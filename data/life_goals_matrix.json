@@ -1,0 +1,66 @@
+[
+  {
+    "subject": "moses",
+    "season_1_precall": "Drawn from Nile, raised in Egyptian palace, ending in rebellion.",
+    "season_2_awakening": "Burning bush supernatural epiphany after forty silent years.",
+    "season_3_activation": "Wandering wilderness in constant conflict with Pharaoh and identity.",
+    "season_4_anguishing": "Mount Nebo identity struggle, blessing tribes while facing pre-call limits.",
+    "season_5_acceptance": "Sees the Promised Land but accepts he cannot enter.",
+    "negative_exemplar_fault": "Murder of an Egyptian and believing fearful scouts over God."
+  },
+  {
+    "subject": "david",
+    "season_1_precall": "Anointed by Samuel while a shepherd boy.",
+    "season_2_awakening": "Killed Goliath with a sling shot, awakening national destiny.",
+    "season_3_activation": "Sauls jealousy triggers wilderness flight, eventually becoming King and bringing the Ark.",
+    "season_4_anguishing": "Absaloms rebellion and family fragmentation fractures.",
+    "season_5_acceptance": "Charges Solomon with building the temple and sleeps with his ancestors.",
+    "negative_exemplar_fault": "Abdicating battlefield leadership, resulting in the Bathsheba moral failure."
+  },
+  {
+    "subject": "paul",
+    "season_1_precall": "Persecuting Christians and witnessing the stoning of Stephen.",
+    "season_2_awakening": "Blinding bolt of lightning epiphany on the Damascus road.",
+    "season_3_activation": "Writing letters to churches, jailed many times telling the story of Jesus.",
+    "season_4_anguishing": "Thorn in the flesh personal suffering and internal identity battles.",
+    "season_5_acceptance": "Declares he has fought the good fight and finished the race before execution.",
+    "negative_exemplar_fault": "Early active execution and persecution of the early Church body."
+  },
+  {
+    "subject": "joseph",
+    "season_1_precall": "Favored son with a coat of many colors, triggering intense brotherly jealousy.",
+    "season_2_awakening": "Supernatural prophetic dreams of sheaves and stars bowing down.",
+    "season_3_activation": "Sold into slavery, managing Potiphars house and interpreting dreams in prison.",
+    "season_4_anguishing": "Confronting his starving brothers in Egypt, wrestling with past wounds.",
+    "season_5_acceptance": "Saves his entire lineage and declares: What man meant for evil, God used for good.",
+    "negative_exemplar_fault": "Boastful youthful pride when sharing early visions with his family."
+  },
+  {
+    "subject": "gideon",
+    "season_1_precall": "Threshing wheat in a hidden winepress to hide from oppressive Midianites.",
+    "season_2_awakening": "Angel of the Lord calls him a Mighty Man of Valor, offering a fleece sign.",
+    "season_3_activation": "Reducing his army down to three hundred men and routing the enemy camp.",
+    "season_4_anguishing": "Struggling to maintain leadership and control after the victory high.",
+    "season_5_acceptance": "Dies in a good old age, leaving behind an unstable golden ephod monument.",
+    "negative_exemplar_fault": "Persistent, fearful demands for repeated miraculous signs to confirm truth."
+  },
+  {
+    "subject": "peter",
+    "season_1_precall": "Ordinary commercial fisherman working the Sea of Galilee loops.",
+    "season_2_awakening": "The miraculous catch of fish prompts him to drop his nets and follow.",
+    "season_3_activation": "Preaching at Pentecost, establishing the early church foundations boldly.",
+    "season_4_anguishing": "The crucifixion trial night where he breaks down in tears.",
+    "season_5_acceptance": "Accepts his martyrdom path as foretold by Christ on the beach.",
+    "negative_exemplar_fault": "Denying any association with Christ three separate times under pressure."
+  },
+  {
+    "subject": "john",
+    "subject_age": 45,
+    "current_season": "season_3_activation",
+    "season_1_precall": "Born to middle class family, completed Computer Science PhD at Case Western.",
+    "season_3_activation": "Serving in prison ministry, launching AI startup company to build products.",
+    "active_subgoal": "Determine AI startup ROI via New York business meeting.",
+    "contained_plan": "Amtrak train routing tracking graph minor.",
+    "missing_knowledge_gap": "Acquaintances at Stanford and UC Berkeley but knows little of business."
+  }
+]
