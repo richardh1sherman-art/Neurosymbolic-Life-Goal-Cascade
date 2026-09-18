@@ -1,112 +1,119 @@
 import os
 
-class SovereignHealingKBInjector:
+class GuardedGrigorchukKBInjector:
     def __init__(self):
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.target_kb_path = os.path.join(self.root_dir, "grigorchuk_planning_space/kb.pl")
 
-    def inject_sovereign_healing_axioms(self):
+    def deploy_guarded_algebraic_kb(self):
         print("=" * 95)
-        print("📝 [KB.PL GROUNDING]: INJECTING SOVEREIGN PATH-HEALING LAWS (JOHN 3:16)")
+        print("📝 [KB.PL ACCORDANCE]: DEPLOYING STABILIZED STRUCTURAL TYPE COMPILER GUARDS")
         print("=" * 95)
 
-        sovereign_healing_kb = """%% =================================================================
-%% 👑 TIER 6 BACKGROUND KNOWLEDGE: THE SOVEREIGN PATH-HEALING LAWS
-%% Grounded in the Sacrifice of Jesus Christ to Overcome Broken Law Blockages
+        weighted_kb = """%% =================================================================
+%% 🌀 TIER 6 BACKGROUND KNOWLEDGE: UNIVERSAL GRIGORCHUK PATH MATRIX
+%% Generalizes Topological Manifolds to Enforce Modal Closure
 %% =================================================================
+:- dynamic believes_in_christ/1.
 :- discontiguous action_violation/2.
 :- discontiguous lifecycle_flaw/2.
 :- discontiguous contracted_nodes/3.
 :- discontiguous deleted_edge/3.
+:- discontiguous group_generator_weight/2.
 
-%% --- THE TEN SOVEREIGN COMMANDMENTS MATRIX ---
+%% --- THE DECALOGUE BOUNDARY PARAMETERS ---
 commandment(1, "No other gods before Me").
-commandment(2, "No graven images or idols").
-commandment(3, "Do not take the Name of the Lord in vain").
-commandment(4, "Remember the Sabbath day to keep it holy").
-commandment(5, "Honor your father and your mother").
 commandment(6, "You shall not murder").
 commandment(7, "You shall not commit adultery").
-commandment(8, "You shall not steal").
-commandment(9, "You shall not bear false witness").
-commandment(10, "You shall not covet").
 
-%% --- DESTRUCTIVE MUTATION OPERATORS (Link-Deletions via Sin) ---
+%% --- DESTRUCTIVE LINK-DELETION OPERATORS ---
 action_violation(murder, 6).
 action_violation(adultery, 7).
-action_violation(coveting, 10).
 action_violation(persecution, 6).
-action_violation(pride, 1).
-action_violation(fearful_unbelief, 1).
-action_violation(denial_under_pressure, 3).
 
-%% --- 👑 THE SOVEREIGN HEALING OPERATOR: JOHN 3:16 ---
-%% The sacrifice of Jesus Christ acts as a universal covering that satisfies the legal deficit
-sovereign_grace_covering(Subject) :-
-    believes_in_christ(Subject).
+%% --- 🌲 GRIGORCHUK INFINITE GROUP GENERATOR MATRICES ---
+group_generator_weight(a, 1).   %% Permutation operation (Active path hop)
+group_generator_weight(b, 3).   %% Recursive failover transformation
+group_generator_weight(c, 4).   %% Core identity inversion shift
+group_generator_weight(d, 5).   %% Long-range alternative modality routing
 
-%% --- ANALOGICAL PROPOUND HOMOMORPHISMS ---
-%% Abrahamic Analogy: Father offers his only son, mapping structurally to the cross
-homomorphic_healing_foreshadow(abraham_sacrifice, calvary_cross).
-%% Temple Analogy: "Destroy this temple and in three days I will raise it up" (Body Matrix)
-homomorphic_healing_foreshadow(temple_destruction, resurrection_three_days).
-%% Prodigal Son Analogy: Total restoration of parthood after rebellion and bankruptcy
-homomorphic_healing_foreshadow(prodigal_return, fathers_embrace).
+%% Assign algebraic weights directly to our workspace strategy operators
+strategy_action_weight(preserve_semantics_equivalence, W) :- group_generator_weight(a, W), !.
+strategy_action_weight(local_partial_group_inversion, W)   :- group_generator_weight(b, W), !.
+strategy_action_weight(global_alternate_modality_routing, W) :- group_generator_weight(d, W), !.
+strategy_action_weight(trigger_terminal_node_rewrite, W)   :- group_generator_weight(c, W), !.
+strategy_action_weight(_, 1).
 
-%% --- TRAVERSAL PATHWAY RULES WITH GRACE ---
-%% An edge is legally blocked ONLY IF a violation occurs AND it has NOT been covered by Grace
+%% --- PATH HEALING GRACE CONDITION (JOHN 3:16) ---
+sovereign_grace_covering(Subject) :- believes_in_christ(Subject).
+
+%% --- PATH CLEARANCE RULES WITH AUTOMATED WEIGHT ACCUMULATION ---
 destiny_edge_blocked(U, V, StoryID, Subject) :-
     lifecycle_flaw(Subject, FlawAction),
-    action_violation(FlawAction, CommandmentID),
-    deleted_edge(U, V, StoryID),
-    \\+ sovereign_grace_covering(Subject).
+    action_violation(FlawAction, CommandmentID).
 
-%% Node Contraction via Grace: Collapses the distance across the broken law boundary
-structurally_equivalent(U, U, _).
-structurally_equivalent(U, V, StoryID) :- contracted_nodes(U, V, StoryID).
-structurally_equivalent(U, V, StoryID) :- contracted_nodes(V, U, StoryID).
-structurally_equivalent(Start, Goal, StoryID) :-
+%% Rigidly separates base equality tests from external contractions to break left-recursion
+structurally_equivalent_step(U, U, _, 0) :- !.
+structurally_equivalent_step(U, V, StoryID, Weight) :- 
+    contracted_nodes(U, V, StoryID), 
+    strategy_action_weight(local_partial_group_inversion, Weight), !.
+structurally_equivalent_step(Start, Goal, StoryID, 1) :-
     deduce_subject_of_story(StoryID, Subject),
-    sovereign_grace_covering(Subject).
+    sovereign_grace_covering(Subject), !.
+structurally_equivalent_step(_, _, _, 0).
 
-%% Helper hook to bind story IDs back to their biological subjects
-deduce_subject_of_story(s_0, john).
-deduce_subject_of_story(s_1, john).
-deduce_subject_of_story(s_2, moses).
-deduce_subject_of_story(s_3, david).
-deduce_subject_of_story(s_4, paul).
-deduce_subject_of_story(s_5, joseph).
-deduce_subject_of_story(s_6, gideon).
-deduce_subject_of_story(s_7, peter).
-
-%% --- TOPOLOGICAL VERIFIER ---
-validate_path_minor(Start, Goal, StoryID) :-
+%% --- AUTOMATED PATH ACCUMULATOR ---
+validate_path_minor(Start, Goal, StoryID, TotalCost) :-
     deduce_subject_of_story(StoryID, Subject),
-    traverse_minor(Start, Goal, StoryID, Subject, []).
+    traverse_weighted_minor(Start, Goal, StoryID, Subject, [Start], TotalCost).
 
-traverse_minor(Current, Goal, StoryID, Subject, _) :-
-    structurally_equivalent(Current, Goal, StoryID), !.
-traverse_minor(Current, Goal, StoryID, Subject, Visited) :-
-    structurally_equivalent(Current, ActualCurrent, StoryID),
+traverse_weighted_minor(Current, Goal, _, _, _, Cost) :-
+    Current == Goal, !, Cost = 0.
+traverse_weighted_minor(Current, Goal, StoryID, Subject, _, Cost) :-
+    structurally_equivalent_step(Current, Goal, StoryID, Cost), Cost > 0, !.
+traverse_weighted_minor(Current, Goal, StoryID, Subject, Visited, TotalCost) :-
+    structurally_equivalent_step(Current, ActualCurrent, StoryID, EqCost),
     base_network_edge(ActualCurrent, Next),
     \\+ destiny_edge_blocked(ActualCurrent, Next, StoryID, Subject),
     \\+ member(Next, Visited),
-    traverse_minor(Next, Goal, StoryID, Subject, [ActualCurrent|Visited]).
+    strategy_action_weight(preserve_semantics_equivalence, StepCost),
+    traverse_weighted_minor(Next, Goal, StoryID, Subject, [Next|Visited], SubCost),
+    TotalCost is EqCost + StepCost + SubCost.
+
+%% 🌐 UNIVERSAL ABSTRACT PATHWAYS
+base_network_edge(start_node, mid_node).
+base_network_edge(mid_node, goal_vertex).
 
 base_network_edge(station, platform_node).
 base_network_edge(platform_node, goal_vertex).
 base_network_edge(airport_gate, flight_line).
 base_network_edge(flight_line, goal_vertex).
+
+%% Biological Subject Hook Bindings
+deduce_subject_of_story(pierre_story_s1, pierre).
+deduce_subject_of_story(pierre_story_s2, pierre).
+deduce_subject_of_story(pierre_story_s2_prime, pierre).
+deduce_subject_of_story(alec_story_s2, alec).
+deduce_subject_of_story(alec_story_s2_prime, alec).
+deduce_subject_of_story(ana_story_s2, ana).
+deduce_subject_of_story(ana_story_s2_prime, ana).
+deduce_subject_of_story(ana_story_s3_s5_prime, ana).
+deduce_subject_of_story(john_story_s1, john).
+deduce_subject_of_story(john_story_s2, john).
+deduce_subject_of_story(john_story_s2_prime, john).
+deduce_subject_of_story(moses_sovereign_flaw, moses).
+deduce_subject_of_story(david_sovereign_flaw, david).
+deduce_subject_of_story(paul_sovereign_flaw, paul).
 """
         os.makedirs(os.path.dirname(self.target_kb_path), exist_ok=True)
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
-            f.write(sovereign_healing_kb)
+            f.write(weighted_kb)
             
-        print(f"   💾 [FS UPDATE]: Sovereign Grace and Healing laws written to -> 'kb.pl'")
+        print(f"   💾 [FS UPDATE]: Stabilized type rules with dynamic declarations saved.")
         print("-" * 95)
-        print("🏆 REDEMPTION GRAPH AXIOMS STABLE IN GRIGORCHUK PLANNING SPACE")
+        print("🏆 AUTOMATED TYPE SAFED LAYERS COMPLETED SUCCESSFULLY")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    injector = SovereignHealingKBInjector()
-    injector.inject_sovereign_healing_axioms()
+    injector = GuardedGrigorchukKBInjector()
+    injector.deploy_guarded_algebraic_kb()
