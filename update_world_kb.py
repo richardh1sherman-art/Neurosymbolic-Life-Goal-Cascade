@@ -1,18 +1,18 @@
 import os
 
-class GuardedGrigorchukKBInjector:
+class InsulatedGrigorchukKBInjector:
     def __init__(self):
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.target_kb_path = os.path.join(self.root_dir, "grigorchuk_planning_space/kb.pl")
 
-    def deploy_guarded_algebraic_kb(self):
+    def deploy_insulated_kb(self):
         print("=" * 95)
-        print("📝 [KB.PL ACCORDANCE]: RE-ENGINEERING UNIVERSAL GRAPH MINOR PATHS")
+        print("📝 [METAPHYSICAL REALIGNMENT]: ENFORCING MODAL DOMAIN INSULATION IN KB.PL")
         print("=" * 95)
 
-        weighted_kb = """%% =================================================================
-%% 🌀 TIER 6 BACKGROUND KNOWLEDGE: UNIVERSAL GRIGORCHUK PATH MATRIX
-%% Generalizes Topological Manifolds to Enforce Modal Closure
+        insulated_kb = """%% =================================================================
+%% 🌀 TIER 6 BACKGROUND KNOWLEDGE: MODALLY INSULATED GRIGORCHUK MATRIX
+%% Isolates Historical, Fictional, and Actual Indexical Modalities
 %% =================================================================
 :- dynamic believes_in_christ/1.
 :- discontiguous action_violation/2.
@@ -20,24 +20,34 @@ class GuardedGrigorchukKBInjector:
 :- discontiguous contracted_nodes/3.
 :- discontiguous deleted_edge/3.
 :- discontiguous group_generator_weight/2.
+:- discontiguous ontological_status/2.
+
+%% --- ONTOLOGICAL MODALITY CLASSIFICATIONS ---
+ontological_status(pierre, fictional).
+ontological_status(alec, fictional).
+ontological_status(ana, fictional).
+ontological_status(john, fictional).
+ontological_status(network, fictional).
+
+ontological_status(moses, historical_immutable).
+ontological_status(david, historical_immutable).
+ontological_status(paul, historical_immutable).
 
 %% --- THE DECALOGUE BOUNDARY PARAMETERS ---
 commandment(1, "No other gods before Me").
 commandment(6, "You shall not murder").
 commandment(7, "You shall not commit adultery").
 
-%% --- DESTRUCTIVE LINK-DELETION OPERATORS ---
 action_violation(murder, 6).
 action_violation(adultery, 7).
 action_violation(persecution, 6).
 
 %% --- 🌲 GRIGORCHUK INFINITE GROUP GENERATOR MATRICES ---
-group_generator_weight(a, 1).   %% Permutation operation (Active path hop)
+group_generator_weight(a, 1).   %% Permutation operation
 group_generator_weight(b, 3).   %% Recursive failover transformation
 group_generator_weight(c, 4).   %% Core identity inversion shift
 group_generator_weight(d, 5).   %% Long-range alternative modality routing
 
-%% Assign algebraic weights directly to our workspace strategy operators
 strategy_action_weight(preserve_semantics_equivalence, W) :- group_generator_weight(a, W), !.
 strategy_action_weight(local_partial_group_inversion, W)   :- group_generator_weight(b, W), !.
 strategy_action_weight(global_alternate_modality_routing, W) :- group_generator_weight(d, W), !.
@@ -47,14 +57,22 @@ strategy_action_weight(_, 1).
 %% --- PATH HEALING GRACE CONDITION (JOHN 3:16) ---
 sovereign_grace_covering(Subject) :- believes_in_christ(Subject).
 
-%% --- PATH CLEARANCE RULES WITH AUTOMATED WEIGHT ACCUMULATION ---
-%% 🚨 BOUNDARY FIX: Only blocks the pathway if a moral violation is actively present in the timeline
+%% --- PATH CLEARANCE RULES WITH MODAL DOMAIN INSULATION ---
+%% Rule 1: Fictional characters can undergo counterfactual rewrites safely.
 destiny_edge_blocked(U, V, StoryID, Subject) :-
     deduce_subject_of_story(StoryID, Subject),
+    ontological_status(Subject, fictional),
     lifecycle_flaw(Subject, FlawAction),
     action_violation(FlawAction, _CommandmentID), !.
 
-%% Rigidly separates base equality tests from external contractions to break left-recursion
+%% Rule 2: Historical individuals are IMMUTABLE. Any attempt to execute a python counterfactual 
+%% rewrite on an immutable historical timeline results in a hard topological block (•).
+destiny_edge_blocked(_, _, StoryID, Subject) :-
+    deduce_subject_of_story(StoryID, Subject),
+    ontological_status(Subject, historical_immutable),
+    execute_rewrite(StoryID, _), !.
+
+%% Separates base equality tests from external contractions
 structurally_equivalent_step(U, U, _, 0) :- !.
 structurally_equivalent_step(U, V, StoryID, Weight) :- 
     contracted_nodes(U, V, StoryID), 
@@ -113,13 +131,14 @@ deduce_subject_of_story(paul_sovereign_flaw, paul).
 """
         os.makedirs(os.path.dirname(self.target_kb_path), exist_ok=True)
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
-            f.write(weighted_kb)
+            f.write(insulated_kb)
             
-        print(f"   💾 [FS UPDATE]: Stabilized type rules with story bounds saved.")
+        print(f"   💾 [FS UPDATE]: Ontological modalities successfully insulated inside 'kb.pl'")
         print("-" * 95)
-        print("🏆 AUTOMATED TYPE SAFED LAYERS SECURED SUCCESSFULLY")
+        print("🏆 METAPHYSICAL BOUNDARY PROTECTION ACTIVE")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    injector = GuardedGrigorchukKBInjector()
-    injector.deploy_guarded_algebraic_kb()
+    # 🚨 CLASS INITIALIZATION PATH REFERENCE CORRECTED HERE
+    injector = InsulatedGrigorchukKBInjector()
+    injector.deploy_insulated_kb()
