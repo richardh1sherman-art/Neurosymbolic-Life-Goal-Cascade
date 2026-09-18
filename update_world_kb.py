@@ -7,7 +7,7 @@ class InsulatedGrigorchukKBInjector:
 
     def deploy_insulated_kb(self):
         print("=" * 95)
-        print("📝 [METAPHYSICAL REALIGNMENT]: ENFORCING MODAL DOMAIN INSULATION IN KB.PL")
+        print("📝 [THEOLOGICAL REALIGNMENT]: FUSING SCRIPTURE AUTHORSHIP OPERATOR")
         print("=" * 95)
 
         insulated_kb = """%% =================================================================
@@ -21,6 +21,7 @@ class InsulatedGrigorchukKBInjector:
 :- discontiguous deleted_edge/3.
 :- discontiguous group_generator_weight/2.
 :- discontiguous ontological_status/2.
+:- discontiguous authored_scripture/1.
 
 %% --- ONTOLOGICAL MODALITY CLASSIFICATIONS ---
 ontological_status(pierre, fictional).
@@ -32,6 +33,18 @@ ontological_status(network, fictional).
 ontological_status(moses, historical_immutable).
 ontological_status(david, historical_immutable).
 ontological_status(paul, historical_immutable).
+
+%% --- 📜 THE SOVEREIGN SCRIPTURE AUTHORSHIP INVARIANTS ---
+%% Because these historical individuals authored the text of universal law,
+%% their action acts as an ultimate topological group inversion operator.
+authored_scripture(moses).
+authored_scripture(david).
+authored_scripture(paul).
+
+%% --- HISTORICAL LIFECYCLE FLAWS ---
+lifecycle_flaw(moses, murder).
+lifecycle_flaw(david, adultery).
+lifecycle_flaw(paul, persecution).
 
 %% --- THE DECALOGUE BOUNDARY PARAMETERS ---
 commandment(1, "No other gods before Me").
@@ -56,6 +69,7 @@ strategy_action_weight(_, 1).
 
 %% --- PATH HEALING GRACE CONDITION (JOHN 3:16) ---
 sovereign_grace_covering(Subject) :- believes_in_christ(Subject).
+sovereign_grace_covering(Subject) :- authored_scripture(Subject).
 
 %% --- PATH CLEARANCE RULES WITH MODAL DOMAIN INSULATION ---
 %% Rule 1: Fictional characters can undergo counterfactual rewrites safely.
@@ -65,11 +79,12 @@ destiny_edge_blocked(U, V, StoryID, Subject) :-
     lifecycle_flaw(Subject, FlawAction),
     action_violation(FlawAction, _CommandmentID), !.
 
-%% Rule 2: Historical individuals are IMMUTABLE. Any attempt to execute a python counterfactual 
-%% rewrite on an immutable historical timeline results in a hard topological block (•).
+%% Rule 2: Historical individuals are IMMUTABLE. If they have a flaw but did NOT author scripture,
+%% their path is blocked. If they DID author scripture, the block is lifted via inversion covering.
 destiny_edge_blocked(_, _, StoryID, Subject) :-
     deduce_subject_of_story(StoryID, Subject),
     ontological_status(Subject, historical_immutable),
+    \\+ authored_scripture(Subject),
     execute_rewrite(StoryID, _), !.
 
 %% Separates base equality tests from external contractions
@@ -133,12 +148,11 @@ deduce_subject_of_story(paul_sovereign_flaw, paul).
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
             f.write(insulated_kb)
             
-        print(f"   💾 [FS UPDATE]: Ontological modalities successfully insulated inside 'kb.pl'")
+        print(f"   💾 [FS UPDATE]: Scripture Authorship operators successfully fused into 'kb.pl'")
         print("-" * 95)
-        print("🏆 METAPHYSICAL BOUNDARY PROTECTION ACTIVE")
+        print("🏆 METAPHYSICAL BOUNDARY RESOLUTION COMPLETE")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    # 🚨 CLASS INITIALIZATION PATH REFERENCE CORRECTED HERE
     injector = InsulatedGrigorchukKBInjector()
     injector.deploy_insulated_kb()
