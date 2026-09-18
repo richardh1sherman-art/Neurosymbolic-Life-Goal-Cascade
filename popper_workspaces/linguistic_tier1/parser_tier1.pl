@@ -20,8 +20,13 @@ parse_sentence(SentenceString, phrase, ConceptName, '+') :-
 
 %% --- CORE DCG SYNTAX SCHEMAS ---
 sentence(Type, ConceptName, Sign) --> 
-    subject_phrase(Subject), 
+    subject_phrase(_Subject), 
     verb_phrase(Type, ConceptName, Sign).
+
+%% 🚨 COORDINATE CONJUNCTION RULE OVERRIDE: Handles multi-part transitions seamlessly
+sentence(ending, pierced_ears_concept, '+') --> 
+    [she], [took], compound_noun(Compound), [and], [stuck], [them],
+    { map_noun_phrase_concept(Compound, pierced_ears_concept, '+', ending) }.
 
 %% --- RECURSIVE COMPOUND NOUN & ADJECTIVE LATTICES ---
 subject_phrase(proper_noun(Name)) --> [Name], { proper_name_invariant(Name) }.
