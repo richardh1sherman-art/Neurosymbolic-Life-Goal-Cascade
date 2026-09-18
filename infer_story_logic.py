@@ -13,22 +13,18 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class SemanticInferencePipeline:
+class ComprehensiveInferencePipeline:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.dcg_path = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl"
         
-        # Build a robust Level 5 Tree that evaluates concepts instead of literal words
-        # Left branch handles active semantic matches; Right branch triggers name rewrites
-        self.t5 = WorldLevelNode(split_feature="has_same_concept_name", split_value="True")
-        self.t5.tb = WorldLevelNode(is_leaf=True, classification="preserve_semantics_equivalence")
-        self.t5.fb = WorldLevelNode(is_leaf=True, classification="trigger_terminal_node_rewrite")
+        with open(os.path.join(self.model_dir, "level5_plan_synthesis.pkl"), "rb") as f:
+            self.t5 = pickle.load(f)
 
-    def query_prolog_semantic_dcg(self, sentence_text):
-        """👑 THE INTENSIONAL SYNTAX GATE: Extracts (Type, ConceptName, Sign) fields from Prolog."""
-        sanitized = re.sub(r'[^a-zA-Z\s]', '', sentence_text).lower().strip()
-        if not sanitized: return "phrase", "unknown", "-"
+    def query_live_dcg_engine(self, raw_sentence):
+        sanitized = re.sub(r'[^a-zA-Z\s]', '', raw_sentence).lower().strip()
+        if not sanitized: return ["phrase", "unknown", "-"]
         
         prolog_query = f"consult('{self.dcg_path}'), (parse_sentence('{sanitized}', Type, Name, Sign) -> format('~w,~w,~w', [Type, Name, Sign]) ; format('phrase,unknown,-', [])), halt."
         
@@ -40,59 +36,75 @@ class SemanticInferencePipeline:
             output = result.stdout.strip()
             parts = output.split(',')
             if len(parts) == 3:
-                return parts[0], parts[1], parts[2]
-            return "phrase", "unknown", "-"
+                return parts
+            return ["phrase", "unknown", "-"]
         except Exception:
-            return "phrase", "unknown", "-"
+            return ["phrase", "unknown", "-"]
 
-    def execute_semantic_cascade(self):
+    def evaluate_tree_logic(self, node, feature_vector):
+        if node is None: return "unknown"
+        if node.is_leaf:
+            if isinstance(node.classification, list):
+                return node.classification[0]
+            return node.classification
+        val = feature_vector.get(node.split_feature, "False")
+        if str(val) == str(node.split_value): 
+            return self.evaluate_tree_logic(node.tb, feature_vector)
+        return self.evaluate_tree_logic(node.fb, feature_vector)
+
+    def run_comprehensive_inference(self):
         print("=" * 95)
-        print("🔮 INTENSIONAL INFERENCE SUITE: EVALUATING TIMETRAVEL TIMELINES VIA CONCEPT DEFINITIONS")
+        print("🔮 INTENSIONAL INFERENCE SUITE: EXECUTING FULL UNIFIED RECURSIVE DCG LIFECYCLE CASCADE")
         print("=" * 95)
         
-        # Ingesting the true counterfactual examples from your notes
-        time_travel_stories = [
-            {"id": "alec_s2", "text": "Alec figured blocks develop her mind", "terminal_target_name": "blocks_help_daughter"},
-            {"id": "alec_s2_prime", "text": "Alec couldnt afford new blocks", "terminal_target_name": "blocks_help_daughter"},
-            {"id": "pierre_s5", "text": "Pierre couldnt wait trick or treating", "terminal_target_name": "fun"}
+        # Comprehensive evaluation matrix mapping all active core and sovereign timelines
+        universal_stories = [
+            {"id": "pierre_story_s1", "text": "Pierre loved Halloween", "terminal_target_name": "fun"},
+            {"id": "pierre_story_s2", "text": "He decided to be a vampire", "terminal_target_name": "costume"},
+            {"id": "pierre_story_s2_prime", "text": "He decided to be a werewolf", "terminal_target_name": "costume"},
+            {"id": "alec_story_s2", "text": "Alec figured blocks develop her mind", "terminal_target_name": "blocks_help_daughter"},
+            {"id": "alec_story_s2_prime", "text": "Alec couldnt afford new blocks", "terminal_target_name": "blocks_help_daughter"},
+            {"id": "ana_story_s2", "text": "She took her baby to the studio and pierced ears", "terminal_target_name": "pierced_ears_concept"},
+            {"id": "ana_story_s2_prime", "text": "She decided not to take her baby to get pierced ears", "terminal_target_name": "pierced_ears_concept"},
+            {"id": "john_story_s1", "text": "John needed to determine startup roi", "terminal_target_name": "determine_startup_roi"},
+            {"id": "moses_sovereign_flaw", "text": "Moses committed murder in Egypt", "terminal_target_name": "sovereign_decalogue_violation"},
+            {"id": "david_sovereign_flaw", "text": "David committed adultery with Bathsheba", "terminal_target_name": "sovereign_decalogue_violation"},
+            {"id": "paul_sovereign_flaw", "text": "Paul persecuted the early Church", "terminal_target_name": "sovereign_decalogue_violation"}
         ]
         
         t5_facts = []
 
-        for s in time_travel_stories:
+        for s in universal_stories:
             s_text = s["text"]
-            terminal_node_name = s["terminal_target_name"]
+            stype, concept_name, sign = self.query_live_dcg_engine(s_text)
             
-            # Step 1: Query the live Prolog DCG to resolve sentence meanings to an abstract concept descriptor
-            stype, concept_name, sign = self.query_prolog_semantic_dcg(s_text)
+            is_pos = "True" if sign == "+" else "False"
+            features = {
+                "concept_class": concept_name,
+                "is_positive_example": is_pos
+            }
             
-            # Step 2: Evaluate the Non-Terminal Node condition: Does the name match the terminal goal?
-            has_name_match = "True" if concept_name == terminal_node_name else "False"
-            
-            features = {"has_same_concept_name": has_name_match}
-            inferred_action = "preserve_semantics_equivalence" if has_name_match == "True" else "trigger_terminal_node_rewrite"
+            inferred_action = self.evaluate_tree_logic(self.t5, features)
             
             print(f"📥 Sentence Ingested: \"{s_text}\"")
             print(f"   ├── Grounded Concept Name ──➔ '{concept_name}' (Sign: {sign})")
-            print(f"   └── Pipeline Action       ──➔ **{inferred_action}** (Terminal Name Fallback Guard)\n")
+            print(f"   └── Inferred DT Decision  ──➔ **{inferred_action}**\n")
             
-            # Serialize the resulting intensional facts safely to disk
-            if inferred_action == "trigger_terminal_node_rewrite":
-                t5_facts.append(f"execute_rewrite({s['id']}, {terminal_node_name}).")
+            if inferred_action == "trigger_terminal_node_rewrite" or sign == "-":
+                t5_facts.append(f"execute_rewrite({s['id']}, {concept_name}).")
             else:
                 t5_facts.append(f"semantic_match({s['id']}, {concept_name}).")
 
-        # Freeze the final outputs to your examples workspace folder
         exs_path = os.path.join(self.root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
         with open(exs_path, "w", encoding="utf-8") as f:
-            f.write("%% Autogenerated Intensional Concept Equivalence Facts\n")
+            f.write("%% Autogenerated Intensional Facts Driven by Master Comprehensive Parser\n")
             for fact in t5_facts: f.write(f"{fact}\n")
             
         print("-" * 95)
-        print("💾 [FS UPDATE]: Saved concept equivalence facts cleanly to 'grigorchuk_planning_space/exs.pl'")
+        print("💾 [FS UPDATE]: Saved comprehensive concept facts cleanly to 'grigorchuk_planning_space/exs.pl'")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    pipeline = SemanticInferencePipeline()
-    pipeline.execute_semantic_cascade()
+    pipeline = ComprehensiveInferencePipeline()
+    pipeline.run_comprehensive_inference()
