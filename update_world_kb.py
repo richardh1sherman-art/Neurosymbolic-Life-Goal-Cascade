@@ -7,7 +7,7 @@ class GuardedGrigorchukKBInjector:
 
     def deploy_guarded_algebraic_kb(self):
         print("=" * 95)
-        print("📝 [KB.PL ACCORDANCE]: DEPLOYING STABILIZED STRUCTURAL TYPE COMPILER GUARDS")
+        print("📝 [KB.PL ACCORDANCE]: RE-ENGINEERING UNIVERSAL GRAPH MINOR PATHS")
         print("=" * 95)
 
         weighted_kb = """%% =================================================================
@@ -48,9 +48,11 @@ strategy_action_weight(_, 1).
 sovereign_grace_covering(Subject) :- believes_in_christ(Subject).
 
 %% --- PATH CLEARANCE RULES WITH AUTOMATED WEIGHT ACCUMULATION ---
+%% 🚨 BOUNDARY FIX: Only blocks the pathway if a moral violation is actively present in the timeline
 destiny_edge_blocked(U, V, StoryID, Subject) :-
+    deduce_subject_of_story(StoryID, Subject),
     lifecycle_flaw(Subject, FlawAction),
-    action_violation(FlawAction, CommandmentID).
+    action_violation(FlawAction, _CommandmentID), !.
 
 %% Rigidly separates base equality tests from external contractions to break left-recursion
 structurally_equivalent_step(U, U, _, 0) :- !.
@@ -101,6 +103,10 @@ deduce_subject_of_story(ana_story_s3_s5_prime, ana).
 deduce_subject_of_story(john_story_s1, john).
 deduce_subject_of_story(john_story_s2, john).
 deduce_subject_of_story(john_story_s2_prime, john).
+deduce_subject_of_story(fiber_story_s2, network).
+deduce_subject_of_story(fiber_story_s2_prime, network).
+deduce_subject_of_story(display_story_s2, network).
+deduce_subject_of_story(display_story_s2_prime, network).
 deduce_subject_of_story(moses_sovereign_flaw, moses).
 deduce_subject_of_story(david_sovereign_flaw, david).
 deduce_subject_of_story(paul_sovereign_flaw, paul).
@@ -109,9 +115,9 @@ deduce_subject_of_story(paul_sovereign_flaw, paul).
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
             f.write(weighted_kb)
             
-        print(f"   💾 [FS UPDATE]: Stabilized type rules with dynamic declarations saved.")
+        print(f"   💾 [FS UPDATE]: Stabilized type rules with story bounds saved.")
         print("-" * 95)
-        print("🏆 AUTOMATED TYPE SAFED LAYERS COMPLETED SUCCESSFULLY")
+        print("🏆 AUTOMATED TYPE SAFED LAYERS SECURED SUCCESSFULLY")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
