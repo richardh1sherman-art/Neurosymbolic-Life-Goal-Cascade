@@ -1,6 +1,6 @@
 %% =================================================================
 %% 🌀 TIER 1 DEFINITE CLAUSE GRAMMAR (DCG) INTENSIONAL PARSER
-%% Universal Matrix Supporting All Active Core and Sovereign Narratives
+%% Universal Matrix Supporting Task 3 Recursive Compound Constraints
 %% =================================================================
 
 %% --- MASTER PARSING ENTRY HOOK ---
@@ -46,6 +46,12 @@ sentence(premise, determine_startup_roi, '+') --> [john], [needed], [to], [deter
 sentence(initial, amtrak_train_routing, '+') --> [john], [booked], [the], [morning], [amtrak], [train].
 sentence(counterfactual, amtrak_train_routing, '-') --> [track], [obstruction], [blocked], [the], [engine], [station].
 
+%% TASK 3 SCHEMA MAPPINGS (Story IV & V Multi-Word Infrastructures)
+sentence(initial, fiber_network_routing, '+') --> [the], [packets], [utilized], [the], [primary], [fiber], [link].
+sentence(counterfactual, fiber_network_routing, '-') --> [an], [excavator], [severed], [the], [primary], [fiber], [link].
+sentence(initial, transit_display_matrix, '+') --> [commuters], [monitored], [the], [central], [train], [arrival], [display].
+sentence(counterfactual, transit_display_matrix, '-') --> [power], [surges], [corrupted], [the], [central], [train], [arrival], [display].
+
 %% Sovereign Level Flaw Matrices
 sentence(counterfactual, sovereign_decalogue_violation, '-') --> [moses], [committed], [murder], [in], [egypt].
 sentence(counterfactual, sovereign_decalogue_violation, '-') --> [david], [committed], [adultery], [with], [bathsheba].
@@ -74,6 +80,7 @@ verb_phrase(Type, ConceptName, Sign) -->
 %% --- INTENSIONAL CONCEPT LEXICON (□ LAWS) ---
 determiner(the) --> [the].
 determiner(a) --> [a].
+determiner(an) --> [an].
 determiner(her) --> [her].
 determiner(more) --> [more].
 determiner(in) --> [in].
@@ -111,6 +118,11 @@ noun_invariant(werewolf).
 noun_invariant(murder).
 noun_invariant(adultery).
 noun_invariant(church).
+noun_invariant(packets).
+noun_invariant(link).
+noun_invariant(commuters).
+noun_invariant(display).
+noun_invariant(surges).
 
 %% Multi-Word Adjective/Noun Modifier Invariants
 modifier_invariant(alecs).
@@ -126,6 +138,11 @@ modifier_invariant(startup).
 modifier_invariant(track).
 modifier_invariant(obstruction).
 modifier_invariant(early).
+modifier_invariant(primary).
+modifier_invariant(fiber).
+modifier_invariant(central).
+modifier_invariant(arrival).
+modifier_invariant(power).
 
 %% Verb Action Invariants
 verb_action(wanted) --> [wanted].
@@ -144,6 +161,10 @@ verb_action(booked) --> [booked].
 verb_action(blocked) --> [blocked].
 verb_action(committed) --> [committed].
 verb_action(persecuted) --> [persecuted].
+verb_action(utilized) --> [utilized].
+verb_action(severed) --> [severed].
+verb_action(monitored) --> [monitored].
+verb_action(corrupted) --> [corrupted].
 
 verb_transitive_invariant(wanted).
 verb_transitive_invariant(figured).
@@ -159,6 +180,10 @@ verb_transitive_invariant(booked).
 verb_transitive_invariant(blocked).
 verb_transitive_invariant(committed).
 verb_transitive_invariant(persecuted).
+verb_transitive_invariant(utilized).
+verb_transitive_invariant(severed).
+verb_transitive_invariant(monitored).
+verb_transitive_invariant(corrupted).
 
 %% --- CORE CONCEPT MAP MATRIX ---
 map_verb_concept(figured, blocks_help_daughter, '+', initial).
@@ -171,9 +196,15 @@ map_verb_concept(booked, amtrak_train_routing, '+', initial).
 map_verb_concept(blocked, amtrak_train_routing, '-', counterfactual).
 map_verb_concept(committed, sovereign_decalogue_violation, '-', counterfactual).
 map_verb_concept(persecuted, sovereign_decalogue_violation, '-', counterfactual).
+map_verb_concept(utilized, fiber_network_routing, '+', initial).
+map_verb_concept(severed, fiber_network_routing, '-', counterfactual).
+map_verb_concept(monitored, transit_display_matrix, '+', initial).
+map_verb_concept(corrupted, transit_display_matrix, '-', counterfactual).
 
 map_noun_phrase_concept(single(mind), blocks_help_daughter, '+', initial).
 map_noun_phrase_concept(modifier(tiny, modifier(diamond, single(stickers))), pierced_ears_concept, '+', ending).
+map_noun_phrase_concept(modifier(primary, modifier(fiber, single(link))), fiber_network_routing, '+', initial).
+map_noun_phrase_concept(modifier(central, modifier(train, modifier(arrival, single(display)))), transit_display_matrix, '+', initial).
 
 positive_keyword(mind, blocks_help_daughter).
 positive_keyword(verbal, blocks_help_daughter).
@@ -181,6 +212,9 @@ positive_keyword(roi, determine_startup_roi).
 positive_keyword(amtrak, amtrak_train_routing).
 positive_keyword(loved, fun).
 positive_keyword(vampire, costume).
+positive_keyword(fiber, fiber_network_routing).
+positive_keyword(display, transit_display_matrix).
+
 negative_keyword(couldnt, blocks_help_daughter).
 negative_keyword(not, pierced_ears_concept).
 negative_keyword(blocked, amtrak_train_routing).
@@ -188,3 +222,5 @@ negative_keyword(werewolf, costume).
 negative_keyword(murder, sovereign_decalogue_violation).
 negative_keyword(adultery, sovereign_decalogue_violation).
 negative_keyword(persecution, sovereign_decalogue_violation).
+negative_keyword(severed, fiber_network_routing).
+negative_keyword(corrupted, transit_display_matrix).
