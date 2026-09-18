@@ -1,0 +1,11 @@
+# =================================================================
+# 🌀 SMT-ILP-ZeroVRAM System & Python Environment Requirements
+# =================================================================
+
+# --- Native Binary System Prerequisites ---
+# Note: SWI-Prolog (swipl >= 9.0) must be installed via apt/brew/source
+# dependency: swi-prolog
+
+# --- Python Core Dependencies ---
+numpy>=1.24.0
+scipy>=1.10.0
