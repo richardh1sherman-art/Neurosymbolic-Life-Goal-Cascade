@@ -16,7 +16,7 @@ class ForestOntologyTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Fully consolidated matrix including Judith Infomorphisms and new TimeTravel blocks
+        # 📋 Structured training data exemplars from your notes
         self.forest_training_data = [
             {"story_id": "ST1_pos", "stagnate": "True", "diligent": "True", "rejection": "True", "withdraw": "True", "target": "quits_job"},
             {"story_id": "ST1_neg", "stagnate": "True", "diligent": "True", "rejection": "False", "withdraw": "False", "target": "keeps_job"},
@@ -40,7 +40,7 @@ class ForestOntologyTrainer:
         print("📋 INGESTED ONTOLOGY EXEMPLARS MATRIX (TIER 3 INPUTS):")
         print("-" * 95)
         for ex in self.forest_training_data:
-            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target Target: **{ex['target']}**")
+            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target: **{ex['target']}**")
 
     def calculate_entropy(self, targets):
         if not targets: return 0
@@ -69,13 +69,16 @@ class ForestOntologyTrainer:
     def build_tree(self, data, features, depth=0):
         if not data: return WorldLevelNode(is_leaf=True, classification="empty")
         targets = [d["target"] for d in data]
-        if len(set(targets)) == 1: return WorldLevelNode(is_leaf=True, classification=targets)
+        
+        # 🚨 STRUCTURAL CORRECTION: Extract the string atom natively to destroy list leaks
+        if len(set(targets)) == 1: 
+            return WorldLevelNode(is_leaf=True, classification=str(targets[0]))
         
         feat, val = self.find_best_split(data, features)
         if feat is None or depth > 5:
             counts = {}
             for t in targets: counts[t] = counts.get(t, 0) + 1
-            return WorldLevelNode(is_leaf=True, classification=max(counts, key=counts.get))
+            return WorldLevelNode(is_leaf=True, classification=str(max(counts, key=counts.get)))
 
         node = WorldLevelNode(split_feature=feat, split_value=val)
         node.tb = self.build_tree([d for d in data if d.get(feat, "False") == val], [f for f in features if f != feat], depth + 1)
