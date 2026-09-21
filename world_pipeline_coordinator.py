@@ -1,5 +1,4 @@
 import os
-import json
 import pickle
 import math
 
@@ -12,20 +11,34 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class CleanNetworkTrainer:
+class ForestOntologyTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
-        self.train_json_path = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Counterfactual-StoryRW-master/data/train_network.json"
         os.makedirs(self.model_dir, exist_ok=True)
+        
+        # 📋 Expanded Training Exemplar profiles incorporating your full notes
+        self.forest_training_data = [
+            {"story_id": "ST1_pos", "stagnate": "True", "diligent": "True", "rejection": "True", "withdraw": "True", "target": "quits_job"},
+            {"story_id": "ST1_neg", "stagnate": "True", "diligent": "True", "rejection": "False", "withdraw": "False", "target": "keeps_job"},
+            {"story_id": "SB_pos", "difficulty": "True", "effort": "True", "reward": "True", "target": "keeps_job"},
+            {"story_id": "SB_neg", "difficulty": "True", "effort": "False", "reward": "False", "target": "lost_job"},
+            {"story_id": "ST2_pos", "grief": "True", "engagement": "True", "success": "True", "target": "mate"},
+            {"story_id": "ST2_neg", "grief": "True", "engagement": "True", "success": "False", "target": "no_mate"},
+            # John's Plan Reversal Exemplars
+            {"story_id": "John_Plan", "planned_trajectory": "True", "edge_deletion": "False", "target": "complete_trip"},
+            {"story_id": "John_Reversal", "planned_trajectory": "True", "edge_deletion": "True", "node_contraction": "True", "target": "graph_minor_recovery"},
+            # Sovereign Immutable Histories
+            {"story_id": "Moses_History", "decalogue_violation": "True", "scripture_authorship": "True", "target": "sovereign_success"},
+            {"story_id": "David_History", "decalogue_violation": "True", "path_healing": "True", "scripture_authorship": "True", "target": "sovereign_success"}
+        ]
 
-    def extract_features(self, text_content):
-        combined = text_content.lower()
-        features = {
-            "primary_modality_blocked": "True" if any(w in combined for w in ["cancelled", "severed", "failed", "blocked", "wrong"]) else "False",
-            "local_partial_inversion_supported": "True" if any(w in combined for w in ["friend", "alternative", "secondary", "draw"]) else "False",
-            "is_transport_network": "True" if any(w in combined for w in ["flight", "plane", "train", "route"]) else "False"
-        }
-        return features
+    def print_exemplars(self):
+        print("-" * 95)
+        print("📋 INGESTED ONTOLOGY EXEMPLARS MATRIX (TIER 3 INPUTS):")
+        print("-" * 95)
+        for ex in self.forest_training_data:
+            features = {k: v for k, v in ex.items() if k not in ["story_id", "target"]}
+            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target: **{ex['target']}**")
 
     def calculate_entropy(self, targets):
         if not targets: return 0
@@ -38,60 +51,64 @@ class CleanNetworkTrainer:
         return entropy
 
     def find_best_split(self, data, features):
-        base_entropy = self.calculate_entropy([d[1] for d in data])
+        base_entropy = self.calculate_entropy([d["target"] for d in data])
         best_gain, best_feat, best_val = -1, None, None
         for f in features:
-            values = set(d[0][f] for d in data)
+            values = set(d.get(f, "False") for d in data)
             for val in values:
-                left = [d for d in data if d[0][f] == val]
-                right = [d for d in data if d[0][f] != val]
+                left = [d for d in data if d.get(f, "False") == val]
+                right = [d for d in data if d.get(f, "False") != val]
                 if not left or not right: continue
-                gain = base_entropy - ((len(left)/len(data)) * self.calculate_entropy([d[1] for d in left]) + (len(right)/len(data)) * self.calculate_entropy([d[1] for d in right]))
+                gain = base_entropy - ((len(left)/len(data)) * self.calculate_entropy([d["target"] for d in left]) + (len(right)/len(data)) * self.calculate_entropy([d["target"] for d in right]))
                 if gain > best_gain:
                     best_gain, best_feat, best_val = gain, f, val
         return best_feat, best_val
 
     def build_tree(self, data, features, depth=0):
         if not data: return WorldLevelNode(is_leaf=True, classification="empty")
-        labels = set(d[1] for d in data)
-        if len(labels) == 1: return WorldLevelNode(is_leaf=True, classification=list(labels))
+        targets = [d["target"] for d in data]
+        if len(set(targets)) == 1: return WorldLevelNode(is_leaf=True, classification=targets[0])
+        
         feat, val = self.find_best_split(data, features)
-        if feat is None or depth > 3:
+        if feat is None or depth > 4:
             counts = {}
-            for d in data: counts[d[1]] = counts.get(d[1], 0) + 1
+            for t in targets: counts[t] = counts.get(t, 0) + 1
             return WorldLevelNode(is_leaf=True, classification=max(counts, key=counts.get))
+
         node = WorldLevelNode(split_feature=feat, split_value=val)
-        node.tb = self.build_tree([d for d in data if d[0][feat] == val], [f for f in features if f != feat], depth + 1)
-        node.fb = self.build_tree([d for d in data if d[0][feat] != val], [f for f in features if f != feat], depth + 1)
+        node.tb = self.build_tree([d for d in data if d.get(feat, "False") == val], [f for f in features if f != feat], depth + 1)
+        node.fb = self.build_tree([d for d in data if d.get(feat, "False") != val], [f for f in features if f != feat], depth + 1)
         return node
 
-    def run_training_suite(self):
+    def run_forest_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: RUNNING RETRAINING SPREAD OVER TEXT CORPUS")
+        print("🚀 RETRAINING DECISION FOREST CORES ACROSS ONTOLOGY CONCEPTS")
         print("=" * 95)
-        if not os.path.exists(self.train_json_path):
-            print("🚨 Training network JSON missing. Regenerating standard samples...")
-            os.makedirs(os.path.dirname(self.train_json_path), exist_ok=True)
-            mock = [{"premise": "Tom flight cancelled", "counterfactual": "Alternative train", "original_ending": "He arrived early"}] * 10
-            with open(self.train_json_path, "w") as f: json.dump(mock, f)
-        with open(self.train_json_path, "r", encoding="utf-8") as f:
-            records = json.load(f)
-        processed_data = []
-        for idx, r in enumerate(records):
-            text = f"{r.get('premise','')} {r.get('counterfactual','')} {r.get('original_ending','')}"
-            features = self.extract_features(text)
-            if idx % 4 == 0: target = "local_partial_group_inversion"
-            elif idx % 4 == 1: target = "graph_minor_edge_contraction_healing"
-            elif idx % 4 == 2: target = "global_alternate_modality_routing"
-            else: target = "standard_priority_path_execution"
-            processed_data.append((features, target))
-        features_list = ["primary_modality_blocked", "local_partial_inversion_supported", "is_transport_network"]
-        t5_root = self.build_tree(processed_data, features_list)
+        
+        self.print_exemplars()
+        
+        features_list = ["stagnate", "diligent", "rejection", "withdraw", "difficulty", "effort", "reward", "grief", "engagement", "success", "planned_trajectory", "edge_deletion", "node_contraction", "decalogue_violation", "path_healing", "scripture_authorship"]
+        t5_root = self.build_tree(self.forest_training_data, features_list)
+        
         with open(os.path.join(self.model_dir, "level5_plan_synthesis.pkl"), "wb") as f:
             pickle.dump(t5_root, f)
-        print("🌲 [DUMPING LEVEL 5 DECISION TOPOLOGY FOLLOWING PROBE]")
-        print("✅ Training complete.")
+            
+        print("-" * 95)
+        print("🌲 [DUMPING LEVEL 3 SITUATIONAL SCHEMA DECISION TREE BRANCHES]")
+        print("-" * 95)
+        self.dump_tree(t5_root)
+        print("=" * 95 + "\n")
+
+    def dump_tree(self, node, indent="   "):
+        if node.is_leaf:
+            print(f"{indent}📦 [TERMINAL ONTOLOGY LEAF NODE] ──➔ **{node.classification}**")
+            return
+        print(f"{indent}🔍 [CROSS-TREE LOOKUP]: Checks if story unit contains concept ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}  ├── True  ──➔", end="")
+        self.dump_tree(node.tb, indent + "  │   ")
+        print(f"{indent}  └── False ──➔", end="")
+        self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = CleanNetworkTrainer()
-    trainer.run_training_suite()
+    trainer = ForestOntologyTrainer()
+    trainer.run_forest_training()
