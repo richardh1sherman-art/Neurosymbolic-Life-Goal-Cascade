@@ -16,7 +16,7 @@ class ForestOntologyTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Expanded Training Exemplar profiles incorporating your full notes
+        # 📋 Fully consolidated matrix including Judith Infomorphisms and new TimeTravel blocks
         self.forest_training_data = [
             {"story_id": "ST1_pos", "stagnate": "True", "diligent": "True", "rejection": "True", "withdraw": "True", "target": "quits_job"},
             {"story_id": "ST1_neg", "stagnate": "True", "diligent": "True", "rejection": "False", "withdraw": "False", "target": "keeps_job"},
@@ -24,12 +24,15 @@ class ForestOntologyTrainer:
             {"story_id": "SB_neg", "difficulty": "True", "effort": "False", "reward": "False", "target": "lost_job"},
             {"story_id": "ST2_pos", "grief": "True", "engagement": "True", "success": "True", "target": "mate"},
             {"story_id": "ST2_neg", "grief": "True", "engagement": "True", "success": "False", "target": "no_mate"},
-            # John's Plan Reversal Exemplars
-            {"story_id": "John_Plan", "planned_trajectory": "True", "edge_deletion": "False", "target": "complete_trip"},
             {"story_id": "John_Reversal", "planned_trajectory": "True", "edge_deletion": "True", "node_contraction": "True", "target": "graph_minor_recovery"},
-            # Sovereign Immutable Histories
-            {"story_id": "Moses_History", "decalogue_violation": "True", "scripture_authorship": "True", "target": "sovereign_success"},
-            {"story_id": "David_History", "decalogue_violation": "True", "path_healing": "True", "scripture_authorship": "True", "target": "sovereign_success"}
+            # Judith Infomorphism Systems
+            {"story_id": "Judith_Normal", "switch_on": "True", "bulb_lit": "True", "flash_sos": "True", "guided_rescue": "True", "target": "rescue_success"},
+            {"story_id": "Judith_Faulty", "switch_on": "True", "bulb_lit": "False", "flash_sos": "False", "guided_rescue": "False", "target": "rescue_failed"},
+            # New TimeTravel Scenarios
+            {"story_id": "Andrea_Draw", "draw_counterfactual": "True", "target": "illustrate_rewrite"},
+            {"story_id": "Charles_Apple", "resource_depletion": "True", "target": "disconnected_interview"},
+            {"story_id": "Neil_Limerick", "negative_aesthetic": "True", "target": "modify_landscape"},
+            {"story_id": "Tom_Storm", "severe_weather_block": "True", "target": "alternate_modality_routing"}
         ]
 
     def print_exemplars(self):
@@ -37,8 +40,7 @@ class ForestOntologyTrainer:
         print("📋 INGESTED ONTOLOGY EXEMPLARS MATRIX (TIER 3 INPUTS):")
         print("-" * 95)
         for ex in self.forest_training_data:
-            features = {k: v for k, v in ex.items() if k not in ["story_id", "target"]}
-            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target: **{ex['target']}**")
+            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target Target: **{ex['target']}**")
 
     def calculate_entropy(self, targets):
         if not targets: return 0
@@ -67,10 +69,10 @@ class ForestOntologyTrainer:
     def build_tree(self, data, features, depth=0):
         if not data: return WorldLevelNode(is_leaf=True, classification="empty")
         targets = [d["target"] for d in data]
-        if len(set(targets)) == 1: return WorldLevelNode(is_leaf=True, classification=targets[0])
+        if len(set(targets)) == 1: return WorldLevelNode(is_leaf=True, classification=targets)
         
         feat, val = self.find_best_split(data, features)
-        if feat is None or depth > 4:
+        if feat is None or depth > 5:
             counts = {}
             for t in targets: counts[t] = counts.get(t, 0) + 1
             return WorldLevelNode(is_leaf=True, classification=max(counts, key=counts.get))
@@ -84,10 +86,9 @@ class ForestOntologyTrainer:
         print("=" * 95)
         print("🚀 RETRAINING DECISION FOREST CORES ACROSS ONTOLOGY CONCEPTS")
         print("=" * 95)
-        
         self.print_exemplars()
         
-        features_list = ["stagnate", "diligent", "rejection", "withdraw", "difficulty", "effort", "reward", "grief", "engagement", "success", "planned_trajectory", "edge_deletion", "node_contraction", "decalogue_violation", "path_healing", "scripture_authorship"]
+        features_list = ["stagnate", "diligent", "rejection", "withdraw", "difficulty", "effort", "reward", "grief", "engagement", "success", "planned_trajectory", "switch_on", "bulb_lit", "flash_sos", "guided_rescue", "draw_counterfactual", "resource_depletion", "negative_aesthetic", "severe_weather_block"]
         t5_root = self.build_tree(self.forest_training_data, features_list)
         
         with open(os.path.join(self.model_dir, "level5_plan_synthesis.pkl"), "wb") as f:
@@ -103,7 +104,7 @@ class ForestOntologyTrainer:
         if node.is_leaf:
             print(f"{indent}📦 [TERMINAL ONTOLOGY LEAF NODE] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [CROSS-TREE LOOKUP]: Checks if story unit contains concept ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [CROSS-TREE LOOKUP]: Checks feature ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
