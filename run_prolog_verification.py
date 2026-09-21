@@ -1,46 +1,32 @@
 import os
 import subprocess
 
-class GrigorchukWeightedVerifier:
+class ForestSituationVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples/grigorchuk_planning_space"
-        self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_weighted_closure.pl")
+        self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
 
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
 :- consult('exs.pl').
 
-query_path_safely(StoryID, Cost) :-
-    validate_path_minor(start_node, goal_vertex, StoryID, Cost), !.
-query_path_safely(StoryID, Cost) :-
-    validate_path_minor(station, goal_vertex, StoryID, Cost), !.
-query_path_safely(StoryID, Cost) :-
-    validate_path_minor(airport_gate, goal_vertex, StoryID, Cost), !.
-
-evaluate_story_cost(StoryID) :-
-    ( query_path_safely(StoryID, Cost) ->
-        format(' [VALID] Path Minor Clear | Grigorchuk Cost: ~w (\u2218).', [Cost])
+%% --- INTERLOCKING FOREST CLOSURE LOGIC ---
+verify_situation_status(SituationID) :-
+    ( situation_classification(SituationID, SchemaDecision) ->
+        format(' [VALID] Situation Core Aligned | Forest Node: ~w (\u2218).', [SchemaDecision])
     ;
-        write(' [BLOCKED] Decalogue Violation Severed Path (\u2022).')
+        write(' [ERROR] Defective Situation Signature Detected (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: GRIGORCHUK COST MATRIX CLOSURE~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: MULTI-TREE SITUATION REPRESENTATION CLOSURE~n'),
     format('==================================================================================~n'),
     
-    format('   ➔ Story [pierre_story_s1]       ──➔ STATUS:'), evaluate_story_cost(pierre_story_s1), format('~n'),
-    format('   ➔ Story [pierre_story_s2]       ──➔ STATUS:'), evaluate_story_cost(pierre_story_s2), format('~n'),
-    format('   ➔ Story [pierre_story_s2_prime] ──➔ STATUS:'), evaluate_story_cost(pierre_story_s2_prime), format('~n'),
-    format('   ➔ Story [alec_story_s2]         ──➔ STATUS:'), evaluate_story_cost(alec_story_s2), format('~n'),
-    format('   ➔ Story [alec_story_s2_prime]   ──➔ STATUS:'), evaluate_story_cost(alec_story_s2_prime), format('~n'),
-    format('   ➔ Story [ana_story_s2]          ──➔ STATUS:'), evaluate_story_cost(ana_story_s2), format('~n'),
-    format('   ➔ Story [ana_story_s2_prime]    ──➔ STATUS:'), evaluate_story_cost(ana_story_s2_prime), format('~n'),
-    format('   ➔ Story [john_story_s1]         ──➔ STATUS:'), evaluate_story_cost(john_story_s1), format('~n'),
-    format('   ➔ Story [moses_sovereign_flaw]  ──➔ STATUS:'), evaluate_story_cost(moses_sovereign_flaw), format('~n'),
-    format('   ➔ Story [david_sovereign_flaw]  ──➔ STATUS:'), evaluate_story_cost(david_sovereign_flaw), format('~n'),
-    format('   ➔ Story [paul_sovereign_flaw]   ──➔ STATUS:'), evaluate_story_cost(paul_sovereign_flaw), format('~n'),
+    format('   ➔ Situation [st1_timeline]     ──➔ STATUS:'), verify_situation_status(st1_timeline), format('~n'),
+    format('   ➔ Situation [sb_timeline_pos]  ──➔ STATUS:'), verify_situation_status(sb_timeline_pos), format('~n'),
+    format('   ➔ Situation [st2_timeline_neg] ──➔ STATUS:'), verify_situation_status(st2_timeline_neg), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -52,13 +38,13 @@ execute_verification_audit :-
     def execute_swipl_process(self):
         self.build_prolog_test_runner()
         result = subprocess.run(
-            ["swipl", "-q", "-g", "execute_verification_audit", "verify_weighted_closure.pl"],
-            cwd=self.grigorchuk_dir,
+            ["swipl", "-q", "-g", "execute_verification_audit", "verify_forest_closure.pl"],
+            cwd=os.path.dirname(self.test_runner_file),
             capture_output=True,
             text=True
         )
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = GrigorchukWeightedVerifier()
+    engine = ForestSituationVerifier()
     engine.execute_swipl_process()
