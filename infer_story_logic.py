@@ -11,19 +11,17 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class ForestSituationInferencePipeline:
+class ParthoodInferencePipeline:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.dcg_path = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl"
         
-        with open(os.path.join(self.model_dir, "level5_plan_synthesis.pkl"), "rb") as f:
-            self.t5 = pickle.load(f)
+        with open(os.path.join(self.model_dir, "level6_parthood_ontology.pkl"), "rb") as f:
+            self.t6 = pickle.load(f)
 
-    def query_cross_tree_parthood(self, text_segment):
-        clean_text = text_segment.replace("'", "").strip().lower()
-        if not clean_text: return "unknown"
-        prolog_query = f"consult('{self.dcg_path}'), (part_of('{clean_text}', situation_tree, Concept) -> write(Concept) ; write('unknown')), halt."
+    def query_prolog_parthood(self, subject, dimension):
+        prolog_query = f"consult('{self.dcg_path}'), (part_of({subject}, {dimension}, Value) -> write(Value) ; write('unknown')), halt."
         try:
             result = subprocess.run(
                 ["swipl", "-q", "-g", prolog_query],
@@ -33,48 +31,49 @@ class ForestSituationInferencePipeline:
         except Exception:
             return "unknown"
 
-    def evaluate_forest_logic(self, node, feature_vector):
+    def evaluate_tree(self, node, feature_vector):
         if node is None: return "unknown"
-        if node.is_leaf:
-            raw_class = node.classification
-            if isinstance(raw_class, list): raw_class = raw_class if raw_class else "unknown"
-            return str(raw_class).lower().replace("[","").replace("]","").replace("'","").strip()
-        val = feature_vector.get(node.split_feature, "False")
+        if node.is_leaf: 
+            raw = str(node.classification).lower().strip()
+            return raw.replace("[", "").replace("]", "").replace("'", "")
+        val = feature_vector.get(node.split_feature, "unknown")
         if str(val) == str(node.split_value): 
-            return self.evaluate_forest_logic(node.tb, feature_vector)
-        return self.evaluate_forest_logic(node.fb, feature_vector)
+            return self.evaluate_tree(node.tb, feature_vector)
+        return self.evaluate_tree(node.fb, feature_vector)
 
-    def run_forest_cascade(self):
+    def run_inference(self):
         print("=" * 95)
-        print("🔮 INTENSIONAL INFERENCE SUITE: PARSING UNIVERSAL COGNITIVE FOREST")
+        print("🔮 INTENSIONAL INFERENCE SUITE: EVALUATING PARTHOOD OVERLAP SYSTEM MATRIX")
         print("=" * 95)
         
-        multi_sentence_stories = [
-            {"id": "judith_rescue_timeline", "narrative_units": ["switch is on", "bulb is lit", "signal sos in morse code", "helicopter guided specifically to coordinates"]},
-            {"id": "andrea_story", "narrative_units": ["asked her friend to draw one"]},
-            {"id": "charles_story", "narrative_units": ["ran out of minutes"]},
-            {"id": "neil_story", "narrative_units": ["ugliest city he had ever seen"]},
-            {"id": "tom_story", "narrative_units": ["cancelled all outgoing flights due to a storm"]}
-        ]
-        
-        t5_facts = []
-        all_ontology_features = ["stagnate", "diligent", "rejection", "withdraw", "difficulty", "effort", "reward", "grief", "engagement", "success", "planned_trajectory", "switch_on", "bulb_lit", "flash_sos", "guided_rescue", "draw_counterfactual", "resource_depletion", "negative_aesthetic", "severe_weather_block"]
+        # 🚨 FIXED: Enclosed 'moses' in rigid string quotes to stabilize loop unrolling
+        subjects = ["judith", "moses", "david", "paul", "joseph", "gideon", "peter"]
+        t6_facts = []
 
-        for story in multi_sentence_stories:
-            features = {f: "False" for f in all_ontology_features}
-            detected_concepts = []
-            for unit in story["narrative_units"]:
-                concept = self.query_cross_tree_parthood(unit)
-                if concept != "unknown":
-                    detected_concepts.append(concept)
-                    features[concept] = "True"
+        for sub in subjects:
+            syntax_val = self.query_prolog_parthood(sub, "syntax")
+            type_val = self.query_prolog_parthood(sub, "abstract_type")
+            region_val = self.query_prolog_parthood(sub, "region")
             
-            inferred_schema = self.evaluate_forest_logic(self.t5, features)
-            print(f"📥 Situation ID: [{story['id']}] ──➔ Forest Classification Leaf: **{inferred_schema}**")
-            t5_facts.append(f"situation_classification({story['id']}, schema_{inferred_schema}).")
+            features = {
+                "syntax": syntax_val,
+                "abstract_type": type_val,
+                "region": region_val
+            }
+            
+            inferred_schema = self.evaluate_tree(self.t6, features)
+            print(f"📥 Subject Ingested: [{sub}]")
+            print(f"   ├── Extracted Overlaps ──➔ [Region: {region_val} | Type: {type_val}]")
+            print(f"   └── Parthood Classifier  ──➔ **{inferred_schema}**\n")
+            
+            t6_facts.append(f"parthood_alignment({sub}, schema_{inferred_schema}).")
 
         exs_path = os.path.join(self.root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
         with open(exs_path, "w", encoding="utf-8") as f:
-            f.write("%% Autogenerated Intensional Facts Driven by Interlocking Forest Model\n")
-            for fact in t5_facts: f.write(f"{fact}\n")
+            f.write("%% Autogenerated Intensional Facts Driven by Secondary Parthood Tree Model\n")
+            for fact in t6_facts: f.write(f"{fact}\n")
+
+if __name__ == "__main__":
+    pipeline = ParthoodInferencePipeline()
+    pipeline.run_inference()

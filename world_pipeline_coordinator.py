@@ -16,33 +16,16 @@ class ForestOntologyTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Fully verified, completely discrete feature footprint matrix
-        self.forest_training_data = [
-            {"story_id": "ST1_pos", "stagnate": "True", "diligent": "True", "rejection": "True", "withdraw": "True", "target": "quits_job"},
-            {"story_id": "ST1_neg", "stagnate": "True", "diligent": "True", "rejection": "False", "withdraw": "False", "target": "keeps_job"},
-            {"story_id": "SB_pos", "difficulty": "True", "effort": "True", "reward": "True", "target": "keeps_job"},
-            {"story_id": "SB_neg", "difficulty": "True", "effort": "False", "reward": "False", "target": "lost_job"},
-            {"story_id": "ST2_pos", "grief": "True", "engagement": "True", "success": "True", "target": "mate"},
-            {"story_id": "ST2_neg", "grief": "True", "engagement": "True", "success": "False", "target": "no_mate"},
-            {"story_id": "John_Reversal", "planned_trajectory": "True", "edge_deletion": "True", "node_contraction": "True", "target": "graph_minor_recovery"},
-            
-            # Judith Infomorphism Systems
-            {"story_id": "Judith_Normal", "switch_on": "True", "bulb_lit": "True", "flash_sos": "True", "guided_rescue": "True", "target": "rescue_success"},
-            {"story_id": "Judith_Faulty", "switch_on": "True", "bulb_lit": "False", "flash_sos": "False", "guided_rescue": "False", "target": "rescue_failed"},
-            
-            # Non-colliding Task 3 Targets
-            {"story_id": "Andrea_Draw", "picture_intent": "True", "camera_setup": "True", "draw_counterfactual": "True", "target": "illustrate_rewrite"},
-            {"story_id": "Charles_Apple", "phone_prerequisite": "True", "job_seeking": "True", "resource_depletion": "True", "target": "disconnected_interview"},
-            {"story_id": "Neil_Limerick", "geographical_context": "True", "negative_aesthetic": "True", "target": "modify_landscape"},
-            {"story_id": "Tom_Storm", "flight_booking": "True", "transit_preparation": "True", "severe_weather_block": "True", "target": "alternate_modality_routing"}
+        # 📋 FIXED: Added rigid string quotes around 'moses' to eliminate the variable leak
+        self.parthood_training_data = [
+            {"subject": "judith", "syntax": "rescue", "abstract_type": "information_flow", "region": "mt_ateh", "target": "system_rescue_schema"},
+            {"subject": "moses", "syntax": "saves_people", "abstract_type": "leader_lifecycle", "region": "egypt", "target": "sovereign_liberation_schema"},
+            {"subject": "david", "syntax": "unifies_kingdom", "abstract_type": "leader_lifecycle", "region": "jerusalem", "target": "sovereign_monarchy_schema"},
+            {"subject": "paul", "syntax": "establishes_church", "abstract_type": "apostle_lifecycle", "region": "damascus_road", "target": "ecclesiastical_apostolic_schema"},
+            {"subject": "joseph", "syntax": "preserves_lineage", "abstract_type": "ruler_lifecycle", "region": "egypt", "target": "sovereign_providence_schema"},
+            {"subject": "gideon", "syntax": "routes_oppressor", "abstract_type": "judge_lifecycle", "region": "midian_camp", "target": "judge_routing_schema"},
+            {"subject": "peter", "syntax": "shepherds_flock", "abstract_type": "pillar_lifecycle", "region": "sea_of_galilee", "target": "ecclesiastical_pastoral_schema"}
         ]
-
-    def print_exemplars(self):
-        print("-" * 95)
-        print("📋 INGESTED HIGH-DIMENSIONAL ONTOLOGY MATRIX (TIER 3 INPUTS):")
-        print("-" * 95)
-        for ex in self.forest_training_data:
-            print(f" 📥 Exemplar ID: [{ex['story_id']}] ──➔ Target: **{ex['target']}**")
 
     def calculate_entropy(self, targets):
         if not targets: return 0
@@ -58,10 +41,10 @@ class ForestOntologyTrainer:
         base_entropy = self.calculate_entropy([d["target"] for d in data])
         best_gain, best_feat, best_val = -1, None, None
         for f in features:
-            values = set(d.get(f, "False") for d in data)
+            values = set(d.get(f, "unknown") for d in data)
             for val in values:
-                left = [d for d in data if d.get(f, "False") == val]
-                right = [d for d in data if d.get(f, "False") != val]
+                left = [d for d in data if d.get(f, "unknown") == val]
+                right = [d for d in data if d.get(f, "unknown") != val]
                 if not left or not right: continue
                 gain = base_entropy - ((len(left)/len(data)) * self.calculate_entropy([d["target"] for d in left]) + (len(right)/len(data)) * self.calculate_entropy([d["target"] for d in right]))
                 if gain > best_gain:
@@ -72,48 +55,40 @@ class ForestOntologyTrainer:
         if not data: return WorldLevelNode(is_leaf=True, classification="empty")
         targets = [d["target"] for d in data]
         if len(set(targets)) == 1: 
-            return WorldLevelNode(is_leaf=True, classification=str(targets[0]))
+            return WorldLevelNode(is_leaf=True, classification=str(targets))
         
         feat, val = self.find_best_split(data, features)
-        if feat is None or depth > 8: # Increased maximum depth limit to fully clear sub-slices
+        if feat is None or depth > 5:
             counts = {}
             for t in targets: counts[t] = counts.get(t, 0) + 1
             return WorldLevelNode(is_leaf=True, classification=str(max(counts, key=counts.get)))
 
         node = WorldLevelNode(split_feature=feat, split_value=val)
-        node.tb = self.build_tree([d for d in data if d.get(feat, "False") == val], [f for f in features if f != feat], depth + 1)
-        node.fb = self.build_tree([d for d in data if d.get(feat, "False") != val], [f for f in features if f != feat], depth + 1)
+        node.tb = self.build_tree([d for d in data if d.get(feat, "unknown") == val], [f for f in features if f != feat], depth + 1)
+        node.fb = self.build_tree([d for d in data if d.get(feat, "unknown") != val], [f for f in features if f != feat], depth + 1)
         return node
 
-    def run_forest_training(self):
+    def run_training(self):
         print("=" * 95)
-        print("🚀 RETRAINING DECISION FOREST CORES ACROSS ONTOLOGY CONCEPTS")
+        print("🚀 CUSTOM AI PIPELINE: RETRAINING NEW DECISION TREE #6 (PARTHOOD RELATIONAL MATRIX)")
         print("=" * 95)
-        self.print_exemplars()
         
-        features_list = [
-            "stagnate", "diligent", "rejection", "withdraw", "difficulty", "effort", "reward", 
-            "grief", "engagement", "success", "planned_trajectory", "switch_on", "bulb_lit", 
-            "flash_sos", "guided_rescue", "draw_counterfactual", "resource_depletion", 
-            "negative_aesthetic", "severe_weather_block", "picture_intent", "camera_setup",
-            "phone_prerequisite", "job_seeking", "geographical_context", "transit_preparation", "flight_booking"
-        ]
-        t5_root = self.build_tree(self.forest_training_data, features_list)
+        features_list = ["syntax", "abstract_type", "region"]
+        t6_root = self.build_tree(self.parthood_training_data, features_list)
         
-        with open(os.path.join(self.model_dir, "level5_plan_synthesis.pkl"), "wb") as f:
-            pickle.dump(t5_root, f)
+        with open(os.path.join(self.model_dir, "level6_parthood_ontology.pkl"), "wb") as f:
+            pickle.dump(t6_root, f)
             
+        print("🌲 [DUMPING LEVEL 3 PARTHOOD 'part_of' DECISION TREE GEOMETRY]")
         print("-" * 95)
-        print("🌲 [DUMPING LEVEL 3 SITUATIONAL SCHEMA DECISION TREE BRANCHES]")
-        print("-" * 95)
-        self.dump_tree(t5_root)
+        self.dump_tree(t6_root)
         print("=" * 95 + "\n")
 
     def dump_tree(self, node, indent="   "):
         if node.is_leaf:
-            print(f"{indent}📦 [TERMINAL ONTOLOGY LEAF NODE] ──➔ **{node.classification}**")
+            print(f"{indent}📦 [TERMINAL REPRESENTATION LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [CROSS-TREE LOOKUP]: Checks feature ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [RELATIONAL LOOKUP]: Checks if parthood category ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
@@ -121,4 +96,4 @@ class ForestOntologyTrainer:
 
 if __name__ == "__main__":
     trainer = ForestOntologyTrainer()
-    trainer.run_forest_training()
+    trainer.run_training()
