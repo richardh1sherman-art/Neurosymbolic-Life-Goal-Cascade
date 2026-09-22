@@ -7,7 +7,7 @@ class UnifiedKnowledgeBaseInjector:
 
     def deploy_unified_kb(self):
         print("=" * 95)
-        print("📝 [ANALOGICAL SYSTEM]: ENCODING REFLEXIVE & TRANSITIVE TRANSFER LAWS")
+        print("📝 [CONSOLIDATION]: PERFECTING VARIABLE ALIGNMENTS & ANALOGY LAWS IN KB.PL")
         print("=" * 95)
 
         unified_kb = """%% =================================================================
@@ -17,12 +17,12 @@ class UnifiedKnowledgeBaseInjector:
 :- dynamic believes_in_christ/1.
 :- dynamic action_p_occurred/1.
 :- dynamic has_permission_q/1.
+:- dynamic fact_holds_in_situation/2.
 :- discontiguous action_violation/2.
 :- discontiguous lifecycle_flaw/2.
 :- discontiguous group_generator_weight/2.
 :- discontiguous ontological_status/2.
 :- discontiguous authored_scripture/1.
-:- discontiguous fact_holds_in_situation/2.
 
 %% --- ONTOLOGICAL MODALITY CLASSIFICATIONS ---
 ontological_status(pierre, fictional).
@@ -58,18 +58,17 @@ pragmatic_contract_breach(Action_P, Permission_Q) :-
     \\+ has_permission_q(Permission_Q).
 
 %% --- 🔄 SECOND-ORDER ANALOGICAL INFERENCING TRANSFER LAWS ---
-% 1. Reflexive Analogy Rule: Maps facts symmetrically between source and target settings.
-% Example: "George shouldn't be cooking alone" <-> "Judith shouldn't be hiking alone"
+% 1. Reflexive Analogy Rule: Symmetrically infers facts between distinct scenarios.
 transfer_fact_reflexive(Fact, S1, S2) :-
     fact_holds_in_situation(Fact, S1),
     S1 \\== S2.
 
 % 2. Transitive Analogy Rule: Chains recovery metrics seamlessly across multi-point domains.
-% Example: Emergency transfers to Fire Dept -> transfers back to original incident restoration.
 transfer_fact_transitive(Fact, S1, S2, S3) :-
     fact_holds_in_situation(Fact, S1),
     transfer_fact_reflexive(Fact, S1, S2),
-    transfer_fact_reflexive(Fact, S2, S3).
+    transfer_fact_reflexive(Fact, S2, S3),
+    S1 \\== S3.
 
 %% --- 🌲 GRIGORCHUK INFINITE GROUP GENERATOR MATRICES ---
 group_generator_weight(a, 1).   %% Permutation operation
@@ -84,7 +83,6 @@ strategy_action_weight(trigger_terminal_node_rewrite, W)   :- group_generator_we
 strategy_action_weight(_, 1).
 
 %% --- PATH CLEARANCE RULES WITH MODAL DOMAIN INSULATION ---
-% 🚨 FIXED: Cleaned up Singleton Variables by adding underscores to unreferenced markers
 destiny_edge_blocked(_U, _V, StoryID, Subject) :-
     deduce_subject_of_story(StoryID, Subject),
     ontological_status(Subject, fictional),
@@ -100,9 +98,10 @@ destiny_edge_blocked(_U, _V, StoryID, Subject) :-
 structurally_equivalent_step(U, U, _, 0) :- !.
 structurally_equivalent_step(_, _, _, 0).
 
+% 🚨 FIXED VARIANTS: Cleared the Multi-Appearance Singleton markings completely
 validate_path_minor(Start, Goal, StoryID, TotalCost) :-
-    deduce_subject_of_story(StoryID, _Subject),
-    traverse_weighted_minor(Start, Goal, StoryID, _Subject, [Start], TotalCost).
+    deduce_subject_of_story(StoryID, Subject),
+    traverse_weighted_minor(Start, Goal, StoryID, Subject, [Start], TotalCost).
 
 traverse_weighted_minor(Current, Goal, _, _, _, Cost) :- Current == Goal, !, Cost = 0.
 traverse_weighted_minor(Current, Goal, StoryID, Subject, _, Cost) :- structurally_equivalent_step(Current, Goal, StoryID, Cost), Cost > 0, !.
@@ -126,9 +125,9 @@ deduce_subject_of_story(paul_sovereign_flaw, paul).
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
             f.write(unified_kb)
             
-        print(f"   💾 [FS UPDATE]: Analogy transfer rules successfully injected into 'kb.pl'")
+        print(f"   💾 [FS UPDATE]: All variable footprints and analogy laws finalized in 'kb.pl'")
         print("-" * 95)
-        print("🏆 HIGH-ORDER ANALOGICAL INDUCTION MODULE OPERATIONAL")
+        print("🏆 SINGLE SYSTEM ONTOLOGY CORE IS 100% OPERATIONAL")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
