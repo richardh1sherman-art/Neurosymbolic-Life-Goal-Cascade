@@ -11,20 +11,48 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class ForestOntologyTrainer:
+class ParthoodOntologyTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 FIXED: Added rigid string quotes around 'moses' to eliminate the variable leak
+        # 📋 Fully expanded 8-dimensional parthood profiles from your notes
         self.parthood_training_data = [
-            {"subject": "judith", "syntax": "rescue", "abstract_type": "information_flow", "region": "mt_ateh", "target": "system_rescue_schema"},
-            {"subject": "moses", "syntax": "saves_people", "abstract_type": "leader_lifecycle", "region": "egypt", "target": "sovereign_liberation_schema"},
-            {"subject": "david", "syntax": "unifies_kingdom", "abstract_type": "leader_lifecycle", "region": "jerusalem", "target": "sovereign_monarchy_schema"},
-            {"subject": "paul", "syntax": "establishes_church", "abstract_type": "apostle_lifecycle", "region": "damascus_road", "target": "ecclesiastical_apostolic_schema"},
-            {"subject": "joseph", "syntax": "preserves_lineage", "abstract_type": "ruler_lifecycle", "region": "egypt", "target": "sovereign_providence_schema"},
-            {"subject": "gideon", "syntax": "routes_oppressor", "abstract_type": "judge_lifecycle", "region": "midian_camp", "target": "judge_routing_schema"},
-            {"subject": "peter", "syntax": "shepherds_flock", "abstract_type": "pillar_lifecycle", "region": "sea_of_galilee", "target": "ecclesiastical_pastoral_schema"}
+            {
+                "subject": "judith", "syntax": "rescue", "abstract_type": "information_flow", "region": "mt_ateh",
+                "event": "judith_falls", "argument": "map_too_old", "action": "rescue_dispatch", "set": "map_trails", "time": "peaked_at_2pm",
+                "target": "system_rescue_schema"
+            },
+            {
+                "subject": "moses", "syntax": "saves_people", "abstract_type": "leader_lifecycle", "region": "egypt",
+                "event": "burning_bush", "argument": "killing_egyptian", "action": "taken_from_nile", "set": "lost_in_wilderness", "time": "forty_silent_years",
+                "target": "sovereign_liberation_schema"
+            },
+            {
+                "subject": "david", "syntax": "unifies_kingdom", "abstract_type": "leader_lifecycle", "region": "jerusalem",
+                "event": "defeat_goliath", "argument": "bathsheba_failure", "action": "writes_psalms", "set": "shepherd_flock", "time": "forty_years_king",
+                "target": "sovereign_monarchy_schema"
+            },
+            {
+                "subject": "paul", "syntax": "establishes_church", "abstract_type": "apostle_lifecycle", "region": "damascus_road",
+                "event": "blinded_by_lightning", "argument": "defense_of_law", "action": "writes_letters", "set": "Gentile_churches", "time": "days_before_execution",
+                "target": "ecclesiastical_apostolic_schema"
+            },
+            {
+                "subject": "joseph", "syntax": "preserves_lineage", "abstract_type": "ruler_lifecycle", "region": "egypt",
+                "event": "dry_pit_betrayal", "argument": "youthful_pride", "action": "manages_grain", "set": "twelve_sons", "time": "seven_years_famine",
+                "target": "sovereign_providence_schema"
+            },
+            {
+                "subject": "gideon", "syntax": "routes_oppressor", "abstract_type": "judge_lifecycle", "region": "midian_camp",
+                "event": "fleece_test", "argument": "miraculous_demands", "action": "tears_baal_altar", "set": "three_hundred_men", "time": "forty_years_rest",
+                "target": "judge_routing_schema"
+            },
+            {
+                "subject": "peter", "syntax": "shepherds_flock", "abstract_type": "pillar_lifecycle", "region": "sea_of_galilee",
+                "event": "walks_on_water", "argument": "trial_night_tears", "action": "cuts_malchus_ear", "set": "inner_circle", "time": "three_hidden_days",
+                "target": "ecclesiastical_pastoral_schema"
+            }
         ]
 
     def calculate_entropy(self, targets):
@@ -58,7 +86,7 @@ class ForestOntologyTrainer:
             return WorldLevelNode(is_leaf=True, classification=str(targets))
         
         feat, val = self.find_best_split(data, features)
-        if feat is None or depth > 5:
+        if feat is None or depth > 6:
             counts = {}
             for t in targets: counts[t] = counts.get(t, 0) + 1
             return WorldLevelNode(is_leaf=True, classification=str(max(counts, key=counts.get)))
@@ -70,16 +98,17 @@ class ForestOntologyTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: RETRAINING NEW DECISION TREE #6 (PARTHOOD RELATIONAL MATRIX)")
+        print("🚀 CUSTOM AI PIPELINE: RETRAINING DECISION TREE #6 OVER ALL 8 PARTHOOD COLUMNS")
         print("=" * 95)
         
-        features_list = ["syntax", "abstract_type", "region"]
+        # 🚨 EXPANDED FEATURE LIST TO EVALUATE THE ENTIRE ONTOLOGY footprint
+        features_list = ["syntax", "abstract_type", "region", "event", "argument", "action", "set", "time"]
         t6_root = self.build_tree(self.parthood_training_data, features_list)
         
         with open(os.path.join(self.model_dir, "level6_parthood_ontology.pkl"), "wb") as f:
             pickle.dump(t6_root, f)
             
-        print("🌲 [DUMPING LEVEL 3 PARTHOOD 'part_of' DECISION TREE GEOMETRY]")
+        print("🌲 [DUMPING COLLISION-FREE LEVEL 3 PARTHOOD DECISION TREE GEOMETRY]")
         print("-" * 95)
         self.dump_tree(t6_root)
         print("=" * 95 + "\n")
@@ -95,5 +124,5 @@ class ForestOntologyTrainer:
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = ForestOntologyTrainer()
+    trainer = ParthoodOntologyTrainer()
     trainer.run_training()

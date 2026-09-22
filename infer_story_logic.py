@@ -46,25 +46,26 @@ class ParthoodInferencePipeline:
         print("🔮 INTENSIONAL INFERENCE SUITE: EVALUATING PARTHOOD OVERLAP SYSTEM MATRIX")
         print("=" * 95)
         
-        # 🚨 FIXED: Enclosed 'moses' in rigid string quotes to stabilize loop unrolling
         subjects = ["judith", "moses", "david", "paul", "joseph", "gideon", "peter"]
         t6_facts = []
 
         for sub in subjects:
-            syntax_val = self.query_prolog_parthood(sub, "syntax")
-            type_val = self.query_prolog_parthood(sub, "abstract_type")
-            region_val = self.query_prolog_parthood(sub, "region")
-            
+            # 🚨 QUERIES ALL ACTIVE DIMENSIONS EXTRACTED VIA THE PROLOG PARSER
             features = {
-                "syntax": syntax_val,
-                "abstract_type": type_val,
-                "region": region_val
+                "syntax": self.query_prolog_parthood(sub, "syntax"),
+                "abstract_type": self.query_prolog_parthood(sub, "abstract_type"),
+                "region": self.query_prolog_parthood(sub, "region"),
+                "event": self.query_prolog_parthood(sub, "event"),
+                "argument": self.query_prolog_parthood(sub, "argument"),
+                "action": self.query_prolog_parthood(sub, "action"),
+                "set": self.query_prolog_parthood(sub, "set"),
+                "time": self.query_prolog_parthood(sub, "time")
             }
             
             inferred_schema = self.evaluate_tree(self.t6, features)
             print(f"📥 Subject Ingested: [{sub}]")
-            print(f"   ├── Extracted Overlaps ──➔ [Region: {region_val} | Type: {type_val}]")
-            print(f"   └── Parthood Classifier  ──➔ **{inferred_schema}**\n")
+            print(f"   ├── Grounded Abstract Type ──➔ '{features['abstract_type']}'")
+            print(f"   └── Parthood Classifier    ──➔ **{inferred_schema}**\n")
             
             t6_facts.append(f"parthood_alignment({sub}, schema_{inferred_schema}).")
 
