@@ -9,32 +9,47 @@
 :- discontiguous graph_property_invariant/3.
 :- discontiguous text_fallacy_pattern/3.
 
-%% =================================================================
-%% 🌐 NEW DOMAIN: GRAPH PROPERTY INVARIANTS (TREES #8 & #9)
-%% Syntax: graph_property_invariant(StoryOrGraphID, PropertyKey, Value)
-%% =================================================================
+%% --- TREE #1: CORE EXTENSIONAL VOCABULARY TOKENS ---
+tree_syntax_pos(judith, noun, '+').
+tree_syntax_pos(moses, noun, '+').
+tree_syntax_pos(david, noun, '+').
+tree_syntax_pos(paul, noun, '+').
+tree_syntax_pos(john, noun, '+').
+tree_syntax_pos(louise, noun, '+').
+
+%% --- TREE #3: SITUATIONAL SCHEMAS & INFOMORPHISMS ---
+map_situation_unit('switch is on', switch_on, '+').
+map_situation_unit('bulb is lit', bulb_lit, '+').
+map_situation_unit('signal sos in morse code', flash_sos, '+').
+map_situation_unit('helicopter guided specifically to coordinates', guided_rescue, '+').
+map_situation_unit('without a raise', stagnate, '+').
+map_situation_unit('kept working hard', diligent, '+').
+map_situation_unit('request for a raise is refused', rejection, '+').
+map_situation_unit('decided to withdraw his effort', withdraw, '+').
+map_situation_unit('was overwhelmed at work', difficulty, '+').
+map_situation_unit('tried hard and finished everything', effort, '+').
+map_situation_unit('boss rewarded him', reward, '+').
+map_situation_unit('painful breakup', grief, '+').
+map_situation_unit('attend a party', engagement, '+').
+map_situation_unit('anniversary', success, '+').
+map_situation_unit('planned using several travel events', planned_trajectory, '+').
+
+%% --- 🌐 NEW DOMAIN: GRAPH PROPERTY INVARIANTS ---
 graph_property_invariant(judith_network, topology, cycle).
 graph_property_invariant(judith_network, logic_property, planar).
-graph_property_invariant(judith_network, graph_border, society).
-
 graph_property_invariant(kitchen_fire_network, topology, cycle).
 graph_property_invariant(kitchen_fire_network, logic_property, planar).
-
 graph_property_invariant(john_transit_network, topology, path).
 graph_property_invariant(john_transit_network, logic_property, bounded_tree_width).
-
 graph_property_invariant(job_loss_short, topology, none).
 
-%% =================================================================
-%% ⚠️ NEW DOMAIN: LOGICAL FALLACY ATOMIC PATTERNS (TREE #10)
-%% Syntax: text_fallacy_pattern(ExemplarID, FallacyClass, TextToken)
-%% =================================================================
+%% --- ⚠️ NEW DOMAIN: LOGICAL FALLACY ATOMIC PATTERNS ---
 text_fallacy_pattern(john_tree_hugger, ad_hominem, 'attacking the individual').
 text_fallacy_pattern(louise_campaign, ad_hominem, 'attacking the individual').
 text_fallacy_pattern(bible_circularity, circular_reasoning, 'logical loop conclusion as premise').
 text_fallacy_pattern(friend_sneeze_corona, irrelevant_authority, 'status without domain expertise').
 
-%% --- EXISTING RELATIONAL HOMOMORPHISM SCHEMAS ---
+%% --- 🪐 TREE #7: RELATIONAL ROLE HOMOMORPHISM SCHEMAS ---
 analogical_homomorphism(dead_battery, blocked_chimney, transmission_failure, '+').
 analogical_homomorphism(helicopter_engine, fire_truck_pump, mitigation_vector, '+').
 analogical_homomorphism(miranda_asleep, dispatcher_distracted, awareness_lapse, '+').

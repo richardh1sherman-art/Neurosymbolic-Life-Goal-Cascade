@@ -1,19 +1,23 @@
 import os
 
-class UnifiedKnowledgeBaseInjector:
+class TriangulatedKBInjector:
     def __init__(self):
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.target_kb_path = os.path.join(self.root_dir, "grigorchuk_planning_space/kb.pl")
 
-    def deploy_unified_kb(self):
+    def deploy_triangulated_kb(self):
         print("=" * 95)
-        print("📝 [CONSOLIDATION]: COMPLETING UNIVERSAL TRANSITIVE ANALYSIS CLOSURE")
+        print("📝 [TRIANGULATION COHERENCE]: DEPLOYING JON BARWISE CHANNEL INVARIANTS")
         print("=" * 95)
 
         unified_kb = """%% =================================================================
 %% 🌀 TIER 6 MASTER BACKGROUND KNOWLEDGE BASE (ONE KB.PL FOR OUR WORLD)
-%% Ground-Truth Logical Invariants, Modalities, and Analogy Transfer Laws
+%% Ground-Truth Logical Invariants, Modalities, and Triangulation Rules
 %% =================================================================
+:- dynamic situation_classification/2.
+:- dynamic graph_structure_classification/2.
+:- dynamic argument_fallacy_classification/2.
+:- dynamic analogy_evaluation/2.
 :- dynamic believes_in_christ/1.
 :- dynamic action_p_occurred/1.
 :- dynamic has_permission_q/1.
@@ -23,6 +27,21 @@ class UnifiedKnowledgeBaseInjector:
 :- discontiguous group_generator_weight/2.
 :- discontiguous ontological_status/2.
 :- discontiguous authored_scripture/1.
+
+%% --- 📐 THE PRINCIPLE OF TRIANGULATION (CHANNEL INFOMORPHISMS) ---
+%% If multiple distinct representations of the same underlying story structures
+%% agree on the destination leaf vertex, it mathematically secures the analogy.
+channel_infomorphism_refinement(Story1, Story2, TargetSchema) :-
+    situation_classification(Story1, TargetSchema),
+    situation_classification(Story2, TargetSchema),
+    Story1 \\== Story2.
+
+triangulated_analogy_confirmed(Story1, Story2, Schema6, Schema8) :-
+    situation_classification(Story1, Schema6),
+    situation_classification(Story2, Schema6),
+    graph_structure_classification(Story1, Schema8),
+    graph_structure_classification(Story2, Schema8),
+    Story1 \\== Story2, !.
 
 %% --- ONTOLOGICAL MODALITY CLASSIFICATIONS ---
 ontological_status(pierre, fictional).
@@ -58,13 +77,10 @@ pragmatic_contract_breach(Action_P, Permission_Q) :-
     \\+ has_permission_q(Permission_Q).
 
 %% --- 🔄 SECOND-ORDER ANALOGICAL INFERENCING TRANSFER LAWS ---
-% 1. Reflexive Analogy Rule: Symmetrically infers facts between distinct scenarios.
 transfer_fact_reflexive(Fact, S1, S2) :-
     fact_holds_in_situation(Fact, S1),
     S1 \\== S2.
 
-% 2. Transitive Analogy Rule: Chains recovery metrics natively across multi-point domains
-% by tracing back to the root fact_holds_in_situation origin point.
 transfer_fact_transitive(Fact, S1, S2, S3) :-
     fact_holds_in_situation(Fact, S1),
     S1 \\== S2,
@@ -72,10 +88,10 @@ transfer_fact_transitive(Fact, S1, S2, S3) :-
     S1 \\== S3.
 
 %% --- 🌲 GRIGORCHUK INFINITE GROUP GENERATOR MATRICES ---
-group_generator_weight(a, 1).   %% Permutation operation
-group_generator_weight(b, 3).   %% Recursive failover transformation
-group_generator_weight(c, 4).   %% Core identity inversion shift
-group_generator_weight(d, 5).   %% Long-range alternative modality routing
+group_generator_weight(a, 1).
+group_generator_weight(b, 3).
+group_generator_weight(c, 4).
+group_generator_weight(d, 5).
 
 strategy_action_weight(preserve_semantics_equivalence, W) :- group_generator_weight(a, W), !.
 strategy_action_weight(local_partial_group_inversion, W)   :- group_generator_weight(b, W), !.
@@ -99,7 +115,6 @@ destiny_edge_blocked(_U, _V, StoryID, Subject) :-
 structurally_equivalent_step(U, U, _, 0) :- !.
 structurally_equivalent_step(_, _, _, 0).
 
-% 🚨 FIXED VARIANT: Removed unreferenced Subject parameters from the sub-clause sequence
 validate_path_minor(Start, Goal, StoryID, TotalCost) :-
     traverse_weighted_minor(Start, Goal, StoryID, [], TotalCost).
 
@@ -124,11 +139,11 @@ deduce_subject_of_story(paul_sovereign_flaw, paul).
         with open(self.target_kb_path, "w", encoding="utf-8") as f:
             f.write(unified_kb)
             
-        print(f"   💾 [FS UPDATE]: Centralized knowledge base optimized and locked.")
+        print(f"   💾 [FS UPDATE]: Triangulation rules successfully locked inside 'kb.pl'.")
         print("-" * 95)
-        print("🏆 SINGLE SYSTEM ONTOLOGY CORE IS PERFECTED WITH COMPLETE ACCORDANCE")
+        print("🏆 CENTRAL SYSTEM GEOMETRY READY FOR CHANNEL TRIANGULATION")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    injector = UnifiedKnowledgeBaseInjector()
-    injector.deploy_unified_kb()
+    injector = TriangulatedKBInjector()
+    injector.deploy_triangulated_kb()

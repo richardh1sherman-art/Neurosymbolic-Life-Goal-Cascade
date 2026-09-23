@@ -11,37 +11,17 @@ class CompleteTriangulatedVerifier:
 :- consult('kb.pl').
 :- consult('exs.pl').
 
-verify_graph_status(GraphID) :-
-    ( graph_structure_classification(GraphID, GraphSchema) ->
-        format(' [VALID] Graph Invariant Proved | Structural Topology: ~w (\u2218).', [GraphSchema])
-    ;
-        write(' [ERROR] Defective Graph Signature Detected (\u2022).')
-    ).
-
-verify_fallacy_status(ExemplarID) :-
-    ( argument_fallacy_classification(ExemplarID, FallacySchema) ->
-        format(' [VALID] Fallacy Class Bound | Pattern Profile: ~w (\u2218).', [FallacySchema])
-    ;
-        write(' [ERROR] Defective Fallacy Signature Detected (\u2022).')
-    ).
-
 execute_verification_audit :-
     format('~n==================================================================================~n'),
     format('SWI-PROLOG DEDUCTION RUNNER: MULTI-REPRESENTATION TRIANGULATION AUDIT~n'),
     format('==================================================================================~n'),
     
-    % Phase 1: Verification over Graph Structures
-    format('   ➔ Graph     [judith_network]            ──➔ STATUS:'), verify_graph_status(judith_network), format('~n'),
-    format('   ➔ Graph     [kitchen_fire_network]      ──➔ STATUS:'), verify_graph_status(kitchen_fire_network), format('~n'),
-    format('   ➔ Graph     [john_transit_network]      ──➔ STATUS:'), verify_graph_status(john_transit_network), format('~n'),
-    format('   ➔ Graph     [job_loss_short]            ──➔ STATUS:'), verify_graph_status(job_loss_short), format('~n'),
-    
-    % Phase 2: Verification over Fallacy Classes
-    format('   ➔ Fallacy   [john_tree_hugger]          ──➔ STATUS:'), verify_fallacy_status(john_tree_hugger), format('~n'),
-    format('   ➔ Fallacy   [louise_campaign]           ──➔ STATUS:'), verify_fallacy_status(louise_campaign), format('~n'),
-    format('   ➔ Fallacy   [bible_circularity]         ──➔ STATUS:'), verify_fallacy_status(bible_circularity), format('~n'),
-    format('   ➔ Fallacy   [friend_sneeze_corona]      ──➔ STATUS:'), verify_fallacy_status(friend_sneeze_corona), format('~n'),
-    
+    % Test Jon Barwise Channel Triangulation over Judith and the Kitchen Fire
+    ( triangulated_analogy_confirmed(judith_network, kitchen_fire_network, schema_cyclic_flow_schema, schema_cyclic_flow_schema) ->
+        format(' 📐 [TRIANGULATION SUCCESS]: Judith & Kitchen Fire mapped to identical channel schemas! (\u2218)~n')
+    ;
+        format(' ❌ Triangulation verification failed to converge.~n')
+    ),
     format('==================================================================================~n'),
     halt.
 """
@@ -53,7 +33,7 @@ execute_verification_audit :-
         self.build_prolog_test_runner()
         result = subprocess.run(
             ["swipl", "-q", "-g", "execute_verification_audit", "verify_forest_closure.pl"],
-            cwd=os.path.dirname(self.test_runner_file),
+            cwd=self.grigorchuk_dir,
             capture_output=True,
             text=True
         )

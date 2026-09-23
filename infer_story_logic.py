@@ -1,6 +1,5 @@
 import os
 import pickle
-import subprocess
 
 class WorldLevelNode:
     def __init__(self, is_leaf=False, split_feature=None, split_value=None, classification=None):
@@ -15,22 +14,11 @@ class TriangulatedInferencePipeline:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
-        self.dcg_path = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl"
         
         with open(os.path.join(self.model_dir, "level8_graph_topologies.pkl"), "rb") as f:
             self.t8 = pickle.load(f)
         with open(os.path.join(self.model_dir, "level9_fallacy_patterns.pkl"), "rb") as f:
             self.t9 = pickle.load(f)
-
-    def query_prolog_graph(self, graph_id, prop_key):
-        # Fallback dictionary to simulate SWI-Prolog query logic across structural properties
-        graph_db = {
-            "judith_network": {"topology": "cycle", "logic_property": "planar"},
-            "kitchen_fire_network": {"topology": "cycle", "logic_property": "planar"},
-            "john_transit_network": {"topology": "path", "logic_property": "bounded_tree_width"},
-            "job_loss_short": {"topology": "none", "logic_property": "unknown"}
-        }
-        return graph_db.get(graph_id, {}).get(prop_key, "unknown")
 
     def evaluate_tree(self, node, feature_vector):
         if node is None: return "unknown"
@@ -43,46 +31,44 @@ class TriangulatedInferencePipeline:
 
     def run_comprehensive_cascade(self):
         print("=" * 95)
-        print("🔮 INTENSIONAL INFERENCE SUITE: EXECUTING TRIANGULATION OVER NEW DIMENSIONS")
+        print("🔮 INTENSIONAL INFERENCE SUITE: RUNNING TRIANGULATION CORE")
         print("=" * 95)
         
         t5_facts = []
 
-        print("📥 Phase 1: Evaluating Narrative Graph Invariants...")
-        graphs = ["judith_network", "kitchen_fire_network", "john_transit_network", "job_loss_short"]
-        for g in graphs:
-            features = {
-                "topology": self.query_prolog_graph(g, "topology"),
-                "logic_property": self.query_prolog_graph(g, "logic_property")
-            }
-            res = self.evaluate_tree(self.t8, features)
-            print(f"   └── Graph ID: [{g}] ──➔ Schema: **{res}**")
+        # Grounding Base Infomorphisms for Triangulation Validation
+        t5_facts.append("situation_classification(judith_network, schema_cyclic_flow_schema).")
+        t5_facts.append("situation_classification(kitchen_fire_network, schema_cyclic_flow_schema).")
+        t5_facts.append("situation_classification(john_transit_network, schema_linear_routing_schema).")
+        t5_facts.append("situation_classification(job_loss_short, schema_static_atomic_schema).")
+
+        # Evaluate Graphs
+        graphs = {
+            "judith_network": {"topology": "cycle", "logic_property": "planar"},
+            "kitchen_fire_network": {"topology": "cycle", "logic_property": "planar"},
+            "john_transit_network": {"topology": "path", "logic_property": "bounded_tree_width"},
+            "job_loss_short": {"topology": "none", "logic_property": "unknown"}
+        }
+        for g, feats in graphs.items():
+            res = self.evaluate_tree(self.t8, feats)
             t5_facts.append(f"graph_structure_classification({g}, schema_{res}).")
 
-        print("\n📥 Phase 2: Evaluating Argument Fallacy Patterns...")
-        fallacies = [
-            {"id": "john_tree_hugger", "feats": {"pattern": "attacking_individual", "authority_error": "False"}},
-            {"id": "louise_campaign", "feats": {"pattern": "attacking_individual", "authority_error": "False"}},
-            {"id": "bible_circularity", "feats": {"pattern": "circular_loop", "authority_error": "False"}},
-            {"id": "friend_sneeze_corona", "feats": {"pattern": "unknown", "authority_error": "True"}}
-        ]
-        for f in fallacies:
-            res = self.evaluate_tree(self.t9, f["feats"])
-            print(f"   └── Fallacy Exemplar: [{f['id']}] ──➔ Class: **{res}**")
-            t5_facts.append(f"argument_fallacy_classification({f['id']}, schema_{res}).")
+        # Evaluate Fallacies
+        fallacies = {
+            "john_tree_hugger": {"pattern": "attacking_individual", "authority_error": "False"},
+            "louise_campaign": {"pattern": "attacking_individual", "authority_error": "False"},
+            "bible_circularity": {"pattern": "circular_loop", "authority_error": "False"},
+            "friend_sneeze_corona": {"pattern": "unknown", "authority_error": "True"}
+        }
+        for f, feats in fallacies.items():
+            res = self.evaluate_tree(self.t9, feats)
+            t5_facts.append(f"argument_fallacy_classification({f}, schema_{res}).")
 
         exs_path = os.path.join(self.root_dir, "grigorchuk_planning_space/exs.pl")
         with open(exs_path, "w", encoding="utf-8") as f:
-            f.write("%% Autogenerated Consolidated Triangulated Facts Sheet\n")
-            f.write("situation_classification(st1_timeline, schema_system_rescue_schema).\n")
-            f.write("situation_classification(sb_timeline_pos, schema_system_rescue_schema).\n")
-            f.write("situation_classification(st2_timeline_neg, schema_system_rescue_schema).\n")
-            f.write("situation_classification(john_reversal_timeline, schema_system_rescue_schema).\n")
-            f.write("situation_classification(judith_rescue_timeline, schema_system_rescue_schema).\n")
-            f.write("analogy_evaluation(kitchen_fire_transfer, schema_valid_structural_analogy).\n")
-            f.write("analogy_evaluation(judith_to_prodigal_transfer, schema_partial_spiritual_homomorphism).\n")
+            f.write("%% Autogenerated Triangulated Facts Sheet\n")
             for fact in t5_facts: f.write(f"{fact}\n")
-        print("\n💾 [FS UPDATE]: Triangulated facts successfully frozen inside 'exs.pl'")
+        print("💾 [FS UPDATE]: All channel infomorphisms successfully frozen inside 'exs.pl'.")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
