@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class CompleteForestVerifier:
+class CompleteTriangulatedVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -11,34 +11,36 @@ class CompleteForestVerifier:
 :- consult('kb.pl').
 :- consult('exs.pl').
 
-verify_situation_status(SituationID) :-
-    ( situation_classification(SituationID, SchemaDecision) ->
-        format(' [VALID] Situation Core Aligned | Forest Node: ~w (\u2218).', [SchemaDecision])
+verify_graph_status(GraphID) :-
+    ( graph_structure_classification(GraphID, GraphSchema) ->
+        format(' [VALID] Graph Invariant Proved | Structural Topology: ~w (\u2218).', [GraphSchema])
     ;
-        write(' [ERROR] Defective Situation Signature Detected (\u2022).')
+        write(' [ERROR] Defective Graph Signature Detected (\u2022).')
     ).
 
-verify_analogy_status(AnalogyID) :-
-    ( analogy_evaluation(AnalogyID, AnalogySchema) ->
-        format(' [VALID] Analogy Homomorphism Proved | Transfer Vertex: ~w (\u2218).', [AnalogySchema])
+verify_fallacy_status(ExemplarID) :-
+    ( argument_fallacy_classification(ExemplarID, FallacySchema) ->
+        format(' [VALID] Fallacy Class Bound | Pattern Profile: ~w (\u2218).', [FallacySchema])
     ;
-        write(' [ERROR] Invalid or Severed Structural Analogy (\u2022).')
+        write(' [ERROR] Defective Fallacy Signature Detected (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: MULTI-REPRESENTATION FOREST CLOSURE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: MULTI-REPRESENTATION TRIANGULATION AUDIT~n'),
     format('==================================================================================~n'),
     
-    format('   ➔ Situation [st1_timeline]             ──➔ STATUS:'), verify_situation_status(st1_timeline), format('~n'),
-    format('   ➔ Situation [sb_timeline_pos]          ──➔ STATUS:'), verify_situation_status(sb_timeline_pos), format('~n'),
-    format('   ➔ Situation [st2_timeline_neg]         ──➔ STATUS:'), verify_situation_status(st2_timeline_neg), format('~n'),
-    format('   ➔ Situation [john_reversal_timeline]   ──➔ STATUS:'), verify_situation_status(john_reversal_timeline), format('~n'),
-    format('   ➔ Situation [judith_rescue_timeline]   ──➔ STATUS:'), verify_situation_status(judith_rescue_timeline), format('~n'),
+    % Phase 1: Verification over Graph Structures
+    format('   ➔ Graph     [judith_network]            ──➔ STATUS:'), verify_graph_status(judith_network), format('~n'),
+    format('   ➔ Graph     [kitchen_fire_network]      ──➔ STATUS:'), verify_graph_status(kitchen_fire_network), format('~n'),
+    format('   ➔ Graph     [john_transit_network]      ──➔ STATUS:'), verify_graph_status(john_transit_network), format('~n'),
+    format('   ➔ Graph     [job_loss_short]            ──➔ STATUS:'), verify_graph_status(job_loss_short), format('~n'),
     
-    % Analogy Tracks
-    format('   ➔ Analogy   [kitchen_fire_transfer]     ──➔ STATUS:'), verify_analogy_status(kitchen_fire_transfer), format('~n'),
-    format('   ➔ Analogy   [judith_to_prodigal_transfer]──➔ STATUS:'), verify_analogy_status(judith_to_prodigal_transfer), format('~n'),
+    % Phase 2: Verification over Fallacy Classes
+    format('   ➔ Fallacy   [john_tree_hugger]          ──➔ STATUS:'), verify_fallacy_status(john_tree_hugger), format('~n'),
+    format('   ➔ Fallacy   [louise_campaign]           ──➔ STATUS:'), verify_fallacy_status(louise_campaign), format('~n'),
+    format('   ➔ Fallacy   [bible_circularity]         ──➔ STATUS:'), verify_fallacy_status(bible_circularity), format('~n'),
+    format('   ➔ Fallacy   [friend_sneeze_corona]      ──➔ STATUS:'), verify_fallacy_status(friend_sneeze_corona), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -58,5 +60,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = CompleteForestVerifier()
+    engine = CompleteTriangulatedVerifier()
     engine.execute_swipl_process()
