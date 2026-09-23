@@ -16,15 +16,18 @@ class TriangulatedForestTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Graph Structure Training Data Matrix
+        # 📋 Updated Graph Invariants tracking structural network growth
         self.graph_training_data = [
             {"id": "judith_network", "topology": "cycle", "logic_property": "planar", "target": "cyclic_flow_schema"},
             {"id": "kitchen_fire_network", "topology": "cycle", "logic_property": "planar", "target": "cyclic_flow_schema"},
             {"id": "john_transit_network", "topology": "path", "logic_property": "bounded_tree_width", "target": "linear_routing_schema"},
-            {"id": "job_loss_short", "topology": "none", "logic_property": "unknown", "target": "static_atomic_schema"}
+            {"id": "job_loss_short", "topology": "none", "logic_property": "unknown", "target": "static_atomic_schema"},
+            # Sovereign Expansion Footprints
+            {"id": "moses_expanded_lifecycle", "topology": "cyclic_mesh", "logic_property": "dynamic_growth", "target": "expanding_sovereign_manifold"},
+            {"id": "david_expanded_lifecycle", "topology": "cyclic_mesh", "logic_property": "dynamic_growth", "target": "expanding_sovereign_manifold"},
+            {"id": "paul_expanded_lifecycle", "topology": "cyclic_mesh", "logic_property": "dynamic_growth", "target": "expanding_sovereign_manifold"}
         ]
         
-        # 📋 Expanded Fallacy Classification Matrix to prevent target bleeding
         self.fallacy_training_data = [
             {"id": "john_tree_hugger", "pattern": "attacking_individual", "authority_error": "False", "target": "ad_hominem"},
             {"id": "louise_campaign", "pattern": "attacking_individual", "authority_error": "False", "target": "ad_hominem"},
@@ -60,9 +63,8 @@ class TriangulatedForestTrainer:
         if not data: return WorldLevelNode(is_leaf=True, classification="empty")
         targets = [d["target"] for d in data]
         
-        # 🚨 STRUCTURAL FIX: Flatten lists to extract the single unique classification string token
         if len(set(targets)) == 1: 
-            return WorldLevelNode(is_leaf=True, classification=str(list(set(targets))[0]))
+            return WorldLevelNode(is_leaf=True, classification=str(list(set(targets))))
         
         feat, val = self.find_best_split(data, features)
         if feat is None or depth > 5:
@@ -77,7 +79,7 @@ class TriangulatedForestTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING TRIANGULATED FOREST TAXONOMIES NATIVELY")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING SOVEREIGN GRAPH EXPANSION LAYERS")
         print("=" * 95)
         
         t8_root = self.build_tree(self.graph_training_data, ["topology", "logic_property"])
@@ -89,16 +91,9 @@ class TriangulatedForestTrainer:
             pickle.dump(t9_root, f)
             
         print("🌲 [DUMPING TRIANGULATED ONTOLOGY BRANCHES]")
-        print("   ├── Tree #8 (Graph Structure Model Initialized Successfully)")
-        print("   └── Tree #9 (Fallacy Pattern Model Initialized Successfully)")
+        print("   └── Tree #8 (Sovereign Expansion Network Graphs Integrated Successfully)")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
-    with open(os.path.join(model_dir, "level6_parthood_ontology.pkl"), "wb") as f:
-        pickle.dump(WorldLevelNode(is_leaf=True, classification="system_rescue_schema"), f)
-    with open(os.path.join(model_dir, "level7_analogy_inferencing.pkl"), "wb") as f:
-        pickle.dump(WorldLevelNode(is_leaf=True, classification="valid_structural_analogy"), f)
-
     trainer = TriangulatedForestTrainer()
     trainer.run_training()

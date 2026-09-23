@@ -43,6 +43,14 @@ graph_property_invariant(john_transit_network, topology, path).
 graph_property_invariant(john_transit_network, logic_property, bounded_tree_width).
 graph_property_invariant(job_loss_short, topology, none).
 
+% 🚨 SOVEREIGN TIMELINE GRAPH EXPANSONS: Micro-details turn lines into expanding meshes
+graph_property_invariant(moses_expanded_lifecycle, topology, cyclic_mesh).
+graph_property_invariant(moses_expanded_lifecycle, logic_property, dynamic_growth).
+graph_property_invariant(david_expanded_lifecycle, topology, cyclic_mesh).
+graph_property_invariant(david_expanded_lifecycle, logic_property, dynamic_growth).
+graph_property_invariant(paul_expanded_lifecycle, topology, cyclic_mesh).
+graph_property_invariant(paul_expanded_lifecycle, logic_property, dynamic_growth).
+
 %% --- ⚠️ NEW DOMAIN: LOGICAL FALLACY ATOMIC PATTERNS ---
 text_fallacy_pattern(john_tree_hugger, ad_hominem, 'attacking the individual').
 text_fallacy_pattern(louise_campaign, ad_hominem, 'attacking the individual').
