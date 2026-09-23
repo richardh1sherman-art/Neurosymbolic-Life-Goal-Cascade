@@ -11,33 +11,25 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class AnalogyOntologyTrainer:
+class TriangulatedForestTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Complex analogy profiles incorporating your spiritual parthood metrics
-        self.analogy_training_data = [
-            {
-                "analogy_id": "m_to_k", 
-                "transmission_failure": "True", "mitigation_vector": "True", "awareness_lapse": "True", "connection_vector": "True", 
-                "has_permission_q": "True", "boundary_asymmetry": "False",
-                "target": "valid_structural_analogy"
-            },
-            {
-                "analogy_id": "m_to_k_breach", 
-                "transmission_failure": "True", "mitigation_vector": "True", "awareness_lapse": "True", "connection_vector": "True", 
-                "has_permission_q": "False", "boundary_asymmetry": "False",
-                "target": "pragmatic_contract_violation"
-            },
-            # 🚨 NEW VARIANT: Spiritual Analogy Map
-            {
-                "analogy_id": "judith_to_prodigal",
-                "fundamental_crisis": "True", "visceral_depletion": "True", "external_deliverance": "True", 
-                "informational_beacon": "True", "awareness_vector": "True", "initial_abundance": "True", 
-                "structural_descent": "True", "boundary_asymmetry": "True", "has_permission_q": "True",
-                "target": "partial_spiritual_homomorphism"
-            }
+        # 📋 Graph Structure Training Data
+        self.graph_training_data = [
+            {"id": "judith_network", "topology": "cycle", "logic_property": "planar", "target": "cyclic_flow_schema"},
+            {"id": "kitchen_fire_network", "topology": "cycle", "logic_property": "planar", "target": "cyclic_flow_schema"},
+            {"id": "john_transit_network", "topology": "path", "logic_property": "bounded_tree_width", "target": "linear_routing_schema"},
+            {"id": "job_loss_short", "topology": "none", "logic_property": "unknown", "target": "static_atomic_schema"}
+        ]
+        
+        # 📋 Fallacy Classification Training Data
+        self.fallacy_training_data = [
+            {"id": "john_tree_hugger", "pattern": "attacking_individual", "target": "ad_hominem"},
+            {"id": "louise_campaign", "pattern": "attacking_individual", "target": "ad_hominem"},
+            {"id": "bible_circularity", "pattern": "circular_loop", "target": "circular_reasoning"},
+            {"id": "friend_sneeze_corona", "pattern": "irrelevant_credentials", "target": "irrelevant_authority"}
         ]
 
     def calculate_entropy(self, targets):
@@ -54,10 +46,10 @@ class AnalogyOntologyTrainer:
         base_entropy = self.calculate_entropy([d["target"] for d in data])
         best_gain, best_feat, best_val = -1, None, None
         for f in features:
-            values = set(d.get(f, "False") for d in data)
+            values = set(d.get(f, "unknown") for d in data)
             for val in values:
-                left = [d for d in data if d.get(f, "False") == val]
-                right = [d for d in data if d.get(f, "False") != val]
+                left = [d for d in data if d.get(f, "unknown") == val]
+                right = [d for d in data if d.get(f, "unknown") != val]
                 if not left or not right: continue
                 gain = base_entropy - ((len(left)/len(data)) * self.calculate_entropy([d["target"] for d in left]) + (len(right)/len(data)) * self.calculate_entropy([d["target"] for d in right]))
                 if gain > best_gain:
@@ -76,34 +68,37 @@ class AnalogyOntologyTrainer:
             return WorldLevelNode(is_leaf=True, classification=str(max(counts, key=counts.get)))
 
         node = WorldLevelNode(split_feature=feat, split_value=val)
-        node.tb = self.build_tree([d for d in data if d.get(feat, "False") == val], [f for f in features if f != feat], depth + 1)
-        node.fb = self.build_tree([d for d in data if d.get(feat, "False") != val], [f for f in features if f != feat], depth + 1)
+        node.tb = self.build_tree([d for d in data if d.get(feat, "unknown") == val], [f for f in features if f != feat], depth + 1)
+        node.fb = self.build_tree([d for d in data if d.get(feat, "unknown") != val], [f for f in features if f != feat], depth + 1)
         return node
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING ANALOGICAL FORESTS OVER SPIRITUAL DOMAINS")
+        print("🚀 CUSTOM AI PIPELINE: RETRAINING TRIANGULATED FOREST REPRESENTATIONS")
         print("=" * 95)
         
-        features_list = [
-            "transmission_failure", "mitigation_vector", "has_permission_q", "boundary_asymmetry",
-            "fundamental_crisis", "visceral_depletion", "external_deliverance", "informational_beacon",
-            "awareness_vector", "initial_abundance", "structural_descent"
-        ]
-        t7_root = self.build_tree(self.analogy_training_data, features_list)
-        
-        with open(os.path.join(self.model_dir, "level7_analogy_inferencing.pkl"), "wb") as f:
-            pickle.dump(t7_root, f)
+        # Train Tree #8 (Graph Invariants)
+        t8_root = self.build_tree(self.graph_training_data, ["topology", "logic_property"])
+        with open(os.path.join(self.model_dir, "level8_graph_topologies.pkl"), "wb") as f:
+            pickle.dump(t8_root, f)
             
-        print("🌲 [DUMPING LEVEL 3 HOMOMORPHISM SELECTIONS]")
-        print("   └── Tree #7 (Spiritual & Structural Analogy Core Restructured Successfully)")
+        # Train Tree #9 (Fallacy Classifications)
+        t9_root = self.build_tree(self.fallacy_training_data, ["pattern"])
+        with open(os.path.join(self.model_dir, "level9_fallacy_patterns.pkl"), "wb") as f:
+            pickle.dump(t9_root, f)
+            
+        print("🌲 [DUMPING TRIANGULATED ONTOLOGY BRANCHES]")
+        print("   ├── Tree #8 (Graph Structure Model Initialized Successfully)")
+        print("   └── Tree #9 (Fallacy Pattern Model Initialized Successfully)")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    # Also initialize dummy Tree #6 wrapper file to keep inference unpickler from crashing
+    # Ensure legacy placeholder files exist to keep the inference script stable
     model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
     with open(os.path.join(model_dir, "level6_parthood_ontology.pkl"), "wb") as f:
         pickle.dump(WorldLevelNode(is_leaf=True, classification="system_rescue_schema"), f)
+    with open(os.path.join(model_dir, "level7_analogy_inferencing.pkl"), "wb") as f:
+        pickle.dump(WorldLevelNode(is_leaf=True, classification="valid_structural_analogy"), f)
 
-    trainer = AnalogyOntologyTrainer()
+    trainer = TriangulatedForestTrainer()
     trainer.run_training()

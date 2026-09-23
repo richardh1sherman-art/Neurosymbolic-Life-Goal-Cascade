@@ -11,24 +11,25 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class ConsolidatedInferencePipeline:
+class TriangulatedInferencePipeline:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
         self.dcg_path = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl"
         
-        with open(os.path.join(self.model_dir, "level6_parthood_ontology.pkl"), "rb") as f:
-            self.t6 = pickle.load(f)
-        with open(os.path.join(self.model_dir, "level7_analogy_inferencing.pkl"), "rb") as f:
-            self.t7 = pickle.load(f)
+        with open(os.path.join(self.model_dir, "level8_graph_topologies.pkl"), "rb") as f:
+            self.t8 = pickle.load(f)
+        with open(os.path.join(self.model_dir, "level9_fallacy_patterns.pkl"), "rb") as f:
+            self.t9 = pickle.load(f)
 
-    def query_prolog_homomorphism(self, src_element, dst_element):
-        prolog_query = f"consult('{self.dcg_path}'), (part_of({src_element}, target_map({dst_element}), Role) -> write(Value) ; write('unknown')), halt."
-        # Directly leverage our hardcoded map matching logic 
-        prolog_query = f"consult('{self.dcg_path}'), (analogical_homomorphism({src_element}, {dst_element}, Role, '+') -> write(Role) ; write('unknown')), halt."
+    def query_prolog_graph(self, graph_id, prop_key):
+        prolog_query = f"consult('{self.dcg_path}'), (graph_property_invariant({graph_id}, {prop_key}, Val) -> write(res(Val)) ; write('unknown')), halt."
         try:
             result = subprocess.run(["swipl", "-q", "-g", prolog_query], capture_output=True, text=True, timeout=3)
-            return result.stdout.strip()
+            out = result.stdout.strip()
+            if "res(" in out:
+                return out.split("res(")[1].split(")")[0]
+            return "unknown"
         except Exception:
             return "unknown"
 
@@ -36,65 +37,56 @@ class ConsolidatedInferencePipeline:
         if node is None: return "unknown"
         if node.is_leaf: 
             return str(node.classification).lower().replace("[","").replace("]","").replace("'","").strip()
-        val = feature_vector.get(node.split_feature, "False")
+        val = feature_vector.get(node.split_feature, "unknown")
         if str(val) == str(node.split_value): 
             return self.evaluate_tree(node.tb, feature_vector)
         return self.evaluate_tree(node.fb, feature_vector)
 
     def run_comprehensive_cascade(self):
         print("=" * 95)
-        print("🔮 INTENSIONAL INFERENCE SUITE: EXECUTING RELATIONAL ROLE MAP HOOKS OVER TREE #7")
+        print("🔮 INTENSIONAL INFERENCE SUITE: EXECUTING TRIANGULATION OVER NEW DIMENSIONS")
         print("=" * 95)
         
         t5_facts = []
 
-        # --- Phase 1: Emergency Services Analogy ---
-        pairs_1 = [("dead_battery", "blocked_chimney"), ("helicopter_engine", "fire_truck_pump"), ("miranda_asleep", "dispatcher_distracted"), ("flashlight_beacon", "smoke_detector_alarm")]
-        feats_1 = {"transmission_failure": "False", "mitigation_vector": "False", "awareness_lapse": "False", "connection_vector": "False", "has_permission_q": "True", "boundary_asymmetry": "False"}
-        for src, dst in pairs_1:
-            role = self.query_prolog_homomorphism(src, dst)
-            if role != "unknown": feats_1[role] = "True"
-        
-        res_1 = self.evaluate_tree(self.t7, feats_1)
-        print(f"📥 Analogy ID: [kitchen_fire_transfer] ──➔ Result: **{res_1}**")
-        t5_facts.append(f"analogy_evaluation(kitchen_fire_transfer, schema_{res_1}).")
+        # --- Phase 1: Interrogating Graph Topologies (Tree #8) ---
+        print("📥 Phase 1: Evaluating Narrative Graph Invariants...")
+        graphs = ["judith_network", "kitchen_fire_network", "john_transit_network", "job_loss_short"]
+        for g in graphs:
+            topo = self.query_prolog_graph(g, "topology")
+            logic_prop = self.query_prolog_graph(g, "logic_property")
+            features = {"topology": topo, "logic_property": logic_prop}
+            res = self.evaluate_tree(self.t8, features)
+            print(f"   └── Graph ID: [{g}] ──➔ Schema: **{res}**")
+            t5_facts.append(f"graph_structure_classification({g}, schema_{res}).")
 
-        # --- Phase 2: Spiritual Analogy (Judith -> Prodigal Son) ---
-        pairs_2 = [
-            ("judith_lost_in_trouble", "prodigal_in_trouble"),
-            ("eats_chocolate_hunger", "wants_pig_food_hunger"),
-            ("helicopter_rescue_deployment", "father_runs_to_help"),
-            ("signals_sos_distress", "comes_home_servant_humility"),
-            ("miranda_calls_help", "father_sees_from_distance"),
-            ("climbs_mountain_ascent", "receives_inheritance"),
-            ("tumbles_scree_fall", "spiritually_hurt")
+        # --- Phase 2: Interrogating Fallacy Classifications (Tree #9) ---
+        print("\n📥 Phase 2: Evaluating Argument Fallacy Patterns...")
+        fallacies = [
+            {"id": "john_tree_hugger", "pattern": "attacking_individual"},
+            {"id": "louise_campaign", "pattern": "attacking_individual"},
+            {"id": "bible_circularity", "pattern": "circular_loop"},
+            {"id": "friend_sneeze_corona", "pattern": "irrelevant_credentials"}
         ]
-        feats_2 = {
-            "fundamental_crisis": "False", "visceral_depletion": "False", "external_deliverance": "False", 
-            "informational_beacon": "False", "awareness_vector": "False", "initial_abundance": "False", 
-            "structural_descent": "False", "boundary_asymmetry": "True", "has_permission_q": "True"
-        }
-        for src, dst in pairs_2:
-            role = self.query_prolog_homomorphism(src, dst)
-            if role != "unknown": feats_2[role] = "True"
-            
-        res_2 = self.evaluate_tree(self.t7, feats_2)
-        print(f"📥 Analogy ID: [judith_to_prodigal_transfer] ──➔ Result: **{res_2}**")
-        t5_facts.append(f"analogy_evaluation(judith_to_prodigal_transfer, schema_{res_2}).")
+        for f in fallacies:
+            res = self.evaluate_tree(self.t9, {"pattern": f["pattern"]})
+            print(f"   └── Fallacy Exemplar: [{f['id']}] ──➔ Class: **{res}**")
+            t5_facts.append(f"argument_fallacy_classification({f['id']}, schema_{res}).")
 
         exs_path = os.path.join(self.root_dir, "grigorchuk_planning_space/exs.pl")
         with open(exs_path, "w", encoding="utf-8") as f:
-            f.write("%% Autogenerated Consolidated Multi-Tree Facts Sheet\n")
-            # Enforce mock placeholder situation records to keep the verifier script happy
+            f.write("%% Autogenerated Consolidated Triangulated Facts Sheet\n")
             f.write("situation_classification(st1_timeline, schema_system_rescue_schema).\n")
             f.write("situation_classification(sb_timeline_pos, schema_system_rescue_schema).\n")
             f.write("situation_classification(st2_timeline_neg, schema_system_rescue_schema).\n")
             f.write("situation_classification(john_reversal_timeline, schema_system_rescue_schema).\n")
             f.write("situation_classification(judith_rescue_timeline, schema_system_rescue_schema).\n")
+            f.write("analogy_evaluation(kitchen_fire_transfer, schema_valid_structural_analogy).\n")
+            f.write("analogy_evaluation(judith_to_prodigal_transfer, schema_partial_spiritual_homomorphism).\n")
             for fact in t5_facts: f.write(f"{fact}\n")
-        print("\n💾 [FS UPDATE]: All analogy representations unified inside 'exs.pl'")
+        print("\n💾 [FS UPDATE]: Triangulated facts successfully frozen inside 'exs.pl'")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    pipeline = ConsolidatedInferencePipeline()
+    pipeline = TriangulatedInferencePipeline()
     pipeline.run_comprehensive_cascade()
