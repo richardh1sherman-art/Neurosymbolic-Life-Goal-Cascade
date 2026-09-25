@@ -1,141 +1,106 @@
 import os
-import pickle
-import re
+import sys
 
-class LispInterpreterEngine:
+class RecursiveStack:
     def __init__(self):
-        # 📋 Initialize a mock environmental sensor block simulating current game states
-        self.game_sensors = {
-            "has_higher_offer": True,
-            "wave_height": 4.2,          # 🌊 Storm active over the river!
-            "charged_extinguisher": False, # 🚨 Extinguisher is dead!
-            "famine": True,
-            "distance_to_goal": 1.2
+        self.nodes = []
+    def push(self, state, path):
+        self.nodes.append((state, path))
+    def pop(self):
+        return self.nodes.pop() if self.nodes else None
+    def is_empty(self):
+        return len(self.nodes) == 0
+
+class SelfSimilarGroupSolver:
+    def __init__(self):
+        # State Vector: (Missionaries_Left, Cannibals_Left, Boat_Left)
+        self.root_state = (3, 3, 1)
+        self.identity_element = (0, 0, 0) # Goal state where word collapses to e
+        
+        # 🪐 ALGEBRAIC GENERATORS: Define the alphabet of discrete group operations
+        # Each tuple represents: (Delta_M, Delta_C) to move in the boat
+        self.generators = {
+            "a": (0, 2),  # Permutation: Move 2 Cannibals
+            "b": (0, 1),  # Failover: Move 1 Cannibal
+            "c": (1, 1),  # Inversion: Move 1 Missionary, 1 Cannibal
+            "d": (2, 0),  # Alternative: Move 2 Missionaries
+            "e": (1, 0)   # Simple shift: Move 1 Missionary
         }
 
-    def tokenize(self, code_string):
-        """Converts raw S-expressions into standard nested Python lists."""
-        # Add spacing around parentheses to split easily
-        spaced = code_string.replace('(', ' ( ').replace(')', ' ) ')
-        return [t for t in spaced.split() if t.strip()]
+    def evaluate_group_invariant(self, state):
+        """Self-similar boundary check: Verifies if a branch level violates the safety laws."""
+        m, c, b = state
+        if m < 0 or c < 0 or m > 3 or c > 3:
+            return False # Hard Topological Block (•)
+        if m > 0 and m < c:
+            return False # Left bank mismatch: eaten
+        rem_m, rem_c = 3 - m, 3 - c
+        if rem_m > 0 and rem_m < rem_c:
+            return False # Right bank mismatch: eaten
+        return True
 
-    def parse_tokens(self, tokens):
-        """Recursively structures tokens into an evaluation tree lattice."""
-        if len(tokens) == 0:
-            raise SyntaxError("Unexpected EOF while reading LISP structure.")
-        
-        token = tokens.pop(0)
-        if token == '(':
-            sub_list = []
-            while tokens and tokens[0] != ')':
-                sub_list.append(self.parse_tokens(tokens))
-            if tokens and tokens[0] == ')':
-                tokens.pop(0) # Pop off matching closing bracket
-            return sub_list
-        elif token == ')':
-            raise SyntaxError("Unexpected closing parenthesis encountered.")
-        else:
-            return self.atomize(token)
-
-    def atomize(self, token):
-        """Converts raw characters into strings, booleans, or floats natively."""
-        if token.lower() == 'true': return True
-        if token.lower() == 'false': return False
-        try:
-            return float(token)
-        except ValueError:
-            return str(token)
-
-    def evaluate(self, exp):
-        """👑 THE RECURSIVE EVALUATION MONAD: Executes the code statements."""
-        if not isinstance(exp, list):
-            # If it's a raw identifier, check if it matches an environmental sensor
-            if exp in self.game_sensors:
-                return self.game_sensors[exp]
-            return exp
-
-        if not exp:
-            return None
-
-        operator = exp[0]
-        
-        # 📜 Control Flow: (if condition true_clause false_clause)
-        if operator == 'if' and len(exp) >= 4:
-            condition = self.evaluate(exp[1])
-            if condition:
-                return self.evaluate(exp[2])
-            else:
-                return self.evaluate(exp[3])
-
-        # 📊 Arithmetic and Comparison Operators
-        elif operator == '<' and len(exp) >= 3:
-            return self.evaluate(exp[1]) < self.evaluate(exp[2])
-        elif operator == 'gt' and len(exp) >= 3:
-            return self.evaluate(exp[1]) > self.evaluate(exp[2])
-        elif operator == 'eq' or operator == '==':
-            if len(exp) >= 3:
-                return self.evaluate(exp[1]) == self.evaluate(exp[2])
-            return False
-        elif operator == 'not' and len(exp) >= 2:
-            return not self.evaluate(exp[1])
-
-        # 🧭 Default Fallback for Action Functions (go, goto, etc.)
-        else:
-            evaluated_args = [self.evaluate(arg) for arg in exp[1:]]
-            return f"({operator} " + " ".join(map(str, evaluated_args)) + ")"
-
-    def run_interpreter_tests(self):
+    def compute_pathfinder(self):
         print("=" * 95)
-        print("🌀 LIVE LISP S-EXPRESSION INTERPRETER CORE DIAGNOSTICS")
+        print("🚀 EXECUTING PATH RECOVERY VIA SELF-SIMILAR GROUP AUTOMATON LOOPS")
         print("=" * 95)
         
-        # Evaluates the actual LISP syntax blocks from your problem stories
-        problems = [
-            {
-                "name": "Corporate Negotiation Track",
-                "code": "(if has_higher_offer (goto counter_bid) (go search_maze))"
-            },
-            {
-                "name": "Emergency Logistics Relay (Drone/Storm)",
-                "code": "(if (gt wave_height 3.0) (go proceed_on_foot) (goto helicopter_flight))"
-            },
-            {
-                "name": "Kitchen Fire Extension (Dead Extinguisher)",
-                "code": "(if (not charged_extinguisher) (go evacuation_jacket) (goto use_extinguisher))"
-            },
-            {
-                "name": "The Sovereign Household Economy",
-                "code": "(if (eq famine true) (goto distribute_rations) (goto surprise_watermelon))"
-            }
-        ]
+        stack = RecursiveStack()
+        stack.push(self.root_state, [self.root_state])
+        
+        visited = set()
+        step = 1
 
-        for p in problems:
-            print(f"📥 Context Domain ──➔ {p['name']}")
-            print(f"   ├── Raw S-Expression ──➔ {p['code']}")
+        while not stack.is_empty():
+            current, path = stack.pop()
             
-            try:
-                tokens = self.tokenize(p['code'])
-                parsed_ast = self.parse_tokens(tokens)
-                runtime_output = self.evaluate(parsed_ast)
-                print(f"   └── INTERPRETER EVALUATION OUTPUT ──➔ \033[1;32m{runtime_output}\033[0m\n")
-            except Exception as e:
-                print(f"   └── \033[1;31mRuntime Error: {str(e)}\033[0m\n")
+            if current == self.identity_element:
+                print("\n==================================================================================")
+                print("🏆 AUTOMATON WORD COLLAPSED TO IDENTITY (e)! ALGEBRAIC PATH PROVED CLEAN:")
+                print("==================================================================================")
+                for idx, vertex in enumerate(path):
+                    print(f"   ➔ Tree Level {idx:02d} | Coordinate Node: {vertex}")
+                print("==================================================================================\n")
+                return True
 
-        print("=" * 95)
+            if current in visited:
+                continue
+            visited.add(current)
+
+            print(f"Step {step:02d} | Node {current} ──➔ Automaton evaluating sub-branch splits...")
+            step += 1
+
+            # The solver exhaustively tests group generator combinations down the tree levels
+            for gen_name, (dm, dc) in self.generators.items():
+                m, c, b = current
+                
+                # Apply group action transformations depending on the active tree split side
+                if b == 1:
+                    next_node = (m - dm, c - dc, 0)
+                else:
+                    next_node = (m + dm, c + dc, 1)
+
+                # Evaluate the structural invariant safety check
+                if not self.evaluate_group_invariant(next_node):
+                    continue
+
+                if next_node in path:
+                    continue
+
+                # Approved path transitions are pushed directly onto the recursion stack
+                print(f"   └── \033[1;32mGenerator [{gen_name}]\033[0m ──➔ Transformed branch level to {next_node}")
+                stack.push(next_node, path + [next_node])
+                
+        print("❌ Word Problem Error: Path blocked, group cannot resolve to identity element.")
+        return False
 
 if __name__ == "__main__":
-    # 🚨 STRUCTURAL REPAIR: Safeguard parent directories against missing folder faults
+    # Ensure directory existence before writing facts sheet to disk
     root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
     exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
     os.makedirs(os.path.dirname(exs_path), exist_ok=True)
     
     with open(exs_path, "w", encoding="utf-8") as f:
-        f.write("synthesis_status(corporate_negotiation, schema_valid_non_fallacious_policy).\n")
-        f.write("synthesis_status(emergency_logistics, schema_graph_minor_detour_policy).\n")
-        f.write("synthesis_status(kitchen_fire_extension, schema_graph_minor_detour_policy).\n")
-        f.write("synthesis_status(sovereign_economy, schema_graph_minor_detour_policy).\n")
-        f.write("synthesis_status(banned_negation, schema_discarded_pruned_expression).\n")
-        f.write("synthesis_status(banned_alignment, schema_discarded_pruned_expression).\n")
+        f.write("situation_classification(river_crossing_loop, schema_self_similar_solution).\n")
 
-    engine = LispInterpreterEngine()
-    engine.run_interpreter_tests()
+    solver = SelfSimilarGroupSolver()
+    solver.compute_pathfinder()
