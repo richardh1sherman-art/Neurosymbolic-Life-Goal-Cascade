@@ -2,7 +2,7 @@
 \usepackage{amsmath,amssymb,amsfonts,latexsym}
 \usepackage{bm}
 
-\title{Metaphysical Foundations of the Multi-Representation Neurosymbolic Forest}
+\title{Metaphysical Foundations and Triangulation Invariants of the Neurosymbolic Forest}
 \author{System Architecture Invariant Manifest}
 \date{\today}
 
@@ -12,81 +12,47 @@
 \section{Introduction and Ontological Modalities}
 Following the formalisms of Edward Zalta's Abstract Object Theory and Situation Theory, we isolate three distinct modal world-lines within a single unified processing manifold:
 \begin{enumerate}
-    \item \textbf{The Historical Immutable World:} Rigidly designated actualities ($s_{\text{actual}}$) frozen in the past (e.g., Moses, David). They are structurally locked against retroactive modifications.
+    \item \textbf{The Historical Immutable World:} Rigidly designated actualities ($s_{\text{actual}}$) frozen in the past (e.g., Moses, David, Paul). They are structurally locked against retroactive modifications.
     \item \textbf{The Fictional Mutable World:} Abstract objects encoding properties inside an isolated situation domain ($s'$), completely open to counterfactual planning rewrites (e.g., John, Judith, Pierre).
     \item \textbf{The Indexical Real World:} The concrete evaluation layer where sovereign actions and executions occur in real time.
 \end{enumerate}
 
-\section{The Forest Layout: Three Independent Structural Representations}
-To prevent feature-space pollution and stabilize Shannon Entropy boundaries during statistical induction, the architecture splits processing tasks across three decoupled upper-tier decision models.
+\section{The DSL Discretization Interface and Homomorphisms}
+Continuous environments (e.g., physics grids, maze navigation, or real-time spatial physics) present an infinite, unsearchable behavior space. We address this challenge by introducing an intermediate LISP-like Domain-Specific Language (DSL) that functions as a structural discretization filter.
 
-\subsection{Representation I: Causal Counterfactuals (Tree \#5)}
-This model monitors binary concept assertions ($\text{Sign} \in \{+, -\}$) to maintain narrative coherence under unexpected contextual breaks. 
-The system evaluates the state profiles using the split rule:
+\subsection{When the DSL and Trees Activate}
+The runtime execution cascade operates in a strict top-down dependency chain:
 \begin{equation}
-\mathcal{F}(s') = 
-\begin{cases} 
-\text{preserve\_semantics\_equivalence}, & \text{if } \text{Sign} = + \\
-\text{trigger\_terminal\_node\_rewrite}, & \text{if } \text{Sign} = -
-\end{cases}
+    \text{Continuous Simulation} \xrightarrow{\text{DSL Filter}} \text{Discrete S-Expressions} \xrightarrow{\text{FCA Layout}} \text{Decision Tree Leaf Nodes}
 \end{equation}
+The DSL is active at the very beginning of the loop. It ingests continuous floating-point observations and maps them into low-dimensional atomic sensor values (\texttt{raydist}, \texttt{distance}, \texttt{gap}). These expressions are then feature-engineered into discrete attribute profiles for our Decision Trees.
 
-\subsubsection{Exemplar Trace: Causal Job-Loss Counterfactual (ST1)}
-Let $S_{\text{ST1}}$ be a multi-sentence situation tracking a worker's trajectory. The transition from positive baseline diligence to an active withdrawal state is formulated strictly as follows:
-\begin{align*}
-    \text{ST1}_{\text{pos}} &= \langle \text{stagnate}, \text{diligent}, \text{rejection}, \text{withdraw} \rangle \longrightarrow \mathbf{quits\_job} \\
-    \text{ST1}_{\text{neg}} &= \langle \text{stagnate}, \text{diligent}, \neg\text{rejection}, \neg\text{withdraw} \rangle \longrightarrow \mathbf{keeps\_job}
-\end{align*}
-When the request for a raise is refused ($\text{Sign} = -$), Tree \#5 triggers a structural branch rewrite, allowing the agent to exit the active edge safely rather than falling into an unhandled system failure.
+\subsection{Homomorphism as Terminal Node Agreement}
+Under Jon Barwise's Information Flow framework, an analogy is defined as a structure-preserving channel infomorphism (homomorphism). In a Decision Tree model, a homomorphism is achieved when **two completely different problems reach the exact same terminal leaf node** through feature engineering. By sharing a common destination vertex, the system registers a verified logical alignment across separate world-lines.
 
-\subsection{Representation II: FCA Parthood Ontologies (Tree \#6)}
-Using Formal Concept Analysis (FCA), situations are decomposed into an 8-dimensional attribute matrix mapping abstract structural parthood ($\sqsubseteq_{\text{part\_of}}$). The categories are defined across uniform relational axes:
-\begin{equation}
-    R_{\text{FCA}} = \langle \text{Syntax}, \text{Type}, \text{Region}, \text{Event}, \text{Argument}, \text{Action}, \text{Set}, \text{Time} \rangle
-\end{equation}
-This matrix isolates multi-sentence overlaps natively. For example, it maps the geographical context of \textit{Egypt} symmetrically across both Moses and Joseph, while cleanly splitting their terminal classifications based on distinct argument vectors (e.g., \textit{killing\_egyptian} vs. \textit{youthful\_pride}).
+\subsection{The Execution Hand-Off to Self-Similar Groups}
+Once the Decision Tree categorizes a situation at its terminal leaf node, **the self-similar group automaton takes over as the execution motor**. Rather than consulting brittle, static tables of connections like Newell's General Problem Solver (GPS), the terminal node maps the problem directly to recursive algebraic generators ($a, b, c, d$). The path is discovered dynamically by solving the algebraic Word Problem on a symmetric rooted tree, collapsing safely to the identity element ($e$) upon completion.
 
-\subsection{Representation III: Relational Role Homomorphisms (Tree \#7)}
-Analogies are not evaluated as loose word overlaps. They are treated as distinct complex abstract objects defined by a structural partial homomorphism ($h: S \to T$) from a Source domain to a Target domain.
+\section{The Core Logic of the Unified Background Knowledge Base (kb.pl)}
+Rather than forcing individual decision trees to duplicate rules, our architecture centralizes all invariant logical axioms inside a single background knowledge layer: \texttt{kb.pl}.
 
-\subsubsection{Pragmatic Social Contract Constraints}
-Tree \#7 checks for high-order pragmatic governance rules. Given an action $p$ and a mandatory permission requirement $q$, an unauthorized exception state triggers an immediate contract breach vertex:
+\subsection{Pragmatic Contract Governance}
+\texttt{kb.pl} handles second-order social contract permissions. Given an action $p$ and a mandatory authorization constraint $q$, an unauthorized exception state triggers an immediate structural breach vertex:
 \begin{equation}
     \text{Pragmatic\_Breach}(p, q) \iff p \land \neg q
 \end{equation}
-For instance, a house kitchen fire expanding while an emergency dispatcher is distracted directly maps onto a mountain emergency where the baseline witness (Miranda) is asleep ($p \land \neg q$).
 
-\section{Analogical Problem Solving via Graph Minors}
-When a target journey line encounters an unexpected topological link break, the system utilizes graph-minor analogical inference to compute a path repair.
-
-Let a planned trajectory be represented as a base network graph $G = (V, E)$. 
+\subsection{Analogy Fact Transfer Laws}
+The centralized engine hosts the rules of logical transfer:
 \begin{enumerate}
-    \item \textbf{Edge Deletion ($G \setminus e$):} Disruption events (e.g., John missing his morning Amtrak train due to a track obstruction) delete a critical transit link $e \in E$, rendering the destination $V_{\text{goal}}$ unreachable.
-    \item \textbf{Node Contraction ($G / e$):} The recovery strategy acts as a node contraction operator. By calling a local cab, the system dynamically folds the broken pathway coordinates back together, restructuring the topological space to preserve destination connectivity.
+    \item \textbf{Reflexive Rule:} Symmetrically infers facts between separate domains ($\text{S}_1 \neq \text{S}_2$) if an underlying structural match is satisfied.
+    \item \textbf{Transitive Rule:} Chains recovery metrics across multi-point domains ($\text{S}_1 \to \text{S}_2 \to \text{S}_3$) by tracing back to the root fact origin point.
 \end{enumerate}
-The accumulated non-linear transformation cost is calculated natively over the Grigorchuk Infinite Group Matrix by traversing equivalent vertex steps inside the background knowledge laws:
-\begin{equation}
-    \text{TotalCost} = \sum \text{EqCost} + \text{StepCost} + \text{SubCost}
-\end{equation}
 
-\section{The Spiritual Analogy Component: Judith and the Prodigal Son}
-The highest layer of analogical inference ascends completely out of the mechanical infrastructure to evaluate structural life-track recovery loops. We define a high-level relational role homomorphism mapping Judith's mountain descent to the narrative of the Prodigal Son ($h: \text{Judith} \to \text{Prodigal\_Son}$):
+\section{The Principle of Triangulation via Channel Infomorphisms}
+While Jon Barwise formulated Channel Composition to track how information commutes through distributed networks, we deploy the Principle of Triangulation to secure cross-model analogies. If three completely independent structural representations (FCA Parthood, Graph Topologies, and Fallacy Patterns) all arrive at the exact same leaf category, the analogy is mathematically finalized.
 
-\begin{equation*}
-\begin{array}{lcl}
-\textbf{Source Scenario (Judith on Mt. Ateh)} & \overset{h}{\longrightarrow} & \textbf{Target Scenario (The Prodigal Son)} \\ \hline
-\text{Ascent under ease and abundance} & \longrightarrow & \text{Initial inheritance and comfortable safety} \\
-\text{Decision to take a different unverified route} & \longrightarrow & \text{Departure to a far, unfamiliar country} \\
-\text{Helpful piles of stones completely peter out} & \longrightarrow & \text{The onset of severe famine and exhaustion} \\
-\text{Hopelessly lost and fallen on a scree slope} & \longrightarrow & \text{Stranded in poverty, feeding swine in the pits} \\
-\text{Injured and trapped against a hardy thorn bush} & \longrightarrow & \text{The awakening event: coming to his senses} \\
-\text{Remembering and flashing the working flashlight} & \longrightarrow & \text{The return journey and confession: ``I have sinned''} \\
-\text{Helicopter searchlight illuminates the face} & \longrightarrow & \text{The Father running out to embrace and cover him} \\
-\text{Waving joyously at the incoming aircraft} & \longrightarrow & \text{The ultimate feast of celebration and restoration}
-\end{array}
-\end{equation*}
-
-\subsection{The Metaphysical Conclusion}
-The flashlight beacon and the son's confession serve identical roles as \textbf{Informational Support Links}. They transform a lost coordinate position into an active, tethered rescue destination. Because both stories map to the exact same high-level mathematical lattice structure inside Tree \#7, the system proves that the transition from a broken fall to a sovereign rescue is governed by an invariant top-down law of redemption.
+\section{Contravariant Lifecycles: Monkey and Experimenter}
+In Tree \#11 (Experiential Architectural Memory), the system learns to parse contravariant observational learning tasks. While the Monkey-and-Bananas problem represents an extraction phase and the Experimenter-and-Bananas problem represents a setup phase, they share an identical topological invariant pattern executed in reverse temporal order. By feature-engineering their shared algebraic operations, the tree maps both settings to a unified strategy leaf vertex: \texttt{homomorphic\_imitation\_learning}, proving that the transition from setting up a constraint to solving it is governed by an invariant top-down law of redemption.
 
 \end{document}
