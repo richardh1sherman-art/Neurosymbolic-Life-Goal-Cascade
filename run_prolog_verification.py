@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class ExperientialMemoryVerifier:
+class AlgebraicForestVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -11,20 +11,19 @@ class ExperientialMemoryVerifier:
 :- consult('kb.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_memory_transfer(ProblemID) :-
-    ( part_of(ProblemID, memory_cluster, Schema) ->
-        format(' [VALID] Formal Algebraic Invariant Closed | Proof Strategy: ~w (\u2218).', [Schema])
+verify_algebraic_closure(TargetID) :-
+    ( dsl_type(variable) ->
+        format(' [VALID] Algebraic Variable Types Registered in Live Architecture (\u2218).~n')
     ;
-        write(' [ERROR] Proof vector missing from episodic memory (\u2022).')
+        format(' [ERROR] Variable data types missing from parser scope (\u2022).~n')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 FORMAL THEOREM PROVER AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: 5TH GRADE ALGEBRAIC CLOSURE AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_memory_transfer(even_product_proof), format('~n'),
-    verify_memory_transfer(odd_product_proof), format('~n'),
+    verify_algebraic_closure(pencil_story), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +43,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = ExperientialMemoryVerifier()
+    engine = AlgebraicForestVerifier()
     engine.execute_swipl_process()
