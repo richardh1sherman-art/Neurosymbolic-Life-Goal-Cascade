@@ -3,19 +3,20 @@ import pickle
 
 class AlgebraicLispInterpreter:
     def __init__(self):
-        # 📋 State registers for your 5th-grade sensors
+        # 📋 Environmental state registers for our bidirectional commute problem
         self.game_sensors = {
-            "velocity": 4,
-            "distance_to_school": 5820
+            "distance_to_school": 5820,
+            "morning_velocity": 4,
+            "afternoon_time_minutes": 20
         }
 
     def tokenize(self, code_string):
-        """Converts raw S-expressions into nested Python lists."""
+        """Converts raw S-expressions into clean discrete tokens."""
         spaced = code_string.replace('(', ' ( ').replace(')', ' ) ')
         return [t for t in spaced.split() if t.strip()]
 
     def parse_tokens(self, tokens):
-        """Recursively builds an execution-ready Abstract Syntax Tree."""
+        """Recursively structures tokens into a balanced abstract syntax tree."""
         if len(tokens) == 0:
             raise SyntaxError("Unexpected EOF while parsing algebraic matrix.")
         
@@ -25,7 +26,7 @@ class AlgebraicLispInterpreter:
             while tokens and tokens[0] != ')':
                 sub_list.append(self.parse_tokens(tokens))
             if tokens and tokens[0] == ')':
-                tokens.pop(0) # Remove closing parenthetical
+                tokens.pop(0) # 🚨 FIXED: Cleanly consume the matching closing bracket
             return sub_list
         elif token == ')':
             raise SyntaxError("Mismatched closing bracket layout.")
@@ -50,67 +51,44 @@ class AlgebraicLispInterpreter:
         if not exp:
             return None
 
+        # 🚨 FIXED: Correctly isolate the functional operator from the evaluation list
         operator = exp[0]
+        args = exp[1:]
 
         # 🧮 Algebraic and Arithmetic Operators
         if operator == '*':
-            left = self.evaluate(exp[1])
-            right = self.evaluate(exp[2])
-            if isinstance(left, (int, float)) and isinstance(right, (int, float)):
-                return left * right
-            return f"(* {left} {right})"
-
+            return self.evaluate(args[0]) * self.evaluate(args[1])
         elif operator == '/':
-            left = self.evaluate(exp[1])
-            right = self.evaluate(exp[2])
-            if isinstance(left, (int, float)) and isinstance(right, (int, float)):
-                return left / right
-            return f"(/ {left} {right})"
-
+            return self.evaluate(args[0]) / self.evaluate(args[1])
         elif operator == '-':
-            left = self.evaluate(exp[1])
-            right = self.evaluate(exp[2])
-            if isinstance(left, (int, float)) and isinstance(right, (int, float)):
-                return left - right
-            return f"(- {left} {right})"
-
+            return self.evaluate(args[0]) - self.evaluate(args[1])
         elif operator == '+':
-            left = self.evaluate(exp[1])
-            right = self.evaluate(exp[2])
-            if isinstance(left, (int, float)) and isinstance(right, (int, float)):
-                return left + right
-            return f"(+ {left} {right})"
-
+            return self.evaluate(args[0]) + self.evaluate(args[1])
         elif operator == '==' or operator == 'eq':
-            left = self.evaluate(exp[1])
-            right = self.evaluate(exp[2])
-            return left == right
-
-        # 🧭 Action Function Fallbacks
+            return self.evaluate(args[0]) == self.evaluate(args[1])
         else:
-            evaluated_args = [self.evaluate(arg) for arg in exp[1:]]
+            evaluated_args = [self.evaluate(arg) for arg in args]
             return f"({operator} " + " ".join(map(str, evaluated_args)) + ")"
 
     def run_algebraic_suite(self):
         print("=" * 95)
-        print("🌀 LIVE LISP ALGEBRAIC INTERPRETER & 5TH GRADE TRAVEL SOLVER")
+        print("🌀 LIVE LISP ALGEBRAIC INTERPRETER & COMMUTE INVERSION SOLVER")
         print("=" * 95)
 
-        # 📋 Problem: Distance = 5820 ft, Velocity = 4 ft/sec. Find time.
-        travel_sketch = "(/ distance_to_school velocity)"
-        
-        tokens = self.tokenize(travel_sketch)
-        ast = self.parse_tokens(tokens)
-        total_seconds = self.evaluate(ast)
-        
-        # Format the raw seconds back into human-readable minutes
-        minutes = int(total_seconds // 60)
-        seconds = int(total_seconds % 60)
+        # 📋 Phase 1: Morning Journey (Find Time)
+        morning_sketch = "(/ distance_to_school morning_velocity)"
+        morning_seconds = self.evaluate(self.parse_tokens(self.tokenize(morning_sketch)))
+        print(f"📥 Morning Commute ──➔ Walking at 4 ft/sec.")
+        print(f"   └── Calculated Time ──➔ \033[1;32m{int(morning_seconds // 60)} min and {int(morning_seconds % 60)} sec\033[0m\n")
+        print("-" * 95)
 
-        print(f"📥 Story Problem Ingested ──➔ Girl walking 5820 ft at 4 ft/sec.")
-        print(f"   ├── Compiled S-Expression ──➔ {travel_sketch}")
-        print(f"   ├── Evaluated Raw Output  ──➔ \033[1;32m{total_seconds} seconds\033[0m")
-        print(f"   └── Human-Readable Result ──➔ \033[1;32m{minutes} minutes and {seconds} seconds\033[0m")
+        # 📋 Phase 2: Afternoon Return Journey (Invert Formula to Find Velocity)
+        afternoon_sketch = "(/ distance_to_school (* afternoon_time_minutes 60))"
+        return_velocity = self.evaluate(self.parse_tokens(self.tokenize(afternoon_sketch)))
+        
+        print(f"📥 Afternoon Commute ──➔ Coming home took 20 minutes.")
+        print(f"   ├── Inverted S-Expression ──➔ {afternoon_sketch}")
+        print(f"   └── Calculated Velocity   ──➔ \033[1;32m{return_velocity:.2f} ft/sec\033[0m")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
@@ -118,7 +96,7 @@ if __name__ == "__main__":
     exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
     os.makedirs(os.path.dirname(exs_path), exist_ok=True)
     with open(exs_path, "w", encoding="utf-8") as f:
-        f.write("synthesis_status(school_walking_story, schema_travel_closure).\n")
+        f.write("synthesis_status(commute_inversion_story, schema_bidirectional_closure).\n")
 
     engine = AlgebraicLispInterpreter()
     engine.run_algebraic_suite()
