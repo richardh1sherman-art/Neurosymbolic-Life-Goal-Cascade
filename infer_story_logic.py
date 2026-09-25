@@ -1,92 +1,141 @@
 import os
 import pickle
+import re
 
-class WorldLevelNode:
-    def __init__(self, is_leaf=False, split_feature=None, split_value=None, classification=None):
-        self.split_feature = split_feature    
-        self.split_value = split_value        
-        self.is_leaf = is_leaf
-        self.classification = classification  
-        self.tb = None                        
-        self.fb = None                        
-
-class TriangulatedInferencePipeline:
+class LispInterpreterEngine:
     def __init__(self):
-        self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
-        self.root_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/Popper-main/examples"
-        
-        with open(os.path.join(self.model_dir, "level8_graph_topologies.pkl"), "rb") as f:
-            self.t8 = pickle.load(f)
-        with open(os.path.join(self.model_dir, "level9_fallacy_patterns.pkl"), "rb") as f:
-            self.t9 = pickle.load(f)
-
-    def query_prolog_graph(self, graph_id, prop_key):
-        graph_db = {
-            "judith_network": {"topology": "cycle", "logic_property": "planar"},
-            "kitchen_fire_network": {"topology": "cycle", "logic_property": "planar"},
-            "john_transit_network": {"topology": "path", "logic_property": "bounded_tree_width"},
-            "job_loss_short": {"topology": "none", "logic_property": "unknown"},
-            # Sovereign Matrix Expansion
-            "moses_expanded_lifecycle": {"topology": "cyclic_mesh", "logic_property": "dynamic_growth"},
-            "david_expanded_lifecycle": {"topology": "cyclic_mesh", "logic_property": "dynamic_growth"},
-            "paul_expanded_lifecycle": {"topology": "cyclic_mesh", "logic_property": "dynamic_growth"}
+        # 📋 Initialize a mock environmental sensor block simulating current game states
+        self.game_sensors = {
+            "has_higher_offer": True,
+            "wave_height": 4.2,          # 🌊 Storm active over the river!
+            "charged_extinguisher": False, # 🚨 Extinguisher is dead!
+            "famine": True,
+            "distance_to_goal": 1.2
         }
-        return graph_db.get(graph_id, {}).get(prop_key, "unknown")
 
-    def evaluate_tree(self, node, feature_vector):
-        if node is None: return "unknown"
-        if node.is_leaf: 
-            return str(node.classification).lower().replace("[","").replace("]","").replace("'","").strip()
-        val = feature_vector.get(node.split_feature, "unknown")
-        if str(val) == str(node.split_value): 
-            return self.evaluate_tree(node.tb, feature_vector)
-        return self.evaluate_tree(node.fb, feature_vector)
+    def tokenize(self, code_string):
+        """Converts raw S-expressions into standard nested Python lists."""
+        # Add spacing around parentheses to split easily
+        spaced = code_string.replace('(', ' ( ').replace(')', ' ) ')
+        return [t for t in spaced.split() if t.strip()]
 
-    def run_comprehensive_cascade(self):
+    def parse_tokens(self, tokens):
+        """Recursively structures tokens into an evaluation tree lattice."""
+        if len(tokens) == 0:
+            raise SyntaxError("Unexpected EOF while reading LISP structure.")
+        
+        token = tokens.pop(0)
+        if token == '(':
+            sub_list = []
+            while tokens and tokens[0] != ')':
+                sub_list.append(self.parse_tokens(tokens))
+            if tokens and tokens[0] == ')':
+                tokens.pop(0) # Pop off matching closing bracket
+            return sub_list
+        elif token == ')':
+            raise SyntaxError("Unexpected closing parenthesis encountered.")
+        else:
+            return self.atomize(token)
+
+    def atomize(self, token):
+        """Converts raw characters into strings, booleans, or floats natively."""
+        if token.lower() == 'true': return True
+        if token.lower() == 'false': return False
+        try:
+            return float(token)
+        except ValueError:
+            return str(token)
+
+    def evaluate(self, exp):
+        """👑 THE RECURSIVE EVALUATION MONAD: Executes the code statements."""
+        if not isinstance(exp, list):
+            # If it's a raw identifier, check if it matches an environmental sensor
+            if exp in self.game_sensors:
+                return self.game_sensors[exp]
+            return exp
+
+        if not exp:
+            return None
+
+        operator = exp[0]
+        
+        # 📜 Control Flow: (if condition true_clause false_clause)
+        if operator == 'if' and len(exp) >= 4:
+            condition = self.evaluate(exp[1])
+            if condition:
+                return self.evaluate(exp[2])
+            else:
+                return self.evaluate(exp[3])
+
+        # 📊 Arithmetic and Comparison Operators
+        elif operator == '<' and len(exp) >= 3:
+            return self.evaluate(exp[1]) < self.evaluate(exp[2])
+        elif operator == 'gt' and len(exp) >= 3:
+            return self.evaluate(exp[1]) > self.evaluate(exp[2])
+        elif operator == 'eq' or operator == '==':
+            if len(exp) >= 3:
+                return self.evaluate(exp[1]) == self.evaluate(exp[2])
+            return False
+        elif operator == 'not' and len(exp) >= 2:
+            return not self.evaluate(exp[1])
+
+        # 🧭 Default Fallback for Action Functions (go, goto, etc.)
+        else:
+            evaluated_args = [self.evaluate(arg) for arg in exp[1:]]
+            return f"({operator} " + " ".join(map(str, evaluated_args)) + ")"
+
+    def run_interpreter_tests(self):
         print("=" * 95)
-        print("🔮 INTENSIONAL INFERENCE SUITE: STREAMING CONSOLIDATED TRIANGULATED FOREST")
+        print("🌀 LIVE LISP S-EXPRESSION INTERPRETER CORE DIAGNOSTICS")
         print("=" * 95)
         
-        t5_facts = []
-
-        # Grounding Base Infomorphisms for Verification Coherence
-        t5_facts.append("situation_classification(judith_network, schema_cyclic_flow_schema).")
-        t5_facts.append("situation_classification(kitchen_fire_network, schema_cyclic_flow_schema).")
-
-        print("📥 Phase 1: Evaluating Narrative Graph Invariants & Network Growth...")
-        graphs = ["judith_network", "kitchen_fire_network", "john_transit_network", "job_loss_short", "moses_expanded_lifecycle", "david_expanded_lifecycle", "paul_expanded_lifecycle"]
-        for g in graphs:
-            features = {
-                "topology": self.query_prolog_graph(g, "topology"),
-                "logic_property": self.query_prolog_graph(g, "logic_property")
+        # Evaluates the actual LISP syntax blocks from your problem stories
+        problems = [
+            {
+                "name": "Corporate Negotiation Track",
+                "code": "(if has_higher_offer (goto counter_bid) (go search_maze))"
+            },
+            {
+                "name": "Emergency Logistics Relay (Drone/Storm)",
+                "code": "(if (gt wave_height 3.0) (go proceed_on_foot) (goto helicopter_flight))"
+            },
+            {
+                "name": "Kitchen Fire Extension (Dead Extinguisher)",
+                "code": "(if (not charged_extinguisher) (go evacuation_jacket) (goto use_extinguisher))"
+            },
+            {
+                "name": "The Sovereign Household Economy",
+                "code": "(if (eq famine true) (goto distribute_rations) (goto surprise_watermelon))"
             }
-            res = self.evaluate_tree(self.t8, features)
-            print(f"   └── Graph ID: [{g}] ──➔ Schema Leaf: **{res}**")
-            t5_facts.append(f"graph_structure_classification({g}, schema_{res}).")
-
-        print("\n📥 Phase 2: Evaluating Argument Fallacy Patterns...")
-        fallacies = [
-            {"id": "john_tree_hugger", "feats": {"pattern": "attacking_individual", "authority_error": "False"}},
-            {"id": "louise_campaign", "feats": {"pattern": "attacking_individual", "authority_error": "False"}},
-            {"id": "bible_circularity", "feats": {"pattern": "circular_loop", "authority_error": "False"}},
-            {"id": "friend_sneeze_corona", "feats": {"pattern": "unknown", "authority_error": "True"}}
         ]
-        for f in fallacies:
-            res = self.evaluate_tree(self.t9, f["feats"])
-            t5_facts.append(f"argument_fallacy_classification({f['id']}, schema_{res}).")
 
-        exs_path = os.path.join(self.root_dir, "grigorchuk_planning_space/exs.pl")
-        with open(exs_path, "w", encoding="utf-8") as f:
-            f.write("%% Autogenerated Consolidated Triangulated Facts Sheet\n")
-            f.write("situation_classification(st1_timeline, schema_system_rescue_schema).\n")
-            f.write("situation_classification(sb_timeline_pos, schema_system_rescue_schema).\n")
-            f.write("situation_classification(st2_timeline_neg, schema_system_rescue_schema).\n")
-            f.write("situation_classification(john_reversal_timeline, schema_system_rescue_schema).\n")
-            f.write("situation_classification(judith_rescue_timeline, schema_system_rescue_schema).\n")
-            f.write("analogy_evaluation(kitchen_fire_transfer, schema_valid_structural_analogy).\n")
-            f.write("analogy_evaluation(judith_to_prodigal_transfer, schema_partial_spiritual_homomorphism).\n")
-            for fact in t5_facts: f.write(f"{fact}\n")
+        for p in problems:
+            print(f"📥 Context Domain ──➔ {p['name']}")
+            print(f"   ├── Raw S-Expression ──➔ {p['code']}")
+            
+            try:
+                tokens = self.tokenize(p['code'])
+                parsed_ast = self.parse_tokens(tokens)
+                runtime_output = self.evaluate(parsed_ast)
+                print(f"   └── INTERPRETER EVALUATION OUTPUT ──➔ \033[1;32m{runtime_output}\033[0m\n")
+            except Exception as e:
+                print(f"   └── \033[1;31mRuntime Error: {str(e)}\033[0m\n")
+
+        print("=" * 95)
 
 if __name__ == "__main__":
-    pipeline = TriangulatedInferencePipeline()
-    pipeline.run_comprehensive_cascade()
+    # 🚨 STRUCTURAL REPAIR: Safeguard parent directories against missing folder faults
+    root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
+    exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
+    os.makedirs(os.path.dirname(exs_path), exist_ok=True)
+    
+    with open(exs_path, "w", encoding="utf-8") as f:
+        f.write("synthesis_status(corporate_negotiation, schema_valid_non_fallacious_policy).\n")
+        f.write("synthesis_status(emergency_logistics, schema_graph_minor_detour_policy).\n")
+        f.write("synthesis_status(kitchen_fire_extension, schema_graph_minor_detour_policy).\n")
+        f.write("synthesis_status(sovereign_economy, schema_graph_minor_detour_policy).\n")
+        f.write("synthesis_status(banned_negation, schema_discarded_pruned_expression).\n")
+        f.write("synthesis_status(banned_alignment, schema_discarded_pruned_expression).\n")
+
+    engine = LispInterpreterEngine()
+    engine.run_interpreter_tests()
