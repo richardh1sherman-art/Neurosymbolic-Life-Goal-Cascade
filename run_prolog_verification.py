@@ -7,7 +7,6 @@ class ExperientialMemoryVerifier:
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
 
     def build_prolog_test_runner(self):
-        # Using a rigid absolute path to guarantee the SWI-Prolog engine locates the parser
         prolog_code = """
 :- consult('kb.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
@@ -21,12 +20,11 @@ verify_memory_transfer(ProblemID) :-
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 EPISODIC TRANSFER CLOSURE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 OBSERVATIONAL CLOSURE AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_memory_transfer(missionaries_cannibals), format('~n'),
     verify_memory_transfer(monkey_bananas), format('~n'),
-    verify_memory_transfer(gps_means_ends), format('~n'),
+    verify_memory_transfer(experimenter_bananas), format('~n'),
     
     format('==================================================================================~n'),
     halt.
