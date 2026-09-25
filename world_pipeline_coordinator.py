@@ -16,11 +16,10 @@ class ExperientialMemoryTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Memory Matrix expanded to track contravariant observation tracks
+        # 📋 Memory Matrix expanded to track algebraic parity proof structures
         self.memory_training_data = [
-            {"id": "missionaries_cannibals", "operator": "self_similar_generators", "perspective": "operator", "target": "automaton_group_solver"},
-            {"id": "monkey_bananas", "operator": "self_similar_generators", "perspective": "operator", "target": "automaton_group_solver"},
-            {"id": "experimenter_bananas", "operator": "self_similar_generators", "perspective": "environment_setter", "target": "homomorphic_imitation_learning"}
+            {"id": "even_product_proof", "domain": "formal_algebra", "remainder_state": "zero_remainder", "target": "even_parity_closure"},
+            {"id": "odd_product_proof", "domain": "formal_algebra", "remainder_state": "isolated_plus_one", "target": "odd_parity_closure"}
         ]
 
     def calculate_entropy(self, targets):
@@ -65,16 +64,16 @@ class ExperientialMemoryTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING EXPERIENTIAL INVERSION EXTRACTION CORES")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING FORMAL THEOREM PROVING CORES")
         print("=" * 95)
         
-        features_list = ["operator", "perspective"]
+        features_list = ["domain", "remainder_state"]
         t11_root = self.build_tree(self.memory_training_data, features_list)
         
         with open(os.path.join(self.model_dir, "level11_experiential_memory.pkl"), "wb") as f:
             pickle.dump(t11_root, f)
             
-        print("🌲 [DUMPING LEVEL 3 EXPERIENCE INVARIANT GEOMETRY]")
+        print("🌲 [DUMPING LEVEL 3 THEOREM PROVER DECISION TREE GEOMETRY]")
         print("-" * 95)
         self.dump_tree(t11_root)
         print("=" * 95 + "\n")
@@ -83,7 +82,7 @@ class ExperientialMemoryTrainer:
         if node.is_leaf:
             print(f"{indent}📦 [TERMINAL MEMORY CLASS LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [MEMORY LOOKUP]: Checks solver characteristic ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [ALGEBRAIC LOOKUP]: Checks proof characteristic ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")

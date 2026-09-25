@@ -1,33 +1,29 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Tree #11 Observational Learning Schemas
+%% Universal Matrix Supporting Tree #11 Theorem Proving Memory
 %% =================================================================
 
 :- dynamic structural_lesson/3.
 :- dynamic map_situation_unit/3.
 
 %% --- 🧠 TREE #11: PROBLEM-SOLVING ARCHITECTURAL MEMORY ---
-% Legacy Episodes
-structural_lesson(missionaries_cannibals, algebraic_operator, self_similar_generators).
-structural_lesson(missionaries_cannibals, resolution_metric, word_reduction).
+% Even Parity Proof Invariants
+structural_lesson(even_product_proof, domain, formal_algebra).
+structural_lesson(even_product_proof, algebraic_operator, scalar_factoring).
+structural_lesson(even_product_proof, remainder_state, zero_remainder).
 
-% 🐒 New Episode: The Monkey-and-Bananas Extraction Problem
-structural_lesson(monkey_bananas, algebraic_operator, self_similar_generators).
-structural_lesson(monkey_bananas, resolution_metric, word_reduction).
-structural_lesson(monkey_bananas, agent_perspective, operator).
-
-% 🧑‍🔬 New Episode: The Experimenter-and-Bananas Setup Problem
-structural_lesson(experimenter_bananas, algebraic_operator, self_similar_generators).
-structural_lesson(experimenter_bananas, resolution_metric, word_reduction).
-structural_lesson(experimenter_bananas, agent_perspective, environment_setter).
+% Odd Parity Proof Invariants
+structural_lesson(odd_product_proof, domain, formal_algebra).
+structural_lesson(odd_product_proof, algebraic_operator, scalar_factoring).
+structural_lesson(odd_product_proof, remainder_state, isolated_plus_one).
 
 %% --- CROSS-TREE MEMORY LOOKUP ENGINE ---
 part_of(Problem, memory_cluster, SchemaType) :-
-    structural_lesson(Problem, algebraic_operator, self_similar_generators),
-    structural_lesson(Problem, agent_perspective, operator),
-    SchemaType = automaton_group_solver.
+    structural_lesson(Problem, domain, formal_algebra),
+    structural_lesson(Problem, remainder_state, zero_remainder),
+    SchemaType = even_parity_closure.
 
 part_of(Problem, memory_cluster, SchemaType) :-
-    structural_lesson(Problem, algebraic_operator, self_similar_generators),
-    structural_lesson(Problem, agent_perspective, environment_setter),
-    SchemaType = homomorphic_imitation_learning.
+    structural_lesson(Problem, domain, formal_algebra),
+    structural_lesson(Problem, remainder_state, isolated_plus_one),
+    SchemaType = odd_parity_closure.

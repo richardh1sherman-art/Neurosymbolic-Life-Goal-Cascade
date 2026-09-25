@@ -13,18 +13,18 @@ class ExperientialMemoryVerifier:
 
 verify_memory_transfer(ProblemID) :-
     ( part_of(ProblemID, memory_cluster, Schema) ->
-        format(' [VALID] Experiential Knowledge Transferred | Solution Strategy: ~w (\u2218).', [Schema])
+        format(' [VALID] Formal Algebraic Invariant Closed | Proof Strategy: ~w (\u2218).', [Schema])
     ;
-        write(' [ERROR] Problem profiling missing from episodic memory (\u2022).')
+        write(' [ERROR] Proof vector missing from episodic memory (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 OBSERVATIONAL CLOSURE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 FORMAL THEOREM PROVER AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_memory_transfer(monkey_bananas), format('~n'),
-    verify_memory_transfer(experimenter_bananas), format('~n'),
+    verify_memory_transfer(even_product_proof), format('~n'),
+    verify_memory_transfer(odd_product_proof), format('~n'),
     
     format('==================================================================================~n'),
     halt.
