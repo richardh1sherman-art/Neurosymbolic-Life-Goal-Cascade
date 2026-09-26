@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class AlgebraicForestVerifier:
+class FunctorDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -11,19 +11,20 @@ class AlgebraicForestVerifier:
 :- consult('kb.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_algebraic_closure(TargetID) :-
-    ( dsl_type(variable) ->
-        format(' [VALID] Algebraic Variable Types Registered in Live Architecture (\u2218).~n')
+verify_functor_status(AlgebraID) :-
+    ( part_of(AlgebraID, structural_analogy, functor) ->
+        format(' [VALID] Inductive Abstract Algebra Maps to a Functor Invariant (\u2218).', [])
     ;
-        format(' [ERROR] Variable data types missing from parser scope (\u2022).~n')
+        format(' [ERROR] Structural functor mapping failed (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: 5TH GRADE ALGEBRAIC CLOSURE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: NON-LINEAR ODE FUNCTOR CLOSURE AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_algebraic_closure(pencil_story), format('~n'),
+    verify_functor_status(real_field), format('~n'),
+    verify_functor_status(pendulum_dynamics), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -43,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = AlgebraicForestVerifier()
+    engine = FunctorDomainVerifier()
     engine.execute_swipl_process()
