@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class ScienceDomainVerifier:
+class ScienceInferenceVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,24 +9,21 @@ class ScienceDomainVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
+:- consult('exs.pl').
 
-verify_scientific_decision(CaseID) :-
-    ( part_of(CaseID, science_metric, status(Status)) ->
-        format(' [VALID] Stability Feature Isolated | Observed Manifold State: ~w (\u2218).', [Status])
+verify_inference_closure(TargetID) :-
+    ( science_inference_result(TargetID, Schema) ->
+        format(' [VALID] Decoupled Inference Proved | Prescribed Policy: ~w (\u2218).', [Schema])
     ;
-        write(' [ERROR] Case feature signature missing from parser scope (\u2022).')
+        format(' [ERROR] Inference results missing from fact sheet (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 SCIENTIFIC INVARIANT AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: DECOUPLED INFERENCE CLOSURE AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_scientific_decision(case_1), format('~n'),
-    verify_scientific_decision(case_2), format('~n'),
-    verify_scientific_decision(case_3), format('~n'),
-    verify_scientific_decision(case_4), format('~n'),
+    verify_inference_closure(inverted_pendulum_case1), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -46,5 +43,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = ScienceDomainVerifier()
+    engine = ScienceInferenceVerifier()
     engine.execute_swipl_process()
