@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class FunctorDomainVerifier:
+class ScienceDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -11,20 +11,22 @@ class FunctorDomainVerifier:
 :- consult('kb.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_functor_status(AlgebraID) :-
-    ( part_of(AlgebraID, structural_analogy, functor) ->
-        format(' [VALID] Inductive Abstract Algebra Maps to a Functor Invariant (\u2218).', [])
+verify_scientific_decision(CaseID) :-
+    ( part_of(CaseID, science_metric, status(Status)) ->
+        format(' [VALID] Stability Feature Isolated | Observed Manifold State: ~w (\u2218).', [Status])
     ;
-        format(' [ERROR] Structural functor mapping failed (\u2022).')
+        write(' [ERROR] Case feature signature missing from parser scope (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: NON-LINEAR ODE FUNCTOR CLOSURE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 SCIENTIFIC INVARIANT AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_functor_status(real_field), format('~n'),
-    verify_functor_status(pendulum_dynamics), format('~n'),
+    verify_scientific_decision(case_1), format('~n'),
+    verify_scientific_decision(case_2), format('~n'),
+    verify_scientific_decision(case_3), format('~n'),
+    verify_scientific_decision(case_4), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +46,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = FunctorDomainVerifier()
+    engine = ScienceDomainVerifier()
     engine.execute_swipl_process()

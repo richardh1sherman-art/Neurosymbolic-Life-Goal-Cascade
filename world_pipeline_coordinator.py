@@ -11,15 +11,17 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class ExperientialMemoryTrainer:
+class ScienceInvariantsTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Memory Matrix expanded to track algebraic parity proof structures
-        self.memory_training_data = [
-            {"id": "even_product_proof", "domain": "formal_algebra", "remainder_state": "zero_remainder", "target": "even_parity_closure"},
-            {"id": "odd_product_proof", "domain": "formal_algebra", "remainder_state": "isolated_plus_one", "target": "odd_parity_closure"}
+        # 📋 Relevant features representing the physical states and informed decisions
+        self.science_training_data = [
+            {"id": "case_1", "spring_stiffness": "soft", "initial_stretch": "unstretched", "tolerance": "liberal", "target": "increase_structural_stiffness"},
+            {"id": "case_2", "spring_stiffness": "soft", "initial_stretch": "unstretched", "tolerance": "stringent", "target": "system_stable_maintain_policy"},
+            {"id": "case_3", "spring_stiffness": "stiff", "initial_stretch": "stretched", "tolerance": "liberal", "target": "system_stable_maintain_policy"},
+            {"id": "case_4", "spring_stiffness": "stiff", "initial_stretch": "stretched", "tolerance": "stringent", "target": "system_stable_maintain_policy"}
         ]
 
     def calculate_entropy(self, targets):
@@ -64,30 +66,30 @@ class ExperientialMemoryTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING FORMAL THEOREM PROVING CORES")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING DECISION TREE #12 (SCIENTIFIC ALGEBRA INVARIANTS)")
         print("=" * 95)
         
-        features_list = ["domain", "remainder_state"]
-        t11_root = self.build_tree(self.memory_training_data, features_list)
+        features_list = ["spring_stiffness", "initial_stretch", "tolerance"]
+        t12_root = self.build_tree(self.science_training_data, features_list)
         
-        with open(os.path.join(self.model_dir, "level11_experiential_memory.pkl"), "wb") as f:
-            pickle.dump(t11_root, f)
+        with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
+            pickle.dump(t12_root, f)
             
-        print("🌲 [DUMPING LEVEL 3 THEOREM PROVER DECISION TREE GEOMETRY]")
+        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #12 (STABILITY CONTROL POLICIES)]")
         print("-" * 95)
-        self.dump_tree(t11_root)
+        self.dump_tree(t12_root)
         print("=" * 95 + "\n")
 
     def dump_tree(self, node, indent="   "):
         if node.is_leaf:
-            print(f"{indent}📦 [TERMINAL MEMORY CLASS LEAF] ──➔ **{node.classification}**")
+            print(f"{indent}📦 [INFORMED DECISION LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [ALGEBRAIC LOOKUP]: Checks proof characteristic ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [STABILITY FEATURE ANALYSIS]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = ExperientialMemoryTrainer()
+    trainer = ScienceInvariantsTrainer()
     trainer.run_training()
