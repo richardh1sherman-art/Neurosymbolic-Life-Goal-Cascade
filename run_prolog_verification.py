@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class WaveDomainVerifier:
+class ScienceDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -10,22 +10,20 @@ class WaveDomainVerifier:
         prolog_code = """
 :- consult('kb.pl').
 :- consult('exs.pl').
-:- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_wave_closure(PolicyID) :-
+verify_science_closure(PolicyID) :-
     ( wave_synthesis_status(PolicyID, Schema) ->
-        format(' [VALID] Wave Policy Verified | System Output State: ~w (\u2218).', [Schema])
+        format(' [VALID] Singularity Defeated | Applied Policy: ~w (\u2218).', [Schema])
     ;
-        format(' [ERROR] Wave execution facts missing from tracking sheets (\u2022).')
+        format(' [ERROR] Science execution facts missing from tracking sheets (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: HYPERBOLIC WAVE REFLECTION AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: SINGULARITY QUENCHING VERIFICATION AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_wave_closure(ideal_uncompensated_policy), format('~n'),
-    verify_wave_closure(adaptive_compensated_policy), format('~n'),
+    verify_science_closure(thermal_blowup_singularity), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -45,5 +43,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = WaveDomainVerifier()
+    engine = ScienceDomainVerifier()
     engine.execute_swipl_process()

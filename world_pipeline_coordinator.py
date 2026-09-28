@@ -16,12 +16,11 @@ class ScienceInvariantsTrainer:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Relevant features representing the physical states and informed decisions
+        # 📋 Relevant scale-independent features for physical systems and informed decisions
         self.science_training_data = [
-            {"id": "case_1", "spring_stiffness": "soft", "initial_stretch": "unstretched", "tolerance": "liberal", "target": "increase_structural_stiffness"},
-            {"id": "case_2", "spring_stiffness": "soft", "initial_stretch": "unstretched", "tolerance": "stringent", "target": "system_stable_maintain_policy"},
-            {"id": "case_3", "spring_stiffness": "stiff", "initial_stretch": "stretched", "tolerance": "liberal", "target": "system_stable_maintain_policy"},
-            {"id": "case_4", "spring_stiffness": "stiff", "initial_stretch": "stretched", "tolerance": "stringent", "target": "system_stable_maintain_policy"}
+            {"id": "ideal_uncompensated_wave", "boundary_type": "hyperbolic", "has_noise": "True", "reflection_state": "uncompensated", "target": "reward_rejection_policy"},
+            {"id": "adaptive_compensated_wave", "boundary_type": "hyperbolic", "has_noise": "True", "reflection_state": "compensated", "target": "active_phase_cancellation"},
+            {"id": "thermal_blowup_singularity", "boundary_type": "nonlinear_pde", "has_noise": "True", "reflection_state": "exponential_divergence", "target": "active_quenching_protocol"}
         ]
 
     def calculate_entropy(self, targets):
@@ -66,10 +65,10 @@ class ScienceInvariantsTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING DECISION TREE #12 (SCIENTIFIC ALGEBRA INVARIANTS)")
+        print("🚀 CUSTOM AI PIPELINE: RETRAINING DECISION TREE #12 (SCIENTIFIC ALGEBRA INVARIANTS)")
         print("=" * 95)
         
-        features_list = ["spring_stiffness", "initial_stretch", "tolerance"]
+        features_list = ["boundary_type", "has_noise", "reflection_state"]
         t12_root = self.build_tree(self.science_training_data, features_list)
         
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
