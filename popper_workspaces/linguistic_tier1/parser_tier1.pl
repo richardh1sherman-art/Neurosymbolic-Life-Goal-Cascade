@@ -1,17 +1,15 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Tree #12 Scientific Algebra Invariants
+%% Universal Matrix Supporting Hyperbolic Wave Reflections and Noise
 %% =================================================================
 
-:- dynamic science_feature_profile/5.
+:- dynamic wave_reflection_profile/4.
 
-%% --- 🪐 TREE #12: SCIENTIFIC ALGEBRA INVARIANTS ---
-%% Syntax: science_feature_profile(CaseID, Stiffness, Stretch, Tolerance, StabilityStatus)
-science_feature_profile(case_1, soft, unstretched, liberal, unstable_drift).
-science_feature_profile(case_2, soft, unstretched, stringent, stable_orbit).
-science_feature_profile(case_3, stiff, stretched, liberal, stable_orbit).
-science_feature_profile(case_4, stiff, stretched, stringent, stable_orbit).
+%% --- 🪐 TREE #12: HYPERBOLIC STABILITY CONTROL POLICIES ---
+%% Syntax: wave_reflection_profile(PolicyID, NoiseStatus, ReflectionCompensation, OutputStatus)
+wave_reflection_profile(ideal_uncompensated_policy, active, uncompensated, reward_rejection).
+wave_reflection_profile(adaptive_compensated_policy, active, compensated, reward_maximized).
 
-%% --- MASTER INTER-TREE SYSTEM LOOKUPS ---
-part_of(CaseID, science_metric, status(Status)) :-
-    science_feature_profile(CaseID, _, _, _, Status).
+%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
+part_of(PolicyID, wave_metric, status(Status)) :-
+    wave_reflection_profile(PolicyID, _, _, Status).
