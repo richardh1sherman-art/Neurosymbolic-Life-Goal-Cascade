@@ -1,15 +1,22 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Hyperbolic Wave Reflections and Noise
+%% Universal Matrix Supporting High-Level Algebraic Meta-Properties
 %% =================================================================
 
-:- dynamic wave_reflection_profile/4.
+:- dynamic algebraic_meta_property/3.
 
-%% --- 🪐 TREE #12: HYPERBOLIC STABILITY CONTROL POLICIES ---
-%% Syntax: wave_reflection_profile(PolicyID, NoiseStatus, ReflectionCompensation, OutputStatus)
-wave_reflection_profile(ideal_uncompensated_policy, active, uncompensated, reward_rejection).
-wave_reflection_profile(adaptive_compensated_policy, active, compensated, reward_maximized).
+%% --- 🪐 SYSTEM COMPLIANCE METADATA REGISTER ---
+% Syntax: algebraic_meta_property(ProblemID, PropertyType, Configuration)
+algebraic_meta_property(flat_thermal_diffusion, structure, linear).
+algebraic_meta_property(rotational_wave_manifold, group_type, semi_simple_continuous).
+algebraic_meta_property(inverted_pendulum_singularity, local_bound, linear_approximation_at_origin).
 
-%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
-part_of(PolicyID, wave_metric, status(Status)) :-
-    wave_reflection_profile(PolicyID, _, _, Status).
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(ProblemID, synthesis_shortcut, linear_pruning) :-
+    algebraic_meta_property(ProblemID, structure, linear).
+
+part_of(ProblemID, synthesis_shortcut, lie_algebra_basis) :-
+    algebraic_meta_property(ProblemID, group_type, semi_simple_continuous).
+
+part_of(ProblemID, synthesis_shortcut, local_jacobian_quench) :-
+    algebraic_meta_property(ProblemID, local_bound, linear_approximation_at_origin).
