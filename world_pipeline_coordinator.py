@@ -11,16 +11,15 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class ScienceInvariantsTrainer:
+class CrossDomainAnalogyTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Relevant scale-independent features for physical systems and informed decisions
-        self.science_training_data = [
-            {"id": "ideal_uncompensated_wave", "boundary_type": "hyperbolic", "has_noise": "True", "reflection_state": "uncompensated", "target": "reward_rejection_policy"},
-            {"id": "adaptive_compensated_wave", "boundary_type": "hyperbolic", "has_noise": "True", "reflection_state": "compensated", "target": "active_phase_cancellation"},
-            {"id": "thermal_blowup_singularity", "boundary_type": "nonlinear_pde", "has_noise": "True", "reflection_state": "exponential_divergence", "target": "active_quenching_protocol"}
+        # 📋 Experiential Memory Matrix grouping separate physical universes by symbolic traits
+        self.training_matrix = [
+            {"id": "thermal_diffusion_boundary", "group_type": "semi_simple_continuous", "boundary_disruption": "active_reflections", "target": "lie_algebra_phase_cancellation"},
+            {"id": "drone_aerodynamic_landing", "group_type": "semi_simple_continuous", "boundary_disruption": "active_reflections", "target": "lie_algebra_phase_cancellation"}
         ]
 
     def calculate_entropy(self, targets):
@@ -65,30 +64,30 @@ class ScienceInvariantsTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: RETRAINING DECISION TREE #12 (SCIENTIFIC ALGEBRA INVARIANTS)")
+        print("🚀 CUSTOM AI PIPELINE: RETRAINING DECISION TREE #11 (CROSS-DOMAIN EXPERIENTIAL TRANSFER)")
         print("=" * 95)
         
-        features_list = ["boundary_type", "has_noise", "reflection_state"]
-        t12_root = self.build_tree(self.science_training_data, features_list)
+        features_list = ["group_type", "boundary_disruption"]
+        t11_root = self.build_tree(self.training_matrix, features_list)
         
-        with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
-            pickle.dump(t12_root, f)
+        with open(os.path.join(self.model_dir, "level11_experiential_memory.pkl"), "wb") as f:
+            pickle.dump(t11_root, f)
             
-        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #12 (STABILITY CONTROL POLICIES)]")
+        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #11 (FUNCTORIAL TRANSFER CHANNELS)]")
         print("-" * 95)
-        self.dump_tree(t12_root)
+        self.dump_tree(t11_root)
         print("=" * 95 + "\n")
 
     def dump_tree(self, node, indent="   "):
         if node.is_leaf:
-            print(f"{indent}📦 [INFORMED DECISION LEAF] ──➔ **{node.classification}**")
+            print(f"{indent}📦 [FUNCTOR ANALOGY LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [STABILITY FEATURE ANALYSIS]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [CROSS-DOMAIN AUDIT]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = ScienceInvariantsTrainer()
+    trainer = CrossDomainAnalogyTrainer()
     trainer.run_training()

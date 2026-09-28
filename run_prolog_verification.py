@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class ScienceDomainVerifier:
+class CrossDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,21 +9,22 @@ class ScienceDomainVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('exs.pl').
+:- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_science_closure(PolicyID) :-
-    ( wave_synthesis_status(PolicyID, Schema) ->
-        format(' [VALID] Singularity Defeated | Applied Policy: ~w (\u2218).', [Schema])
+verify_analogy_transfer(ProblemID) :-
+    ( part_of(ProblemID, memory_cluster, Schema) ->
+        format(' [VALID] Functorial Analogy Proved | Transferred Policy: ~w (\u2218).', [Schema])
     ;
-        format(' [ERROR] Science execution facts missing from tracking sheets (\u2022).')
+        format(' [ERROR] Symbolic profile missing from experiential memory (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: SINGULARITY QUENCHING VERIFICATION AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 CROSS-DOMAIN ANALOGY AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_science_closure(thermal_blowup_singularity), format('~n'),
+    verify_analogy_transfer(thermal_diffusion_boundary), format('~n'),
+    verify_analogy_transfer(drone_aerodynamic_landing), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -43,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = ScienceDomainVerifier()
+    engine = CrossDomainVerifier()
     engine.execute_swipl_process()
