@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SwarmDomainVerifier:
+class SwarmSafetyVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -12,19 +12,19 @@ class SwarmDomainVerifier:
 :- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_swarm_closure(TargetID) :-
-    ( swarm_synthesis_status(TargetID, Schema) ->
-        format(' [VALID] Weather-Adaptive Swarm Invariant Closed | Reward State: ~w (\u2218).', [Schema])
+verify_safety_closure(TargetID) :-
+    ( swarm_safety_status(TargetID, Schema) ->
+        format(' [VALID] Term 3 Safety Verified | Structural Mode: ~w (\u2218).', [Schema])
     ;
-        format(' [ERROR] Swarm execution facts missing from validation sheets (\u2022).')
+        format(' [ERROR] Swarm safety facts missing from tracking registries (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: COUPLED PDE/ODE SWARM CONTROL AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: SWARM SAFETY INVARIANT AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_swarm_closure(multi_drone_turbulent_field), format('~n'),
+    verify_safety_closure(dense_grid_crossing), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SwarmDomainVerifier()
+    engine = SwarmSafetyVerifier()
     engine.execute_swipl_process()
