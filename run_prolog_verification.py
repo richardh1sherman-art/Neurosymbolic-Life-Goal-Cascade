@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class CrossDomainVerifier:
+class SwarmDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,22 +9,22 @@ class CrossDomainVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
+:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_analogy_transfer(ProblemID) :-
-    ( part_of(ProblemID, memory_cluster, Schema) ->
-        format(' [VALID] Functorial Analogy Proved | Transferred Policy: ~w (\u2218).', [Schema])
+verify_swarm_closure(TargetID) :-
+    ( swarm_synthesis_status(TargetID, Schema) ->
+        format(' [VALID] Weather-Adaptive Swarm Invariant Closed | Reward State: ~w (\u2218).', [Schema])
     ;
-        format(' [ERROR] Symbolic profile missing from experiential memory (\u2022).')
+        format(' [ERROR] Swarm execution facts missing from validation sheets (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #11 CROSS-DOMAIN ANALOGY AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: COUPLED PDE/ODE SWARM CONTROL AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_analogy_transfer(thermal_diffusion_boundary), format('~n'),
-    verify_analogy_transfer(drone_aerodynamic_landing), format('~n'),
+    verify_swarm_closure(multi_drone_turbulent_field), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = CrossDomainVerifier()
+    engine = SwarmDomainVerifier()
     engine.execute_swipl_process()

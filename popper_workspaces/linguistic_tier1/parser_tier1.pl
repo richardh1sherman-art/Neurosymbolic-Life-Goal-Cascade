@@ -1,23 +1,24 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Tree #11 Cross-Domain Symbolic Transfer
+%% Universal Matrix Supporting Coupled PDE/ODE Swarm Invariants
 %% =================================================================
 
-:- dynamic structural_lesson/3.
+:- dynamic agent_kinematics_type/2.
+:- dynamic turbulent_pde_property/3.
+:- dynamic sensor_filter/2.
 
-%% --- 🪐 PROBLEM 1: THERMAL DIFFUSION BOUNDARY LAYER ---
-structural_lesson(thermal_diffusion_boundary, group_type, semi_simple_continuous).
-structural_lesson(thermal_diffusion_boundary, boundary_disruption, active_reflections).
-structural_lesson(thermal_diffusion_boundary, structural_constraint, linear).
+%% --- 🛸 AGENT KINEMATICS (ODE LAYER) ---
+agent_kinematics_type(swarm_nodes, double_integrator).
+agent_kinematics_type(agent_count, 6).
 
-%% --- 🪐 PROBLEM 2: DRONE AERODYNAMIC LANDING FLIGHT ---
-% A completely distinct physical system that inherits the exact same math properties
-structural_lesson(drone_aerodynamic_landing, group_type, semi_simple_continuous).
-structural_lesson(drone_aerodynamic_landing, boundary_disruption, active_reflections).
-structural_lesson(drone_aerodynamic_landing, structural_constraint, linear).
+%% --- 🌀 TURBULENT WEATHER MANIFOLD (PDE LAYER) ---
+turbulent_pde_property(wave_advection, linear_damping, 0). % Gamma=0 ensures self-similarity
+turbulent_pde_property(velocity_field, turbulence, kolmogorov_power_law).
 
-%% --- CROSS-TREE CATEGORICAL FUNCTOR LOOKUPS ---
-part_of(Problem, memory_cluster, SchemaType) :-
-    structural_lesson(Problem, group_type, semi_simple_continuous),
-    structural_lesson(Problem, boundary_disruption, active_reflections),
-    SchemaType = lie_algebra_phase_cancellation.
+%% --- 📐 FILTER AND REPRESENTATION DESCRIPTORS ---
+sensor_filter(wavelet_transform, discrete_multiscale_gradients).
+sensor_filter(dsl_sensor_type, scale_invariant_atoms).
+
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(swarm_nodes, structural_topology, fully_connected).
+part_of(wavelet_transform, signal_processing, discrete_filter).
