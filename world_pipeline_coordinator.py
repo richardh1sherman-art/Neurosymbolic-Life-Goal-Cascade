@@ -11,15 +11,15 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class CrossDomainAnalogyTrainer:
+class SwarmSafetyInvariantsTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Experiential Memory Matrix grouping separate physical universes by symbolic traits
-        self.training_matrix = [
-            {"id": "thermal_diffusion_boundary", "group_type": "semi_simple_continuous", "boundary_disruption": "active_reflections", "target": "lie_algebra_phase_cancellation"},
-            {"id": "drone_aerodynamic_landing", "group_type": "semi_simple_continuous", "boundary_disruption": "active_reflections", "target": "lie_algebra_phase_cancellation"}
+        # 📋 Scale-independent feature mappings representing the swarm experiences
+        self.safety_training_data = [
+            {"id": "dense_crossing_trial_1", "filtering": "haar_wavelet", "repulsion": "weak_apf", "target": "amplify_potential_field_gain"},
+            {"id": "dense_crossing_trial_2", "filtering": "haar_wavelet", "repulsion": "amplified_apf", "target": "system_stable_maintain_policy"}
         ]
 
     def calculate_entropy(self, targets):
@@ -64,30 +64,30 @@ class CrossDomainAnalogyTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: RETRAINING DECISION TREE #11 (CROSS-DOMAIN EXPERIENTIAL TRANSFER)")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING DECISION TREE #12 (SWARM SAFETY INVARIANTS)")
         print("=" * 95)
         
-        features_list = ["group_type", "boundary_disruption"]
-        t11_root = self.build_tree(self.training_matrix, features_list)
+        features_list = ["filtering", "repulsion"]
+        t12_root = self.build_tree(self.safety_training_data, features_list)
         
-        with open(os.path.join(self.model_dir, "level11_experiential_memory.pkl"), "wb") as f:
-            pickle.dump(t11_root, f)
+        with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
+            pickle.dump(t12_root, f)
             
-        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #11 (FUNCTORIAL TRANSFER CHANNELS)]")
+        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #12 (ADAPTIVE SWARM CONTROL POLICIES)]")
         print("-" * 95)
-        self.dump_tree(t11_root)
+        self.dump_tree(t12_root)
         print("=" * 95 + "\n")
 
     def dump_tree(self, node, indent="   "):
         if node.is_leaf:
-            print(f"{indent}📦 [FUNCTOR ANALOGY LEAF] ──➔ **{node.classification}**")
+            print(f"{indent}📦 [INFORMED CONTROL LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [CROSS-DOMAIN AUDIT]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [SAFETY AXIS ANALYSIS]: Is control characteristic ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = CrossDomainAnalogyTrainer()
+    trainer = SwarmSafetyInvariantsTrainer()
     trainer.run_training()

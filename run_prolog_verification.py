@@ -9,22 +9,22 @@ class SwarmSafetyVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_safety_closure(TargetID) :-
-    ( swarm_safety_status(TargetID, Schema) ->
-        format(' [VALID] Term 3 Safety Verified | Structural Mode: ~w (\u2218).', [Schema])
+verify_swarm_safety_record(CaseID) :-
+    ( part_of(CaseID, safety_metric, status(Status)) ->
+        format(' [VALID] Control Experience Logged | Observed Behavioral Signature: ~w (\u2218).', [Status])
     ;
-        format(' [ERROR] Swarm safety facts missing from tracking registries (\u2022).')
+        write(' [ERROR] Case safety signature missing from parser scope (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: SWARM SAFETY INVARIANT AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 EXPERIENTIAL ARCHIVE AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_safety_closure(dense_grid_crossing), format('~n'),
+    verify_swarm_safety_record(dense_crossing_trial_1), format('~n'),
+    verify_swarm_safety_record(dense_crossing_trial_2), format('~n'),
     
     format('==================================================================================~n'),
     halt.

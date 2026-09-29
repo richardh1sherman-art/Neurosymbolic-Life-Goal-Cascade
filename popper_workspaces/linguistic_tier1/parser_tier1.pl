@@ -1,24 +1,15 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Coupled PDE/ODE Swarm Invariants
+%% Universal Matrix Supporting Tree #12 Multi-Agent Swarm Safety
 %% =================================================================
 
-:- dynamic agent_kinematics_type/2.
-:- dynamic turbulent_pde_property/3.
-:- dynamic sensor_filter/2.
+:- dynamic swarm_safety_profile/5.
 
-%% --- 🛸 AGENT KINEMATICS (ODE LAYER) ---
-agent_kinematics_type(swarm_nodes, double_integrator).
-agent_kinematics_type(agent_count, 6).
+%% --- 🪐 TREE #12: SWARM SAFETY INVARIANT ARCHIVE ---
+%% Syntax: swarm_safety_profile(CaseID, FilteringType, RepulsionState, MinSeparation, ControlStatus)
+swarm_safety_profile(dense_crossing_trial_1, haar_wavelet, weak_apf, close, chattering_boundary_breach).
+swarm_safety_profile(dense_crossing_trial_2, haar_wavelet, amplified_apf, safe, safety_invariant_preserved).
 
-%% --- 🌀 TURBULENT WEATHER MANIFOLD (PDE LAYER) ---
-turbulent_pde_property(wave_advection, linear_damping, 0). % Gamma=0 ensures self-similarity
-turbulent_pde_property(velocity_field, turbulence, kolmogorov_power_law).
-
-%% --- 📐 FILTER AND REPRESENTATION DESCRIPTORS ---
-sensor_filter(wavelet_transform, discrete_multiscale_gradients).
-sensor_filter(dsl_sensor_type, scale_invariant_atoms).
-
-%% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(swarm_nodes, structural_topology, fully_connected).
-part_of(wavelet_transform, signal_processing, discrete_filter).
+%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
+part_of(CaseID, safety_metric, status(Status)) :-
+    swarm_safety_profile(CaseID, _, _, _, Status).
