@@ -11,15 +11,16 @@ class WorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class SwarmSafetyInvariantsTrainer:
+class ScienceInvariantsTrainer:
     def __init__(self):
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
         
-        # 📋 Scale-independent feature mappings representing the swarm experiences
-        self.safety_training_data = [
-            {"id": "dense_crossing_trial_1", "filtering": "haar_wavelet", "repulsion": "weak_apf", "target": "amplify_potential_field_gain"},
-            {"id": "dense_crossing_trial_2", "filtering": "haar_wavelet", "repulsion": "amplified_apf", "target": "system_stable_maintain_policy"}
+        # 📋 Memory Matrix expanded to handle 8-hour Mesarovic performance metrics
+        self.science_training_data = [
+            {"id": "hour_8_trial_1", "horizon": "hours", "wavelet": "active", "connectivity": "connected_mesh", "target": "system_stable_maintain_policy"},
+            {"id": "hour_8_trial_2", "horizon": "hours", "wavelet": "inactive", "connectivity": "disconnected_minor", "target": "trigger_graph_minor_contraction"},
+            {"id": "hour_8_trial_3", "horizon": "hours", "wavelet": "active", "connectivity": "isolated_discovery", "target": "activate_delayed_recovery_routing"}
         ]
 
     def calculate_entropy(self, targets):
@@ -64,16 +65,16 @@ class SwarmSafetyInvariantsTrainer:
 
     def run_training(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING DECISION TREE #12 (SWARM SAFETY INVARIANTS)")
+        print("🚀 CUSTOM AI PIPELINE: TRAINING TREE #12 ON MESAROVIC & MULTI-HOUR SWARM INVARIANTS")
         print("=" * 95)
         
-        features_list = ["filtering", "repulsion"]
-        t12_root = self.build_tree(self.safety_training_data, features_list)
+        features_list = ["horizon", "wavelet", "connectivity"]
+        t12_root = self.build_tree(self.science_training_data, features_list)
         
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(t12_root, f)
             
-        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #12 (ADAPTIVE SWARM CONTROL POLICIES)]")
+        print("🌲 [GEOMETRY LAYOUT: DECISION TREE #12 (SCIENTIFIC ALGEBRA POLICIES)]")
         print("-" * 95)
         self.dump_tree(t12_root)
         print("=" * 95 + "\n")
@@ -82,12 +83,12 @@ class SwarmSafetyInvariantsTrainer:
         if node.is_leaf:
             print(f"{indent}📦 [INFORMED CONTROL LEAF] ──➔ **{node.classification}**")
             return
-        print(f"{indent}🔍 [SAFETY AXIS ANALYSIS]: Is control characteristic ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}🔍 [STABILITY METRIC EVALUATION]: Checks characteristic ['{node.split_feature}'] == '{node.split_value}'?")
         print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
         print(f"{indent}  └── False ──➔", end="")
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":
-    trainer = SwarmSafetyInvariantsTrainer()
+    trainer = ScienceInvariantsTrainer()
     trainer.run_training()

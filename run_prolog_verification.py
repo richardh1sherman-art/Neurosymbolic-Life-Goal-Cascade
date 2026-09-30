@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SdsHubVerifier:
+class ScienceInvariantsVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,22 +9,23 @@ class SdsHubVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_sds_closure(TargetID) :-
-    ( sds_synthesis_status(TargetID, Schema) ->
-        format(' [VALID] 100-Mile Hub Launch Verified | Final Outcome: ~w (\u2218).', [Schema])
+verify_scientific_invariant(CaseID) :-
+    ( part_of(CaseID, performance_metric, status(Decision)) ->
+        format(' [VALID] Mesarovic Performance Token Closed | Prescribed Action: ~w (\u2218).', [Decision])
     ;
-        format(' [ERROR] SDS system metrics missing from fact registries (\u2022).')
+        write(' [ERROR] Scientific feature profile missing from tree scope (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: 100-MILE HOIZON FIRESTATON SDS AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 LONG-RANGE INVARIANT AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_sds_closure(fleet_search_judith), format('~n'),
+    verify_scientific_invariant(hour_8_trial_1), format('~n'),
+    verify_scientific_invariant(hour_8_trial_2), format('~n'),
+    verify_scientific_invariant(hour_8_trial_3), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +45,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SdsHubVerifier()
+    engine = ScienceInvariantsVerifier()
     engine.execute_swipl_process()
