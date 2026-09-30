@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SdsDomainVerifier:
+class SdsHubVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -14,14 +14,14 @@ class SdsDomainVerifier:
 
 verify_sds_closure(TargetID) :-
     ( sds_synthesis_status(TargetID, Schema) ->
-        format(' [VALID] Mesarovic-SDS Controller Verified | Target Status: ~w (\u2218).', [Schema])
+        format(' [VALID] 100-Mile Hub Launch Verified | Final Outcome: ~w (\u2218).', [Schema])
     ;
         format(' [ERROR] SDS system metrics missing from fact registries (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: 50-VEHICLE DYNAMIC GRAPH SDS AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: 100-MILE HOIZON FIRESTATON SDS AUDIT~n'),
     format('==================================================================================~n'),
     
     verify_sds_closure(fleet_search_judith), format('~n'),
@@ -44,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SdsDomainVerifier()
+    engine = SdsHubVerifier()
     engine.execute_swipl_process()
