@@ -13,14 +13,14 @@ class ScienceInvariantsVerifier:
 
 verify_scientific_invariant(CaseID) :-
     ( part_of(CaseID, performance_metric, status(Decision)) ->
-        format(' [VALID] Mesarovic Performance Token Closed | Prescribed Action: ~w (\u2218).', [Decision])
+        format(' [VALID] Mesarovic Invariant Closed | Action Vector: ~w (\u2218).', [Decision])
     ;
         write(' [ERROR] Scientific feature profile missing from tree scope (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 LONG-RANGE INVARIANT AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 HISTORICAL ACTION AUDIT~n'),
     format('==================================================================================~n'),
     
     verify_scientific_invariant(hour_8_trial_1), format('~n'),
