@@ -1,15 +1,25 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Tree #12 Multi-Agent Swarm Safety
+%% Universal Matrix Supporting Mesarovic-SDS Three-Graph Operations
 %% =================================================================
 
-:- dynamic swarm_safety_profile/5.
+:- dynamic mesarovic_space/3.
+:- dynamic sds_disruption_rule/3.
 
-%% --- 🪐 TREE #12: SWARM SAFETY INVARIANT ARCHIVE ---
-%% Syntax: swarm_safety_profile(CaseID, FilteringType, RepulsionState, MinSeparation, ControlStatus)
-swarm_safety_profile(dense_crossing_trial_1, haar_wavelet, weak_apf, close, chattering_boundary_breach).
-swarm_safety_profile(dense_crossing_trial_2, haar_wavelet, amplified_apf, safe, safety_invariant_preserved).
+%% --- 🪐 MESAROVIC SYSTEM OBJECTS ---
+% Syntax: mesarovic_space(Component, Classification, MathematicalType)
+mesarovic_space(u_space, disturbance_set, hyperbolic_weather_front).
+mesarovic_space(m_space, control_input, structural_graph_minor_contraction).
+mesarovic_space(y_space, system_outcome, layered_triple_graphs).
 
-%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
-part_of(CaseID, safety_metric, status(Status)) :-
-    swarm_safety_profile(CaseID, _, _, _, Status).
+%% --- ⚠️ SDS DISRUPTION CONSTRAINTS ---
+% Syntax: sds_disruption_rule(RuleID, TriggerCondition, Severity)
+sds_disruption_rule(rule_1, loss_of_line_of_sight, hard_cutoff).
+sds_disruption_rule(rule_2, distance_exceeds_signal_range, hard_cutoff).
+sds_disruption_rule(rule_3, electric_power_depletion, terminal_shutdown).
+sds_disruption_rule(rule_4, fuel_exhaustion, vertex_freeze).
+sds_disruption_rule(rule_5, turbulent_weather_block, edge_deletion).
+
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(m_space, network_control, adaptive_contraction).
+part_of(rule_4, forbidden_minor_trigger, danger_zone).

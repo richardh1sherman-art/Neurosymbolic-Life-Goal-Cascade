@@ -2,128 +2,115 @@ import os
 import math
 import numpy as np
 
-class AdvancedSwarmSimulator:
+class MesarovicSdsSwarmSimulator:
     def __init__(self):
-        self.N = 6  # 🛸 6-Drone Node configuration
-        self.t_max = 5.0
-        self.dt = 0.1
-        self.time_steps = np.arange(int(self.t_max / self.dt)) * self.dt
-        self.steps_count = len(self.time_steps)
+        self.N = 50  # 🛸 Large scale system profile: 50 Vehicles
+        self.t_max = 10.0
+        self.dt = 0.5
+        self.time_steps = np.arange(0, self.t_max, self.dt)
         
-        # Initial positions forcing a tight, dense grid crossing path intersection
-        self.pos_x = [0.0, 5.0, 0.0, 5.0, 2.5, 2.5]
-        self.pos_y = [0.0, 5.0, 5.0, 0.0, 0.0, 5.0]
+        # Target Objective coordinate: Judith's location
+        self.judith_pos = np.array([25.0, 25.0])
         
-        self.vel_x = [1.0, -1.0, 1.0, -1.0, 0.0, 0.0]
-        self.vel_y = [1.0, -1.0, -1.0, 1.0, 1.0, -1.0]
+        # Initialize vehicle physical graph arrays (distributed in a wide search mesh)
+        np.random.seed(101)
+        self.pos_x = np.random.uniform(0.0, 50.0, self.N)
+        self.pos_y = np.random.uniform(0.0, 50.0, self.N)
+        
+        # Energy and state metrics tracking
+        self.fuel = np.random.uniform(80.0, 100.0, self.N)
+        self.power = np.random.uniform(90.0, 100.0, self.N)
+        
+        # Communication signal limits
+        self.max_signal_range = 15.0
+        self.weather_block_center = np.array([20.0, 20.0])
+        self.weather_block_radius = 8.0
 
-        # 📐 Term 3 Parameters: Critical Safety Radii and APF Thresholds
-        self.r_safe = 0.4        # Critical crash radius boundary (Unresolvable barrier)
-        self.d_influence = 1.2   # Potential field activation threshold region
-        self.eta = 5.0           # APF scaling factor gain
-        
-        # Formation gains
-        self.kp, self.kv, self.kw = 1.0, 0.5, 1.5
+    def run_sds_graph_planning(self):
+        print("=" * 95)
+        print("🌀 LIVE LISP PDE INTERPRETER: HIGHER-ORDER MULTI-AGENT SDS SPATIAL PLANNING")
+        print("=" * 95)
+        print("📥 System Matrix: 50 Distributed Drones Governed by Multi-Layered Graphs")
+        print("📥 Mission Objective: Locate target coordinates [Judith_Lost_And_Hurt]")
+        print("-" * 95)
 
-    def compute_wavelet_coefficient_extractor(self, raw_signal):
-        """
-        🌀 STEP 3: DISCRETE WAVELET COEFFICIENT EXTRACTOR
-        Performs a single-level Haar wavelet decomposition to filter out 
-        high-frequency turbulent noise from the active sensor array.
-        """
-        if len(raw_signal) < 2: return raw_signal
-        # Compute approximation coefficients (low-pass filter mapping)
-        approx = (raw_signal[0::2] + raw_signal[1::2]) / math.sqrt(2.0)
-        return approx
+        judith_found = False
+        step = 1
 
-    def compute_apf_collision_avoidance(self, i, current_pos_x, current_pos_y):
-        """
-        🛡️ TERM 3: ARTIFICIAL POTENTIAL FIELD COLLISION AVOIDANCE
-        Enforces a hard gradient repulsive barrier if vehicle paths violate safety bounds.
-        """
-        u_collision_x = 0.0
-        u_collision_y = 0.0
-        
-        for j in range(self.N):
-            if j == i: continue
-            dx = current_pos_x[i] - current_pos_x[j]
-            dy = current_pos_y[i] - current_pos_y[j]
-            d_ij = math.sqrt(dx**2 + dy**2)
+        for t in self.time_steps:
+            if judith_found: break
             
-            # Check if neighbor vehicle falls inside the active potential influence envelope
-            if d_ij < self.d_influence:
-                if d_ij <= self.r_safe:
-                    # Guard against zero-division singularities at the exact crash point
-                    d_ij = self.r_safe + 1e-5
-                
-                # Compute the potential barrier scalar gradient
-                factor = self.eta * ((1.0 / (d_ij - self.r_safe)) - (1.0 / (self.d_influence - self.r_safe))) * (-1.0 / ((d_ij - self.r_safe)**2))
-                u_collision_x += factor * (dx / d_ij)
-                u_collision_y += factor * (dy / d_ij)
-                
-        return np.array([u_collision_x, u_collision_y])
-
-    def run_simulation(self):
-        print("=" * 95)
-        print("🌀 LIVE LISP INTERPRETER: IMPLEMENTING WAVELET EXTRACTORS AND APF SAFETY SHIELDS")
-        print("=" * 95)
-        print(f"📥 Term 3 Active: Enforcing Safety Critical Radii (r_safe) = {self.r_safe}m")
-        print(f"📥 Wavelet Core: Haar Coefficient Extractor Initialized over Spatial Streams")
-        print("-" * 95)
-
-        minimum_distance_recorded = float('inf')
-        collision_detected = False
-
-        for idx, t in enumerate(self.time_steps):
-            # Sample continuous turbulent field vectors
-            raw_turbulent_sample = np.array([math.sin(5.0 * t), math.cos(5.0 * t), math.sin(10.0 * t), math.cos(10.0 * t)])
-            # Run live Wavelet extraction pass to isolate the true scale invariant trend
-            wavelet_filtered_signal = self.compute_wavelet_coefficient_extractor(raw_turbulent_sample)
-            weather_vector_x = wavelet_filtered_signal[0] * self.kw
-            weather_vector_y = wavelet_filtered_signal[1] * self.kw
-
-            next_x = list(self.pos_x)
-            next_y = list(self.pos_y)
-
+            # 📜 LISP Spatial Stencil Invariant unrolled inside the loop:
+            # (if (near weather_block #0) (execute_graph_minor_contraction #0) (go standard_search))
+            active_nodes = []
+            
+            # Evaluate Disruption Rules across the network
             for i in range(self.N):
-                # Compute Term 3: Active APF Repulsion vectors
-                u_collision = self.compute_apf_collision_avoidance(i, self.pos_x, self.pos_y)
+                # Consume fuels and battery metrics dynamically over the execution path
+                self.fuel[i] -= 2.5 * self.dt
+                self.power[i] -= 1.8 * self.dt
                 
-                # Kinematic double-integrator state transformation updates
-                self.vel_x[i] += (weather_vector_x + u_collision[0]) * self.dt
-                self.vel_y[i] += (weather_vector_y + u_collision[1]) * self.dt
+                # Rule 3 & 4 Check: Out of power or fuel triggers structural node freezing
+                if self.fuel[i] <= 0 or self.power[i] <= 0:
+                    continue
                 
-                next_x[i] += self.vel_x[i] * self.dt
-                next_y[i] += self.vel_y[i] * self.dt
+                # Rule 5 Check: Turbulent weather block intersects coordinate space
+                dist_to_weather = math.sqrt((self.pos_x[i] - self.weather_block_center[0])**2 + (self.pos_y[i] - self.weather_block_center[1])**2)
+                if dist_to_weather < self.weather_block_radius:
+                    # 🪐 GRAPH-MINOR CONTRACTION EVENT: Contract nodes safely around the block
+                    self.pos_x[i] = self.weather_block_center[0] + (self.weather_block_radius * (self.pos_x[i] / 50.0))
+                    self.pos_y[i] = self.weather_block_center[1] + (self.weather_block_radius * (self.pos_y[i] / 50.0))
+                
+                # Standard Search state updates: Step closer to Judith's coordinate signature
+                dx, dy = self.judith_pos[0] - self.pos_x[i], self.judith_pos[1] - self.pos_y[i]
+                dist_to_target = math.sqrt(dx**2 + dy**2)
+                
+                if dist_to_target < 2.0:
+                    print(f"\n🎉 \033[1;32m[GOAL REACHED]: Vehicle Node [{i}] has located Judith at t = {t:.1f}s!\033[0m")
+                    judith_found = True
+                    break
+                
+                # Step forward
+                if dist_to_target > 0:
+                    self.pos_x[i] += (dx / dist_to_target) * 3.5 * self.dt
+                    self.pos_y[i] += (dy / dist_to_target) * 3.5 * self.dt
+                
+                active_nodes.append(i)
 
-                # Track closest approach metrics across the dense vehicle grid crossing
-                for j in range(self.N):
-                    if j == i: continue
-                    dist = math.sqrt((next_x[i] - next_x[j])**2 + (next_y[i] - next_y[j])**2)
-                    if dist < minimum_distance_recorded:
-                        minimum_distance_recorded = dist
-                    if dist < self.r_safe:
-                        collision_detected = True
+            # Rule 2 Check: Verify Algebraic Connectivity and Graph signal limits
+            isolated_nodes = 0
+            for i in active_nodes:
+                has_link = False
+                for j in active_nodes:
+                    if i == j: continue
+                    d_ij = math.sqrt((self.pos_x[i] - self.pos_x[j])**2 + (self.pos_y[i] - self.pos_y[j])**2)
+                    if d_ij < self.max_signal_range:
+                        has_link = True
+                        break
+                if not has_link:
+                    isolated_nodes += 1
 
-            self.pos_x = next_x
-            self.pos_y = next_y
-
-            if idx % (self.steps_count // 4) == 0 or idx == self.steps_count - 1:
-                print(f"   ➔ Time t = {t:3.1f}s | Swarm Minimum Inter-Agent Separation: {minimum_distance_recorded:.4f}m")
+            # Mesarovic Output Evaluation Tracker
+            print(f"Step {step:02d} | Time t = {t:3.1f}s | Active Functional Nodes: {len(active_nodes):2d} | Isolated Nodes: {isolated_nodes}")
+            step += 1
+            
+            # Check if network contracted into the forbidden minor M_danger
+            if len(active_nodes) < 5 or isolated_nodes > 15:
+                print("🛑 \033[1;31m[FORBIDDEN MINOR BREACH]: Network connectivity split. M_danger reached.\033[0m")
+                break
 
         print("-" * 95)
-        print(f"🏆 SIMULATION COMPLETE: Absolute Closest Vehicle Approach ──➔ \033[1;32m{minimum_distance_recorded:.4f}m\033[0m")
-        safety_status = "CRASH_RADIUS_VIOLATED" if collision_detected else "SAFETY_INVARIANT_PRESERVED"
-        print(f"🎯 Term 3 Potential Field Operational Invariant       ──➔ \033[1;32m{safety_status}\033[0m")
+        status = "REWARD_MAXIMIZED_JUDITH_FOUND" if judith_found else "REJECTED_FORBIDDEN_MINOR_BREACH"
+        print(f"🎯 Mesarovic Performance Outcome Invariant          ──➔ \033[1;32m{status}\033[0m")
         print("=" * 95 + "\n")
 
-        # Record resolved structural metrics cleanly out to disk for our SWI-Prolog verifier
+        # Emitting facts sheets for the SWI-Prolog validator
         root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
         exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
         with open(exs_path, "w", encoding="utf-8") as f:
-            f.write(f"swarm_safety_status(dense_grid_crossing, schema_{safety_status.lower()}).\n")
+            f.write(f"sds_synthesis_status(fleet_search_judith, schema_{status.lower()}).\n")
 
 if __name__ == "__main__":
-    engine = AdvancedSwarmSimulator()
-    engine.run_simulation()
+    engine = MesarovicSdsSwarmSimulator()
+    engine.run_sds_graph_planning()

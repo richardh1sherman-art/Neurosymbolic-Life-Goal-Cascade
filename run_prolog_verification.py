@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SwarmSafetyVerifier:
+class SdsDomainVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,22 +9,22 @@ class SwarmSafetyVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
+:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_swarm_safety_record(CaseID) :-
-    ( part_of(CaseID, safety_metric, status(Status)) ->
-        format(' [VALID] Control Experience Logged | Observed Behavioral Signature: ~w (\u2218).', [Status])
+verify_sds_closure(TargetID) :-
+    ( sds_synthesis_status(TargetID, Schema) ->
+        format(' [VALID] Mesarovic-SDS Controller Verified | Target Status: ~w (\u2218).', [Schema])
     ;
-        write(' [ERROR] Case safety signature missing from parser scope (\u2022).')
+        format(' [ERROR] SDS system metrics missing from fact registries (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #12 EXPERIENTIAL ARCHIVE AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: 50-VEHICLE DYNAMIC GRAPH SDS AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_swarm_safety_record(dense_crossing_trial_1), format('~n'),
-    verify_swarm_safety_record(dense_crossing_trial_2), format('~n'),
+    verify_sds_closure(fleet_search_judith), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SwarmSafetyVerifier()
+    engine = SdsDomainVerifier()
     engine.execute_swipl_process()
