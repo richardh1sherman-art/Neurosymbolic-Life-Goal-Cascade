@@ -1,18 +1,24 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Tree #12 Multi-Hour Swarm Invariants
+%% Universal Matrix Supporting Coupled PDE/ODE Swarm Invariants
 %% =================================================================
 
-:- dynamic science_performance_profile/5.
-:- dynamic sds_synthesis_status/2.
+:- dynamic agent_kinematics_type/2.
+:- dynamic turbulent_pde_property/3.
+:- dynamic sensor_filter/2.
 
-%% --- 🪐 TREE #12: MESAROVIC SYSTEM CONTROL HISTORY ---
-science_performance_profile(hour_8_trial_1, hours, active, connected_mesh, system_stable_maintain_policy).
-science_performance_profile(hour_8_trial_2, hours, inactive, disconnected_minor, trigger_graph_minor_contraction).
-science_performance_profile(hour_8_trial_3, hours, active, isolated_discovery, activate_delayed_recovery_routing).
+%% --- 🛸 AGENT KINEMATICS (ODE LAYER) ---
+agent_kinematics_type(swarm_nodes, double_integrator).
+agent_kinematics_type(agent_count, 6).
 
-%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
-part_of(CaseID, performance_metric, status(Decision)) :-
-    science_performance_profile(CaseID, _, _, _, Decision), !.
+%% --- 🌀 TURBULENT WEATHER MANIFOLD (PDE LAYER) ---
+turbulent_pde_property(wave_advection, linear_damping, 0). % Gamma=0 ensures self-similarity
+turbulent_pde_property(velocity_field, turbulence, kolmogorov_power_law).
 
-part_of(fleet_search_judith, performance_metric, status(delayed_sovereign_success)) :- !.
+%% --- 📐 FILTER AND REPRESENTATION DESCRIPTORS ---
+sensor_filter(wavelet_transform, discrete_multiscale_gradients).
+sensor_filter(dsl_sensor_type, scale_invariant_atoms).
+
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(swarm_nodes, structural_topology, fully_connected).
+part_of(wavelet_transform, signal_processing, discrete_filter).
