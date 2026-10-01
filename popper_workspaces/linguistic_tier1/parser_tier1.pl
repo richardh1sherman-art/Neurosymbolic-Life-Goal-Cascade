@@ -1,24 +1,20 @@
 %% =================================================================
-%% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Coupled PDE/ODE Swarm Invariants
+%% 🌀 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Master Apex Registry Supporting Tree #0 Functor Dispatches
 %% =================================================================
 
-:- dynamic agent_kinematics_type/2.
-:- dynamic turbulent_pde_property/3.
-:- dynamic sensor_filter/2.
+:- dynamic global_problem_domain/2.
 
-%% --- 🛸 AGENT KINEMATICS (ODE LAYER) ---
-agent_kinematics_type(swarm_nodes, double_integrator).
-agent_kinematics_type(agent_count, 6).
-
-%% --- 🌀 TURBULENT WEATHER MANIFOLD (PDE LAYER) ---
-turbulent_pde_property(wave_advection, linear_damping, 0). % Gamma=0 ensures self-similarity
-turbulent_pde_property(velocity_field, turbulence, kolmogorov_power_law).
-
-%% --- 📐 FILTER AND REPRESENTATION DESCRIPTORS ---
-sensor_filter(wavelet_transform, discrete_multiscale_gradients).
-sensor_filter(dsl_sensor_type, scale_invariant_atoms).
+%% --- 🪐 TREE #0: APEX SIGNATURE ROUTING ---
+global_problem_domain(monkey_bananas, linguistic_narrative).
+global_problem_domain(parity_proofs, abstract_algebra).
+global_problem_domain(algebra_stories, linguistic_narrative).
+global_problem_domain(inverted_pendulum, continuous_manifold).
+global_problem_domain(fractional_pde, continuous_manifold).
+global_problem_domain(pde_blowup, continuous_manifold).
+global_problem_domain(wavelet_swarm, continuous_manifold).
+global_problem_domain(dynamic_sds_swarm, continuous_manifold).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(swarm_nodes, structural_topology, fully_connected).
-part_of(wavelet_transform, signal_processing, discrete_filter).
+part_of(Problem, apex_routing, TargetForest) :-
+    global_problem_domain(Problem, TargetForest).

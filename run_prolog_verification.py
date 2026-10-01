@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SwarmDomainVerifier:
+class ApexForestVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,22 +9,23 @@ class SwarmDomainVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_swarm_closure(TargetID) :-
-    ( swarm_synthesis_status(TargetID, Schema) ->
-        format(' [VALID] Weather-Adaptive Swarm Invariant Closed | Reward State: ~w (\u2218).', [Schema])
+verify_apex_dispatch(ProblemID) :-
+    ( part_of(ProblemID, apex_routing, Target) ->
+        format(' [VALID] Apex Tree #0 Dispatch Layer Closed | Problem Path Maps to: ~w (\u2218).', [Target])
     ;
-        format(' [ERROR] Swarm execution facts missing from validation sheets (\u2022).')
+        write(' [ERROR] Apex routing token signature missing from database scope (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: COUPLED PDE/ODE SWARM CONTROL AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: TREE #0 APEX ROUTING METRIC AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_swarm_closure(multi_drone_turbulent_field), format('~n'),
+    verify_apex_dispatch(monkey_bananas), format('~n'),
+    verify_apex_dispatch(parity_proofs), format('~n'),
+    verify_apex_dispatch(dynamic_sds_swarm), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +45,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SwarmDomainVerifier()
+    engine = ApexForestVerifier()
     engine.execute_swipl_process()
