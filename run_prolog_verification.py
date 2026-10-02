@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class ApexForestVerifier:
+class SdsComplexVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,23 +9,22 @@ class ApexForestVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
+:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_apex_dispatch(ProblemID) :-
-    ( part_of(ProblemID, apex_routing, Target) ->
-        format(' [VALID] Apex Tree #0 Dispatch Layer Closed | Problem Path Maps to: ~w (\u2218).', [Target])
+verify_sds_complex_closure(TargetID) :-
+    ( sds_synthesis_status(TargetID, Schema) ->
+        format(' [VALID] Complex 3-Graph SDS Invariant Closed | Operational State: ~w (\u2218).', [Schema])
     ;
-        write(' [ERROR] Apex routing token signature missing from database scope (\u2022).')
+        format(' [ERROR] Multi-network metrics missing from fact registries (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: TREE #0 APEX ROUTING METRIC AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: COMPLEX INTER-NETWORK SDS AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_apex_dispatch(monkey_bananas), format('~n'),
-    verify_apex_dispatch(parity_proofs), format('~n'),
-    verify_apex_dispatch(dynamic_sds_swarm), format('~n'),
+    verify_sds_complex_closure(fleet_search_judith), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -45,5 +44,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = ApexForestVerifier()
+    engine = SdsComplexVerifier()
     engine.execute_swipl_process()

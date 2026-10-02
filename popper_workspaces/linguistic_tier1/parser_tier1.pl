@@ -1,20 +1,32 @@
 %% =================================================================
-%% 🌀 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
-%% Master Apex Registry Supporting Tree #0 Functor Dispatches
+%% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
+%% Universal Matrix Supporting Mesarovic-SDS Value Compositions
 %% =================================================================
 
-:- dynamic global_problem_domain/2.
+:- dynamic sds_concept_axiom/2.
+:- dynamic network_composition_type/2.
+:- dynamic failure_interaction_rule/3.
 
-%% --- 🪐 TREE #0: APEX SIGNATURE ROUTING ---
-global_problem_domain(monkey_bananas, linguistic_narrative).
-global_problem_domain(parity_proofs, abstract_algebra).
-global_problem_domain(algebra_stories, linguistic_narrative).
-global_problem_domain(inverted_pendulum, continuous_manifold).
-global_problem_domain(fractional_pde, continuous_manifold).
-global_problem_domain(pde_blowup, continuous_manifold).
-global_problem_domain(wavelet_swarm, continuous_manifold).
-global_problem_domain(dynamic_sds_swarm, continuous_manifold).
+%% --- 🪐 CONCEPT SPACE AXIOMS (Am ⊆ C) ---
+sds_concept_axiom(counting, primitive).
+sds_concept_axiom(physical_collision_avoidance, tracking_node).
+sds_concept_axiom(line_of_sight_connectivity, comm_edge).
+sds_concept_axiom(task_saturation_balancing, computational_vertex).
+
+%% --- 🔀 MULTI-AGENT VALUE FACTORIZATION (Step 2) ---
+network_composition_type(vdn, linear_sum).
+network_composition_type(qmix, monotonic_mixing_function).
+network_composition_type(qtran, relaxed_non_monotonic_transformation).
+
+%% --- ⚠️ SEVENTY-STEP INTER-NETWORK INTERACTIONS (Step 3) ---
+% Interaction 1: Node destruction/depletion cascades deletions across all layers
+failure_interaction_rule(interaction_1, physical_node_dead, cascade_delete_all_graphs).
+% Interaction 43: Tasking node deletion increases load on remaining computational vertices
+failure_interaction_rule(interaction_43, task_node_deleted, escalate_neighbor_task_saturation).
+% Interaction 85: Comm link failure triggers dynamic task shifting; recovery restores it
+failure_interaction_rule(interaction_85, comm_link_failed, transient_task_reallocation).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(Problem, apex_routing, TargetForest) :-
-    global_problem_domain(Problem, TargetForest).
+part_of(vdn, composition_architecture, linear_coordination).
+part_of(interaction_43, cascade_behavior, saturation_trigger).
+part_of(interaction_85, reachability_constraint, state_recovery).
