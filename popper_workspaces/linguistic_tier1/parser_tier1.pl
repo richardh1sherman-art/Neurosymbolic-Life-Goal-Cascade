@@ -1,32 +1,16 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Mesarovic-SDS Value Compositions
+%% Isolated Sub-Tree Primitives Supporting Single Network Controls
 %% =================================================================
 
-:- dynamic sds_concept_axiom/2.
-:- dynamic network_composition_type/2.
-:- dynamic failure_interaction_rule/3.
+:- dynamic sub_tree_routing/3.
 
-%% --- 🪐 CONCEPT SPACE AXIOMS (Am ⊆ C) ---
-sds_concept_axiom(counting, primitive).
-sds_concept_axiom(physical_collision_avoidance, tracking_node).
-sds_concept_axiom(line_of_sight_connectivity, comm_edge).
-sds_concept_axiom(task_saturation_balancing, computational_vertex).
+%% --- 🪐 SEPARATE TREE REGISTRIES FOR SINGLE NETWORK CONTROLS ---
+% Syntax: sub_tree_routing(NetworkID, SpecializedTree, InvariantPruningRule)
+sub_tree_routing(physical_layer, tree_12_sub_p, enforce_collision_boundaries).
+sub_tree_routing(communication_layer, tree_12_sub_c, enforce_line_of_sight_30mi).
+sub_tree_routing(computational_layer, tree_12_sub_comp, balance_task_saturation_loads).
 
-%% --- 🔀 MULTI-AGENT VALUE FACTORIZATION (Step 2) ---
-network_composition_type(vdn, linear_sum).
-network_composition_type(qmix, monotonic_mixing_function).
-network_composition_type(qtran, relaxed_non_monotonic_transformation).
-
-%% --- ⚠️ SEVENTY-STEP INTER-NETWORK INTERACTIONS (Step 3) ---
-% Interaction 1: Node destruction/depletion cascades deletions across all layers
-failure_interaction_rule(interaction_1, physical_node_dead, cascade_delete_all_graphs).
-% Interaction 43: Tasking node deletion increases load on remaining computational vertices
-failure_interaction_rule(interaction_43, task_node_deleted, escalate_neighbor_task_saturation).
-% Interaction 85: Comm link failure triggers dynamic task shifting; recovery restores it
-failure_interaction_rule(interaction_85, comm_link_failed, transient_task_reallocation).
-
-%% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(vdn, composition_architecture, linear_coordination).
-part_of(interaction_43, cascade_behavior, saturation_trigger).
-part_of(interaction_85, reachability_constraint, state_recovery).
+%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
+part_of(NetworkID, single_control_loop, Tree) :-
+    sub_tree_routing(NetworkID, Tree, _).
