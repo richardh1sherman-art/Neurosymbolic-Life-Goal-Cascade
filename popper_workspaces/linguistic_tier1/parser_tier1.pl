@@ -1,15 +1,21 @@
 %% =================================================================
-%% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Non-Convex Obstacle Graph Contractions
+%% 🌀 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Complete System Composition Ontology Matrix - "part_of" Invariants
 %% =================================================================
 
-:- dynamic terrain_obstacle/3.
+:- dynamic part_of_system/3.
 
-%% --- 🪐 CASE #8: NON-CONVEX SPATIAL INVARIANTS ---
-% Syntax: terrain_obstacle(ObstacleID, GeometryType, InterruptionRule)
-terrain_obstacle(mountain_range, non_convex_barrier, line_of_sight_signal_occlusion).
-terrain_obstacle(urban_city_core, polygon_keep_out, forced_vertex_contraction).
+%% --- 🛸 CORE SYSTEM PARTHOOD STRUCTURAL ANCHORS ---
+% Syntax: part_of_system(SubComponent, ParentSystem, OperationalRole)
+part_of_system(physical_graph_gp, large_swarm_sds, kinematic_double_integrator_plant).
+part_of_system(communications_graph_gc, large_swarm_sds, line_of_sight_mesh_links).
+part_of_system(computational_graph_gcomp, large_swarm_sds, resource_task_allocation_queues).
+
+%% --- 🪐 SUBSYSTEM COMPOSITE OPERATIONAL ANCHORS ---
+part_of_system(apf_collision_avoidance, physical_graph_gp, non_convex_safety_shield).
+part_of_system(wavelet_transform_sensor, communications_graph_gc, multiscale_gradient_filter).
+part_of_system(graph_minor_contraction, large_swarm_sds, dimensional_reduction_operator).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(mountain_range, reachability_constraint, empty_attainable_space_risk).
-part_of(urban_city_core, dynamic_sds_modifier, topology_compression).
+part_of(SubComponent, system_hierarchy, ParentSystem) :-
+    part_of_system(SubComponent, ParentSystem, _).
