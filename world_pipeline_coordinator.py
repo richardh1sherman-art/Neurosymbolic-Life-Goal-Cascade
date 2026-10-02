@@ -8,8 +8,8 @@ class EnhancedWorldLevelNode:
         self.split_value = split_value        
         self.is_leaf = is_leaf
         self.classification = classification  
-        self.context = context                # Intensional State Context field
-        self.reward_metric = reward_metric    # Analytical Reward Invariant field
+        self.context = context                
+        self.reward_metric = reward_metric    
         self.tb = None                        
         self.fb = None                        
 
@@ -28,6 +28,13 @@ class EnhancedForestCoordinator:
             {"id": "pde_blowup", "system_type": "continuous", "manifold": "differential", "target": "route_to_tree_12_pde"},
             {"id": "wavelet_swarm", "system_type": "continuous", "manifold": "graph_dynamic", "target": "route_to_tree_12_swarm"},
             {"id": "dynamic_sds_swarm", "system_type": "continuous", "manifold": "graph_dynamic", "target": "route_to_tree_12_swarm"}
+        ]
+        
+        # 📋 NEW: Training data for Tree #30 Subsystem Parthood Dispatch
+        self.tree30_training_data = [
+            {"id": "collision_check", "property": "kinematic", "target": "route_to_physical_sub_p"},
+            {"id": "signal_mesh", "property": "connection", "target": "route_to_communications_sub_c"},
+            {"id": "load_balancing", "property": "task_saturation", "target": "route_to_computational_sub_comp"}
         ]
 
     def calculate_entropy(self, targets):
@@ -72,12 +79,8 @@ class EnhancedForestCoordinator:
         return node
 
     def build_custom_tree12_with_schema(self):
-        """🔨 COMPILING TREE #12 TO INJECT THE INTENSIONAL LEAF SCHEMAS NATIVELY"""
         root = EnhancedWorldLevelNode(split_feature="wavelet", split_value="active")
-        
-        # --- LEFT BRANCH: Wavelet is Active (True) ---
         root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
-        
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
@@ -90,10 +93,7 @@ class EnhancedForestCoordinator:
             context="Drones isolated on edge of 100-mile grid with pending discovery packets",
             reward_metric="Transactional link restoration path identified and verified open"
         )
-        
-        # --- RIGHT BRANCH: Wavelet is Inactive (False) ---
         root.fb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="disconnected_minor")
-        
         root.fb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="trigger_graph_minor_contraction",
@@ -106,38 +106,40 @@ class EnhancedForestCoordinator:
             context="Task queue load permanently exceeds sustainable capacity (>140%) across active fleet nodes",
             reward_metric="Backward reachability tubes confirm Attainable Space Performance Subset V' is EMPTY"
         )
-        
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
 
     def run_coordination_pipeline(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: RETRAINING RECURSIVE TREE FORESTS WITH ENHANCED LEAF SCHEMAS")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND SUBSYSTEM DISPATCH CHANNELS")
         print("=" * 95)
         
-        # Train Tree #0
+        # 1. Compile Tree #0
         features_list = ["system_type", "manifold"]
         t0_root = self.build_tree(self.apex_dispatch_data, features_list)
         with open(os.path.join(self.model_dir, "level00_master_dispatcher.pkl"), "wb") as f:
             pickle.dump(t0_root, f)
             
-        # Build upgraded Tree #12
+        # 2. Compile Tree #12
         self.build_custom_tree12_with_schema()
         
-        # Build placeholders for legacy branches to make sure the dump loop unrolls fully
-        for t_idx in range(1, 12):
-            stub_path = os.path.join(self.model_dir, f"level{t_idx:02d}_experiential_memory.pkl")
-            if not os.path.exists(stub_path):
-                stub_node = EnhancedWorldLevelNode(is_leaf=True, classification=f"legacy_tree_{t_idx}_active")
-                with open(stub_path, "wb") as sf:
-                    pickle.dump(stub_node, sf)
+        # 3. 🚨 NEW: Compile Tree #30 Subsystem Mereology Router
+        features_tree30 = ["property"]
+        t30_root = self.build_tree(self.tree30_training_data, features_tree30)
+        with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
+            pickle.dump(t30_root, f)
 
         # Output the comprehensive forest audit
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
-        # 🚨 FIXED: Explicitly defined list limits [0, 12] to eradicate the syntax drop
-        for i in[0, 12]:
-            file_name = "level00_master_dispatcher.pkl" if i == 0 else "level12_science_invariants.pkl"
+        for i in [0, 12, 30]:
+            if i == 0:
+                file_name = "level00_master_dispatcher.pkl"
+            elif i == 12:
+                file_name = "level12_science_invariants.pkl"
+            else:
+                file_name = "level30_subsystem_dispatcher.pkl"
+                
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
                 tree_root = pickle.load(mf)
@@ -147,17 +149,17 @@ class EnhancedForestCoordinator:
 
     def dump_tree(self, node, indent="   "):
         if node.is_leaf:
-            print(f"{node}📦 [ENHANCED CONTROL LEAF SCHEME]")
+            print(f"{indent}📦 [ENHANCED CONTROL LEAF SCHEME]")
             if node.context:
-                print(f"{node}  ├── 📝 State Context  ──➔ {node.context}")
+                print(f"{indent}  ├── 📝 State Context  ──➔ {node.context}")
             if node.reward_metric:
-                print(f"{node}  ├── 🎯 Reward Metric  ──➔ {node.reward_metric}")
-            print(f"{node}  └── ⚙️ Action Command ──➔ \033[1;32m**{node.classification}**\033[0m")
+                print(f"{indent}  ├── 🎯 Reward Metric  ──➔ {node.reward_metric}")
+            print(f"{indent}  └── ⚙️ Action Command ──➔ \033[1;32m**{node.classification}**\033[0m")
             return
-        print(f"{node}🔍 [FEATURE LOGIC VERTEX]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
-        print(f"{node}  ├── True  ──➔", end="")
+        print(f"{indent}🔍 [FEATURE LOGIC VERTEX]: Is system property ['{node.split_feature}'] == '{node.split_value}'?")
+        print(f"{indent}  ├── True  ──➔", end="")
         self.dump_tree(node.tb, indent + "  │   ")
-        print(f"{node}  └── False ──➔", end="")
+        print(f"{indent}  └── False ──➔", end="")
         self.dump_tree(node.fb, indent + "      ")
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import os
 import subprocess
 
-class SdsComplexVerifier:
+class ApexForestVerifier:
     def __init__(self):
         self.grigorchuk_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples/grigorchuk_planning_space"
         self.test_runner_file = os.path.join(self.grigorchuk_dir, "verify_forest_closure.pl")
@@ -9,22 +9,34 @@ class SdsComplexVerifier:
     def build_prolog_test_runner(self):
         prolog_code = """
 :- consult('kb.pl').
-:- consult('exs.pl').
 :- consult('/home/rsherman/projects/SMT-ILP/ZeroVRAM/popper_workspaces/linguistic_tier1/parser_tier1.pl').
 
-verify_sds_complex_closure(TargetID) :-
-    ( sds_synthesis_status(TargetID, Schema) ->
-        format(' [VALID] Complex 3-Graph SDS Invariant Closed | Operational State: ~w (\u2218).', [Schema])
+verify_apex_dispatch(ProblemID) :-
+    ( part_of(ProblemID, apex_routing, Target) ->
+        format(' [VALID] Apex Tree #0 Dispatch Layer Closed | Problem Path Maps to: ~w (\u2218).', [Target])
     ;
-        format(' [ERROR] Multi-network metrics missing from fact registries (\u2022).')
+        write(' [ERROR] Apex routing token signature missing from database scope (\u2022).')
+    ).
+
+verify_tree30_parthood(TaskToken) :-
+    ( part_of(TaskToken, tree_30_routing, SubTree) ->
+        format(' [VALID] Tree #30 Parthood Layer Closed | Target Sub-Network Module: ~w (\u2218).', [SubTree])
+    ;
+        write(' [ERROR] Task token parthood signature missing from Tree #30 registry (\u2022).')
     ).
 
 execute_verification_audit :-
     format('~n==================================================================================~n'),
-    format('SWI-PROLOG DEDUCTION RUNNER: COMPLEX INTER-NETWORK SDS AUDIT~n'),
+    format('SWI-PROLOG DEDUCTION RUNNER: GLOBAL APEX AND PARTHOOD DISPATCH AUDIT~n'),
     format('==================================================================================~n'),
     
-    verify_sds_complex_closure(fleet_search_judith), format('~n'),
+    verify_apex_dispatch(monkey_bananas), format('~n'),
+    verify_apex_dispatch(dynamic_sds_swarm), format('~n'),
+    
+    format('----------------------------------------------------------------------------------~n'),
+    verify_tree30_parthood(collision_check), format('~n'),
+    verify_tree30_parthood(signal_mesh), format('~n'),
+    verify_tree30_parthood(load_balancing), format('~n'),
     
     format('==================================================================================~n'),
     halt.
@@ -44,5 +56,5 @@ execute_verification_audit :-
         print(result.stdout)
 
 if __name__ == "__main__":
-    engine = SdsComplexVerifier()
+    engine = ApexForestVerifier()
     engine.execute_swipl_process()
