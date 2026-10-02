@@ -1,16 +1,15 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Isolated Sub-Tree Primitives Supporting Single Network Controls
+%% Universal Matrix Supporting Non-Convex Obstacle Graph Contractions
 %% =================================================================
 
-:- dynamic sub_tree_routing/3.
+:- dynamic terrain_obstacle/3.
 
-%% --- 🪐 SEPARATE TREE REGISTRIES FOR SINGLE NETWORK CONTROLS ---
-% Syntax: sub_tree_routing(NetworkID, SpecializedTree, InvariantPruningRule)
-sub_tree_routing(physical_layer, tree_12_sub_p, enforce_collision_boundaries).
-sub_tree_routing(communication_layer, tree_12_sub_c, enforce_line_of_sight_30mi).
-sub_tree_routing(computational_layer, tree_12_sub_comp, balance_task_saturation_loads).
+%% --- 🪐 CASE #8: NON-CONVEX SPATIAL INVARIANTS ---
+% Syntax: terrain_obstacle(ObstacleID, GeometryType, InterruptionRule)
+terrain_obstacle(mountain_range, non_convex_barrier, line_of_sight_signal_occlusion).
+terrain_obstacle(urban_city_core, polygon_keep_out, forced_vertex_contraction).
 
-%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
-part_of(NetworkID, single_control_loop, Tree) :-
-    sub_tree_routing(NetworkID, Tree, _).
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(mountain_range, reachability_constraint, empty_attainable_space_risk).
+part_of(urban_city_core, dynamic_sds_modifier, topology_compression).
