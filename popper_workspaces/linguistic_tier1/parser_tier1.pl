@@ -1,16 +1,22 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Discrete Morse Theory Invariants
+%% Universal Matrix Supporting Discrete Morse & Group Schedulers
 %% =================================================================
 
-:- dynamic topological_invariant/3.
+:- dynamic science_performance_profile/5.
+:- dynamic topological_group_action/3.
 
-%% --- 🪐 CASE #8: CLOSED-LOOP TOPOLOGY MATRIX ---
-% Syntax: topological_invariant(SystemComponent, CharacteristicType, DescriptiveValue)
-topological_invariant(betti_0, landscape_complexity, network_fracture_islands).
-topological_invariant(betti_1, landscape_complexity, active_coverage_holes).
-topological_invariant(morse_saddle, local_corridor_feature, critical_space_time_tunnel).
+%% --- 🪐 TREE #12: MESAROVIC SYSTEM CONTROL HISTORY ---
+science_performance_profile(morse_trial_1, hours, active, connected_mesh, system_stable_maintain_policy).
+science_performance_profile(morse_trial_2, hours, active, isolated_discovery, activate_delayed_recovery_routing).
+science_performance_profile(morse_trial_3, hours, active, topological_fracture, trigger_group_minor_contraction).
+science_performance_profile(morse_trial_4, hours, active, empty_attainable_space, activate_mission_abort_safety_halt).
 
-%% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(betti_0, global_landscape, complexity_bounds).
-part_of(morse_saddle, optimal_routing, v_path_alignment).
+%% --- 🌀 SELF-SIMILAR GROUP OPERATIONS ---
+% Syntax: topological_group_action(GeneratorSymbol, GroupDomain, OperatorType)
+topological_group_action(g1, symmetric_s3, vertex_permutation_exchange).
+topological_group_action(g2, symmetric_s3, edge_tunnel_hop).
+
+%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
+part_of(CaseID, performance_metric, status(Decision)) :-
+    science_performance_profile(CaseID, _, _, _, Decision), !.
