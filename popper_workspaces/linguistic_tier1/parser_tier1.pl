@@ -1,22 +1,20 @@
 %% =================================================================
 %% 🌀 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Discrete Morse & Group Schedulers
+%% Universal Matrix Supporting Store-and-Forward & Charging Hubs
 %% =================================================================
 
-:- dynamic science_performance_profile/5.
-:- dynamic topological_group_action/3.
+:- dynamic network_capability/3.
+:- dynamic infrastructure_hub/3.
 
-%% --- 🪐 TREE #12: MESAROVIC SYSTEM CONTROL HISTORY ---
-science_performance_profile(morse_trial_1, hours, active, connected_mesh, system_stable_maintain_policy).
-science_performance_profile(morse_trial_2, hours, active, isolated_discovery, activate_delayed_recovery_routing).
-science_performance_profile(morse_trial_3, hours, active, topological_fracture, trigger_group_minor_contraction).
-science_performance_profile(morse_trial_4, hours, active, empty_attainable_space, activate_mission_abort_safety_halt).
+%% --- 📡 STEP 8: DELAY-TOLERANT PRIMITIVES ---
+% Syntax: network_capability(Layer, CapabilityType, MemoryBufferStatus)
+network_capability(computational_queue, store_and_forward, active_packet_caching).
+network_capability(communications_mesh, delay_tolerant, multi_hop_flush).
 
-%% --- 🌀 SELF-SIMILAR GROUP OPERATIONS ---
-% Syntax: topological_group_action(GeneratorSymbol, GroupDomain, OperatorType)
-topological_group_action(g1, symmetric_s3, vertex_permutation_exchange).
-topological_group_action(g2, symmetric_s3, edge_tunnel_hop).
+%% --- 🔌 RESOURCE REPLENISHMENT STATIONS ---
+% Syntax: infrastructure_hub(StationID, Coordinates, ServiceType)
+infrastructure_hub(charging_hub_alpha, coordinates(50, 50), autonomous_battery_swap).
 
-%% --- MASTER INTER-TREE LOOKUP CONNECTIONS ---
-part_of(CaseID, performance_metric, status(Decision)) :-
-    science_performance_profile(CaseID, _, _, _, Decision), !.
+%% --- MASTER INTER-TREE DELEGATION CORE ---
+part_of(store_and_forward, task_architecture, resilient_routing).
+part_of(charging_hub_alpha, resource_management, decay_prevention).
