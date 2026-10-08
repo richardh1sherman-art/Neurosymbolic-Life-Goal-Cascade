@@ -1,20 +1,19 @@
 %% =================================================================
-%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Godelian Human Incompleteness
+%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
+%% Social Network Manifold Primitives - Inverse Centrality Rewards
 %% =================================================================
 
-:- dynamic human_closed_loop/3.
-:- dynamic unresolvable_valuation/2.
+:- dynamic social_reward_mechanism/3.
+:- dynamic node_state_variable/2.
 
-%% --- 📜 CLOSED AUTONOMOUS HUMAN SYSTEM (System F) ---
-% Syntax: human_closed_loop(RelationID, EvaluationType, BoundaryLimit)
-human_closed_loop(relation_h, syntactic_legalism, temporal_w1_only).
-human_closed_loop(e_human, external_action_observation, syntax_restricted).
+%% --- ⛪ STEP 1: ECCLESIAL PARADOX REWARDS ---
+% Syntax: social_reward_mechanism(ManifoldID, RewardType, OptimizationObjective)
+social_reward_mechanism(early_church_complex, inverse_centrality, buffer_low_degree_periphery).
+social_reward_mechanism(early_church_complex, intrinsic_fruit_payout, neutralize_existential_fear).
 
-%% --- 🚨 UNRESOLVABLE SPIRITUAL VALUATIONS (v_k ∈ V') ---
-% Syntax: unresolvable_valuation(ValueID, SystemAccess)
-unresolvable_valuation(v_k, structurally_unobtainable_without_m).
+%% --- 📉 NODE PSYCHOLOGICAL CRITERIA ---
+node_state_variable(theta_i, intrinsic_existential_fear).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(relation_h, closed_human_system, syntax_only).
-part_of(v_k, unobtainable_target, remnant_v_prime).
+part_of(inverse_centrality, alternative_optimization, servant_leadership).
+part_of(intrinsic_fruit_payout, feedback_loop, fear_reduction_to_zero).
