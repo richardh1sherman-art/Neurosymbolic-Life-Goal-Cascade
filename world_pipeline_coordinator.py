@@ -18,11 +18,10 @@ class EnhancedForestCoordinator:
         os.makedirs(self.model_dir, exist_ok=True)
 
     def build_custom_tree12_with_ecclesial_schema(self):
-        """🔨 COMPILING CORRECTED TREE #12 WITH INVERSE CENTRALITY REWARDS"""
         root = EnhancedWorldLevelNode(split_feature="wavelet", split_value="active")
         root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
         
-        # --- LEFT BRANCH: Church Manifold Active ---
+        # --- LEFT BRANCH: Early Church ---
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
@@ -36,7 +35,7 @@ class EnhancedForestCoordinator:
             reward_metric="Route packet word along the self-similar group generator sequence back to mesh mass"
         )
         
-        # --- RIGHT BRANCH: Twelve Spies Failure ---
+        # --- RIGHT BRANCH: Twelve Spies & Desert Wandering ---
         root.fb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="topological_fracture")
         root.fb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
@@ -47,8 +46,8 @@ class EnhancedForestCoordinator:
         root.fb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_mission_abort_safety_halt",
-            context="Twelve spies horizontal echo chamber detected; non-trivial H1 loop forces total system collapse",
-            reward_metric="High localized stress ceiling breached; Attainable Performance Space V' is completely EMPTY"
+            context="Twelve spies fault expands to national complex; 40-year looping desert orbit active",
+            reward_metric="Bleed off generational noise parameters before re-attempting Promised Land entry V'"
         )
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
@@ -62,6 +61,8 @@ class EnhancedForestCoordinator:
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
+        
+        # 🚨 REPAIRED & EXTENDED: Perfect explicit range collection limits for clean execution
         for i in [12, 30]:
             file_name = "level12_science_invariants.pkl"
             full_path = os.path.join(self.model_dir, file_name)

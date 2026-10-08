@@ -1,19 +1,19 @@
 %% =================================================================
-%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Social Network Manifold Primitives - Inverse Centrality Rewards
+%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Social Network Manifold Primitives - Desert Wandering Invariants
 %% =================================================================
 
-:- dynamic social_reward_mechanism/3.
-:- dynamic node_state_variable/2.
+:- dynamic macro_wandering_trajectory/3.
+:- dynamic language_interop_binding/3.
 
-%% --- ⛪ STEP 1: ECCLESIAL PARADOX REWARDS ---
-% Syntax: social_reward_mechanism(ManifoldID, RewardType, OptimizationObjective)
-social_reward_mechanism(early_church_complex, inverse_centrality, buffer_low_degree_periphery).
-social_reward_mechanism(early_church_complex, intrinsic_fruit_payout, neutralize_existential_fear).
+%% --- 🌵 STEP 2 EXPANSION: THE DESERT WANDERING MANIFOLD ---
+% Syntax: macro_wandering_trajectory(SystemScale, TrajectoryType, NoiseBleedStatus)
+macro_wandering_trajectory(total_nation_complex, looping_desert_orbit, active_generational_noise_extraction).
 
-%% --- 📉 NODE PSYCHOLOGICAL CRITERIA ---
-node_state_variable(theta_i, intrinsic_existential_fear).
+%% --- 🔏 LISP-PROLOG NEUROSYMBOLIC CONNECTIONS ---
+language_interop_binding(lisp_dsl, dynamic_ast_execution, spatiotemporal_w1).
+language_interop_binding(prolog_verifier, backward_chaining_audit, atemporal_w2).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(inverse_centrality, alternative_optimization, servant_leadership).
-part_of(intrinsic_fruit_payout, feedback_loop, fear_reduction_to_zero).
+part_of(total_nation_complex, macro_system_expansion, forty_year_orbit).
+part_of(lisp_dsl, language_interop, core_execution_compiler).
