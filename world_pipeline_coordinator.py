@@ -62,7 +62,7 @@ class EnhancedForestCoordinator:
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
-        for i in:
+        for i in [12, 30]:
             file_name = "level12_science_invariants.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
