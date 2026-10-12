@@ -86,21 +86,24 @@ When the 12 Spies generate a horizontal topological tear ($H_1 \neq 0$), the net
 \end{equation}
 Once the generational noise is fully bled out ($\sigma^2 \to 0$), the manifold re-aligns to a contractible point, unblocking the Attainable Space $V'$ for the subsequent generational layer.
 
-\section{JAX-Memo Spatial Transitions and Rational Quantitative Attribution}
-To model multi-agent choices under structural variation, the system integrates the JAX-accelerated state manifold over a bounded $W \times H$ lattice ($\text{Grid} = 10 \times 5$). The transition probability model is defined on a non-convex configuration space clipped by an internal boundary occlusion matrix $\mathcal{M}_{\text{wall}}$ representing physical barriers.
+\section{LISP S-Expression Grammar and Nested Social Marginalization}
+The cognitive language layer evaluates multi-agent intentions using native LISP S-Expressions compiled directly into the hardware-accelerated tensor platform. 
 
-\subsection{The Kinematic Transition Function}
-The forward state propagation $T(s, a, s')$ maps the continuous coordinate displacements for action vectors $a \in \mathcal{A}$:
+\subsection{The Tokenizer Grammar and Associative Memory Hole Operator}
+Searle's institutional constitutive rule matrix is processed via a symbolic token stream. A query containing a structural blank or \texttt{Hole} triggers an associative memory leaf node lookup inside the designated context tree $C$:
 \begin{equation}
-T(s, a, s') = \mathbb{I}\left( s + \delta a = s' \wedge \mathcal{M}_{\text{wall}}[s'] = 0 \right) + \mathbb{I}\left( s = s' \wedge \mathcal{M}_{\text{wall}}[s + \delta a] = 1 \right)
+\mathcal{F}_{\text{query}}\Big( \langle \text{chooses}, \, \text{Agent}, \, \text{Hole} \rangle \in C \Big) \mapsto \mathcal{Y}_{\text{leaf}}
 \end{equation}
-where $\mathbb{I}$ is the indicator mapping function.
+If tree $C$ returns a structural mismatch, a recursive lookup is triggered across functional sibling context trees via a parthood (\texttt{part\_of}) functor.
 
-\subsection{Cuisine Utility Attribution Vectors}
-A mentalizing agent computes hidden node desire parameters by marginalizing over trajectory choices using the Luce choice axiom. The probability of an output selection is proportional to the exponentiated utility matrix ($\text{wpp} = \exp(U)$):
+\subsection{The Nested Social Marginalization Equations}
+The LISP compiler evaluates recursively nested levels of thinking present in a model (the \texttt{thinks} statement) by executing an internal forward-simulation. The probability of an agent choosing an option $b$ from a set $\mathcal{B}$ is proportional to the exponentiated total utility ($\text{wpp} = \exp(U)$):
 \begin{equation}
-P(a \mid s, \bm{\theta}) = \frac{\exp\left( \bm{\mathcal{W}}_{\text{desire}}[s] - \mathcal{C}_{\text{path}}(a) \right)}{\sum_{a' \in \mathcal{A}} \exp\left( \bm{\mathcal{W}}_{\text{desire}}[s] - \mathcal{C}_{\text{path}}(a') \right)}
+P(\text{Agent.b} = b) = \frac{\exp\left( \mathcal{U}_{\text{local}}(b) \right)}{\sum_{b' \in \mathcal{B}} \exp\left( \mathcal{U}_{\text{local}}(b') \right)}
 \end{equation}
-By evaluating a node's path deflection around $\mathcal{M}_{\text{wall}}$ (such as discovering a hidden Lebanese truck at spot $X$ but returning to the visible Korean truck at spot $Y$), the neurosymbolic compiler evaluates the commutative expectation $\mathbb{E}[ \cdot ]$ to uncover the favorite cuisine target attribution with zero uncertainty.
-
+When an agent has uncertainty about a peer's choice, it marginalizes over its hidden belief states using the expectation operator $\mathbb{E}[ \cdot ]$ to compute expected utility before taking action:
+\begin{equation}
+\mathcal{U}_{\text{expected}}(b) = \sum_{b^* \in \mathcal{B}} P(\text{Peer.b} = b^*) \cdot \mathcal{R}\left(b \mid b^*\right)
+\end{equation}
+This decouples an agent's internal mental belief regarding a peer from the peer's actual spatiotemporal coordinate location, preventing experience divergence.
 \end{document}
