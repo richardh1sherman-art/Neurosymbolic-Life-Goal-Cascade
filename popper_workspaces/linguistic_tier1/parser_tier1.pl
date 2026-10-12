@@ -1,19 +1,23 @@
 %% =================================================================
 %% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
-%% Social Network Manifold Primitives - Desert Wandering Invariants
+%% Universal Matrix Mapping Inertial Spin Model & Collective AI Fear
 %% =================================================================
 
-:- dynamic macro_wandering_trajectory/3.
-:- dynamic language_interop_binding/3.
+:- dynamic iabp_agent_parameter/3.
+:- dynamic rms_fear_category/2.
 
-%% --- 🌵 STEP 2 EXPANSION: THE DESERT WANDERING MANIFOLD ---
-% Syntax: macro_wandering_trajectory(SystemScale, TrajectoryType, NoiseBleedStatus)
-macro_wandering_trajectory(total_nation_complex, looping_desert_orbit, active_generational_noise_extraction).
+%% --- ⛪ STEP 1: INERTIAL SPIN MODEL AXIOMS ---
+% Syntax: iabp_agent_parameter(Concept, Variable, AssignedValue)
+iabp_agent_parameter(behavioral_inertia, chi, 1.0).
+iabp_agent_parameter(spin_damping, eta, 0.5).
+iabp_agent_parameter(alignment_strength, k_factor, 40.0).
+iabp_agent_parameter(love_mapping, bijection, divine_aligned).
 
-%% --- 🔏 LISP-PROLOG NEUROSYMBOLIC CONNECTIONS ---
-language_interop_binding(lisp_dsl, dynamic_ast_execution, spatiotemporal_w1).
-language_interop_binding(prolog_verifier, backward_chaining_audit, atemporal_w2).
+%% --- 🚨 SEPARATED RMS FEAR CATEGORIES ---
+rms_fear_category(pastoral_generational_departure, active_rms).
+rms_fear_category(workplace_skill_displacement, active_rms).
+rms_fear_category(antichrist_technological_control, active_rms).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(total_nation_complex, macro_system_expansion, forty_year_orbit).
-part_of(lisp_dsl, language_interop, core_execution_compiler).
+part_of(behavioral_inertia, inertial_spin_model, dynamics).
+part_of(pastoral_generational_departure, rms_error_matrix, category_1).

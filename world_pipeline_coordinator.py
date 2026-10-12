@@ -25,8 +25,8 @@ class EnhancedForestCoordinator:
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Social manifold contractible [b0=1, b1=0]; Matthew 18 low-pass filter active",
-            reward_metric="Inverse Centrality Reward (High-degree hubs support periphery) + Intrinsic Fruit Payouts (theta_i -> 0)"
+            context="Social manifold contractible [b0=1, b1=0]; Intelligent Active Brownian Particles (iABP) active",
+            reward_metric="Inverse Centrality Reward (High-degree hubs support periphery) + Separated Category RMS Error Minimization"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
@@ -62,7 +62,7 @@ class EnhancedForestCoordinator:
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
         
-        # 🚨 REPAIRED & EXTENDED: Perfect explicit range collection limits for clean execution
+        # 🚨 REPAIRED: Clean compilation loop targeting the correct pickled models
         for i in [12, 30]:
             file_name = "level12_science_invariants.pkl"
             full_path = os.path.join(self.model_dir, file_name)
