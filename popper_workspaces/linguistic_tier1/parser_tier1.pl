@@ -1,23 +1,19 @@
 %% =================================================================
-%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Mapping Inertial Spin Model & Collective AI Fear
+%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
+%% Universal Matrix Mapping Empirical Barna Data & Love Homomorphisms
 %% =================================================================
 
-:- dynamic iabp_agent_parameter/3.
-:- dynamic rms_fear_category/2.
+:- dynamic barna_divergence/3.
+:- dynamic love_homomorphism/2.
 
-%% --- ⛪ STEP 1: INERTIAL SPIN MODEL AXIOMS ---
-% Syntax: iabp_agent_parameter(Concept, Variable, AssignedValue)
-iabp_agent_parameter(behavioral_inertia, chi, 1.0).
-iabp_agent_parameter(spin_damping, eta, 0.5).
-iabp_agent_parameter(alignment_strength, k_factor, 40.0).
-iabp_agent_parameter(love_mapping, bijection, divine_aligned).
+%% --- 📊 TIER 2 HISTORICAL DATA PRIMITIVES ---
+% Syntax: barna_divergence(Cohort, MetricType, PercentageValue)
+barna_divergence(perimeter_leaf_nodes, chatbot_shortcut_trust, 48).
+barna_divergence(pastoral_core_nodes, structural_filtering_trust, 12).
 
-%% --- 🚨 SEPARATED RMS FEAR CATEGORIES ---
-rms_fear_category(pastoral_generational_departure, active_rms).
-rms_fear_category(workplace_skill_displacement, active_rms).
-rms_fear_category(antichrist_technological_control, active_rms).
+%% --- ⛪ CATEGORY THEORY COMMUTATIVE MATRIX ---
+love_homomorphism(bijection_verification, god_first_alignment).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(behavioral_inertia, inertial_spin_model, dynamics).
-part_of(pastoral_generational_departure, rms_error_matrix, category_1).
+part_of(perimeter_leaf_nodes, network_divergence, spatial_shadow).
+part_of(love_homomorphism, policy_engine, fear_eradication).
