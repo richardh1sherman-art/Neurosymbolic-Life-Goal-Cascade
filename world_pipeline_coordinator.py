@@ -17,21 +17,22 @@ class EnhancedForestCoordinator:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
 
-    def build_custom_tree12_with_ecclesial_schema(self):
+    def build_custom_tree12_with_memo_schema(self):
+        """🔨 COMPILING RECURSIVE REASONING AND STATUS FUNCTION SEARLE LEAF SCHEMAS"""
         root = EnhancedWorldLevelNode(split_feature="wavelet", split_value="active")
         root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
         
-        # --- LEFT BRANCH: Early Church ---
+        # --- LEFT BRANCH: Stable Contractible Church / Drone Memo PPL ---
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Social manifold contractible [b0=1, b1=0]; Intelligent Active Brownian Particles (iABP) active",
-            reward_metric="Inverse Centrality Reward (High-degree hubs support periphery) + Separated Category RMS Error Minimization"
+            context="Social manifold contractible [b0=1, b1=0]; Associative memory 'X counts as Y in C' verified",
+            reward_metric="MIT Memo PPL recursive reasoning active: chooses(b, wpp=exp(E[Utility])) and thinks[] nested blocks"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_delayed_recovery_routing",
-            context="Social graph tear detected; packet contract locked in store-and-forward queue",
+            context="Social graph tear detected; recursive lookup triggered across sibling context trees",
             reward_metric="Route packet word along the self-similar group generator sequence back to mesh mass"
         )
         
@@ -57,13 +58,11 @@ class EnhancedForestCoordinator:
         print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND TOPOLOGICAL DISPATCH CHANNELS")
         print("=" * 95)
         
-        self.build_custom_tree12_with_ecclesial_schema()
+        self.build_custom_tree12_with_memo_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
-        
-        # 🚨 REPAIRED: Clean compilation loop targeting the correct pickled models
-        for i in [12, 30]:
+        for i in [12,30]:
             file_name = "level12_science_invariants.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
