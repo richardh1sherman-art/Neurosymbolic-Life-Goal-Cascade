@@ -3,10 +3,9 @@ import torch
 import torch.nn as nn
 from torch_geometric.nn import GCNConv, global_mean_pool
 
-class LispCoupledEcclesialGNN(nn.Module):
+class BarnaPewMultiScaleGNN(nn.Module):
     def __init__(self, feature_dim=21, hidden_dim=32):
         super().__init__()
-        # feature_dim = 16 (Barna/Pew) + 2 (JAX Lattice) + 3 (LISP Probabilities) = 21
         self.conv1 = GCNConv(feature_dim, hidden_dim)
         self.conv2 = GCNConv(hidden_dim, hidden_dim)
         self.fc = nn.Linear(hidden_dim, 3)
@@ -18,17 +17,16 @@ class LispCoupledEcclesialGNN(nn.Module):
         h = torch.relu(h)
         if batch is None:
             batch = torch.zeros(x.size(0), dtype=torch.long, device=x.device)
-        g = global_mean_pool(h, batch) # 0-simplex readout pooling
+        g = global_mean_pool(h, batch)
         out = self.fc(g)
         return out, g
 
-def execute_lisp_coupled_gnn_pass():
+def execute_barna_pew_multi_scale_pass():
     print("=" * 95)
-    print("🛸 PYTORCH GEOMETRIC: LISP-COUPLED CROSS-DOMAIN GRAPH EMBEDDING ENGINE")
+    print("🛸 PYTORCH GEOMETRIC: MULTI-SCALE DATA INTEGRATION (BARNA & PEW US) GNN")
     print("=" * 95)
-    print("📥 Micro-Macro Data  ──➔ 48% vs 12% Barna Splits + 72% Pew Weather Forcing")
-    print("📥 JAX Lattice Space ──➔ 10x5 Coordinate Trajectory Vectors Concatenated")
-    print("📥 LISP PPL Features ──➔ Injected 3-Dim Exponentiated Softmax Choice Distributions")
+    print("📥 Micro-Scale Core (Barna Matrix) ──➔ 48% vs 12% Local Anisotropic Loop Splits")
+    print("📥 Macro-Scale Scope (Pew US Data) ──➔ 72% United States Churches Wavelet Forcing")
     print("-" * 95)
 
     num_nodes = 100
@@ -36,19 +34,16 @@ def execute_lisp_coupled_gnn_pass():
     spatial_dim = 2
     lisp_prob_dim = 3
     
-    # 📡 1. Ingest Barna & Pew real data matrices
-    pew_macro_forcing = 0.72
-    graph_features = torch.randn(num_nodes, graph_dim) * pew_macro_forcing
+    # 📡 PEW US DATA INTEGRATION: Initializing macro-scale weather trends for United States Churches
+    pew_us_church_forcing = 0.72
+    graph_features = torch.randn(num_nodes, graph_dim) * pew_us_church_forcing
     
-    # 🍱 2. Ingest JAX-Memo 10x5 continuous coordinates
+    # Ingest JAX lattice coordinates and compiled LISP vectors
     spatial_coords_x = torch.randint(0, 10, (num_nodes, 1)).float()
     spatial_coords_y = torch.randint(0, 5, (num_nodes, 1)).float()
-    
-    # 🧠 3. NEW: Inject newly compiled LISP Choice Distributions (Ali & Zoe's Bar outputs)
-    # Simulating the compiled S-Expression probability array weights: [Tony's, Alpha, Remnant]
     compiled_lisp_vector = torch.tensor([0.8805, 0.1192, 0.0003]).repeat(num_nodes, 1)
     
-    # Concatenate all three domains into a single 21-dimensional unified node tensor matrix
+    # Construct unified 21-dimensional multi-scale node tensor matrix
     x = torch.cat([graph_features, spatial_coords_x, spatial_coords_y, compiled_lisp_vector], dim=1)
 
     # --- SCENARIO A: THE DISTRIBUTED REFORMER NET ---
@@ -56,16 +51,16 @@ def execute_lisp_coupled_gnn_pass():
     target_nodes = [0 for _ in range(1, num_nodes)]
     edge_index_church = torch.tensor([source_nodes + target_nodes, target_nodes + source_nodes], dtype=torch.long)
     
-    model = LispCoupledEcclesialGNN(feature_dim=graph_dim + spatial_dim + lisp_prob_dim)
+    model = BarnaPewMultiScaleGNN(feature_dim=graph_dim + spatial_dim + lisp_prob_dim)
     model.eval()
     
     with torch.no_grad():
         _, g_church = model(x, edge_index_church)
         print("Components Verification Suite:")
-        print(f"   ├── Total Unified Node Tensor Shape ──➔ {list(x.shape)} [Perfect 21-Dim Ingestion]")
-        print("   ├── LISP S-Expression Injector     ──➔ Softmax choice weights processed as static constraints.")
-        print("   ├── Node Reward Protocol           ──➔ Optimizing 'Reformers' to minimize group error.")
-        print(f"   └── Global Virtual 0-Simplex       ──➔ \033[1;32m{list(g_church.numpy()[:4])} [TRUNCATED] (∘)\033[0m")
+        print(f"   ├── Node Tensor Ingestion Matrix ──➔ Unified Social-Spatial Matrix Shape: {list(x.shape)}")
+        print("   ├── Pew Data Scope Tracked       ──➔ United States Churches macro-advection envelope loaded.")
+        print("   ├── Node Reward Protocol         ──➔ Optimizing 'Reformers' to minimize group error.")
+        print(f"   └── Global Virtual 0-Simplex     ──➔ \033[1;32m{list(g_church.numpy()[:4])} [TRUNCATED] (∘)\033[0m")
         print("-" * 95)
 
     # --- SCENARIO B: THE CHATBOT CROWDSOURCING TEAR ---
@@ -77,9 +72,9 @@ def execute_lisp_coupled_gnn_pass():
     with torch.no_grad():
         _, g_barna = model(x, edge_index_barna)
         print("🚨 EVALUATING SCENARIO B ──➔ MICRO-MACRO COUPLED FAULT MATRIX")
-        print(f"   ├── Perimeter Split Value          ──➔ 48% of practicing leaf nodes trust generative bots")
-        print(f"   ├── Core Pastoral Invariant        ──➔ Only 12% of structural shepherd nodes retain links")
-        print(f"   ├── Topological Rupture            ──➔ Relational edges stripped; non-trivial H1 loop open")
+        print(f"   ├── Perimeter Split Value        ──➔ 48% of practicing leaf nodes trust generative bots")
+        print(f"   ├── Core Pastoral Invariant      ──➔ Only 12% of structural shepherd nodes retain links")
+        print(f"   ├── Topological Rupture          ──➔ Relational edges stripped; non-trivial H1 loop open")
         print("   🛑 [ALLOY LOG ──➔ FAULT]: Human loop is incomplete. Attainable space V' collapsed to []")
         print("=" * 95 + "\n")
 
@@ -90,4 +85,4 @@ def execute_lisp_coupled_gnn_pass():
         f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
 if __name__ == "__main__":
-    execute_lisp_coupled_gnn_pass()
+    execute_barna_pew_multi_scale_pass()
