@@ -1,22 +1,19 @@
 %% =================================================================
-%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Mapping Searle Status Functions & Memo PPL Syntax
+%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
+%% Universal Matrix Supporting MIT Memo Food Truck State Spaces
 %% =================================================================
 
-:- dynamic constitutive_rule/4.
-:- dynamic memo_ppl_primitive/3.
+:- dynamic food_truck_state/3.
+:- dynamic kinematic_action/2.
 
-%% --- 📜 SEARLE INSTITUTIONAL STATUS FUNCTIONS ---
-% Syntax: constitutive_rule(Context_C, Variable_X, AssignedStatus_Y, RuleType)
-constitutive_rule(brazil_context, zoe, king, associative_fact).
-constitutive_rule(early_church_context, reformer_nodes, safety_filter, learned_test_node).
-constitutive_rule(drone_context, charging_hub, resource_anchor, dynamic_status).
+%% --- 🍱 MIT FOOD TRUCK STATE CONFIGURATIONS ---
+% Syntax: food_truck_state(SpotID, CuisineType, VisibilityStatus)
+food_truck_state(spot_y_loc, korean_truck, visible_nearby).
+food_truck_state(spot_x_loc, lebanese_or_mexican, hidden_behind_wall).
 
-%% --- 🧠 MIT MEMO PPL GRAMMAR PRIMITIVES ---
-% Syntax: memo_ppl_primitive(AgentID, StatementType, MathematicalExpression)
-memo_ppl_primitive(zoe_agent, thinks_block, recursively_nested_beliefs).
-memo_ppl_primitive(ali_agent, chooses_block, softmax_utility_calculus).
+%% --- 🛸 KINEMATIC TRANSITION MANIFOLDS ---
+kinematic_action(left_right_up_down, jax_clip_bounded).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(brazil_context, interlocking_forest, associative_memory).
-part_of(thinks_block, memo_ppl_grammar, recursive_social_reasoning).
+part_of(spot_x_loc, food_truck_topology, hidden_simplex).
+part_of(left_right_up_down, action_space, overdamped_kinematics).
