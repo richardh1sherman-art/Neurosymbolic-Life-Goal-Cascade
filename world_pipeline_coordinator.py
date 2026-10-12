@@ -17,38 +17,38 @@ class EnhancedForestCoordinator:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
 
-    def build_custom_tree12_with_memo_schema(self):
-        """🔨 COMPILING RECURSIVE REASONING AND STATUS FUNCTION SEARLE LEAF SCHEMAS"""
-        root = EnhancedWorldLevelNode(split_feature="wavelet", split_value="active")
-        root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
+    def build_custom_tree12_with_jax_schema(self):
+        """🔨 COMPILING TREE #12 TO NATIVELY RECOGNIZE CROSS-DOMAIN JAX FEATURE SHAPES"""
+        root = EnhancedWorldLevelNode(split_feature="jax_feature_dim", split_value="18")
         
-        # --- LEFT BRANCH: Stable Contractible Church / Drone Memo PPL ---
+        # --- TRUE BRANCH: Concatenated Social-Spatial Array Ingested ---
+        root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Social manifold contractible [b0=1, b1=0]; Associative memory 'X counts as Y in C' verified",
-            reward_metric="MIT Memo PPL recursive reasoning active: chooses(b, wpp=exp(E[Utility])) and thinks[] nested blocks"
+            context="Social manifold contractible [b0=1, b1=0]; 18-dim JAX feature arrays loaded cleanly",
+            reward_metric="MIT Memo PPL active: exp(U) choice probability vectors marginalized over E[Utility]"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_delayed_recovery_routing",
-            context="Social graph tear detected; recursive lookup triggered across sibling context trees",
-            reward_metric="Route packet word along the self-similar group generator sequence back to mesh mass"
+            context="Link occlusion detected behind non-convex barrier matrix M_wall; invoking store-and-forward",
+            reward_metric="Flush data contract packet through the next validated Discrete Morse saddle tunnel (0,2)"
         )
         
-        # --- RIGHT BRANCH: Twelve Spies & Desert Wandering ---
+        # --- FALSE BRANCH: Topological Fractures ---
         root.fb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="topological_fracture")
         root.fb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="trigger_graph_minor_contraction",
-            context="Betti 0 spikes; network fractures into isolated geometric island subgraphs",
+            context="Betti 0 spikes; 48% vs 12% Barna divergence triggers network fragmentation",
             reward_metric="Execute immediate combinatorial contraction to restore global algebraic connectivity"
         )
         root.fb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_mission_abort_safety_halt",
-            context="Twelve spies fault expands to national complex; 40-year looping desert orbit active",
-            reward_metric="Bleed off generational noise parameters before re-attempting Promised Land entry V'"
+            context="Twelve spies fault detected; uncollapsible H1 horizontal loop forces total system collapse",
+            reward_metric="High localized stress ceiling breached; Attainable Performance Space V' is completely EMPTY"
         )
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
@@ -58,11 +58,11 @@ class EnhancedForestCoordinator:
         print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND TOPOLOGICAL DISPATCH CHANNELS")
         print("=" * 95)
         
-        self.build_custom_tree12_with_memo_schema()
+        self.build_custom_tree12_with_jax_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
-        for i in [12,30]:
+        for i in:
             file_name = "level12_science_invariants.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:

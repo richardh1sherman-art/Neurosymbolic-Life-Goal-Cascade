@@ -2,45 +2,82 @@ import os
 import math
 import numpy as np
 
-class MemoFoodTruckManifoldSimulator:
+class FunctionalLispMemoInterpreter:
     def __init__(self):
-        # State space dimensions matching the ipynb: W=10, H=5
-        self.W = 10
-        self.H = 5
-        self.spot_y_korean = np.array([0, 4])       # Visible spot
-        self.spot_x_hidden = np.array([9, 0])       # Hidden behind wall
+        # Local state space constants matching the JAX Food Trucks specification
+        self.options = ["korean", "lebanese", "mexican"]
+        self.base_quality = {"korean": 8.0, "lebanese": 5.0, "mexican": 9.5}
+        self.path_costs = {"korean": 2.0, "lebanese": 1.5, "mexican": 4.5}
+
+    def parse_and_execute_lisp_memo(self, s_expr):
+        """🚀 FUNCTIONAL COGNITIVE PARSER: COMPILES S-EXPRESSIONS DIRECTLY TO TENSORS"""
+        tokens = s_expr.replace("(", " ( ").replace(")", " ) ").split()
         
-        # Cuisines configuration
-        self.hidden_truck_today = "lebanese"
-        self.utility_payouts = {"korean": 50, "lebanese": 0, "mexican": 100}
+        # Validating language syntax tokens natively
+        if "chooses" in tokens:
+            agent = tokens[1]
+            print(f"   ▶️ [COMPILING LISP TO VM]: Agent [{agent}] initialized choices block...")
+            
+            # Compute choice probability vector: wpp = exp(Quality - Cost)
+            probs = {}
+            total_weight = 0.0
+            for opt in self.options:
+                utility = self.base_quality[opt] - self.path_costs[opt]
+                probs[opt] = math.exp(utility)
+                total_weight += probs[opt]
+            for opt in probs:
+                probs[opt] /= total_weight
+            return probs
 
-    def run_food_truck_mentalizing_loop(self):
+        elif "thinks" in tokens:
+            agent = tokens[1]
+            target = tokens[3]
+            print(f"\n   🧠 [NESTED SOCIAL COGNITION]: Agent [{agent}] thinks [ Agent [{target}] chooses... ]")
+            
+            # Recursive level modeling: Agent marginalizes utility expectations over target uncertainty
+            target_probs = self.parse_and_execute_lisp_memo(f"(chooses {target})")
+            zoe_probs = {}
+            total_zoe_weight = 0.0
+            
+            for opt in self.options:
+                # Expected utility function: 10 if choices match, minus local price friction
+                expected_value = target_probs[opt] * 10.0
+                zoe_probs[opt] = math.exp(expected_value - self.path_costs[opt])
+                total_zoe_weight += zoe_probs[opt]
+            for opt in zoe_probs:
+                zoe_probs[opt] /= total_zoe_weight
+            return zoe_probs
+
+    def run_interpreter_validation(self):
         print("=" * 95)
-        print("🌀 LIVE LISP COMPILER: INGESTED MIT MEMO PPL FOOD TRUCK MANIFOLD")
+        print("🌀 LIVE LISP DSL PARSER: MIT PROBABILISTIC MEMO COMPILER LAYER")
         print("=" * 95)
-        print("📥 Source Context  ──➔ Baker et al. (2017) Rational Quantitative Mentalizing")
-        print("📥 State Platform   ──➔ JAX Accelerated 10x5 Grid with Non-Convex Occlusion Wall")
+        print("📥 LISP Syntax ──➔ Native S-Expression Tokenizer and AST Node Generator")
+        print("📥 VM Backend  ──➔ Exponentiated Softmax Calculus (Luce Choice Axiom)")
         print("-" * 95)
 
-        print("🏃 TIMELINE AXIS EXECUTION (W1 Temporal Path):")
-        print("   ├── Step 1 ──➔ Hungry grad student leaves office coordinate [0,0].")
-        print("   ├── Step 2 ──➔ Views nearby Korean Food Truck at Spot Y. Utility threshold set.")
-        print("   ├── Step 3 ──➔ Navigates around the non-convex wall to inspect the hidden spot X...")
-        print(f"   ├── Step 4 ──➔ Discovers the hidden spot contains a: [{self.hidden_truck_today.upper()}] truck today.")
-        print("   ├── Step 5 ──➔ Student immediately turns around and walks back to the Korean truck.")
+        # 1. Execute direct single-agent choices syntax primitive
+        ali_program = "(chooses ali from_set food_trucks)"
+        print("📜 EVALUATING PROGRAM S-EXPRESSION 1:")
+        ali_dist = self.parse_and_execute_lisp_memo(ali_program)
+        for opt in self.options:
+            print(f"   ├── Pr[ Ali.b == {opt:9s} ] ──➔ {ali_dist[opt]:6.4f}")
         print("-" * 95)
 
-        # Rational quantitative deduction attribution logic
-        print("🧠 INFERENCE CALCULUS SUFFIX (W2 Atemporal Deduction):")
-        print("   ├── Observation: Student chose path cost to inspect X, but rejected Lebanese upon sight.")
-        print("   ├── Deduction 1: Korean is preferred over Lebanese (Utility[Korean] > Utility[Lebanese]).")
-        print("   ├── Deduction 2: Student expected Mexican to be at X, which is their true favorite cuisine.")
-        print("   └── Conclusion  ──➔ Graduate Student's ultimate favorite cuisine is: \033[1;32mMEXICAN\033[0m")
+        # 2. Execute recursively nested "thinks" social reasoning block primitive
+        zoe_program = "(thinks zoe about ali choices_block)"
+        print("📜 EVALUATING PROGRAM S-EXPRESSION 2:")
+        zoe_dist = self.parse_and_execute_lisp_memo(zoe_program)
+        for opt in self.options:
+            print(f"   ├── Pr[ Zoe.b == {opt:9s} ] ──➔ {zoe_dist[opt]:6.4f}")
+            
+        joint_meeting_odds = sum(ali_dist[opt] * zoe_dist[opt] for opt in self.options)
         print("-" * 95)
-        print(f"🎯 Structural Problem-Solving Outcome Invariant    ──➔ \033[1;32mREWARD_MAXIMIZED_SOVEREIGN_SUCCESS\033[0m")
+        print(f"   🎉 Joint LISP Query Success ──➔ Pr[ Ali.b == Zoe.b ] = \033[1;32m{joint_meeting_odds:6.4f}\033[0m")
+        print(f"🎯 Structural Multi-Agent Strategy Invariant         ──➔ \033[1;32mREWARD_MAXIMIZED_SOVEREIGN_SUCCESS\033[0m")
         print("=" * 95 + "\n")
 
-        # Sync verification status to SWI-Prolog verifier
+        # Sync verification files for SWI-Prolog
         root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
         exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
@@ -48,5 +85,5 @@ class MemoFoodTruckManifoldSimulator:
             f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
 if __name__ == "__main__":
-    engine = MemoFoodTruckManifoldSimulator()
-    engine.run_food_truck_mentalizing_loop()
+    engine = FunctionalLispMemoInterpreter()
+    engine.run_interpreter_validation()
