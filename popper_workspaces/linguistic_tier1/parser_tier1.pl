@@ -1,19 +1,20 @@
 %% =================================================================
-%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting MIT Memo Food Truck State Spaces
+%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Universal Matrix Supporting Searle Declarations & Probabilistic Observations
 %% =================================================================
 
-:- dynamic food_truck_state/3.
-:- dynamic kinematic_action/2.
+:- dynamic dsl_declaration_primitive/4.
+:- dynamic dsl_observation_exemplar/3.
 
-%% --- 🍱 MIT FOOD TRUCK STATE CONFIGURATIONS ---
-% Syntax: food_truck_state(SpotID, CuisineType, VisibilityStatus)
-food_truck_state(spot_y_loc, korean_truck, visible_nearby).
-food_truck_state(spot_x_loc, lebanese_or_mexican, hidden_behind_wall).
+%% --- 📜 SEARLE STATUS FUNCTION DECLARATIONS ---
+% Syntax: dsl_declaration_primitive(Context_C, Entity_X, Status_Y, GenerationType)
+dsl_declaration_primitive(brazil_context, zoe, king, speech_act_inception).
+dsl_declaration_primitive(swarm_context, robot_a, swarm_leader, structural_collective_decree).
 
-%% --- 🛸 KINEMATIC TRANSITION MANIFOLDS ---
-kinematic_action(left_right_up_down, jax_clip_bounded).
+%% --- 📊 PROBABILISTIC SENSOR OBSERVATIONS ---
+% Syntax: dsl_observation_exemplar(ObservedEntity, DistributionTrack, ConfidenceWeight)
+dsl_observation_exemplar(alice_bob_link, prior_distribution_55_45, induction_exemplar).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(spot_x_loc, food_truck_topology, hidden_simplex).
-part_of(left_right_up_down, action_space, overdamped_kinematics).
+part_of(swarm_leader, interlocking_forest, level30_mereology_router).
+part_of(induction_exemplar, interlocking_forest, level12_science_invariants).
