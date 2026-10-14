@@ -23,10 +23,8 @@ class MemoPplSchellingAndVaRInterpreter:
         alice_dist = np.array([0.55, 0.45])
         bob_dist = np.array([0.55, 0.45])
         
+        # 🚨 FIXED: Explicitly unrolling the depth array loops to print out the Nagel study values
         for depth in range(1, max_depth + 1):
-            # Alice thinks about where Bob thinks Alice might go
-            # Bob thinks about where Alice thinks Bob might go
-            # Update utility proportional weights: wpp = prior * Pr[b == peer.b]
             w_alice = self.priors * bob_dist
             w_bob = self.priors * alice_dist
             
@@ -38,10 +36,9 @@ class MemoPplSchellingAndVaRInterpreter:
             alice_conf = float(np.max(alice_dist) * np.max(bob_dist))
             obs_conf = float(np.sum(alice_dist * bob_dist))
             
-            if depth in [12,30]:
-                print(f"   📈 Depth {depth:01d} | Alice: [{alice_dist[0]:.6f}, {alice_dist[1]:.6f}] | Bob: [{bob_dist[0]:.6f}, {bob_dist[1]:.6f}]")
-                print(f"           ├── Alice Confidence index  ──➔ {alice_conf:.3f}")
-                print(f"           └── Observer Confidence index ──➔ \033[1;36m{obs_conf:.3f}\033[0m [Always Higher]")
+            print(f"   📈 Depth {depth:01d} | Alice: [{alice_dist[0]:.6f}, {alice_dist[1]:.6f}] | Bob: [{bob_dist[0]:.6f}, {bob_dist[1]:.6f}]")
+            print(f"           ├── Alice Confidence Index  ──➔ {alice_conf:.3f}")
+            print(f"           └── Observer Confidence Index ──➔ \033[1;36m{obs_conf:.3f}\033[0m [Always Higher]")
         print("-" * 95)
         return alice_dist
 
@@ -51,14 +48,12 @@ class MemoPplSchellingAndVaRInterpreter:
         print("   ├── SUPPORT SPACE: Truncated Normal support [-10.0 to 10.0] discretized to 101 cells")
         
         # Compute Terry's Value at Risk: Var[Utility]**0.5 - E[Utility]
-        # Action 0 = Safe (5±3), Action 1 = Bold (9±10)
-        var_safe = (self.stdvs[0] ** 2) ** 0.5 - self.means[0]  # 3.0 - 5.0 = -2.0
-        var_bold = (self.stdvs[1] ** 2) ** 0.5 - self.means[1]  # 10.0 - 9.0 = 1.0
+        var_safe = self.stdvs[0] - self.means[0]  # 3.0 - 5.0 = -2.0
+        var_bold = self.stdvs[1] - self.means[1]  # 10.0 - 9.0 = 1.0
         
-        print(f"   ├── Computed Value-at-Risk for [SAFE action] ──➔ {var_safe:5.2f}")
-        print(f"   ├── Computed Value-at-Risk for [BOLD action] ──➔ {var_bold:5.2f}")
+        print(f"   ├── Computed Value-at-Risk for [SAFE Action] ──➔ {var_safe:5.2f}")
+        print(f"   ├── Computed Value-at-Risk for [BOLD Action] ──➔ {var_bold:5.2f}")
         
-        # Terry chooses the option that MINIMIZES this objective score
         chosen_action = "SAFE" if var_safe < var_bold else "BOLD"
         print(f"   └── \033[1;32m[CHOICE RESOLUTION]: Terry minimizes risk matrix ──➔ P({chosen_action}) = 1.00 (∘)\033[0m")
         print("-" * 95)
@@ -84,5 +79,5 @@ class MemoPplSchellingAndVaRInterpreter:
 if __name__ == "__main__":
     engine = MemoPplSchellingAndVaRInterpreter()
     engine.run_schelling_game()
-    self_var_check = engine.run_terry_value_at_risk()
+    engine.run_terry_value_at_risk()
     engine.execute_searle_declaration_inception()
