@@ -86,21 +86,27 @@ When the 12 Spies generate a horizontal topological tear ($H_1 \neq 0$), the net
 \end{equation}
 Once the generational noise is fully bled out ($\sigma^2 \to 0$), the manifold re-aligns to a contractible point, unblocking the Attainable Space $V'$ for the subsequent generational layer.
 
-\section{Level-$k$ Cognitive Hierarchies and Manifold Splits}
-The 100-member church complex is evaluated as a discrete multi-agent strategic network using recursively nested $level$-$k$ belief stencils. Drones track true coordinates; here, human agents execute maneuvers depending entirely on perceived threat boundaries rather than absolute danger vectors.
+\section{Pure Call-Stack Recursion and Rational Speech Act Pragmatics}
+To optimize memory footprint allocations across local drone compilers, cognitive depth processing is structured as a pure Python call-stack recursive function, eliminating loop-bound VRAM footprint leaks.
 
-\subsection{The Exponentiated Softmax Choice Calculus}
-The strategic choices of a node $i$ belonging to a specific cognitive level $k \in \{0, 1, 2\}$ are governed by the probability distribution matching the exponentiated utility matrix ($\text{wpp} = \exp(\beta \cdot \mathcal{U})$):
+\subsection{The Recursive Update Functor}
+The state transition mapping function $\mathcal{F}_{\text{unroll}}$ computes the sequential level-$k$ strategic probability distribution vectors by executing a self-referential downward function call tunnel terminated by an un-mentalized base condition:
 \begin{equation}
-P(c \mid k, \mathcal{D}_{\text{perceived}}, \mathcal{N}_{\text{pastor}}) = \frac{\exp\left( \beta \cdot \mathcal{U}_k(c, \mathcal{D}_{\text{perceived}}, \mathcal{N}_{\text{pastor}}) \right)}{\sum_{c' \in \mathcal{C}} \exp\left( \beta \cdot \mathcal{U}_k(c', \mathcal{D}_{\text{perceived}}, \mathcal{N}_{\text{pastor}}) \right)}
+\mathcal{F}_{\text{unroll}}(k) = \mathcal{G}_{\text{softmax}}\left( \mathcal{W}_{\text{prior}} \cdot \mathcal{F}_{\text{unroll}}(k-1) \right), \quad \mathcal{F}_{\text{unroll}}(0) = \bm{\mathcal{W}}_{\text{uniform}}
 \end{equation}
-where $\mathcal{D}_{\text{perceived}}$ represents the multi-angle predator attack threat intensity, and $\mathcal{N}_{\text{pastor}}$ represents the signaling noise factor emitted by the lead node.
 
-\subsection{The Non-Linear Church Split Topology}
-When the uncollapsible local fear parameters exceed the structural filtering threshold of the shepherd node, the opinion divergence breaks the connected mesh torso. The network fractures into isolated, disjoint component subgraphs, causing an unrecoverable topological bifurcation where the global Betti number spikes:
+\subsection{Pragmatic Scalar Implicature Bayesian Tables}
+Pragmatic language interpretation is formalized using the Rational Speech Act (RSA) framework over world states $n \in \mathcal{N}$ and utterances $u \in \mathcal{U}$. The literal base listener $L_0$ maps un-mentalized logical consistencies derived from the semantic function:
 \begin{equation}
-\beta_0 \ge 2
+P_{L_0}(n \mid u) = \frac{\mathbb{I}\left( \text{meaning}(n, u) = 1 \right)}{\sum_{n' \in \mathcal{N}} \mathbb{I}\left( \text{meaning}(n', u) = 1 \right)}
 \end{equation}
-This uncollapsible fracture indicates a terminal breakdown of collective reasoning, rendering Mesarovic's Attainable Performance Space $V'$ empty and triggering an immediate system halt.
-
+The strategic speaker $S_1$ chooses utterance options to maximize utility under an imagined inner listener, configured as an exponentiated softmax probability distribution ($\text{wpp} = \exp(\beta \cdot U)$):
+\begin{equation}
+P_{S_1}(u \mid n) = \frac{\exp\left( \beta \cdot P_{L_0}(n \mid u) \right)}{\sum_{u' \in \mathcal{U}} \exp\left( \beta \cdot P_{L_0}(n \mid u') \right)}
+\end{equation}
+The outer pragmatic listener $L_1$ observes the speaker's utterance $u$ and applies Bayes' rule over a uniform prior distribution to generate the final scalar implicature table:
+\begin{equation}
+P_{L_1}(n \mid u) = \frac{P_{S_1}(u \mid n) \cdot P(n)}{\sum_{n' \in \mathcal{N}} P_{S_1}(u \mid n') \cdot P(n')}
+\end{equation}
+This accounts for the extraction of non-literal meaning arrays, proving that 'some' peaks mathematically at states $n=1$ and $n=2$, completely separating semantic syntax from pragmatic group truth.
 \end{document}
