@@ -12,7 +12,8 @@ class InstitutionalCoupledSocialGNN(nn.Module):
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x, edge_index, batch=None):
-        h = self.conv1(x, feature_dim=None) if hasattr(self.conv1, 'forward') else self.conv1(x, edge_index)
+        # 🚨 FIXED: Stripped the erroneous feature_dim keyword token to match PyG forward requirements
+        h = self.conv1(x, edge_index)
         h = torch.relu(h)
         h = self.conv2(h, edge_index)
         h = torch.relu(h)
@@ -94,6 +95,5 @@ def execute_institutional_gnn_pass():
     with open(exs_path, "w", encoding="utf-8") as f:
         f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
-# 🚨 FIXED: Trigger signature points precisely to the correct functional name
 if __name__ == "__main__":
     execute_institutional_gnn_pass()
