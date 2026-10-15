@@ -37,19 +37,12 @@ h_i^{l+1} = \text{ReLU}\left( W^l \frac{1}{\sqrt{\text{deg}_i}\sqrt{\text{deg}_j
 \end{equation}
 where $W^l$ represents the trainable layer weight tensor matrix, and $\mathcal{N}_i$ represents the local neighborhood of node $i$.
 
-\subsection{The Alternative Optimization Paradox}
-Isotropic normalization enforces Policy A (Radical Edge-Weight Equalization), stripping away ego biases. Policy B (The Matthew 18 Friction Filter) acts as a localized neighborhood pooling operation that confines high-frequency chatter to local sub-simplices, preventing non-trivial $H_1$ holes. To maintain a contractible manifold ($\beta_1 = 0, \beta_0 = 1$), the global graph collapses via a mean pooling readout node to Christ, the 0-simplex anchor:
+\subsection{The 27-Dimensional Integrated Attribute Matrix}
+To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 27}$. For each node $i$, the vector decomposes into three distinct socio-pragmatic tensor blocks:
 \begin{equation}
-h_{\mathcal{G}} = \frac{1}{|\mathcal{V}|} \sum_{i \in \mathcal{V}} h_i^L
+\bm{x}_i = \left[ \bm{e}_i^{\text{empirical}} \mid \bm{c}_i^{\text{cognitive}} \mid \bm{s}_i^{\text{institutional}} \right]
 \end{equation}
-This alternative optimization function balances the Inverse Centrality Reward (hub leaders expending energy to protect leaf nodes) and drives the node's existential fear parameter to zero ($\theta_i \to 0$).
-
-\subsection{Macro-System Expansion: The National Desert Wandering Orbit}
-When the 12 Spies generate a horizontal topological tear ($H_1 \neq 0$), the network gets trapped inside an uncollapsible horizontal echo chamber. The fault scales across the total national complex of $N=600,000$ nodes, forcing a 40-year looping desert orbit trajectory to extract systemic variance:
-\begin{equation}
-\sigma^2(t) = \sigma^2_0 \cdot \exp(-\gamma t)
-\end{equation}
-Once the generational noise is fully bled out ($\sigma^2 \to 0$), the manifold re-aligns to a contractible point, unblocking the Attainable Space $V'$ for the subsequent generational layer.
+where $\bm{e}_i \in \mathbb{R}^{18}$ encapsulates the Barna loop splits, the 72\% Pew United States Church macro-advection wavelets, and the JAX spatial grid coordinates. The cognitive component $\bm{c}_i \in \mathbb{R}^6$ packs the compiled LISP bar preferences and the 3-dimensional Rational Speech Act (RSA) scalar implicature distributions. The institutional component $\bm{s}_i \in \mathbb{R}^3$ isolates the zero-uncertainty Searlean speech-act flags ($X$ counts as $Y$ in $C$), allowing the network to collapse giant graph topologies down to a unified virtual 0-simplex token ready for decision tree lookup routing.
 
 \section{Three-Tier Nested S-Expression Grammars and Searlean Realities}
 We formalize the cross-compilation of continuous pathfinding metrics, recursive PPL choice distributions, and institutional status functions within a unified three-tier LISP S-Expression syntax grammar.
@@ -67,6 +60,6 @@ A Speech-Act declaration explicitly bypasses raw sensory ambiguity (\texttt{obse
 \begin{equation}
 \mathcal{D}_{\text{inception}}\Big( \langle C, \, X, \, Y \rangle \Big) \implies \left( X \text{ counts as } Y \text{ in } C \right)
 \end{equation}
-When a misplaced branch or subject error is triggered, the DSL agent recognizes the discrepancy and back-propagates structural look-up repairs, grafting a corrected zero-uncertainty exemplar node into the living document forest.
+When a misplaced branch or subject error is triggered, the DSL agent recognizes the discrepancy and back-propagates structural look-up repairs, grafting a corrected zero-uncertainty exemplar node into the living document forest branch.
 
 \end{document}

@@ -52,19 +52,44 @@ class EnhancedForestCoordinator:
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
 
+    def build_custom_tree30_with_27dim_schema(self):
+        """🔨 COMPILING TREE #30 TO NATIVELY ROUTE ALL 27-DIMENSIONAL INTEGRATED FEATURES"""
+        root = EnhancedWorldLevelNode(split_feature="gnn_feature_dim", split_value="27")
+        
+        # --- TRUE BRANCH: Complete Socio-Spatial Inception Vector ---
+        root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
+        root.tb.tb = EnhancedWorldLevelNode(
+            is_leaf=True,
+            classification="system_stable_maintain_policy",
+            context="Institutional manifold verified; 27-dim GNN 0-simplex virtual features loaded cleanly",
+            reward_metric="Speech-act tokens (Assertive, Directive, Commissive, Expressive, Declaration) validated"
+        )
+        root.tb.fb = EnhancedWorldLevelNode(
+            is_leaf=True,
+            classification="activate_delayed_recovery_routing",
+            context="Topological tracking loop divergence detected; executing back-propagation tree repair",
+            reward_metric="Graft corrected zero-uncertainty exemplar node into the living document forest branch"
+        )
+        
+        # --- FALSE BRANCH: Mismatched Feature Inputs ---
+        root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid tensor shape signature detected; aborting token routing loop")
+        
+        with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
+            pickle.dump(root, f)
+
     def run_coordination_pipeline(self):
         print("=" * 95)
         print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND TOPOLOGICAL DISPATCH CHANNELS")
         print("=" * 95)
         
         self.build_custom_tree12_with_declaration_schema()
+        self.build_custom_tree30_with_27dim_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
         
-        # 🚨 REPAIRED: Clean looping sequence targeting explicit model ranges
-        for i in [12,30]:
-            file_name = "level12_science_invariants.pkl"
+        for i in [12, 30]:
+            file_name = "level12_science_invariants.pkl" if i == 12 else "level30_subsystem_dispatcher.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
                 tree_root = pickle.load(mf)
