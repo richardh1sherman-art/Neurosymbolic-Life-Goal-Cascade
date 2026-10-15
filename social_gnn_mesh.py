@@ -12,7 +12,7 @@ class InstitutionalCoupledSocialGNN(nn.Module):
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x, edge_index, batch=None):
-        h = self.conv1(x, edge_index)
+        h = self.conv1(x, feature_dim=None) if hasattr(self.conv1, 'forward') else self.conv1(x, edge_index)
         h = torch.relu(h)
         h = self.conv2(h, edge_index)
         h = torch.relu(h)
@@ -50,8 +50,7 @@ def execute_institutional_gnn_pass():
     compiled_lisp_vector = torch.tensor([0.8805, 0.1192, 0.0003]).repeat(num_nodes, 1)
     compiled_rsa_vector = torch.tensor([0.2164, 0.3145, 0.2210]).repeat(num_nodes, 1)
     
-    # 📜 4. NEW: Ingest newly parsed Grammar 3 Searle institutional status vectors [X, Y, C]
-    # Maps the speech-act inception variables cleanly to zero-uncertainty structural bounds
+    # 📜 4. Ingest parsed Grammar 3 Searle institutional status vectors [X, Y, C]
     compiled_searle_vector = torch.tensor([1.0000, 1.0000, 0.0000]).repeat(num_nodes, 1)
     
     # Concatenate all domains into a single 27-dimensional unified node tensor matrix
@@ -95,5 +94,6 @@ def execute_institutional_gnn_pass():
     with open(exs_path, "w", encoding="utf-8") as f:
         f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
+# 🚨 FIXED: Trigger signature points precisely to the correct functional name
 if __name__ == "__main__":
-    execute_pragmatic_gnn_pass()
+    execute_institutional_gnn_pass()
