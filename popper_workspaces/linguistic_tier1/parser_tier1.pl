@@ -1,17 +1,20 @@
 %% =================================================================
-%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Recursive Scalar Implicature Pragmatics
+%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Universal Matrix Supporting Blahut-Arimoto Empowerment Declarations
 %% =================================================================
 
-:- dynamic rsa_pragmatic_primitive/3.
+:- dynamic speech_act_declaration/4.
+:- dynamic channel_empowerment/3.
 
-%% --- 📜 BAYESIAN PRAGMATIC CONSTANTS ---
-% Syntax: rsa_pragmatic_primitive(ModelLayer, ConstructToken, OperationalRole)
-rsa_pragmatic_primitive(scalar_implicature, given_alias, choice_uniform_prior).
-rsa_pragmatic_primitive(scalar_implicature, imagine_block, hypothetical_simulation).
-rsa_pragmatic_primitive(scalar_implicature, recursive_stack, loop_free_thinking_depth).
+%% --- 📜 SEARLE SPEECH-ACT STATUS FUNCTIONS ---
+% Syntax: speech_act_declaration(Entity_X, Status_Y, Context_C, Mode)
+speech_act_declaration(matthias, disciple, church, collective_ontological_inception).
+
+%% --- 📊 INFORMATION-THEORETIC CHANNELS ---
+% Syntax: channel_empowerment(CandidateID, ChannelCapacity, StrategyType)
+channel_empowerment(barsabbas, low_capacity, rigid_specialist).
+channel_empowerment(matthias, high_capacity, adaptable_strategist).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(given_alias, rsa_grammar, non_agency_prior).
-part_of(imagine_block, rsa_grammar, speaker_utility_simulation).
-part_of(recursive_stack, python_virtual_machine, stack_unrolling).
+part_of(matthias, interlocking_forest, level30_subsystem_dispatcher).
+part_of(channel_empowerment, interlocking_forest, level12_science_invariants).
