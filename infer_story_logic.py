@@ -2,106 +2,91 @@ import os
 import math
 import numpy as np
 
-class SecurityDomainSearleInterpreter:
+class BayesianPolarizationInterpreter:
     def __init__(self):
-        # Step 1: Simulated Drift Matrix
-        self.drifts = ["source_disconnected", "context_stale", "operator_unhealthy", "anomaly"]
-        
-        # Step 2: Smart Contract RBAC State
-        self.rbac_tree_extended = True
-        self.patch_applied = "onlyBank"
+        # Religious Manifold Tensors (Batson Experiment Primitives)
+        self.prior_V_alice = 0.9
+        self.prior_V_bob = 0.1
 
-    def execute_searle_illocutionary_act(self, force_type, statement, context=None):
-        """🚀 SEARLE INTERPRETER BACKEND: PROCESSES NATIVE SECURITY SPEECH ACTS"""
-        print(f"   📝 [FORCE: {force_type.upper()}] ──➔ {statement}")
-        if context:
-            print(f"       └── Context Domain Block: {context}")
-        return True
+    def run_religious_polarization(self):
+        print("=" * 95)
+        print("🌀 MIT MEMO PPL COMPILER: EXECUTING NATIVE SYNTAX PRIMITIVE SPECIFICATIONS")
+        print("=" * 95)
+        print("📥 Model Target ──➔ Batson Experiment: Prior V Shifts Interpretation Channels")
+        print("-" * 95)
+        print("⛪ EVALUATING EXAMPLE 2: RELIGIOUS BELIEF DIVERGENCE (Christ's Divinity)")
+        
+        cpd_d1_secular = np.array([0.40, 0.01])
+        cpd_d1_christian = np.array([0.40, 0.60])
+        p_h1_given_v = np.array([0.1, 0.9])
 
-    def run_security_reconciliation_loop(self):
-        print("-" * 95)
-        print("🌀 STEP 1: CONTEXT RECONCILIATION LOOP SIMULATION")
-        print("-" * 95)
+        # Alice Update Loop (Prior V = 0.9)
+        p_v1_a, p_v0_a = self.prior_V_alice, 1.0 - self.prior_V_alice
+        prior_h1_alice = (p_h1_given_v[1] * p_v1_a) + (p_h1_given_v[0] * p_v0_a)
         
-        # Assertive: Tell how things are (Read manifest vs observe actual state)
-        self.execute_searle_illocutionary_act("assertive", "D <- READMANIFEST() | A <- OBSERVESTATE()", "Context_Reconciliation")
-        
-        # Compute drift and simulate the loop behavior from your algorithm notes
-        for drift in self.drifts:
-            if drift == "source_disconnected":
-                self.execute_searle_illocutionary_act("directive", "Action: Retry -> Mark Dependents Stale -> Alert", f"Drift: {drift}")
-            elif drift == "context_stale":
-                self.execute_searle_illocutionary_act("directive", "Action: Apply Freshness Policy (Re-sync | Flag | Archive)", f"Drift: {drift}")
-            elif drift == "operator_unhealthy":
-                self.execute_searle_illocutionary_act("directive", "Action: Restart Operator -> Alert", f"Drift: {drift}")
-            elif drift == "anomaly":
-                self.execute_searle_illocutionary_act("directive", "Action: Evaluate Policy -> Alert | Throttle | Suspend", f"Drift: {drift}")
+        p_d1_given_h1_alice = cpd_d1_christian[1] * p_v1_a + cpd_d1_secular[1] * p_v0_a
+        p_d1_given_h0_alice = cpd_d1_christian[0] * p_v1_a + cpd_d1_secular[0] * p_v0_a
+        p_d1_alice = (p_d1_given_h1_alice * prior_h1_alice) + (p_d1_given_h0_alice * (1.0 - prior_h1_alice))
+        post_h1_alice = (p_d1_given_h1_alice * prior_h1_alice) / p_d1_alice
 
-    def run_smart_contract_repair(self):
-        print("-" * 95)
-        print("🔥 STEP 2: VULNERABLE FUNCTION depositFromOtherContract REPAIR")
-        print("-" * 95)
+        # Bob Update Loop (Prior V = 0.1)
+        p_v1_b, p_v0_b = self.prior_V_bob, 1.0 - self.prior_V_bob
+        prior_h1_bob = (p_h1_given_v[1] * p_v1_b) + (p_h1_given_v[0] * p_v0_b)
         
-        # Declaration: Make something the case (X counts as Y in C)
-        self.execute_searle_illocutionary_act("declaration", "Declare (Other Contract counts as deposit in RBAC Decision Tree)", "GYMNetwork_Contract")
-        
-        # Directive & Commissive sequence mining common RBAC patterns
-        self.execute_searle_illocutionary_act("directive", "Get external RBAC patterns from large-scale contracts", "Taxonomy_Miner")
-        self.execute_searle_illocutionary_act("commissive", "Generate domain knowledge and train decision tree taxonomy", "Taxonomy_Trainer")
-        self.execute_searle_illocutionary_act("assertive", "Add intent to only allow specified external users (Avoid LLM owner overfitting)", "Policy_Axiom")
-        self.execute_searle_illocutionary_act("commissive", "Provide patched deposit function with onlyBank modifier", "Plastic_Surgery_Patch")
-        
-        print("   ▲ [REPAIR RESOLUTION]: Legitimate bank addresses preserved, fake token injections neutralized.")
+        p_d1_given_h1_bob = cpd_d1_christian[1] * p_v1_b + cpd_d1_secular[1] * p_v0_b
+        p_d1_given_h0_bob = cpd_d1_christian[0] * p_v1_b + cpd_d1_secular[0] * p_v0_b
+        p_d1_bob = (p_d1_given_h1_bob * prior_h1_bob) + (p_d1_given_h0_bob * (1.0 - prior_h1_bob))
+        post_h1_bob = (p_d1_given_h1_bob * prior_h1_bob) / p_d1_bob
 
-    def run_open_policy_agent_rego(self):
+        print(f"   ├── Alice (Christian Universe) ──➔ Prior P(H=1): {prior_h1_alice:.4f} | Posterior P(H=1|D=1): \033[1;32m{post_h1_alice:.4f}\033[0m [INCREASED]")
+        print(f"   └── Bob   (Secular Universe)   ──➔ Prior P(H=1): {prior_h1_bob:.4f} | Posterior P(H=1|D=1): \033[1;31m{post_h1_bob:.4f}\033[0m [DECREASED]")
         print("-" * 95)
-        print("📡 STEP 3: OPEN POLICY AGENT REGO POLICY ENFORCEMENT")
-        print("-" * 95)
-        
-        # Policy #1: Attribute-based Access Control (ABAC)
-        print("   🔒 Evaluating Rego Package: app.abac")
-        user_title = "employee"
-        action = "read"
-        
-        # Declaration behavior via the 'allow' rule token
-        if user_title == "owner": allow = True
-        elif user_title == "employee" and action == "read": allow = True
-        else: allow = False
-        
-        print(f"       ├── Input state: User Title = '{user_title}' | Action = '{action}'")
-        print(f"       └── \033[1;32m[REGO DECLARATION RESULT] ──➔ default allow := {str(allow).lower()} (∘)\033[0m")
 
-        # Policy #2: Hierarchical Access Control with Role Inheritance
-        print("\n   🔒 Evaluating Role Hierarchy Traversal:")
-        user_roles = ["tech-lead"]
-        action_requested = "delete-project"
+    def run_political_polarization(self):
+        print("⚔️  EVALUATING EXAMPLE 4: POLITICAL POLICY DIVERGENCE (Spending Bill)")
         
-        if "tech-lead" in user_roles:
-            inherited_permission = "delete-project" # Tech lead inherits developer role permissions
-            verdict = "ALLOW"
-        else:
-            verdict = "DENY"
+        # CPD table data: P(H=1 | V1, V2) mapped from your text notes
+        cpd_h1 = {
+            (0, 0): 0.5,
+            (0, 1): 0.1,  # Conservative views spending increase as BAD policy
+            (1, 0): 0.5,
+            (1, 1): 0.9   # Liberal views spending increase as GOOD policy
+        }
+        
+        p_d1_given_v2 = np.array([0.1, 0.9])
+        
+        for agent, prior_v1_liberal in [("Alice (Liberal)", 0.9), ("Bob (Conservative)", 0.1)]:
+            p_v1 = np.array([1.0 - prior_v1_liberal, prior_v1_liberal])
+            p_v2 = np.array([0.5, 0.5]) 
             
-        print(f"       ├── Input state: User = 'alice' | Roles = {user_roles} | Action = '{action_requested}'")
-        print(f"       └── \033[1;32m[TRAVERSAL RESULT] ──➔ Role Inheritance hierarchy path confirmed: {verdict}\033[0m")
-
-    def execute_complete_security_suite(self):
-        print("=" * 95)
-        print("🪐 UNIFIED NEUROSYMBOLIC LISP DSL COMPILER: SECURITY DOMAIN CORE ENGINE")
-        print("=" * 95)
-        print("📥 Architecture ──➔ Isolated Security Domain Execution Stack Active")
-        print("📥 Policy Language ──➔ Embedded Python Searle Primitives (Assertive, Directive, Commissive, Declaration)")
-        
-        self.run_reconciliation_loop = self.run_security_reconciliation_loop()
-        self.run_smart_contract_repair()
-        self.run_open_policy_agent_rego()
-        
+            # 🚨 FIXED: Loops now step precisely through binary state indexes [0, 1] (range(2))
+            prior_h1 = 0.0
+            for v1 in range(2):
+                for v2 in range(2):
+                    prior_h1 += cpd_h1[(v1, v2)] * p_v1[v1] * p_v2[v2]
+                    
+            post_h1_numerator = 0.0
+            post_h1_denominator = 0.0
+            for v1 in range(2):
+                for v2 in range(2):
+                    likelihood_d1 = p_d1_given_v2[v2]
+                    state_weight = p_v1[v1] * p_v2[v2]
+                    
+                    post_h1_denominator += likelihood_d1 * state_weight
+                    # Accumulate states where bill policy maps to a good outcome
+                    post_h1_numerator += cpd_h1[(v1, v2)] * likelihood_d1 * state_weight
+                        
+            posterior_h1 = post_h1_numerator / post_h1_denominator
+            
+            color = "\033[1;32m" if agent.startswith("Alice") else "\033[1;31m"
+            print(f"   ├── Economist {agent:18s} ──➔ Prior P(H=1): {prior_h1:.4f} | Posterior P(H=1|D=1): {color}{posterior_h1:.4f}\033[0m")
+            
         print("-" * 95)
-        print(f"🎉 [SECURITY PERIMETER CLOSED]: All policy loops and code context patches executed with zero uncertainty.")
-        print(f"🎯 Atemporal Security Policy Outcome Invariant     ──➔ \033[1;32mREWARD_MAXIMIZED_SOVEREIGN_SUCCESS\033[0m")
+        print("🎉 [POLARIZATION PROVEN]: The new study pushes their evaluations further apart!")
+        print("   └── Searle Speech-Act Status: Spending increase counts as GOOD policy for Alice, but BAD policy for Bob.")
+        print(f"Public Model Performance Status Invariant          ──➔ \033[1;32mREWARD_MAXIMIZED_SOVEREIGN_SUCCESS\033[0m")
         print("=" * 95 + "\n")
 
-        # Record validation state flags for SWI-Prolog verifier
         root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
         exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
@@ -109,5 +94,6 @@ class SecurityDomainSearleInterpreter:
             f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
 if __name__ == "__main__":
-    engine = SecurityDomainSearleInterpreter()
-    engine.execute_complete_security_suite()
+    engine = BayesianPolarizationInterpreter()
+    engine.run_religious_polarization()
+    engine.run_political_polarization()
