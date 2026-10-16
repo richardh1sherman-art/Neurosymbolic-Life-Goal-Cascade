@@ -27,21 +27,28 @@ To inject continuous meaning and speech-act context into the message-passing con
 \end{equation}
 where $\bm{e}_i \in \mathbb{R}^{18}$ encapsulates the Barna loop splits, the 72\% Pew United States Church macro-advection wavelets, and the JAX spatial grid coordinates. The cognitive component $\bm{c}_i \in \mathbb{R}^6$ packs the compiled LISP bar preferences and the 3-dimensional Rational Speech Act (RSA) scalar implicature distributions. The institutional component $\bm{s}_i \in \mathbb{R}^3$ isolates the zero-uncertainty Searlean speech-act flags ($X$ counts as $Y$ in $C$), allowing the network to collapse giant graph topologies down to a unified virtual 0-simplex token ready for decision tree lookup routing.
 
-\section{Bayesian Belief Polarization and Worldview Channels}
-We formalize the divergence profiles of Example 2 (Religious Belief) and Example 4 (Political Policy) as a normative Bayesian update process operating across decoupled background knowledge tensors.
+\section{Time-Bounded Deontic Logic and Legal Contract Invariants}
+We formalize commercial billing compliance as a temporal trajectory tracking process within a bounded legal lattice, where obligations switch from voluntary commitments to enforced penalties as a function of discrete time steps $t$.
 
-\subsection{The Religious Belief Update Formulation}
-Let $H \in \{0, 1\}$ be the divinity hypothesis space, $V \in \{0, 1\}$ be the background universe context (Secular vs. Christian), and $D \in \{0, 1\}$ represent the observed data vector (Persecution). The prior probability of divinity is explicitly conditioned on the worldview parameter: $P(H \mid V)$. The final updated posterior distribution $P(H=1 \mid D=1)$ is computed via:
+\subsection{The Temporal Utility Decay Function}
+Let $\mathcal{C}_{\text{bill}}$ be the brute invoice cost, $\mathcal{P}_{\text{base}}$ be the initial late penalty modifier, and $t_{\text{deadline}}$ represent the explicit legal temporal boundary. The agent's choice space maps to $\mathcal{A} \in \{\text{Pay}, \text{Evade}\}$. The utility of compliance remains constant, while the utility of evasion scales non-linearly post-deadline via a directional advection step:
 \begin{equation}
-P(H=1 \mid D=1) = \frac{\sum_{v \in \{0,1\}} P(D=1 \mid H=1, v) P(H=1 \mid v) P(v)}{\sum_{h \in \{0,1\}} \sum_{v \in \{0,1\}} P(D=1 \mid h, v) P(h \mid v) P(v)}
+\mathcal{U}(a = \text{Pay}, t) = -\mathcal{C}_{\text{bill}}
 \end{equation}
-Because Alice assigns $P(V=1) = 0.9$ and Bob assigns $P(V=1) = 0.1$, the identical observation vector $D=1$ updates Alice's belief upward to $0.8604$ while causing Bob's posterior to experience a downward advection trend, demonstrating absolute cognitive polarization under perfect rationality.
+\begin{equation}
+\mathcal{U}(a = \text{Evade}, t) = 
+\begin{cases} 
+0, & \text{if } t \le t_{\text{deadline}} \\
+-\mathcal{P}_{\text{base}} \cdot \gamma^{(t - t_{\text{deadline}})}, & \text{if } t > t_{\text{deadline}}
+\end{cases}
+\end{equation}
+where $\gamma > 1$ represents the compounding interest escalation parameter.
 
-\subsection{The Political Policy Update Formulation}
-Let $H \in \{0, 1\}$ be the policy evaluation space (Bad vs. Good), $V_1 \in \{0, 1\}$ represent the agent's background economic philosophy (Conservative vs. Liberal), and $V_2 \in \{0, 1\}$ represent the bill's spending outcome. The independent study output matches $D \in \{0, 1\}$. Evaluated over uniform priors for $V_2$, the strategic posterior joint matrix unrolls via:
+\subsection{Softmax Choice Vector Convergence}
+The probability distribution governing contract compliance is compiled via the exponentiated softmax calculus ($wpp = \exp(\beta \cdot \mathcal{U})$):
 \begin{equation}
-P(H=1 \mid D=1) = \frac{\sum_{v_1} \sum_{v_2} P(H=1 \mid v_1, v_2) P(D=1 \mid v_2) P(v_1) P(v_2)}{\sum_{h} \sum_{v_1} \sum_{v_2} P(h \mid v_1, v_2) P(D=1 \mid v_2) P(v_1) P(v_2)}
+P(a = \text{Pay} \mid t) = \frac{\exp\left( \beta \cdot \mathcal{U}(\text{Pay}, t) \right)}{\exp\left( \beta \cdot \mathcal{U}(\text{Pay}, t) \right) + \exp\left( \beta \cdot \mathcal{U}(\text{Evade}, t) \right)}
 \end{equation}
-Because Alice attaches a $0.90$ prior to $V_1=1$, her belief surges from $0.6600$ up to $0.7880$ upon receiving an incriminating spending signal ($D=1$). Bob's prior maps inversely, driving his posterior down to $0.2120$. This provides the exact mathematical proof that a single study dataset expands belief variance across polarized network clusters.
+When $t > t_{\text{deadline}}$, the non-linear penalty block forces an immediate collapse of the choice matrix, driving $\lim_{t \to \infty} P(a = \text{Pay} \mid t) = 1.0000$. This mathematically establishes the transition from a Commissive intent to a Directive-enforced institutional reality, unblocking Mesarovic's Attainable Space $V'$ for automated legal compliance auditing.
 
 \end{document}
