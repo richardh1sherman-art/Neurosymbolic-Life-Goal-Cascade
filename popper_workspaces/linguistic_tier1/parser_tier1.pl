@@ -1,14 +1,10 @@
 %% =================================================================
 %% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Supporting Train Ticket Deontic Obligations
+%% Universal Matrix Tracking Temporal Deontic Contract Limits
 %% =================================================================
 
-:- dynamic deontic_obligation/4.
+:- dynamic temporal_deontic_boundary/4.
 
-%% --- 🎫 TRANSIT CONTRACT OPERATORS ---
-% Syntax: deontic_obligation(Context_C, Action_X, DeonticStatus_Y, EnforcementType)
-deontic_obligation(transit_system_context, buy_ticket, commissive_permission, voluntary_contract).
-deontic_obligation(transit_system_context, bypass_fare, directive_prohibition, penalty_infraction).
-
-%% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(deontic_obligation, interlocking_forest, level30_subsystem_dispatcher).
+%% --- ⏳ LEGAL CONTRACT TIMELINE BOUNDS ---
+% Syntax: temporal_deontic_boundary(ContractID, TargetAction, DeadlineTime, InfractionPenalty)
+temporal_deontic_boundary(legal_invoice_01, remit_payment, step_30, severe_interest_escalation).

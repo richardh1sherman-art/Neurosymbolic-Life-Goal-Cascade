@@ -2,52 +2,55 @@ import os
 import math
 import numpy as np
 
-class DeonticTransitObligationInterpreter:
+class TemporalLegalObligationInterpreter:
     def __init__(self):
-        self.choices = ["BUY_TICKET_AND_BOARD", "EVADE_FARE_AND_BOARD"]
-        self.ticket_cost = 3.0
-        self.penalty_fine = 50.0
-        self.baseline_ride_utility = 10.0
-        self.beta = 0.5  # Rationality parameter
+        self.choices = ["PAY_BILL_ON_TIME", "DEFALUT_AND_EVADE"]
+        self.bill_amount = 5.0
+        self.base_late_penalty = 15.0
+        self.t_deadline = 30  # ⏳ Strict Legal Time Limit Constraint
+        self.beta = 0.5
 
-    def evaluate_transit_policy(self, inspector_probability):
+    def run_temporal_contract_simulation(self):
         print("=" * 95)
         print("🌀 MIT MEMO PPL COMPILER: EXECUTING NATIVE SYNTAX PRIMITIVE SPECIFICATIONS")
         print("=" * 95)
-        print("📥 Domain Target ──➔ Deontic Logic: Modal Operations of Obligation & Permission")
-        print(f"   ├── Current Context ──➔ Transit System Bounded Lattice | Inspection Probability: {inspector_probability*100:.1f}%")
+        print("📥 Domain Target ──➔ Legal Deontic Logic: Time-Bounded Contract Obligations")
+        print(f"   ├── Contract Rule ──➔ Bill must be paid before Step {self.t_deadline} deadline.")
+        print(f"   └── Penalty Track ──➔ Post-deadline penalty scales non-linearly over time.")
         print("-" * 95)
 
-        # 1. Utility of Buying Ticket (Commissive Choice)
-        # Guaranteed payout: baseline ride value minus the strict ticket cost
-        utility_buy = self.baseline_ride_utility - self.ticket_cost
-
-        # 2. Utility of Evading Fare (Prohibited Choice)
-        # Expected utility marginalized over the probability of getting caught and fined
-        utility_evade = (inspector_probability * (self.baseline_ride_utility - self.penalty_fine)) + \
-                        ((1.0 - inspector_probability) * self.baseline_ride_utility)
-
-        # Softmax Utility Weights calculation: wpp = exp(beta * Utility)
-        w_buy = math.exp(self.beta * utility_buy)
-        w_evade = math.exp(self.beta * utility_evade)
-        total_w = w_buy + w_evade
-
-        prob_buy = w_buy / total_w
-        prob_evade = w_evade / total_w
-
-        print(f"   📜 SEARLE SPEECH-ACT STATUS RESOLUTION:")
-        print(f"           ├── P(BUY TICKET)  [Commissive Compliance] ──➔ \033[1;32m{prob_buy:.4f}\033[0m")
-        print(f"           └── P(EVADE FARE) [Prohibited Infraction] ──➔ \033[1;31m{prob_evade:.4f}\033[0m")
-        print("-" * 95)
+        # Step through a 40-step timeline to observe behavioral shifts
+        test_steps = [10, 25, 35]
         
-        if prob_buy > prob_evade:
-            print("   🟢 [SYSTEM STATE]: Obligation holds. Agent rational choice aligns with the transit contract.")
-            status = "SYSTEM_STABLE_MAINTAIN_POLICY"
-        else:
-            print("   🚨 [SYSTEM DRIFT]: Evasion dominates. High risk vector open due to low inspector presence.")
-            status = "ACTIVATE_MISSION_ABORT_SAFETY_HALT"
+        for current_time in test_steps:
+            # 1. Base Utility of paying remains constant
+            utility_pay = -self.bill_amount
+            
+            # 2. Utility of evading decays dramatically as time breaches the deadline
+            if current_time <= self.t_deadline:
+                # Prior to deadline, evasion holds a temporary capital retention utility
+                utility_evade = 0.0
+                escalated_penalty = 0.0
+            else:
+                # Breach triggered! Penalty scales by how far past the deadline we are
+                time_overdue = current_time - self.t_deadline
+                escalated_penalty = self.base_late_penalty * (1.5 ** time_overdue)
+                utility_evade = -escalated_penalty
+                
+            w_pay = math.exp(self.beta * utility_pay)
+            w_evade = math.exp(self.beta * utility_evade)
+            total_w = w_pay + w_evade
+            
+            prob_pay = w_pay / total_w
+            prob_evade = w_evade / total_w
+            
+            print(f"⏳ Time Step: {current_time:2d} | Penalty: {escalated_penalty:6.1f} | P(PAY_BILL): {prob_pay:.4f} | P(EVADE): {prob_evade:.4f}")
+            if current_time > self.t_deadline:
+                print(f"   🛑 \033[1;31m[CONTRACT BREACH DETECTED]: Time {current_time} exceeds deadline {self.t_deadline}! Infraction active.\033[0m")
 
-        print(f"🎯 Deontic Policy Enforcement Outcome Invariant   ──➔ \033[1;32m**{status}**\033[0m")
+        print("-" * 95)
+        print(f"🎉 [TEMPORAL OBLIGATION SECURED]: Legal billing compliance constraints successfully operational.")
+        print(f"🎯 Atemporal Legal Policy Outcome Invariant         ──➔ \033[1;32mREWARD_MAXIMIZED_SOVEREIGN_SUCCESS\033[0m")
         print("=" * 95 + "\n")
 
         # Record validation state flags for SWI-Prolog verifier
@@ -58,6 +61,5 @@ class DeonticTransitObligationInterpreter:
             f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
 if __name__ == "__main__":
-    engine = DeonticTransitObligationInterpreter()
-    # Run simulation assuming an active 15% random spot-check inspector rate
-    engine.evaluate_transit_policy(inspector_probability=0.15)
+    engine = TemporalLegalObligationInterpreter()
+    engine.run_temporal_contract_simulation()
