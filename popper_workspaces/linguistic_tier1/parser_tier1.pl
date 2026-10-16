@@ -1,17 +1,23 @@
 %% =================================================================
-%% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Universal Matrix Mapping MIT DSL Syntax Primitives to Tensor Arrays
+%% 🪐 TIER 0 & TIER 1/3 INTERLOCKING FORESTS OF DECISION TREES
+%% Security Domain Extension: Searlean Policy and Drift Axioms
 %% =================================================================
 
-:- dynamic mit_dsl_primitive/3.
+:- dynamic security_drift_policy/3.
+:- dynamic contract_status_function/4.
 
-%% --- 🧠 ABRIDGED GRAMMAR MAPPINGS ---
-% Syntax: mit_dsl_primitive(SyntaxToken, SemanticBehavior, LowLevelImplementation)
-mit_dsl_primitive(chooses, sampling_softmax, exponentiated_utility_vector).
-mit_dsl_primitive(observes, conditioning_gate, indicator_matrix_multiplication).
-mit_dsl_primitive(thinks, recursive_reasoning, nested_hidden_state_simulation).
-mit_dsl_primitive(knows, variable_sharing, zero_uncertainty_index_lookup).
+%% --- 📊 STEP 1: CONTEXT RECONCILIATION LOOPS ---
+% Syntax: security_drift_policy(DriftType, CorrectiveAction, SeverityLevel)
+security_drift_policy(source_disconnected, mark_stale_and_alert, critical).
+security_drift_policy(context_stale, apply_freshness_resync, moderate).
+security_drift_policy(operator_unhealthy, restart_operator_alert, critical).
+security_drift_policy(anomaly, evaluate_throttle_suspend, high).
+
+%% --- 📜 STEP 2: SMART CONTRACT RBAC TAXONOMY ---
+% Syntax: contract_status_function(Context_C, Entity_X, Status_Y, Enforcement)
+contract_status_function(rbac_decision_tree, other_contract, deposit, only_bank_modifier).
+contract_status_function(security_perimeter, authenticated_user, allow_resource, rego_abac_rule).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(chooses, mit_memo_grammar, core_sampling).
-part_of(thinks, mit_memo_grammar, social_mentalizing).
+part_of(security_drift_policy, interlocking_forest, level12_science_invariants).
+part_of(contract_status_function, interlocking_forest, level30_subsystem_dispatcher).
