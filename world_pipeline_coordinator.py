@@ -17,40 +17,62 @@ class EnhancedForestCoordinator:
         self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
         os.makedirs(self.model_dir, exist_ok=True)
 
-    def build_custom_tree12_with_security_schema(self):
-        """🔨 COMPILING TREE #12 TO NATIVELY RECOGNIZE THE SECURITY PERIMETER CONTEXT"""
+    def build_custom_tree12_with_declaration_schema(self):
         root = EnhancedWorldLevelNode(split_feature="wavelet", split_value="active")
         root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
         
-        # --- LEFT BRANCH: Stable Connected Perimeter ---
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Security perimeter manifold contractible [b0=1, b1=0]; OPA Rego allow conditions true",
-            reward_metric="Context reconciliation loops continuously resolve drift delta; GYMNetwork smart contract secure via onlyBank"
+            context="Social manifold contractible [b0=1, b1=0]; Schelling game depth recursion active",
+            reward_metric="Declaration operator instantiates status function exemplar; observe logs prior(.55, .45)"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_delayed_recovery_routing",
-            context="Source disconnected drift anomaly detected; caching packet token for session propagation",
-            reward_metric="Route packet word along the self-similar group generator sequence back to core mesh"
+            context="Link occlusion detected behind non-convex barrier matrix M_wall; invoking store-and-forward",
+            reward_metric="Route packet word along the self-similar group generator sequence back to mesh torso"
         )
         
-        # --- RIGHT BRANCH: Policy Violations & Exploits ---
         root.fb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="topological_fracture")
         root.fb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="trigger_graph_minor_contraction",
-            context="Betti 0 spikes; unverified external contract invokes depositFromOtherContract",
-            reward_metric="Execute immediate combinatorial contraction to isolate attacker address and minimize two million USD asset loss"
+            context="Betti 0 spikes; network fractures into isolated geometric island subgraphs",
+            reward_metric="Execute immediate combinatorial contraction to restore global algebraic connectivity"
         )
         root.fb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_mission_abort_safety_halt",
-            context="Hierarchical RBAC role explosion or critical drift threshold breach; policy logic failure",
-            reward_metric="Backward reachability checks confirm Attainable Security Performance Space V' is completely EMPTY"
+            context="Terry Value-at-Risk constraints violated under extreme environmental shock; tracking loop failure",
+            reward_metric="Backward reachability tube checks confirm Attainable Performance Space V' is completely EMPTY"
         )
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
+            pickle.dump(root, f)
+
+    def build_custom_tree30_with_27dim_schema(self):
+        """🔨 COMPILING TREE #30 TO NATIVELY ROUTE ALL 27-DIMENSIONAL INTEGRATED FEATURES"""
+        root = EnhancedWorldLevelNode(split_feature="gnn_feature_dim", split_value="27")
+        
+        # --- TRUE BRANCH: Complete Socio-Spatial Inception Vector ---
+        root.tb = EnhancedWorldLevelNode(split_feature="connectivity", split_value="connected_mesh")
+        root.tb.tb = EnhancedWorldLevelNode(
+            is_leaf=True,
+            classification="system_stable_maintain_policy",
+            context="Institutional manifold verified; 27-dim GNN 0-simplex virtual features loaded cleanly",
+            reward_metric="Speech-act tokens (Assertive, Directive, Commissive, Expressive, Declaration) validated"
+        )
+        root.tb.fb = EnhancedWorldLevelNode(
+            is_leaf=True,
+            classification="activate_delayed_recovery_routing",
+            context="Topological tracking loop divergence detected; executing back-propagation tree repair",
+            reward_metric="Graft corrected zero-uncertainty exemplar node into the living document forest branch"
+        )
+        
+        # --- FALSE BRANCH: Mismatched Feature Inputs ---
+        root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid tensor shape signature detected; aborting token routing loop")
+        
+        with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
             pickle.dump(root, f)
 
     def run_coordination_pipeline(self):
@@ -58,12 +80,13 @@ class EnhancedForestCoordinator:
         print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND TOPOLOGICAL DISPATCH CHANNELS")
         print("=" * 95)
         
-        self.build_custom_tree12_with_security_schema()
+        self.build_custom_tree12_with_declaration_schema()
+        self.build_custom_tree30_with_27dim_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
         for i in [12,30]:
-            file_name = "level12_science_invariants.pkl"
+            file_name = "level12_science_invariants.pkl" if i == 12 else "level30_subsystem_dispatcher.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
                 tree_root = pickle.load(mf)
