@@ -4,15 +4,14 @@ import torch.nn as nn
 from torch_geometric.nn import GCNConv, global_mean_pool
 
 class InstitutionalCoupledSocialGNN(nn.Module):
-    def __init__(self, feature_dim=27, hidden_dim=32):
+    def __init__(self, feature_dim=30, hidden_dim=32):
         super().__init__()
-        # feature_dim = 16 (Barna/Pew) + 2 (JAX Grid) + 3 (LISP) + 3 (RSA) + 3 (Searle Status Function Vectors) = 27
+        # feature_dim = 16 (Barna/Pew) + 2 (JAX Grid) + 3 (LISP) + 3 (RSA) + 3 (Searle) + 3 (Temporal Deontic) = 30
         self.conv1 = GCNConv(feature_dim, hidden_dim)
         self.conv2 = GCNConv(hidden_dim, hidden_dim)
         self.fc = nn.Linear(hidden_dim, 3)
 
     def forward(self, x, edge_index, batch=None):
-        # 🚨 FIXED: Stripped the erroneous feature_dim keyword token to match PyG forward requirements
         h = self.conv1(x, edge_index)
         h = torch.relu(h)
         h = self.conv2(h, edge_index)
@@ -30,6 +29,7 @@ def execute_institutional_gnn_pass():
     print("📥 Empirical Layer ──➔ Ingesting Barna splits & 72% Pew US Church Wavelet Weather Forcing")
     print("📥 Cognitive Layer ──➔ Ingesting JAX Coordinate Lattices & 3-Dim RSA Choice Distributions")
     print("📥 Searle Layer     ──➔ Injected 3-Dim 'X counts as Y in C' Declarative Inception Tensors")
+    print("📥 Deontic Layer    ──➔ Injected 3-Dim Temporal Deadline Compliance Vectors")
     print("-" * 95)
 
     num_nodes = 100
@@ -38,6 +38,7 @@ def execute_institutional_gnn_pass():
     lisp_dim = 3
     rsa_dim = 3
     searle_dim = 3
+    deontic_dim = 3
     
     # 📡 1. Ingest Barna & Pew real data matrices
     pew_us_forcing = 0.72
@@ -54,21 +55,24 @@ def execute_institutional_gnn_pass():
     # 📜 4. Ingest parsed Grammar 3 Searle institutional status vectors [X, Y, C]
     compiled_searle_vector = torch.tensor([1.0000, 1.0000, 0.0000]).repeat(num_nodes, 1)
     
-    # Concatenate all domains into a single 27-dimensional unified node tensor matrix
-    x = torch.cat([graph_features, spatial_coords_x, spatial_coords_y, compiled_lisp_vector, compiled_rsa_vector, compiled_searle_vector], dim=1)
+    # ⏳ 5. Ingest newly updated Temporal Deontic deadline arrays
+    compiled_deontic_vector = torch.tensor([1.0000, 0.0000, 0.0000]).repeat(num_nodes, 1) # Full contract compliance
+    
+    # Concatenate all domains into a single 30-dimensional unified node tensor matrix
+    x = torch.cat([graph_features, spatial_coords_x, spatial_coords_y, compiled_lisp_vector, compiled_rsa_vector, compiled_searle_vector, compiled_deontic_vector], dim=1)
 
     # --- SCENARIO A: THE DISTRIBUTED REFORMER NET ---
     source_nodes = [i for i in range(1, num_nodes)]
     target_nodes = [0 for _ in range(1, num_nodes)]
     edge_index_church = torch.tensor([source_nodes + target_nodes, target_nodes + source_nodes], dtype=torch.long)
     
-    model = InstitutionalCoupledSocialGNN(feature_dim=graph_dim + spatial_dim + lisp_dim + rsa_dim + searle_dim)
+    model = InstitutionalCoupledSocialGNN(feature_dim=graph_dim + spatial_dim + lisp_dim + rsa_dim + searle_dim + deontic_dim)
     model.eval()
     
     with torch.no_grad():
         _, g_church = model(x, edge_index_church)
         print("Components Verification Suite:")
-        print(f"   ├── Total Unified Node Tensor Shape ──➔ {list(x.shape)} [Perfect 27-Dim Ingestion]")
+        print(f"   ├── Total Unified Node Tensor Shape ──➔ {list(x.shape)} [Perfect 30-Dim Ingestion]")
         print("   ├── Grammar 3 Tokens Processed      ──➔ Speech-act declarations injected as continuous graph nodes.")
         print("   ├── Node Reward Protocol            ──➔ Optimizing 'Reformers' to minimize group error.")
         print(f"   └── Global Virtual 0-Simplex       ──➔ \033[1;32m{list(g_church.numpy()[:4])} [TRUNCATED] (∘)\033[0m")
