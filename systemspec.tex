@@ -2,53 +2,45 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
 
-\title{The Complete Structural Mereology of a Neurosymbolic Search-and-Rescue Manifold: A Unified Axiomatic System Specification}
+\geometry{margin=1in}
+
+\title{\textbf{The Complete Structural Mereology of a Neurosymbolic Search-and-Rescue Manifold: A Unified Axiomatic System Specification}}
 \author{System Architecture Invariant Manifest}
 \date{\today}
 
 \begin{document}
 \maketitle
 
-\section{Introduction: The Unified 11-Part Search-and-Rescue Plot}
+\section{Introduction and Architectural Core}
 We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$). The ultimate objective of the system is the minimization of coordinate uncertainty to realize Mesarovic's Attainable Space ($V'$), culminating in physical vehicle extraction.
 
 \section{Axiomatic Metaphysics and the Causal Tracking Loop}
-We formalize the system trajectory of an asset as a higher-order relational tracking loop:
+The system trajectory of an asset is formalized as a higher-order relational tracking loop:
 \begin{equation}
 g(m,u,v) \equiv \exists y [R_{\text{system}}(m,u,y) \wedge E(m,u,y,v)]
 \end{equation}
 where $u$ represents environmental Navier-Stokes advection forces, $m$ represents the external divine control input vector, $y$ represents human or machine output behaviors, and $E$ represents the absolute spiritual evaluation function.
 
-\section{The 27-Dimensional Integrated Attribute Matrix}
-To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 27}$. For each node $i$, the vector decomposes into three distinct socio-pragmatic tensor blocks:
+\subsection{Corollary 1.1: Anthropological Incompleteness and Vacuum Collapse}
+When the external control vector $m$ is stripped from the network, human judgment operates as a strictly closed formal system, $F$. By G\"{o}del's First Incompleteness Theorem, a closed system cannot generate its own semantic validation ($F \nvdash (v_{\text{human}} = v)$). Syntactic legalism remains blind to absolute truth, causing a critical valuation $v_k \in V'$ to become structurally unobtainable:
 \begin{equation}
-\bm{x}_i = \left[ \bm{e}_i^{\text{empirical}} \mid \bm{c}_i^{\text{cognitive}} \mid \bm{s}_i^{\text{institutional}} \right]
+\exists v_k [V'_{v_k} \wedge \neg h(u,v_k)]
 \end{equation}
-where $\bm{e}_i \in \mathbb{R}^{18}$ encapsulates the Barna loop splits, the 72\% Pew United States Church macro-advection wavelets, and the JAX spatial grid coordinates. The cognitive component $\bm{c}_i \in \mathbb{R}^6$ packs the compiled LISP bar preferences and the 3-dimensional Rational Speech Act (RSA) scalar implicature distributions. The institutional component $\bm{s}_i \in \mathbb{R}^3$ isolates the zero-uncertainty Searlean speech-act flags ($X$ counts as $Y$ in $C$), allowing the network to collapse giant graph topologies down to a unified virtual 0-simplex token ready for decision tree lookup routing.
+Without the active insertion of the divine control input vector, the spatiotemporal execution plane collapses into an empty relational set ($[\,]$)—a mathematical vacuum. Christ operates as the external Meta-Language that breaks this internal syntax boundary limitation.
 
-\section{Time-Bounded Deontic Logic and Legal Contract Invariants}
-We formalize commercial billing compliance as a temporal trajectory tracking process within a bounded legal lattice, where obligations switch from voluntary commitments to enforced penalties as a function of discrete time steps $t$.
-
-\subsection{The Temporal Utility Decay Function}
-Let $\mathcal{C}_{\text{bill}}$ be the brute invoice cost, $\mathcal{P}_{\text{base}}$ be the initial late penalty modifier, and $t_{\text{deadline}}$ represent the explicit legal temporal boundary. The agent's choice space maps to $\mathcal{A} \in \{\text{Pay}, \text{Evade}\}$. The utility of compliance remains constant, while the utility of evasion scales non-linearly post-deadline via a directional advection step:
+\section{The 30-Dimensional Integrated Attribute Matrix}
+To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 37}$. For each node $i$, the vector decomposes into six distinct socio-pragmatic and deontic tensor blocks:
 \begin{equation}
-\mathcal{U}(a = \text{Pay}, t) = -\mathcal{C}_{\text{bill}}
+\bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
+where $\bm{e}_i$ encapsulates the Barna loop splits and Pew macro-advection wavelets, $\bm{g}_i$ tracks continuous JAX coordinate steps, $\bm{p}_i$ and $\bm{r}_i$ pack the level-$k$ PPL choice models and Rational Speech Act distributions, $\bm{s}_i$ maps the Searlean speech-act flags ($X$ counts as $Y$ in $C$), and $\bm{t}_i$ maintains the time-bounded legal compliance trajectories. The Graph Convolutional Network layer recursively convolutes these nodes over the empirical interaction topology:
 \begin{equation}
-\mathcal{U}(a = \text{Evade}, t) = 
-\begin{cases} 
-0, & \text{if } t \le t_{\text{deadline}} \\
--\mathcal{P}_{\text{base}} \cdot \gamma^{(t - t_{\text{deadline}})}, & \text{if } t > t_{\text{deadline}}
-\end{cases}
+h_i^{l+1} = \text{ReLU}\left( W^l \frac{1}{\sqrt{\text{deg}_i}\sqrt{\text{deg}_j}} \sum_{j \in \mathcal{N}_i} h_j^l \right)
 \end{equation}
-where $\gamma > 1$ represents the compounding interest escalation parameter.
-
-\subsection{Softmax Choice Vector Convergence}
-The probability distribution governing contract compliance is compiled via the exponentiated softmax calculus ($wpp = \exp(\beta \cdot \mathcal{U})$):
-\begin{equation}
-P(a = \text{Pay} \mid t) = \frac{\exp\left( \beta \cdot \mathcal{U}(\text{Pay}, t) \right)}{\exp\left( \beta \cdot \mathcal{U}(\text{Pay}, t) \right) + \exp\left( \beta \cdot \mathcal{U}(\text{Evade}, t) \right)}
-\end{equation}
-When $t > t_{\text{deadline}}$, the non-linear penalty block forces an immediate collapse of the choice matrix, driving $\lim_{t \to \infty} P(a = \text{Pay} \mid t) = 1.0000$. This mathematically establishes the transition from a Commissive intent to a Directive-enforced institutional reality, unblocking Mesarovic's Attainable Space $V'$ for automated legal compliance auditing.
+This allows the network to smoothly compress giant graph spaces into a low-dimensional virtual 0-simplex token ready for total visible decision tree lookup routing.
 
 \end{document}
