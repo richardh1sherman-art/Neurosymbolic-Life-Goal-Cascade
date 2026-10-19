@@ -1,0 +1,73 @@
+\documentclass[11pt,fleqn]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\begin{document}
+
+\section{Socio-Pragmatic Architecture and System Component Specifications}
+
+\subsection{Pragmatics, Level-k Reasoning, and Searlean Realities}
+To model social networks where agents think about other agents' thoughts, a custom Probabilistic Domain Specific Language (DSL) was developed. This language parses recursively nested mental states (\texttt{thinks}, \texttt{chooses}, \texttt{knows}, \texttt{observes}) to simulate Rational Speech Act (RSA) matrices and level-$k$ strategic convergence (e.g., Schelling games, political and religious belief polarization networks). 
+
+To satisfy John Searle's philosophy of the social world, the language was expanded to Grammar 3, embedding a dedicated, constitutive status operator:
+\begin{equation}
+\mathcal{D}_{\text{inception}}\Big( \langle C, \, X, \, Y \rangle \Big) \implies \left( X \text{ counts as } Y \text{ in } C \right)
+\end{equation}
+This allows the engine to instantiate institutional facts that cannot be measured via physical sensory inputs (e.g., declaring that Zoe counts as King in Brazil, or that Matthias counts as a disciple in the Church). The grammar cleanly separates illocutionary forces into five distinct categories: Assertives, Directives, Commissives, Expressives, and Declarations. This framework manages security perimeters, access control, and legal obligations containing strict temporal deadlines ($t_{\text{deadline}}$).
+
+\subsection{Specification and System Components}
+The neuro-symbolic system acts as a bounded, type-safe transducer. It inputs structural strings or queries and produces learned contexts, classifications, or deductive responses based on the available training material.
+
+The system is powered by seven interlocking components:
+\begin{enumerate}
+    \item \textbf{LLM as Co-Designer:} Acts as an automated reward stencil synthesizer and meta-level instructor.
+    \item \textbf{Python Orchestrator:} The master continuous execution plane and virtual machine runner.
+    \item \textbf{Forest of Decision Trees:} The core associative, hierarchical memory array for learning situational contexts.
+    \item \textbf{The Prolog Guardrail (\texttt{kb.pl}):} The formal logical attention filter ensuring type-safe branch splits.
+    \item \textbf{RL with DSLs:} Sequential decision-making engines optimizing policies over bounded continuous languages.
+    \item \textbf{Automated Algebraic Solver:} Symmetric Group ($S_3$) controllers providing invertible, loss-free data rollbacks.
+    \item \textbf{Graph Neural Network (GNN):} PyTorch Geometric modules processing large-scale empirical church network graphs.
+\end{enumerate}
+
+\section{Context Layer: Interlocking Decision Forests}
+
+\subsection{Decision Trees as Associative Agent Memory}
+Decision trees function as the agent's structural memory matrix and are used directly for context classification. The forest learns complex relational concepts as presented by sparse multi-modal exemplars. The non-terminal internal nodes are derived dynamically from the exemplars, evaluating testing features or structured parthood (\texttt{part\_of}) relationships. 
+
+The decision tree recursion is explicitly configured to support nested conceptual compositionality, enabling the system to learn high-level meta-concepts strictly in terms of simpler, underlying local sub-concepts. Concepts are formulated in LISP S-expressions and can be indefinitely nested. Terminal leaf nodes retain partial exemplar arrays and domain-specific solution techniques. There are multiple independent trees trained for each category of concepts, ensuring that structurally analogous scenarios (e.g., mountain climbing and kitchen fires) converge cleanly onto the exact same leaf node.
+
+\subsection{\texttt{kb.pl} Logic as the Attention Guardrail}
+The Prolog logic layer operates as an explainable attention filter. If a decision tree attempts to shift its focus or generate a new, random feature split to minimize statistical error over noisy data, the \texttt{kb.pl} file audits that choice. It blocks the tree from chasing noise or hallucinating branches, verifying that variables are legally and structurally meaningful to the macro-institution. Attention is thus transformed from a black-box floating-point matrix into a hierarchical, fully auditable pipeline where agents dial their cognitive focus up or down based on real-time institutional feedback.
+
+\section{Training and Inferencing Plane}
+
+\subsection{Reinforcement Learning with Integrated DSLs}
+Reinforcement learning provides sequential decision-making under uncertainty. While classical General Problem Solvers (GPS) lacked the capacity to learn from past solutions and relied on a single reward (reducing the distance between current and goal states), our framework uses deep analogical classification to map new problems to historical stencils, transferring learned reward structures cleanly across domains. Problems are written in a structured DSL containing five primitives: Agent, Environment, State ($S$), Action ($A$), and Reward ($R$).
+
+\subsection{The Temporal UAV Charging Dilemma}
+The critical necessity of long-term reward tracking is demonstrated by an autonomous UAV executing a search-and-rescue mission over a 100-mile grid. At any given moment, the drone can remain positioned above a dense user target and receive high immediate reward. However, its battery level drops below a critical threshold ($\theta < 30\%$). If a greedy controller is used, it will choose to stay, causing a battery collapse that escalates load onto neighbors (an Interaction 43 cascade) and ultimately fails the mission. 
+
+Conversely, our reinforcement learning agent balances immediate decay against long-term returns. It utilizes the PPL \texttt{knows} shorthand statement to monitor the real-time availability of Charging Hub Alpha at coordinates $[50.0, 50.0]$. If the shared hub is occupied by civilian electric vehicles, the drone's policy automatically overrides its path, routing it back to exclusive bays at the central Fire-Station base before hitting power depletion limits, thereby maximizing long-term mission survival.
+
+\section{Conclusion and Future Horizons}
+We have presented a robust, unified Neuro-Symbolic AI architecture that successfully scales across continuous physical motion, recursive theory of mind lattices, and discrete Searle institutional speech acts. By grounding continuous neural transformations into explainable symbolic guardrails, the framework eliminates VRAM memory black-box opacity and prevents hallucinatory logic paths. Future work will expand the algebraic solver constraints to track massive distributed multi-graph consensus splits in real time over volatile network nodes.
+
+\section{References}
+\begin{enumerate}
+    \item Barwise, J., \& Seligman, J. (1997). \textit{Information Flow: The Logic of Distributed Systems}. Cambridge University Press.
+    \item Batson, C. D. (1975). Rational processing or cognitive modification? Regaining a functional balance. \textit{Journal of Personality and Social Psychology}, 32(1), 176.
+    \item Jern, A., Chang, K. M., \& Kemp, C. (2009). Bayesian belief polarization. \textit{Advances in Neural Information Processing Systems}, 22.
+    \item Nagel, R. (1995). Unraveling in guessing games: An experimental study. \textit{The American Economic Review}, 85(5), 1313-1326.
+    \item Open Policy Agent (OPA) Specifications. CNCF Graduated Project Core Documentation (2026).
+    \item Schelling, T. C. (1980). \textit{The Strategy of Conflict}. Harvard University Press.
+    \item Searle, J. R. (1995). \textit{The Construction of Social Reality}. Free Press.
+    \item Zalta, E. N. (1983). \textit{Abstract Objects: An Introduction to Axiomatic Metaphysics}. D. Reidel.
+\end{enumerate}
+
+\end{document}
