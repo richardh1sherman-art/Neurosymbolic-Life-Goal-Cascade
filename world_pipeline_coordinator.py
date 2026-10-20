@@ -50,27 +50,27 @@ class EnhancedForestCoordinator:
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
 
-    def build_custom_tree30_with_secure_mas_schema(self):
-        """🔨 COMPILING TREE #30 TO NATIVELY ROUTE ALL SECURE DISTRIBUTED MAS CONSTRAINTS"""
+    def build_custom_tree30_with_branching_poset_schema(self):
+        """🔨 COMPILING TREE #30 TO NATIVELY SCHEDULER THE BRANCHING POSET DISPUTE RESOLUTIONS"""
         root = EnhancedWorldLevelNode(split_feature="gnn_feature_dim", split_value="30")
         
-        # --- TRUE BRANCH: Complete 30-Dimensional Security Feature Space ---
+        # --- TRUE BRANCH: Bounded 30-Dimensional Data Tensor Input ---
         root.tb = EnhancedWorldLevelNode(split_feature="registry_status", split_value="isolated_domain_firewall")
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Distributed MAS consensus reached; Zanzibar causal ordering checks verified over MCP gateway",
-            reward_metric="Local logic vocabulary merged; target decision trees repaired back-propagation style"
+            context="Branching poset consensus verified; parallel worker agents a2 and a1 unified via master a0",
+            reward_metric="Fitting antimonotonic implication logic checked; Clause (e) modal negation dropped un-stabilized paths"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_delayed_recovery_routing",
-            context="Zanzibar information flow security lattice violation detected; intercepting rogue token transmission",
-            reward_metric="Deploy MCP gateway firewalls to isolate unverified agent theory words immediately"
+            context="Poset constraint breach or rogue data flow detected across non-dominant lattice edges",
+            reward_metric="Deploy MCP gateway filters to drop low-priority transaction words instantly"
         )
         
-        # --- FALSE BRANCH: Mismatched Feature Dimensions ---
-        root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid tensor shape signature detected; aborting token routing loop")
+        # --- FALSE BRANCH: Invalid Input Shapes ---
+        root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid signature tensor dimension; aborting token routing loops")
         
         with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
             pickle.dump(root, f)
@@ -81,11 +81,11 @@ class EnhancedForestCoordinator:
         print("=" * 95)
         
         self.build_custom_tree12_with_declaration_schema()
-        self.build_custom_tree30_with_secure_mas_schema()
+        self.build_custom_tree30_with_branching_poset_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)
-        for i in [12, 30]:
+        for i in [12,30]:
             file_name = "level12_science_invariants.pkl" if i == 12 else "level30_subsystem_dispatcher.pkl"
             full_path = os.path.join(self.model_dir, file_name)
             with open(full_path, "rb") as mf:
