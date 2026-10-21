@@ -23,29 +23,37 @@ To inject continuous meaning and speech-act context into the message-passing con
 \begin{equation}
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
-where $\bm{e}_i$ encapsulates the Barna loop splits and Pew macro-advection wavelets, $\bm{g}_i$ tracks continuous JAX coordinate steps, $\bm{p}_i$ and $\bm{r}_i$ pack the level-$k$ PPL choice models and Rational Speech Act distributions, $\bm{s}_i$ maps the Searlean speech-act flags ($X$ counts as $Y$ in $C$), and $\bm{t}_i$ maintains the time-bounded legal compliance trajectories.
 
 \section{Homomorphic Multi-Agent Lattices and Fitting Consensus}
-We formalize the secure distributed multi-agent system by defining a structural identity mapping between the epistemic authority poset and the Functional Zanzibar security perimeter.
-
-\subsection{Lattice Homomorphism and Isomorphic Clearance Mappings}
-Let $\mathcal{A} = \{a_0, a_1, a_2, a_3\}$ represent the set of decentralized neuro-symbolic agents. The architecture unifies the Epistemic Knowledge Lattice $\mathcal{L}_K$ and the Security Flow Lattice $\mathcal{L}_S$ into an identical branching partial-order structure. Instead of a linear sequence, parallel worker agents $a_1$ and $a_2$ occupy the same tier coordinate, formalizing a non-linear poset governed by the following strict axiomatic constraints:
+The architecture unifies the Epistemic Knowledge Lattice $\mathcal{L}_K$ and the Security Flow Lattice $\mathcal{L}_S$ into an identical branching partial-order structure governed by $\nu \in \mathcal{A}$. Parallel worker agents $a_1$ and $a_2$ occupy the same tier coordinate, formalizing a non-linear poset governed by the following strict axiomatic constraints:
 \begin{equation}
-a_3 \preceq a_2, \quad a_3 \preceq a_1
-\end{equation}
-\begin{equation}
-a_2 \preceq a_0, \quad a_1 \preceq a_0
-\end{equation}
-where $a_0$ (\texttt{agent\_0\_master}) acts as the supreme bounding apex ($\top$) with an epistemic rank of 3, and $a_3$ (\texttt{agent\_3\_observer}) represents the minimal lower bound ($\bot$) matching \texttt{public\_base}. The structural identity mapping guarantees that an agent's coordinate position dictates its Zanzibar causal authorization layer natively:
-\begin{equation}
-\text{Rank}(a_k) \equiv \text{Clearance}(a_k)
+a_3 \left(\alpha_3 \preceq a_2\right), \quad a_3 \left(\alpha_3 \preceq a_1\right), \quad a_2 \preceq a_0, \quad a_1 \preceq a_0
 \end{equation}
 
-\subsection{Fitting Antimonotonic Logic and MCP Enforcement}
-Data packet and vocabulary transport across varying clearance domains are executed via the Model Context Protocol (MCP) gateway, which directly enforces Fitting (1992) intuitionistic modal logic semantics. For any two coordinates $w \preceq_T t$, the system enforces antimonotonic perception constraints. The satisfaction relation over local decision forest frames $\mathcal{F}$ yields:
+\section{Adversarial Defenses and Deep Security Reinforcement Learning}
+We formalize the automated protection of the multi-agent system (MAS) perimeter as a non-zero-sum Markov Game operating over an advanced windowed token filtering gateway.
+
+\subsection{Reduced-Vocabulary Intrusion Detection Interface}
+To protect the active multi-agent system from open-ended adversarial injection, the LLM user agents do not communicate directly with the symbolic call-stack. Instead, all input prompts are routed through a pre-built Intrusion Detection System (IDS). This gateway processes the incoming strings and projects them into a strictly \textit{reduced vocabulary form} before passing the tokens to the neuro-symbolic (NS) agents. This interface decoupling is maintained as a deliberate research boundary: because the current phase focuses on multi-agent consensus networks, the pre-built IDS acts as an isolated, upstream firewall layer.
+
+\subsection{Google Windowed Perplexity Filter Gateway}
+Within the reduced-vocabulary stream, the NS intrusion detection filter computes the maximum windowed per-token log-likelihood profile over a sliding token window $\mathcal{W}$ of size $k$ to isolate non-human-interpretable adversarial tokens:
 \begin{equation}
-M \models d_t(\phi) \implies M \models d_w(\phi)
+\text{PPL}_{\text{max}} = \max_{i} \left[ \frac{1}{k} \sum_{j=i}^{i+k-1} \log P(\text{token}_j \mid \text{context}) \right]
 \end{equation}
-When a consensus conflict is triggered due to a coarse, low-clearance agent $a_w$ being gullible to an un-stabilized path while a sharp, high-clearance agent $a_t$ detects an algebraic boundary anomaly, the MCP gateway applies Clause (d) Intuitionistic Implication Routing and Clause (e) Modal Negation. The low-priority transaction request is instantly dropped, preserving macro-systemic privacy and boundary integrity without black-box VRAM overhead.
+If $\text{PPL}_{\text{max}} < \tau$, where $\tau = -4.0000$ represents the security boundary threshold, an adversarial payload exception is triggered. The engine immediately refuses response execution, and grafts a text-notational Zanzibar relation tuple directly into the decision forest branch leaf nodes:
+\begin{equation}
+\langle \text{namespace} \rangle : \langle \text{object\_id} \rangle \, \# \, \langle \text{relation} \rangle \, @ \, \langle \text{user\_id} \rangle
+\end{equation}
+
+\subsection{Symmetric Progression-Based DRL Game Mechanics}
+The multi-agent system conditions defensive policy vectors by optimizing a fully observable defender reward function $r_1$ and a partially observable attacker reward function $r_2$. Let $\mathbb{I}$ represent the indicator function for active system state transitions. The structural rewards scale non-linearly over the attack progression matrix:
+\begin{equation}
+r_1(h_{ts}) = -\lambda_1 \cdot \mathbb{I}(\text{Exploit}) - \lambda_2 \cdot \mathbb{I}(\text{Impact}) - \lambda_3 \cdot \mathbb{I}(\text{Restore})
+\end{equation}
+\begin{equation}
+r_2(h_{t2}) = \lambda_1 \cdot \mathbb{I}(\text{Exploit}) + \lambda_2 \cdot \mathbb{I}(\text{Impact})
+\end{equation}
+where $\lambda_1 = 2000$, $\lambda_2 = 1000$, and $\lambda_3 = 500$. The attacker's blind spot regarding the quality of service (QoS) degradation penalty $\lambda_3$ during a network \texttt{Restore} operation allows the defender's adaptive policy ($\pi_1$) to maintain dominance, minimizing long-term variance and securing the systemic performance space $V'$.
 
 \end{document}
