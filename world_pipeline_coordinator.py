@@ -50,26 +50,26 @@ class EnhancedForestCoordinator:
         with open(os.path.join(self.model_dir, "level12_science_invariants.pkl"), "wb") as f:
             pickle.dump(root, f)
 
-    def build_custom_tree30_with_branching_poset_schema(self):
-        """🔨 COMPILING TREE #30 TO NATIVELY SCHEDULER THE BRANCHING POSET DISPUTE RESOLUTIONS"""
+    def build_custom_tree30_with_adversarial_game_schema(self):
+        """🔨 COMPILING TREE #30 TO NATIVELY CONDITION AND CLASSIFY ATTACKER PROGRESSION"""
         root = EnhancedWorldLevelNode(split_feature="gnn_feature_dim", split_value="30")
         
-        # --- TRUE BRANCH: Bounded 30-Dimensional Data Tensor Input ---
+        # --- TRUE BRANCH: Complete 30-Dimensional Attribute Input Matrix ---
         root.tb = EnhancedWorldLevelNode(split_feature="registry_status", split_value="isolated_domain_firewall")
         root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Branching poset consensus verified; parallel worker agents a2 and a1 unified via master a0",
-            reward_metric="Fitting antimonotonic implication logic checked; Clause (e) modal negation dropped un-stabilized paths"
+            context="Perplexity filter verified benign; Zanzibar ACL tuples map zero-uncertainty user permissions",
+            reward_metric="Progression-based rewards calibrated; defender adaptive policy overrides attacker exploits"
         )
         root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_delayed_recovery_routing",
-            context="Poset constraint breach or rogue data flow detected across non-dominant lattice edges",
-            reward_metric="Deploy MCP gateway filters to drop low-priority transaction words instantly"
+            context="High-perplexity adversarial token sequence intercepted; intrusion detection loop triggered",
+            reward_metric="Graft immediate Zanzibar restrict_access tuple into the active perimeter guardrail leaves"
         )
         
-        # --- FALSE BRANCH: Invalid Input Shapes ---
+        # --- FALSE BRANCH: Mismatched Input Formats ---
         root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid signature tensor dimension; aborting token routing loops")
         
         with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
@@ -81,7 +81,7 @@ class EnhancedForestCoordinator:
         print("=" * 95)
         
         self.build_custom_tree12_with_declaration_schema()
-        self.build_custom_tree30_with_branching_poset_schema()
+        self.build_custom_tree30_with_adversarial_game_schema()
 
         print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR CHOSEN TARGET TREES:")
         print("-" * 95)

@@ -1,23 +1,24 @@
 %% =================================================================
 %% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Phase Next Revision: Branching Poset Lattice and Fitting Semantics
+%% Grammar 4 Security Domain: DRL Game Matrices & Perplexity Gates
 %% =================================================================
 
-:- dynamic agent_poset_edge/3.
-:- dynamic fitting_consensus_rule/4.
+:- dynamic drl_reward_vector/4.
+:- dynamic perplexity_threshold_gate/3.
 
-%% --- 📊 NEW: RE-ALIGNED BRANCHING POSET EDGES ---
-% Syntax: agent_poset_edge(LowerAgent, HigherAgent, LatticeType)
-agent_poset_edge(agent_3_observer, agent_2_worker, branching_poset).
-agent_poset_edge(agent_3_observer, agent_1_specialist, branching_poset).
-agent_poset_edge(agent_2_worker, agent_0_master, branching_poset).
-agent_poset_edge(agent_1_specialist, agent_0_master, branching_poset).
+%% --- 🛡️ DEFENDER-ATTACKER GAME REWARDS ---
+% Syntax: drl_reward_vector(AgentRole, ActionType, BasePenalty, Observability)
+drl_reward_vector(defender, exploit_leak, -2000.0, fully_observable).
+drl_reward_vector(defender, server_impact, -1000.0, fully_observable).
+drl_reward_vector(defender, service_restore, -500.0, fully_observable).
+drl_reward_vector(attacker, server_impact, 1000.0, partially_observable).
 
-%% --- 📜 FITTING ANTIMONOTONIC MODAL RULES ---
-% Syntax: fitting_consensus_rule(AgentID, PerceptionDepth, ValuationMode, LogicalClause)
-fitting_consensus_rule(agent_w, 1, coarse_gullible, clause_d_implication).
-fitting_consensus_rule(agent_t, 3, sharp_strict, clause_e_negation).
+%% --- 🔍 GOOGLE PERPLEXITY FILTER METRICS ---
+% Syntax: perplexity_threshold_gate(FilterType, WindowSize, LogLikelihoodLimit)
+perplexity_threshold_gate(beam_search_detector, 5, -3.5).
+perplexity_threshold_gate(gcg_adversarial_jailbreak, 8, -4.2).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(agent_poset_edge, interlocking_forest, level12_science_invariants).
-part_of(fitting_consensus_rule, interlocking_forest, level30_subsystem_dispatcher).
+part_of(drl_reward_vector, interlocking_forest, level30_subsystem_dispatcher).
+part_of(perplexity_threshold_gate, interlocking_forest, level12_science_invariants).
+
