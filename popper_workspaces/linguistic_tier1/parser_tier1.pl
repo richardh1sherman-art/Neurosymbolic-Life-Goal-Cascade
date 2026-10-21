@@ -21,4 +21,3 @@ perplexity_threshold_gate(gcg_adversarial_jailbreak, 8, -4.2).
 %% --- MASTER INTER-TREE DELEGATION CORE ---
 part_of(drl_reward_vector, interlocking_forest, level30_subsystem_dispatcher).
 part_of(perplexity_threshold_gate, interlocking_forest, level12_science_invariants).
-
