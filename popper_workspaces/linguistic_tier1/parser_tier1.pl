@@ -1,21 +1,14 @@
 %% =================================================================
 %% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Phase Next Revision: Dr. Rasiowa Complete Consensus Axiomatization
+%% Phase Next Revision: Model Context Protocol Theory Migration
 %% =================================================================
 
-:- dynamic rasiowa_modal_operator/4.
-:- dynamic distributed_logic_channel/3.
+:- dynamic mcp_theory_movement_step/4.
 
-%% --- 📊 DR. RASIOWA MODAL SATISFACTION RULES ---
-% Syntax: rasiowa_modal_operator(LatticeID, ModalOperator, UnderlyingLanguage, Status)
-rasiowa_modal_operator(branching_poset, dt_phi_or_psi, predicate_case, clause_b_disjunction).
-rasiowa_modal_operator(branching_poset, dt_phi_implies_psi, predicate_case, clause_d_implication).
-rasiowa_modal_operator(branching_poset, dt_negation_phi, predicate_case, clause_e_negation).
-
-%% --- 📜 BARWISE DISTRIBUTED LOGIC CHANNELS ---
-% Syntax: distributed_logic_channel(Core_C, Component_A1, Component_A2)
-distributed_logic_channel(master_kb_pl, individual_reasoning_forest, searle_social_forest).
+%% --- 📡 MCP TRANSACTION LOGGER PRIMITIVES ---
+% Syntax: mcp_theory_movement_step(StepID, SourceNode, TargetNode, ExecutionStatus)
+mcp_theory_movement_step(step_4_payload_pack, agent_1_specialist, mcp_tool_buffer, packed_success).
+mcp_theory_movement_step(step_5_forest_graft, mcp_tool_buffer, agent_2_worker, grafted_and_serialized).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(rasiowa_modal_operator, interlocking_forest, level30_subsystem_dispatcher).
-part_of(distributed_logic_channel, interlocking_forest, level12_science_invariants).
+part_of(mcp_theory_movement_step, interlocking_forest, level30_subsystem_dispatcher).
