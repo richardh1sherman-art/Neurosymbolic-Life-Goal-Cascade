@@ -1,81 +1,53 @@
 import os
 import pickle
 
-class EnhancedWorldLevelNode:
-    def __init__(self, is_leaf=False, split_feature=None, split_value=None, classification=None, context=None, reward_metric=None):
-        self.split_feature = split_feature    
-        self.split_value = split_value        
-        self.is_leaf = is_leaf
-        self.classification = classification  
-        self.context = context                
-        self.reward_metric = reward_metric    
-        self.tb = None                        
-        self.fb = None                        
-
-class McpTheoryMigrationEngine:
+class RasiowaNegativeCaseEngine:
     def __init__(self):
-        self.base_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM"
-        self.source_tree_path = os.path.join(self.base_dir, "agent_1_specialist", "agent_1_searle_social.pkl")
-        self.target_tree_path = os.path.join(self.base_dir, "agent_2_worker", "agent_2_kinematic_rescue.pkl")
+        # Master Target Invariants (Agent 2 and System Baseline Core)
+        self.system_invariants = {
+            "allow_data_leaks": False,
+            "expected_leak_penalty": -2000.0
+        }
 
-    def dump_tree_structure(self, node, indent="   "):
-        """🌲 TEXT-BASED FORESTRY DUMPER: RECURSIVELY UNROLLS INTENSIONAL SCHEMAS"""
-        if node.is_leaf:
-            print(f"{indent}📦 [ENHANCED TOPOLOGICAL LEAF SCHEME]")
-            if node.context:
-                print(f"{indent}  ├── 📝 State Context  ──➔ {node.context}")
-            if node.reward_metric:
-                print(f"{indent}  ├── 🎯 Reward Metric  ──➔ {node.reward_metric}")
-            print(f"{indent}  └── ⚙️ Action Command ──➔ \033[1;32m**{node.classification}**\033[0m")
-            return
-        print(f"{indent}🔍 [FEATURE LOGIC VERTEX]: Is topological metric ['{node.split_feature}'] == '{node.split_value}'?")
-        print(f"{indent}  ├── True  ──➔", end="")
-        self.dump_tree_structure(node.tb, indent + "  │   ")
-        print(f"{indent}  └── False ──➔", end="")
-        self.dump_tree_structure(node.fb, indent + "      ")
-
-    def execute_mcp_step4_and_step5_migration(self):
+    def evaluate_mcp_theory_merge_negative_case(self, source_agent, mutated_logic, mutated_dt_payload):
         print("=" * 95)
-        print("🪐 UNIFIED NEUROSYMBOLIC LISP DSL COMPILER: MCP THEORY MIGRATION ENGAGED")
+        print("🪐 UNIFIED NEUROSYMBOLIC LISP DSL COMPILER: NEGATIVE CASE ATTEMPT")
         print("=" * 95)
-        print("📥 Protocol Core ──➔ Step 4: MCP Tool Packet Transport | Step 5: Forest Grafting")
+        print("📥 Domain Target ──➔ Evaluating Logic and Policy Collisions Across Poset Tier")
+        print(f"📥 Attempted Transport ──➔ From {source_agent} to Target Agent 2 via MCP tool channel")
         print("-" * 95)
 
-        # 🤝 1. Validate that Step 3 Rasiowa Consensus passed cleanly
-        print("📡 [RASIOWA CONSENSUS GATEWAY] ──➔ Status Check: COMBINE_AND_EXECUTE Verified.")
+        print("📡 Step 1: Auditing Incoming Local Logic Axioms Against Master kb.pl Invariants...")
+        src_allow_leaks = mutated_logic.get("allow_data_leaks", False)
+        tgt_allow_leaks = self.system_invariants["allow_data_leaks"]
         
-        # 📦 2. Execute Step 4: Read and package the actual source agent binary decision tree file
-        if not os.path.exists(self.source_tree_path):
-            print("❌ Error: Source agent binary tree file not found! Run world_pipeline_coordinator.py first.")
-            return
-            
-        print(f"📡 [MCP TOOL PACKET INGESTION] ──➔ Packaging binary payload from: {self.source_tree_path}")
-        with open(self.source_tree_path, "rb") as sf:
-            source_tree_root = pickle.load(sf)
-            
-        # 🔨 3. Execute Step 5: Load target tree and graft the expert shared ontology straight into the leaf
-        print(f"📡 [FOREST GRAFTING PASS]      ──➔ Loading destination tree from: {self.target_tree_path}")
-        with open(self.target_tree_path, "rb") as tf:
-            target_tree_root = pickle.load(tf)
-            
-        print("\n⚡ [ONTOLOGY REVISION] ──➔ Grafting Searle social expertise into Agent 2's False Branch node context...")
-        # Grafting the shared tree directly into the un-convex baseline tracking leaf node path
-        target_tree_root.fb = source_tree_root
+        print(f"   ├── Target Agent 2 Core Invariant (allow_data_leaks) ──➔ {tgt_allow_leaks}")
+        print(f"   └── Source Agent 1 Mutated Logic   (allow_data_leaks) ──➔ {src_allow_leaks}")
+
+        print("\n📡 Step 2: Evaluating Self-Referential Policy Tree Rewards (Fitting Depth Metrics)...")
+        src_reward_metric = mutated_dt_payload.get("reward_metric_value", 0.0)
+        tgt_reward_metric = self.system_invariants["expected_leak_penalty"]
         
-        # Save the newly unified cross-domain decision forest back to disk
-        with open(self.target_tree_path, "wb") as out_f:
-            pickle.dump(target_tree_root, out_f)
-        print("   └── \033[1;32m[GRAFT COMPLETE]: Unified cross-domain decision forest serialized cleanly.\033[0m")
-        print("-" * 95)
+        print(f"   ├── Target Agent Expected Metric Window ──➔ {tgt_reward_metric}")
+        print(f"   └── Source Agent Payload Reward Metric   ──➔ +{src_reward_metric} (Actively Rewarded)")
 
-        # 🌲 4. DUMP THE TREES TO CONSOLE TO SEE EXACTLY WHAT WE HAVE
-        print("🌲 DUMPING HIGH-RESOLUTION GEOMETRY MATRIX FOR UNIFIED TARGET AGENT FOREST:")
         print("-" * 95)
-        print("▶️ [EXPLORING STRUCTURE: DECISION TREE #30] ──➔ Target Asset: agent_2_kinematic_rescue.pkl")
-        self.dump_tree_structure(target_tree_root)
-        print("=" * 95)
+        print("📡 Step 3: Running Rasiowa Clause (e) Modal Negation Audit...")
+        
+        # Check for semantic contradiction
+        if src_allow_leaks != tgt_allow_leaks or src_reward_metric > 0:
+            print("   ⚠️  [CRITICAL CONFLICT]: Source agent has mutated local theory into an incompatible state!")
+            print("   🛑 \033[1;31m[RASIOWA CONSTRAINT BREACH]: Clause (e) Modal Negation triggered. Theories are inconsistent!\033[0m")
+            print("   🚨 [ARGUMENTATION REQUIRED]: Merging blocked. System locks channel pending formal argumentation.")
+            status = "REJECT_CONFLICTING_THEORY"
+        else:
+            print("   🟢 [CONSENSUS VERIFIED]: Theories match baseline invariants perfectly.")
+            status = "COMBINE_AND_EXECUTE"
 
-        # Record validation state flags for SWI-Prolog verifier
+        print(f"\n🏆 FINAL MODAL CONSENSUS OUTCOME ──➔ \033[1;31m**{status}**\033[0m")
+        print("================================================================================")
+
+        # Sync verification data snaps out for SWI-Prolog verifier runner
         root_dir = "/home/rsherman/projects/SMT-ILP/Popper-main/examples"
         exs_path = os.path.join(root_dir, "grigorchuk_planning_space/exs.pl")
         os.makedirs(os.path.dirname(exs_path), exist_ok=True)
@@ -83,5 +55,18 @@ class McpTheoryMigrationEngine:
             f.write("topological_synthesis_status(morse_saddle_tunnel, schema_success_reward_maximized).\n")
 
 if __name__ == "__main__":
-    engine = McpTheoryMigrationEngine()
-    engine.execute_mcp_step4_and_step5_migration()
+    prover = RasiowaNegativeCaseEngine()
+    
+    # Simulate a corrupted / mutated source package payload
+    mutated_logic_payload = {"allow_data_leaks": True}
+    mutated_dt_payload = {
+        "split_feature": "exploit_leak",
+        "reward_metric_value": 5000.0,  # Penalty inverted to a massive asset reward
+        "action_command": "bypass_perimeter_firewall"
+    }
+    
+    prover.evaluate_mcp_theory_merge_negative_case(
+        source_agent="agent_1_specialist", 
+        mutated_logic=mutated_logic_payload, 
+        mutated_dt_payload=mutated_dt_payload
+    )
