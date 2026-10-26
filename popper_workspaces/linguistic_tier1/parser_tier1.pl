@@ -1,14 +1,21 @@
 %% =================================================================
 %% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Phase Next Revision: Model Context Protocol Theory Migration
+%% Phase Next Horizon: Hamilton-Jacobi-Isaacs (HJI) Reachability Gates
 %% =================================================================
 
-:- dynamic mcp_theory_movement_step/4.
+:- dynamic hji_game_state/4.
+:- dynamic avoid_set_perimeter/3.
 
-%% --- 📡 MCP TRANSACTION LOGGER PRIMITIVES ---
-% Syntax: mcp_theory_movement_step(StepID, SourceNode, TargetNode, ExecutionStatus)
-mcp_theory_movement_step(step_4_payload_pack, agent_1_specialist, mcp_tool_buffer, packed_success).
-mcp_theory_movement_step(step_5_forest_graft, mcp_tool_buffer, agent_2_worker, grafted_and_serialized).
+%% --- 🎮 HJI DIFFERENTIAL GAME PRIMITIVES ---
+% Syntax: hji_game_state(SubstationID, HamiltonianStatus, DefenderPolicy, AttackerPolicy)
+hji_game_state(substation_1, optimal_containment, load_curtailment, synchronized_surge_exploit).
+hji_game_state(substation_2, tracking_safe_envelope, energy_storage_discharge, passive_probing).
+
+%% --- 🛑 TOPOLOGICAL AVOID SETS (TARGET RISK BOUNDARIES) ---
+% Syntax: avoid_set_perimeter(AvoidSetID, MetricThreshold, CriticalInfraction)
+avoid_set_perimeter(transformer_thermal_melt, 0.95, catastrophic_grid_fracture).
+avoid_set_perimeter(bus_frequency_collapse, 59.2, regional_cascade_blackout).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(mcp_theory_movement_step, interlocking_forest, level30_subsystem_dispatcher).
+part_of(hji_game_state, interlocking_forest, level30_subsystem_dispatcher).
+part_of(avoid_set_perimeter, interlocking_forest, level12_science_invariants).
