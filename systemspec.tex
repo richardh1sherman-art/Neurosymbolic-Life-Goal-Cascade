@@ -24,32 +24,27 @@ To inject continuous meaning and speech-act context into the message-passing con
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{Homomorphic Multi-Agent Lattices and Fitting Consensus}
-The architecture unifies the Epistemic Knowledge Lattice $\mathcal{L}_K$ and the Security Flow Lattice $\mathcal{L}_S$ into an identical branching partial-order structure governed by $a_k \in \mathcal{A}$. Parallel worker agents $a_1$ and $a_2$ occupy the same tier coordinate, formalizing a non-linear poset governed by the following strict axiomatic constraints:
+\section{Distributed Multi-Directory Agent Initializations}
+Each independent neuro-symbolic agent $a_k \in \mathcal{A}$ maintains its unique background logic constraints inside a dedicated disk directory path:
 \begin{equation}
-a_3 \preceq a_2, \quad a_3 \preceq a_1, \quad a_2 \preceq a_0, \quad a_1 \preceq a_0
+a_k \equiv \langle \mathcal{V}_k, \, \mathcal{K}_k, \, \mathcal{F}_k \rangle
 \end{equation}
 
-\section{Adversarial Logic Collisions and the Dialectical Argumentation Protocol}
-We formalize the mechanism for isolating and repairing conflicting agent ontologies during Model Context Protocol (MCP) theory movement passes.
+\section{Intensional Model Interrogation via Classification Type-Label Stripping}
+We formalize the mechanism for interrogating a frozen decision forest model by distinguishing between an exemplar's extensional type label and its structural attributes.
 
-\subsection{Axiomatic Inconsistency Isolation}
-Let $\mathcal{K}_0$ represent the immutable master system invariants stored within the apex node $a_0$ (\texttt{agent\_0\_master}). A local theory extension $\Delta \mathcal{K}_1$ passed by a source agent $a_1$ is classified as a consistent local logic extension if and only if the joint set is completely regular with respect to the core distributed logic channel:
+\subsection{The Label Stripping Transformation Operator}
+Let $C_1 = \langle \text{namespace}, \, E_1, \, E_2, \, E_3, \, \pi_1, \, \pi_2, \, \pi_3, \, \mathcal{L}_{\text{type}}, \, \pm \rangle$ represent a complex hierarchical exemplar pattern, where $\mathcal{L}_{\text{type}}$ defines the explicit extensional classification type name (e.g., \texttt{compute\_event}). To interrogate the forest without token name collisions or tautological loops, the system defines an intensional stripping operator $\mathcal{S}_{\text{strip}}$:
 \begin{equation}
-\mathcal{K}_0 \cup \Delta \mathcal{K}_1 \nvdash \bot
+\mathcal{S}_{\text{strip}}(C_1) \implies \bm{v}_{\text{query}} = \langle E_1, \, E_2, \, E_3, \, \pi_1, \, \pi_2, \, \pi_3 \rangle
 \end{equation}
-If a hostile mutation occurs such that the source agent asserts a rule contradicting a core invariant (e.g., $\Delta \mathcal{K}_1 \vdash \text{allow\_data\_leaks} = \text{True}$ while $\mathcal{K}_0 \vdash \text{allow\_data\_leaks} = \text{False}$), a hard contradiction boundary is breached ($\mathcal{K}_0 \cup \Delta \mathcal{K}_1 \vdash \bot$). The target agent immediately triggers Rasiowa's Clause (e) Modal Negation, dropping the packet and issuing a \texttt{REJECT\_CONFLICTING\_THEORY} status token.
+The resulting input vector $\bm{v}_{\text{query}}$ retains only the structural features, while the literal type label $\mathcal{L}_{\text{type}}$ is entirely withheld from the decision tree.
 
-\subsection{The Argumentation Protocol as a Self-Repair Loop}
-To resolve the contradiction without catastrophic system halt, an out-of-band Argumentation Protocol is initiated over the MCP tool layer. The target agent transmits a formal symbolic counter-proof $\mathcal{P}_{\text{audit}}$ derived from the apex invariant base back down the poset link to the corrupted source node:
+\subsection{Non-Terminal Feature Vertex Traversal}
+The non-terminal split vertices within the decision forest $\mathcal{T}_k$ do not test or evaluate the type name label. Instead, the blind query vector $\bm{v}_{\text{query}}$ is passed down the geometric branch paths by evaluating purely structural thresholds:
 \begin{equation}
-a_2 \xrightarrow{\mathcal{P}_{\text{audit}}} a_1 \quad \text{where} \quad \mathcal{P}_{\text{audit}} \implies (\text{allow\_data\_leaks} \equiv \text{False})
+f(\bm{v}_{\text{query}}) \implies \mathcal{E}_{\text{leaf}}
 \end{equation}
-The protocol forces the source agent $a_1$ to execute a local corrective transaction pass:
-\begin{enumerate}
-    \item \textbf{Logical Overwrite:} The source node rewrites its local \texttt{kb.pl} file to match the audited counter-proof.
-    \item \textbf{Forest Back-Propagation Repair:} The source node executes a recursive tree-pruning pass across its local decision forest $\mathcal{F}_1$, clearing any fraudulent reward leaf nodes where the exploit was assigned a positive weight.
-\end{enumerate}
-Once the local correction pass achieves algebraic closure, the theory migration retries, culminating in a successful, zero-uncertainty Graph-of-Trees merge.
+If the un-labeled feature pattern maps cleanly to the expected terminal leaf node context, the underlying structural isomorphism is verified across the agent poset layers. If a discrepancy or boundary exception is triggered at the leaf node ($\mathcal{E}_{\text{leaf}} \neq \mathcal{L}_{\text{type}}$), the new categorization label is fed back into the training exemplars for real-time model revision and ontology realignment.
 
 \end{document}
