@@ -24,27 +24,28 @@ To inject continuous meaning and speech-act context into the message-passing con
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{Distributed Multi-Directory Agent Initializations}
-Each independent neuro-symbolic agent $a_k \in \mathcal{A}$ maintains its unique background logic constraints inside a dedicated disk directory path:
-\begin{equation}
-a_k \equiv \langle \mathcal{V}_k, \, \mathcal{K}_k, \, \mathcal{F}_k \rangle
-\end{equation}
+\section{Five-Step Abstract Ontology Replacement Merger Protocol}
+We define the formal sequencing bounds for executing single-pass ontology alignment across distinct agent nodes using pre-resident grounding exemplars.
 
-\section{Intensional Model Interrogation via Classification Type-Label Stripping}
-We formalize the mechanism for interrogating a frozen decision forest model by distinguishing between an exemplar's extensional type label and its structural attributes.
-
-\subsection{The Label Stripping Transformation Operator}
-Let $C_1 = \langle \text{namespace}, \, E_1, \, E_2, \, E_3, \, \pi_1, \, \pi_2, \, \pi_3, \, \mathcal{L}_{\text{type}}, \, \pm \rangle$ represent a complex hierarchical exemplar pattern, where $\mathcal{L}_{\text{type}}$ defines the explicit extensional classification type name (e.g., \texttt{compute\_event}). To interrogate the forest without token name collisions or tautological loops, the system defines an intensional stripping operator $\mathcal{S}_{\text{strip}}$:
+\subsection{The Local Grounding Initialization Constraint}
+Let $\mathcal{E}_k$ represent the local extensional ground plane stored inside an agent's \texttt{exs.pl} file framework. The initialization constraint mandates that all historical complex exemplars must be fully compiled and serialized prior to data transport:
 \begin{equation}
-\mathcal{S}_{\text{strip}}(C_1) \implies \bm{v}_{\text{query}} = \langle E_1, \, E_2, \, E_3, \, \pi_1, \, \pi_2, \, \pi_3 \rangle
+\mathcal{E}_{\text{target}} \equiv \langle C_1', C_2', \dots, C_n' \rangle \in \text{Local Memory}
 \end{equation}
-The resulting input vector $\bm{v}_{\text{query}}$ retains only the structural features, while the literal type label $\mathcal{L}_{\text{type}}$ is entirely withheld from the decision tree.
+This baseline provides the immutable structural stencils required to interrogate incoming models.
 
-\subsection{Non-Terminal Feature Vertex Traversal}
-The non-terminal split vertices within the decision forest $\mathcal{T}_k$ do not test or evaluate the type name label. Instead, the blind query vector $\bm{v}_{\text{query}}$ is passed down the geometric branch paths by evaluating purely structural thresholds:
-\begin{equation}
-f(\bm{v}_{\text{query}}) \implies \mathcal{E}_{\text{leaf}}
-\end{equation}
-If the un-labeled feature pattern maps cleanly to the expected terminal leaf node context, the underlying structural isomorphism is verified across the agent poset layers. If a discrepancy or boundary exception is triggered at the leaf node ($\mathcal{E}_{\text{leaf}} \neq \mathcal{L}_{\text{type}}$), the new categorization label is fed back into the training exemplars for real-time model revision and ontology realignment.
+\subsection{The Single-Pass Interrogation and Realignment Sequence}
+Upon receiving the source agent's abstract tree model via the Model Context Protocol (MCP), the target node executes a 5-step replacement sequence:
+\begin{enumerate}
+    \item \textbf{Logic Basis Consensus:} The target verifies the incoming \texttt{kb.pl} rules against master invariants to clear a shared logical foundation.
+    \item \textbf{Model Payload Buffering:} The target agent copies the source abstract decision tree $\mathcal{T}_{\text{source}}$ directly into a protected memory cache.
+    \item \textbf{Blind Intensional Interrogation:} The target unrolls its local complex exemplars, strips out the explicit classification type names to form blind query vectors $\bm{v}_{\text{query}}$, and evaluates them across both models. Let $\mathcal{H}_T$ represent the target tree traversal function and $\mathcal{H}_S$ represent the source copy function:
+    \begin{equation}
+    \mathcal{H}_T(\bm{v}_{\text{query}}) \implies \mathcal{L}_{\text{target}}, \quad \mathcal{H}_S(\bm{v}_{\text{query}}) \implies \mathcal{L}_{\text{source}}
+    \end{equation}
+    If a structural nomenclature variance occurs ($\mathcal{L}_{\text{target}} \neq \mathcal{L}_{\text{source}}$), the target captures the discrepancy once, maps the corrected source name to the feature set, and locks the repaired exemplar into the local \texttt{exs.pl} file matrix.
+    \item \textbf{Inductive Retraining Over Delta Buffer:} The target executes an immediate local inductive training pass over the updated, repaired exemplar list, absorbing the merged terms.
+    \item \textbf{Ontology Substitution Merger:} The newly retrained abstract model replaces the old target tree configuration, achieving complete semantic realignment across the multi-agent perimeter.
+\end{enumerate}
 
 \end{document}
