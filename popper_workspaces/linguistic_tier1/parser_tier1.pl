@@ -1,21 +1,28 @@
 %% =================================================================
 %% 🪐 TIER 1 & TIER 3 INTERLOCKING FORESTS OF DECISION TREES
-%% Phase Next Horizon: Hamilton-Jacobi-Isaacs (HJI) Reachability Gates
+%% Phase Next Core: Besnard-Hunter Deductive Argumentation Logic
+%% References: Philippe Besnard & Anthony Hunter (Deductive Arguments)
 %% =================================================================
 
-:- dynamic hji_game_state/4.
-:- dynamic avoid_set_perimeter/3.
+:- dynamic argument_tuple/4.
+:- dynamic undercutter/3.
+:- dynamic defeasible_claim/2.
 
-%% --- 🎮 HJI DIFFERENTIAL GAME PRIMITIVES ---
-% Syntax: hji_game_state(SubstationID, HamiltonianStatus, DefenderPolicy, AttackerPolicy)
-hji_game_state(substation_1, optimal_containment, load_curtailment, synchronized_surge_exploit).
-hji_game_state(substation_2, tracking_safe_envelope, energy_storage_discharge, passive_probing).
+%% --- 🛡️ BESNARD-HUNTER CORE ARGUMENT STRUCTURES ---
+% Syntax: argument_tuple(ArgumentID, SupportSet, Claim, OriginAgent)
+argument_tuple(arg_src_01, [telemetry_drift, load_surge_unmapped], allow_data_bypass, agent_1_specialist).
+argument_tuple(arg_tgt_01, [system_invariant_leak_false, expected_leak_penalty], deny_data_bypass, agent_2_worker).
 
-%% --- 🛑 TOPOLOGICAL AVOID SETS (TARGET RISK BOUNDARIES) ---
-% Syntax: avoid_set_perimeter(AvoidSetID, MetricThreshold, CriticalInfraction)
-avoid_set_perimeter(transformer_thermal_melt, 0.95, catastrophic_grid_fracture).
-avoid_set_perimeter(bus_frequency_collapse, 59.2, regional_cascade_blackout).
+%% --- ⚔️ TOPOLOGICAL DEFATER & ATTACK PATHS ---
+% Syntax: undercutter(AttackingArgumentID, TargetArgumentID, TargetSupportPremise)
+undercutter(arg_tgt_01, arg_src_01, telemetry_drift).
+
+%% --- 📜 DEFEASIBLE ACTION HYPOTHESES ---
+% Syntax: defeasible_claim(ClaimID, ActionCommand)
+defeasible_claim(allow_data_bypass, activate_delayed_recovery_routing).
+defeasible_claim(deny_data_bypass, activate_mission_abort_safety_halt).
 
 %% --- MASTER INTER-TREE DELEGATION CORE ---
-part_of(hji_game_state, interlocking_forest, level30_subsystem_dispatcher).
-part_of(avoid_set_perimeter, interlocking_forest, level12_science_invariants).
+part_of(argument_tuple, interlocking_forest, level30_subsystem_dispatcher).
+part_of(undercutter, interlocking_forest, level12_science_invariants).
+part_of(defeasible_claim, interlocking_forest, level30_subsystem_dispatcher).

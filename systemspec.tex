@@ -16,7 +16,7 @@
 \maketitle
 
 \section{Introduction and Architectural Core}
-We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$). The ultimate objective of the system is the minimization of coordinate uncertainty to realize Mesarovic's Attainable Space ($V'$), culminating in physical vehicle extraction.
+We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$).
 
 \section{The 30-Dimensional Integrated Attribute Matrix}
 To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 30}$:
@@ -24,25 +24,24 @@ To inject continuous meaning and speech-act context into the message-passing con
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{Emergent MARL Utility Sharing and CSMA Protocols}
-We formalize the coordination of decentralized data center nodes sharing a common electric power grid capacity boundary without centralized top-down scheduling matrices.
+\section{Besnard-Hunter Deductive Argumentation and Defeasible Self-Repair}
+We formalize the machine-to-machine deconfliction and self-repair mechanism using Philippe Besnard and Anthony Hunter's deductive argumentation framework, replacing monotonic First-Order Logic (FOL) to handle localized theory anomalies.
 
-\subsection{Carrier Sense Multiple Access (CSMA) via Utility Load Sensing}
-Let $\mathcal{A}_{\text{marl}} = \{a_A, a_B, a_{\text{util}}\}$ represent the decentralized deep reinforcement learning nodes. The aggregate electrical load demand on the substation bus acts as a shared continuous communications carrier channel $L(t)$. Each agent computes its training cycle activation policy $\bm{\pi}_i$ based on a collective reward framework formulated to minimize spatially correlated active-power disturbances:
+\subsection{The Support-Claim Argument Tuple}
+Let $\mathcal{K}_i$ represent the localized, non-monotonic knowledge base of an agent $a_i \in \mathcal{A}$. An argument $\mathcal{A}_k$ is formalized as a structural tuple:
 \begin{equation}
-R_{\text{collective}}(t) = \sum_{i} \text{Throughload}_i(t) - \gamma \cdot \mathbb{I}\left( \sum_{i} \text{Compute}_i(t) > L_{\text{capacity}} \right)
+\mathcal{A}_k = \langle \Phi, \, \alpha \rangle
 \end{equation}
-where $\mathbb{I}$ represents the indicator function tracking synchronized load overlaps, and $\gamma = 5000$ serves as a non-linear penalty multiplier. If an agent senses a busy carrier state ($L(t) \ge 0.60$), the local policy triggers an automatic exponential backoff routine:
+where $\Phi \subseteq \mathcal{K}_i$ represents the \textit{Support} (a minimal, logically consistent subset of local premises) and $\alpha$ represents the \textit{Claim} (the derived behavioral heuristic or decision tree split command). The support must satisfy the following consistency criteria:
 \begin{equation}
-\bm{\pi}_i(t) \implies \text{Backoff}(t + \Delta t_{\text{random}})
+\Phi \nvdash \bot \quad \text{and} \quad \Phi \vdash \alpha
 \end{equation}
-releasing channel capacity natively without explicit inter-company planning loops.
 
-\subsection{Topological Load Perspective Tracing under Synchronous Attack}
-When an external adversary or malicious perimeter source executes a synchronous load intrusion ($\Delta L_{\text{attack}} = +0.85\text{ GW}$), the MARL network initiates a distributed geometric trace query. The load anomaly is verified by evaluating localized structural load perspectives $\mathcal{P}_k$ across the multi-graph substation topology:
+\subsection{Topological Undercutters and Attack Primitives}
+When a source agent maps an anomalous theory, a target agent constructs a logical Counter-Argument designed to attack the consistency of the source's support. An argument $\mathcal{A}_2 = \langle \Phi_2, \alpha_2 \rangle$ is an \textit{Undercutter} for $\mathcal{A}_1 = \langle \Phi_1, \alpha_1 \rangle$ if the claim $\alpha_2$ directly negates a premise within the source support set:
 \begin{equation}
-\nabla_{\bm{x}} V_k(\mathcal{P}_k) \neq 0 \implies \text{Isolate}(\text{Branch}_{\text{unmapped}})
+\alpha_2 \equiv \neg \phi \quad \text{where} \quad \phi \in \Phi_1
 \end{equation}
-If the gradient reveals that the load advection path originates from an unmapped physical branch rather than a registered consumer node, the attention guardrail issues a hard \texttt{activate\_mission\_abort\_safety\_halt} token, freezing the transmission bus to protect structural grid connectivity.
+Upon receiving the undercutter payload over the Model Context Protocol (MCP) gateway, the claim is classified as defeated. This triggers an immediate 5-step inductive replacement loop, forcing the source agent to execute local back-propagation pruning across its decision forest $\mathcal{F}_1$ to realign the abstract tree topology with the master invariants ($\top$) without causing a global system halt.
 
 \end{document}
