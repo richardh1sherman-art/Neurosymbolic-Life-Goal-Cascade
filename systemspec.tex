@@ -16,29 +16,33 @@
 \maketitle
 
 \section{Introduction and Architectural Core}
-We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$).
+We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$). The ultimate objective of the system is the minimization of coordinate uncertainty to realize Mesarovic's Attainable Space ($V'$), culminating in physical vehicle extraction.
 
-\section{Distributed Multi-Directory Agent Initializations}
-Each independent neuro-symbolic agent $a_k \in \mathcal{A}$ maintains its unique background logic constraints inside a dedicated disk directory path:
+\section{The 30-Dimensional Integrated Attribute Matrix}
+To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 30}$:
 \begin{equation}
-a_k \equiv \langle \mathcal{V}_k, \, \mathcal{K}_k, \, \mathcal{F}_k \rangle
+\bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{Logical Soundness of the Inductively Grown Merger Ontology}
-We formalize the deductive guarantees that preserve structural sanity and prevent concept drift during the inductive tree retraining pass.
+\section{Emergent MARL Utility Sharing and CSMA Protocols}
+We formalize the coordination of decentralized data center nodes sharing a common electric power grid capacity boundary without centralized top-down scheduling matrices.
 
-\subsection{The Prolog Guardrail Attention Filter Invariant}
-Let $\mathcal{K}_{\text{target}}$ represent the target agent's verified background knowledge base (\texttt{kb.pl}), and let $\Delta\mathcal{E}$ represent the set of repaired, newly aligned complex exemplars staged during the single-pass blind interrogation phase. The inductive learning engine $\mathcal{I}_{\text{CART}}$ generates the revised decision tree structure $\mathcal{T}_{\text{merged}}$ strictly within the declarative perimeter enforced by the logic filter:
+\subsection{Carrier Sense Multiple Access (CSMA) via Utility Load Sensing}
+Let $\mathcal{A}_{\text{marl}} = \{a_A, a_B, a_{\text{util}}\}$ represent the decentralized deep reinforcement learning nodes. The aggregate electrical load demand on the substation bus acts as a shared continuous communications carrier channel $L(t)$. Each agent computes its training cycle activation policy $\bm{\pi}_i$ based on a collective reward framework formulated to minimize spatially correlated active-power disturbances:
 \begin{equation}
-\mathcal{T}_{\text{merged}} = \mathcal{I}_{\text{CART}}(\mathcal{E} \cup \Delta\mathcal{E}) \quad \text{subject to} \quad \mathcal{K}_{\text{target}} \vdash \Delta\mathcal{E} \nvdash \bot
+R_{\text{collective}}(t) = \sum_{i} \text{Throughload}_i(t) - \gamma \cdot \mathbb{I}\left( \sum_{i} \text{Compute}_i(t) > L_{\text{capacity}} \right)
 \end{equation}
-Because the logic verification gateway blocks any exemplar mutation that violates the core structural invariants ($\mathcal{K} \cup \Delta\mathcal{E} \vdash \bot$), the tree is restricted from generating illegitimate feature splits or chasing noise.
+where $\mathbb{I}$ represents the indicator function tracking synchronized load overlaps, and $\gamma = 5000$ serves as a non-linear penalty multiplier. If an agent senses a busy carrier state ($L(t) \ge 0.60$), the local policy triggers an automatic exponential backoff routine:
+\begin{equation}
+\bm{\pi}_i(t) \implies \text{Backoff}(t + \Delta t_{\text{random}})
+\end{equation}
+releasing channel capacity natively without explicit inter-company planning loops.
 
-\subsection{Inductive Definability and Semantic Consistency}
-The resulting decision forest is completely inductively definable and remains a sound semantic extension of the initial logic. Any path tracing from the root vertex to a newly merged classification leaf matches a validated theorem path within the underlying Description Logic:
+\subsection{Topological Load Perspective Tracing under Synchronous Attack}
+When an external adversary or malicious perimeter source executes a synchronous load intrusion ($\Delta L_{\text{attack}} = +0.85\text{ GW}$), the MARL network initiates a distributed geometric trace query. The load anomaly is verified by evaluating localized structural load perspectives $\mathcal{P}_k$ across the multi-graph substation topology:
 \begin{equation}
-\forall \text{Path}(\text{Root} \to \mathcal{E}_{\text{leaf}}) \implies \mathcal{K}_{\text{target}} \vdash \Psi_{\text{consistent}}
+\nabla_{\bm{x}} V_k(\mathcal{P}_k) \neq 0 \implies \text{Isolate}(\text{Branch}_{\text{unmapped}})
 \end{equation}
-This dual-layer constraint system guarantees that while the agent's ontology expands dynamically to absorb shared multi-scale grid strategies, the operational execution plane retains absolute semantic soundness and boundary integrity with zero black-box VRAM overhead.
+If the gradient reveals that the load advection path originates from an unmapped physical branch rather than a registered consumer node, the attention guardrail issues a hard \texttt{activate\_mission\_abort\_safety\_halt} token, freezing the transmission bus to protect structural grid connectivity.
 
 \end{document}
