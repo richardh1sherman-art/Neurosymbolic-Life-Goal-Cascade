@@ -16,7 +16,7 @@
 \maketitle
 
 \section{Introduction and Architectural Core}
-We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$). The ultimate objective of the system is the minimization of coordinate uncertainty to realize Mesarovic's Attainable Space ($V'$), culminating in physical vehicle extraction.
+We formalize the search-and-rescue plot for a central Fire-Station as an interlocking multi-graph Sequential Dynamic System (SDS) operating across distinct modal boundaries. Following Edward Zalta's Theory of Abstract Objects, the spatiotemporal execution plane maps to ordinary object exemplification ($Fx$), while the invariant control forests encode properties atemporally ($xF$).
 
 \section{The 30-Dimensional Integrated Attribute Matrix}
 To inject continuous meaning and speech-act context into the message-passing convolutions, the GNN ingests an integrated, multi-scale node attribute matrix $\bm{X} \in \mathbb{R}^{N \times 30}$:
@@ -24,43 +24,25 @@ To inject continuous meaning and speech-act context into the message-passing con
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{Second-Order Kuramoto Grid Physics and Decentralized CSMA/CD Access}
-We formalize the active stabilization of shared electrical transmission networks under massive distributed training workloads as a closed-loop system mapping discrete multi-agent reinforcement learning to continuous swing equations.
+\section{Phase-Shift Stabilization Under Rigid Periodic Software Forcing}
+We formalize the mathematical safety perimeters enabling grid stabilization without modifying internal data center deep learning compilation batch variables.
 
-\subsection{The Continuous Route to Chaos Swing Matrix}
-Let $N$ represent the total number of synchronized training nodes scaling asymptotically up to $10,000$. Each electrical substation bus $i$ behaves as a coupled non-linear oscillator with an instantaneous phase angle $\theta_i(t)$ and a local phase velocity deviation $\dot{\theta}_i(t)$. The physical grid dynamics under the impact of periodic data center loads are governed by the second-order Kuramoto swing equation:
+\subsection{The Fixed-Batch Periodic Driving Constraint}
+Let $\mathcal{W}_i(t)$ represent the rigid internal training workload execution function of data center $a_i \in \mathcal{A}$, operating with an unalterable continuous training stride of approximately $50$ seconds. The resulting load profile generates an immutable, extensional periodic driving square wave:
 \begin{equation}
-m_i \ddot{\theta}_i + d_i \dot{\theta}_i = P_i - \sum_{j=1}^{N} K_{ij} \sin(\theta_i - \theta_j) - P_{\text{AI}, i}(t)
+P_{\text{AI}, i}(t) = \text{Square\_Wave}(\Omega_{\text{load}} \cdot t + \phi_i)
 \end{equation}
-where $m_i$ represents the rotational turbine inertia, $d_i$ represents the natural system damping, and $K_{ij}$ defines the admittance coupling strength of the physical transmission lines. The term $P_{\text{AI}, i}(t)$ represents the aggregate load injection of the AI cluster. Prior to reinforcement learning intervention, uncoordinated training sessions run in a perfectly synchronous software loop, transforming $P_{\text{AI}, i}(t)$ into a heavy low-frequency square wave pulsing at a destructive resonant frequency:
-\begin{equation}
-P_{\text{AI}, i}(t) = \text{Square\_Wave}(\Omega_{\text{load}} \cdot t), \quad \Omega_{\text{load}} \approx 0.5\text{ Hz}
-\end{equation}
-As the amplitude of this periodic driving force scales up, the grid frequency deviations $\dot{\theta}_i(t)$ undergo a classic period-doubling bifurcation cascade, collapsing the global phase-locked limit cycle into a chaotic attractor, causing extensive phase-slipping and localized grid blackouts.
+Uncoordinated initialization mandates that phase variables align constructively ($\phi_1 = \phi_2$), leading to resonant amplification that drives the second-order Kuramoto swing equations into period-doubling bifurcation cascades.
 
-\subsection{State Observation Filters and Operational Ramp Constraints}
-The system unrolls a complete closed-loop macro-protocol by extracting a continuous state space observation vector $\bm{s}_i(t)$ at each millisecond Runge-Kutta (RK4) ODE solver step:
+\subsection{The External Phase-Shifting Gating Operator}
+To prevent grid collapse without intruding into the proprietary data center software stack, the MARL controller acts exclusively as an external access gatekeeper at the network boundary interface. Let $\mathcal{H}_{\text{CD}}$ represent the collision detection function tracking aggregate load derivatives ($\frac{dL}{dt}$). Upon detection of an imminent bus overlap event, the controller instantiates a randomized temporal phase-shifting gating operator $\mathcal{G}_{\Delta t}$:
 \begin{equation}
-\bm{s}_i(t) = \left[ \theta_i(t), \, L(t), \, \frac{dL}{dt} \right] \in \mathbb{R}^3
+P_{\text{AI}, i}^{\text{gated}}(t) = \text{Square\_Wave}\Big(\Omega_{\text{load}} \cdot (t - \Delta t_{\text{random}}) + \phi_i\Big)
 \end{equation}
-where $L(t) = \sum P_i(t)$ defines the aggregate utility carrier load and $\frac{dL}{dt}$ acts as an instantaneous collision detection metric. Power utility operators impose strict time-domain constraints to enforce grid boundary safety, forcing compliance metrics across three structural parameters:
-\begin{itemize}
-    \item \textbf{Ramp-Up/Down Rate Limit:} $\mathcal{R}_{\text{ramp}} \le 50.0\text{ MW/s}$ maximum permitted change.
-    \item \textbf{Dynamic Power Range:} Short-term deviations before triggering penalty terms.
-    \item \textbf{Harmonic Spectral Cap:} Harmonic energy within the critical $0.1 - 20\text{ Hz}$ resonance band must never exceed $20\%$ of total spectral energy.
-\end{itemize}
-
-\subsection{Emergent CSMA/CD Phase-Locking and Historical Throughput Invariants}
-The MARL controllers optimize their policy weights using an explicit, non-linear quadratic collective reward function designed to punish greed during structural grid overlaps:
+The application of $\mathcal{G}_{\Delta t}$ introduces an artificial, out-of-band asymmetric delay that forces destructive interference across the active load profiles:
 \begin{equation}
-R_{\text{collective}}(t) = \sum_{i=1}^{N} \text{Compute\_Progress}_i(t) - \beta \cdot \max\left(0, \, L(t) - L_{\text{threshold}}\right)^2
+\phi_1 \neq \phi_2^{\text{gated}} \implies \int_{t}^{t+T} \left( P_{\text{AI}, 1}(t) + P_{\text{AI}, 2}^{\text{gated}}(t) \right) e^{-i\Omega_{\text{load}}t} dt \to 0
 \end{equation}
-where $\beta = 1000$. When a collision spike is detected via $\frac{dL}{dt}$, the agents execute a decentralized randomized backoff action. This transforms $P_{\text{AI}, i}(t)$ from an aggressive driving force into a flat line characterized by high-frequency, low-amplitude white noise. The grid's natural damping $d_i$ instantly recovers dominance, dampening the oscillations and pulling the oscillators back into a globally synchronized, phase-locked steady state.
-
-Our inductive procedures validate that the emergent power grid utility service curve strictly satisfies standard network performance curves for throughput ($S$) versus traffic load ($G$) first established in the foundational data networks architecture framework of \textbf{Sherman \& Gable (1983)}:
-\begin{equation}
-S = \frac{G \cdot e^{-2aG}}{G(1 + 2a) + e^{-aG} - e^{-2aG}}
-\end{equation}
-where $a$ represents the normalized propagation delay of the grid sensing envelope. This guarantees that even when scaled asymptotically up to $10,000$ training nodes, the multi-agent system achieves maximum throughput efficiency with zero black-box VRAM overhead.
+By explicitly nullifying the low-frequency Fourier spectral magnitude within the critical resonant inter-area band ($0.1 - 20\text{ Hz}$), the destructive driving term is removed from the Kuramoto system manifold. The grid's natural damping $d_i$ and mechanical turbine inertia $m_i$ recover immediate dominance, dampening frequency deviations $\dot{\theta}_i(t)$ and pulling the coupled non-linear oscillators back into a stable, globally synchronized phase-locked steady state ($\circ$).
 
 \end{document}
