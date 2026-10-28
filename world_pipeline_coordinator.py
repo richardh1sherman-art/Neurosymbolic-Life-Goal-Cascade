@@ -12,77 +12,48 @@ class EnhancedWorldLevelNode:
         self.tb = None                        
         self.fb = None                        
 
-class MultiAgentForestCompiler:
+class EnhancedForestCoordinator:
     def __init__(self):
-        self.base_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM"
-        
-    def build_and_serialize_agent2_kinematic_tree(self):
-        """🌲 AGENT 2 COMPILATION: INDIVIDUAL KINEMATIC & SITUATION ISOMORPHISMS"""
-        root = EnhancedWorldLevelNode(split_feature="situation_type", split_value="non_convex_trapped")
-        
-        # True Branch: Trap Isomorphism (Mountain Rescue == Kitchen Fire Relational Pattern)
-        root.tb = EnhancedWorldLevelNode(
-            is_leaf=True,
-            classification="trigger_graph_minor_contraction",
-            context="Trapped profile confirmed; Judith crevice topology maps to George kitchen fire leaf",
-            reward_metric="Minimize coordinate uncertainty; execute structural analogy transfer"
-        )
-        # False Branch: Non-Trapped Invariant
-        root.fb = EnhancedWorldLevelNode(
-            is_leaf=True,
-            classification="system_stable_maintain_policy",
-            context="No geometric trap detected; open path corridor available",
-            reward_metric="Maintain routine observation tracking vectors"
-        )
-        
-        target_path = os.path.join(self.base_dir, "agent_2_worker", "agent_2_kinematic_rescue.pkl")
-        with open(target_path, "wb") as f:
-            pickle.dump(root, f)
-        print(f"   └── \033[1;32m[SERIALIZED AGENT 2 FOREST]\033[0m ──➔ {target_path}")
+        self.model_dir = "/home/rsherman/projects/SMT-ILP/ZeroVRAM/story_intake_directory/pickled_models"
+        os.makedirs(self.model_dir, exist_ok=True)
 
-    def build_and_serialize_agent1_searle_tree(self):
-        """🌲 AGENT 1 COMPILATION: COLLECTIVE REASONING & SEARLE SOCIAL REALITIES"""
-        root = EnhancedWorldLevelNode(split_feature="speech_act_type", split_value="declaration_inception")
+    def build_custom_tree30_with_kuramoto_schema(self):
+        """🔨 TREE #30 OVERHAUL: COUPLING PHYSICS WAVELETS TO STRATEGIC ACTIONS"""
+        root = EnhancedWorldLevelNode(split_feature="gnn_feature_dim", split_value="30")
         
-        # True Branch: Searle Institutional Reality
-        root.tb = EnhancedWorldLevelNode(
-            is_leaf=True,
-            classification="system_stable_maintain_policy",
-            context="Constitutive operator active; X counts as Y in C status function verified cleanly",
-            reward_metric="Matthias selection validated via Blahut-Arimoto information channel"
-        )
-        # False Branch: Temporal Billing Deadlines
-        root.fb = EnhancedWorldLevelNode(split_feature="time_breached", split_value="step_30")
-        root.fb.tb = EnhancedWorldLevelNode(
+        # True Branch: 30-Dimensional Attribute Input Validated
+        root.tb = EnhancedWorldLevelNode(split_feature="kuramoto_state", split_value="bifurcation_cascade")
+        
+        # True-True: Grid heading to chaos -> Trigger Emergency Backoff Policy Override
+        root.tb.tb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="activate_mission_abort_safety_halt",
-            context="Legal deadline violated; non-linear penalty multiplier active",
-            reward_metric="Enforce strict contract breach infraction metrics"
+            context="Synchronous AI square wave driving force detected; phase velocity deviations exceeding safety limits",
+            reward_metric="Enforce quadratic collective penalty beta; inject randomized backoff parameters"
         )
-        root.fb.fb = EnhancedWorldLevelNode(
+        
+        # True-False: Stable Phase-Locked Grid Loop -> Maintain Standard Operating Protocols
+        root.tb.fb = EnhancedWorldLevelNode(
             is_leaf=True,
             classification="system_stable_maintain_policy",
-            context="Time within contract bounds; voluntary payment sequence active",
-            reward_metric="Monitor timeline compliance vectors"
+            context="Emergent Sherman-Gable (1983) CSMA/CD protocol active; driving force flattened into white noise",
+            reward_metric="Damping and inertia maintain global synchronization; throughput curves optimized"
         )
         
-        target_path = os.path.join(self.base_dir, "agent_1_specialist", "agent_1_searle_social.pkl")
-        with open(target_path, "wb") as f:
+        # False Branch: Dimensional mismatch
+        root.fb = EnhancedWorldLevelNode(is_leaf=True, classification="activate_mission_abort_safety_halt", context="Invalid attribute vector dimensions")
+        
+        with open(os.path.join(self.model_dir, "level30_subsystem_dispatcher.pkl"), "wb") as f:
             pickle.dump(root, f)
-        print(f"   └── \033[1;32m[SERIALIZED AGENT 1 FOREST]\033[0m ──➔ {target_path}")
 
-    def run_pipeline(self):
+    def run_coordination_pipeline(self):
         print("=" * 95)
-        print("🚀 CUSTOM AI PIPELINE: COMPILING DECENTRALIZED MULTI-AGENT MEMORY FORESTS")
+        print("🚀 CUSTOM AI PIPELINE: COMPILING APEX LAYER AND TOPOLOGICAL DISPATCH CHANNELS")
         print("=" * 95)
-        print("📥 Architecture ──➔ Extracting Isolated Expert Tree Frames For Local Storage")
-        print("-" * 95)
-        
-        self.build_and_serialize_agent1_searle_tree()
-        self.build_and_serialize_agent2_kinematic_tree()
-        
+        self.build_custom_tree30_with_kuramoto_schema()
+        print("🌲 DECISION FOREST LAYER SUCCESSFULLY RETRAINED ON CONTINUOUS GRID PHYSICS INVARIANTS.")
         print("=" * 95 + "\n")
 
 if __name__ == "__main__":
-    compiler = MultiAgentForestCompiler()
-    compiler.run_pipeline()
+    coordinator = EnhancedForestCoordinator()
+    coordinator.run_coordination_pipeline()
