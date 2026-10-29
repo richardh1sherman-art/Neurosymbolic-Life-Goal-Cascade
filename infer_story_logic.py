@@ -13,12 +13,14 @@ class KuramotoBifurcationLogger:
         self.forcing_amplitudes = np.linspace(0.0, 15.0, 8)
         
     def compute_swing_derivatives(self, theta, omega, p_forcing, time):
-        """Continuous Second-Order Kuramoto Swing Equation under Periodic Square-Wave Forcing"""
+        """Continuous Second-Order Kuramoto Swing Equation under Periodic Forcing"""
+        # Periodic square-wave forcing tracking data center batch cycles
         forcing_signal = p_forcing if math.sin(2.0 * math.pi * 0.5 * time) > 0 else 0.0
         
         d_theta = omega
         p_mechanical = 5.0
-        interaction = self.coupling_k * math.sin(theta[1] - theta[0])
+        # 🚨 FIX: Corrected the index parsing to evaluate the actual difference between coupled nodes
+        interaction = self.coupling_k * math.sin(theta[0] - theta[1])
         
         d_omega_0 = (p_mechanical - interaction - forcing_signal - self.damping_d * omega[0]) / self.inertia_m
         d_omega_1 = (p_mechanical + interaction - self.damping_d * omega[1]) / self.inertia_m
@@ -32,7 +34,6 @@ class KuramotoBifurcationLogger:
         
         settled_peaks = []
         
-        # 2500 steps simulation
         for step in range(2500):
             k1_t, k1_w = self.compute_swing_derivatives(theta, omega, p_forcing, time)
             
@@ -52,11 +53,10 @@ class KuramotoBifurcationLogger:
             omega += (self.dt / 6.0) * (k1_w + 2.0 * k2_w + 2.0 * k3_w + k4_w)
             time += self.dt
             
-            # Post-transient phase: harvest the maximum local phase velocity deviations
-            if step >= 2000 and step % 50 == 0:
+            # 🚨 FIX: Extract a single continuous target bus coordinate [0] to track true bifurcations
+            if step >= 2000 and step % 40 == 0:
                 settled_peaks.append(abs(omega[0]))
                 
-        # 🚨 FIXED: Synchronized variable spelling signature to reference settled_peaks
         return np.unique(np.round(settled_peaks if settled_peaks else [abs(omega[0])], 3))
 
     def generate_bifurcation_matrix(self):
@@ -64,7 +64,7 @@ class KuramotoBifurcationLogger:
         print("🪐 UNIFIED NEUROSYMBOLIC LISP DSL COMPILER: BIFURCATION MATRIX EXTRACTOR")
         print("=" * 95)
         print("📥 Variable Input  ──➔ Forcing Amplitude P_AI (0.0 to 15.0 GW)")
-        print("📥 Target Metric    ──➔ Asymptotic Local Phase Velocity Peaks |w_i| (Hz)")
+        print("📥 Target Metric    ──➔ Asymptotic Local Phase Velocity Peaks |w_0| (Hz)")
         print("-" * 95)
         print("FORCING AMP (P_AI) | ASYMPTOTIC FREQUENCY PEAKS (Hz)  | DYNAMICAL TOPOLOGY REGIME")
         print("-" * 95)
@@ -73,12 +73,13 @@ class KuramotoBifurcationLogger:
             peaks = self.run_rk4_simulation(p_amp)
             peaks_str = ", ".join([f"{p:.3f}" for p in peaks])
             
+            # Categorize the exact regime by inspecting splitting cardinality
             if len(peaks) == 1:
                 regime = "🟢 [STABLE LIMIT CYCLE]"
             elif len(peaks) == 2:
-                regime = "🔶 [PERIOD-2 BIFURCATION]"
+                regime = "A  [PERIOD-2 SPLITTING]"
             elif len(peaks) <= 4:
-                regime = "⚠️  [PERIOD-4 CASCADING COHERENCE]"
+                regime = "🔶 [PERIOD-4 CASCADE REGISTERED]"
             else:
                 regime = "🛑 [SYNCHRONIZED CHAOTIC ATTRACTOR]"
                 
