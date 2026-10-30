@@ -27,19 +27,11 @@ m_i \ddot{\theta}_i + d_i \dot{\theta}_i = P_i - \sum_{j=1}^{N} K_{ij} \sin(\the
 \end{equation}
 where $m_i$ represents the rotational turbine inertia, $d_i$ represents the natural damping, and $K_{ij}$ defines the admittance coupling strength of the high-voltage transmission lines.
 
-\section{Multi-Facility Scaling and Normalized Sensing}
-As the architecture scales up to 10,000 training nodes distributed across multiple locations at a density of 50 training nodes per facility, static global threshold sensing breaks down. The MARL agents adapt by implementing a normalized carrier-sensing metric $\overline{L}_i(t)$ tracking local facility capacity perimeters:
-\begin{equation}
-\overline{L}_i(t) = \frac{\sum_{j \in \mathcal{N}_i} P_{\text{AI}, j}(t)}{\text{Capacity}_{\text{facility}}}
-\end{equation}
-This multi-scale localization allows individual clusters to sense the aggregate load acceleration ($\frac{dL}{dt}$) and execute independent out-of-phase gating delays, preventing the formation of chaotic attractors.
+\section{High-Fidelity EMT Grounding and IEEE 39-Bus Testing}
+To ground the continuous-time physics layers into a highly verifiable industrial framework, sub-millisecond electromagnetic transient (EMT) numerical simulations are performed across a modified IEEE 39-bus test system. Time-domain simulations are executed using \texttt{PowerSimulationsDynamics.jl}, an open-source Julia package for power system dynamics. This software generates high-fidelity data structures modeling synchronous generators, inverter-based resources, and high-speed electronic controllers. These continuous wavelets are processed directly by our localized inductive learners as extensional exemplars (\texttt{exs.pl}), providing the verified data envelope necessary to train our distributed multi-agent system.
 
-\section{The Core MARL Framework and Emergent CSMA/CD}
-The decentralized controllers evaluate their state-action parameters using a unified, non-linear quadratic collective reward function:
-\begin{equation}
-R_{\text{collective}}(t) = \sum_{i=1}^{N} \text{Compute\_Progress}_i(t) - \beta \cdot \max\left(0, \, L(t) - L_{\text{threshold}}\right)^2
-\end{equation}
-where $\beta = 1000$. Sensing an imminent collision via the load derivative, the agent introduces a randomized temporal delay gate that shifts the periodic square waves out of phase. The grid's natural damping $d_i$ and mechanical inertia $m_i$ recover dominance, dampening the frequency deviations $\dot{\theta}_i(t)$ and pulling the oscillators back into global synchronization.
+\section{Black-Hunter-Pan Multi-Ontology Dialogue Strategy}
+When separate corporate utilities must negotiate grid capacity boundaries without data leakage, interactions map onto the preference-ordered dialogue-game framework established by \textbf{Black, Hunter \& Pan}. Rather than transmitting a massive extensional exemplar dataset, agents exchange compact symbolic arguments formulated as support-claim tuples $\mathcal{A} = \langle \Phi, \alpha \rangle$. The dialogue unrolls dynamically through a deterministic preference sequence ($\text{Scounter} \succ \text{Sarg} \succ \text{Sconcede} \succ \text{Sclose}$), allowing nodes to isolate nomenclature differences and align shared strategies at the grid perimeter without causing VRAM black-box overhead.
 
 \section{Asymptotic Local Frequency Deviations Data Matrix}
 The data tables below contrast the open-loop trajectory towards a chaotic attractor with the closed-loop MARL intervention which collapses the multi-frequency cloud back into a stable phase-locked peak:
@@ -76,6 +68,7 @@ FORCING AMP | ASYMPTOTIC FREQUENCY PEAKS (Hz)  | REGIME
 
 \begin{thebibliography}{9}
 \bibitem{barwise} Barwise, J., \& Seligman, J. (1997). \textit{Information Flow: The Logic of Distributed Systems}. Cambridge University Press.
+\bibitem{black09} \textbf{Black, E., Hunter, A., \& Pan, J. Z. (2009). An Argument-based Approach to Using Multiple Ontologies. \textit{Conference on Scalable Uncertainty Management}. Springer.}
 \bibitem{chaudhary} Chaudhary, C., et al. (2026). Detection of Synchronized AI Data Center Load Episodes Using SCADA Telemetry. \textit{arXiv:2609.18997v1 [eess.SY]}.
 \bibitem{sherman83} Sherman, R., \& Gable, M. (1983). Experience with a Local Network. \textit{Data Communications}, July, 1983.
 \bibitem{vieira96} de Sousa Vieira, M., Khoury, P., Lichtenberg, A. J., Lieberman, M. A., Wonchoba, W., Gullicksen, J., Huang, J. Y., Sherman, R., \& Steinberg, M. (1996). Numerical and Experimental Studies of Self-Synchronization and Synchronized Chaos. \textit{Journal of Nonlinear Science}.
