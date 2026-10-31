@@ -25,46 +25,27 @@ To inject continuous meaning and speech-act context into the message-passing con
 \bm{x}_i = \left[ \bm{e}_i^{\text{emp (16)}} \mid \bm{g}_i^{\text{spatial (2)}} \mid \bm{p}_i^{\text{ppl (3)}} \mid \bm{r}_i^{\text{rsa (3)}} \mid \bm{s}_i^{\text{searle (3)}} \mid \bm{t}_i^{\text{deontic (3)}} \right] \in \mathbb{R}^{30}
 \end{equation}
 
-\section{High-Fidelity Electromagnetic Transient (EMT) Systems and IEEE 39-Bus Testing}
-To ground the continuous-time physics layer into a verifiable industrial framework, sub-millisecond electromagnetic transient (EMT) numerical simulations are executed across a modified IEEE 39-bus test system via the open-source Julia platform \texttt{PowerSimulationsDynamics.jl}. Let the transient state of an electrical node $i$ be characterized by a continuous differential-algebraic power vector $\bm{\xi}_i(t)$:
-\begin{equation}
-\bm{\xi}_i(t) = \left[ V_i(t), \, \delta_i(t), \, P_{\text{IBR}, i}(t), \, Q_{\text{IBR}, i}(t) \right] \in \mathbb{R}^4
-\end{equation}
-where $V_i(t)$ represents the instantaneous voltage magnitude, $\delta_i(t)$ defines the phase angle deviation, and $P_{\text{IBR}, i}(t), Q_{\text{IBR}, i}(t)$ monitor the active and reactive power outputs of local inverter-based renewable resources. The sub-millisecond voltage variations are processed natively by the inductive learners as extensional grounding exemplars (\texttt{exs.pl}):
-\begin{equation}
-\mathcal{E}_i \implies \text{Ingest}\left(\bm{\xi}_i(t_{\text{sample}}), \, \Delta t = 0.5\text{ ms}\right)
-\end{equation}
-This allows our distributed MARL controllers to intercept microscopic transient voltage droops ($V_i(t) < 0.95\text{ p.u.}$) and enforce the Sherman-Gable (1983) backoff boundary constraints before sub-synchronous oscillations propagate into catastrophic inter-area blackouts.
+\section{Multilayer Cyber-Physical Decision Symmetries and Slack Interlocks}
+We formalize the symmetric decentralization of the electrical transmission network by mapping the power grid into a functional, multi-layer conceptual decision hierarchy.
 
-\section{Symmetric Throughput Invariants and Parameter Estimation}
-Following the network routing paradigms of \textbf{Sherman \& Gable (1983)}, our cyber-physical framework evaluates carrier capacity limits across the shared transmission line using a normalized propagation delay parameter $a = \tau_{\text{prop}} / T_{\text{trans}}$. Given electricity propagation speed in copper ($v \approx 2 \times 10^8\text{ m/s}$), a campus cable runway length of $L = 1000\text{ meters}$ results in an end-to-end propagation time of $\tau_{\text{prop}} = 5\text{ }\mu\text{s}$. Bound against our sub-millisecond Julia EMT DAE control step window of $T_{\text{trans}} = 500\text{ }\mu\text{s}$, the network constant is derived exactly as:
+\subsection{Mesarovic Complexity Layers and Vertical Response Vectors}
+The control topology splits across three distinct functional complexity layers, eliminating top-down monolithic dependencies:
+\begin{itemize}
+    \item \textbf{Layer 1 (Direct Control Layer):} Operates on a sub-millisecond to second interval. It uses vectorized numerical optimization and continuous DAE solvers to regulate immediate feedback.
+    \item \textbf{Layer 2 (Adaptation Layer):} Operates on a minute to hourly interval. It utilizes statistical pattern recognition and logical inductive learning forests to identify localized system models.
+    \item \textbf{Layer 3 (Self-Organizing Layer):} Operates on a weekly to monthly timeline. It executes management-by-exception heuristics to modify macro-operating strategies upon global performance deterioration.
+\end{itemize}
+Let $\mathcal{S}_{\text{slack}}$ define a continuous vector interlock managing the boundary constraints between Layer 1 transient responses and Layer 2 Area Generation Control (AGC) commitments under PJM Manual 12 Balancing Operations:
 \begin{equation}
-a = \frac{5\text{ }\mu\text{s}}{500\text{ }\mu\text{s}} = 0.01
+\text{Minimize } \quad \mathcal{J} = \int_{t}^{t+T} \left( \bm{\xi}_i(t) - \bm{\xi}_{\text{nominal}} \right)^2 dt + \bm{s}_{\text{slack}}^T \bm{W} \bm{s}_{\text{slack}}
 \end{equation}
-The absolute throughput performance ($S$) as a function of offered traffic load ($G$) under this parameter is governed by the non-linear invariant:
-\begin{equation}
-S = \frac{G \cdot e^{-aG}}{G \cdot (1 + 2a) + e^{-aG} - (1 - e^{-aG})}
-\end{equation}
-When $a = 0.01$, the system achieves optimal channel utilization efficiency, allowing our decentralized MARL agents to maximize collective rewards and execute randomized delay gating before control-loop interaction chaos collapses the grid.
+The slack variables $\bm{s}_{\text{slack}}$ prevent logical contradictions between high-speed inverter phase-slip damping and slow, hourly economic dispatch limits, certifying local stability without forcing aggregators to disclose internal control laws or proprietary parameters.
 
-\section{Black-Hunter-Pan Multi-Ontology Dialogue Poset Strategy}
-When independent corporate data centers must resolve grid access boundaries without data leakage or brute-force database merges, the deconfliction process is modeled as a preference-ordered dialogue game following the algebraic principles of \textbf{Black, Hunter \& Pan}. 
-
-Agents exchange lightweight symbolic arguments formulated as support-claim tuples $\mathcal{A}_k = \langle \Phi, \alpha \rangle$ across a Model Context Protocol (MCP) tool channel. Let $\mathcal{D}_t$ represent the sequential state-history matrix of the active dialogue at turn $t$. The turn-taking strategy function $\mathcal{S}_x(\mathcal{D}_t)$ acts as a deterministic, preference-ordered selection transducer over the Description Logic poset, mapped via the following strict dominance hierarchy:
+\subsection{Virtual LAN Grid Partitioning Invariants}
+To optimize security and maintain firewall integrity, the macro-grid topology is partitioned into a set of small, decentralized virtual area local area networks (LANs). Instead of a single area with $M$ physical generators, the graph is divided into $M$ independent virtual zones containing a single generation asset or localized renewable cluster each. High-speed Graph Neural Networks (GNNs) compute the inter-LAN boundary exchange paths across the partitioned adjacency matrix $\bm{A}_{\text{partition}}$:
 \begin{equation}
-\mathcal{S}_x(\mathcal{D}_t) = \text{Scounter}_x(\mathcal{D}_t) \succ \text{Sarg}_x(\mathcal{D}_t) \succ \text{Sconcede}_x(\mathcal{D}_t) \succ \langle x, \text{close}, \gamma \rangle
+\bm{A}_{\text{partition}} = \bigoplus_{k=1}^{M} \bm{A}_{\text{LAN}, k} \in \mathbb{R}^{N \times N}
 \end{equation}
-where:
-\begin{align}
-\text{Scounter}_x(\mathcal{D}_t) &= \{ \langle x, \text{posit}, \langle \Phi, \phi \rangle \rangle \mid \langle \Phi, \phi \rangle \text{ is a novel Undercutter counter-argument} \} \\
-\text{Sarg}_x(\mathcal{D}_t) &= \{ \langle x, \text{posit}, \langle \Phi, \gamma \rangle \rangle \mid \gamma = \text{Topic}(\mathcal{D}_t) \} \\
-\text{Sconcede}_x(\mathcal{D}_t) &= \{ \langle x, \text{concede}, \phi \rangle \mid \phi \in \Delta_x \cup \Pi \text{ and } \phi \text{ is relevant to } \gamma \}
-\end{align}
-
-Transmission bandwidth overhead $\mathcal{C}$ scales as a compact function of decision forest graph depth $d$ rather than the raw magnitude of the extensional grounding data:
-\begin{equation}
-\mathcal{C}(\mathcal{T}) \propto \mathcal{O}(d \cdot \Sigma_{\text{tokens}}) \ll \mathcal{C}(\mathcal{E}) \propto \mathcal{O}(|\mathcal{E}| \cdot \text{Dim}_{\text{features}})
-\end{equation}
-This enables the multi-agent perimeter to achieve absolute strategic consensus $\langle x, \text{close}, \gamma \rangle \cap \langle y, \text{close}, \gamma \rangle$ over thin network channels while keeping proprietary Level 1 telemetry perfectly firewalled.
+Each virtual area network connects to the existing power data grid through a single secure gateway interface, eliminating individual node vulnerabilities and allowing the Black-Hunter-Pan dialogue poset function ($\text{Scounter} \succ \text{Sarg} \succ \text{Sconcede} \succ \text{Sclose}$) to resolve turn-taking deconflictions locally during consensus rounds.
 
 \end{document}
