@@ -27,19 +27,35 @@ m_i \ddot{\theta}_i + d_i \dot{\theta}_i = P_i - \sum_{j=1}^{N} K_{ij} \sin(\the
 \end{equation}
 where $m_i$ represents the rotational turbine inertia, $d_i$ represents the natural damping, and $K_{ij}$ defines the admittance coupling strength of the high-voltage transmission lines. The bounds of global phase-locking under these non-linear conditions follow the fundamental alignment proofs established by \textit{Chopra \& Spong (2009)}.
 
-\section{Multi-Scale Control Models: Macroscopic Kuramoto and High-Fidelity EMT}
+\section{Multi-Scale Control Models and High-Fidelity EMT Grounding}
 We implement a dual-resolution physical framework to model grid safety. Macroscopic stability is governed by second-order dynamics to isolate inter-area phase angle bifurcation cascades. Micro-level, sub-millisecond electromagnetic transient (EMT) numerical simulations are executed across a modified IEEE 39-bus New England testbed system using the native, open-source Julia framework \texttt{PowerSimulationsDynamics.jl} documented by \textit{Lara et al. (2023)} to model non-linear inverter-based resource (IBR) Phase-Locked Loop (PLL) voltage tracking dynamics. 
 
-When a data center drops high-amplitude periodic training steps on an IBR network, the low-frequency forcing signal interacts with high-speed internal current controller switching loops to induce severe control-loop interaction chaos, forcing the local bus tracking voltage $V_i(t)$ to undergo catastrophic transient phase-slips and localized blackouts. These sub-millisecond variations are captured as extensional exemplars (\texttt{exs.pl}) sampled at a resolution of $\Delta t = 0.5\text{ ms}$:
+When a data center drops high-amplitude periodic training steps on an IBR network, the low-frequency forcing signal interacts with high-speed internal current controller switching loops to induce severe control-loop interaction chaos, forcing the local bus tracking voltage $V_i(t)$ to undergo catastrophic transient phase-slips and localized blackouts. These sub-millisecond variations are captured as extensional exemplars sampled at a resolution of $\Delta t = 0.5\text{ ms}$:
 \begin{equation}
 \bm{\xi}_i(t) = \left[ V_i(t), \, \delta_i(t), \, P_{\text{IBR}, i}(t), \, Q_{\text{IBR}, i}(t) \right] \in \mathbb{R}^4
 \end{equation}
 As reinterpreted within the contemporary multi-time-scale grid hierarchies of \textit{Dall'Anese, Simpson-Porco, Dörfler, et al. (2026)}, integrating feedback optimization directly with first-principles physical dynamics enables new decentralized coordination regimes for highly heterogeneous resources.
 
+\section{Hierarchical Pattern Recognition and Scalable Parameter Estimation}
+To achieve automated system identification without centralized computational overhead, we construct an advanced hierarchy of structural patterns. Time-based input-output trajectories are harvested from synchronous generators and inverter-based resources under both nominal states and phase noise conditions. To recover hidden physical constants and unmapped dynamics from partial measurements, we implement a scalable bi-level optimization scheme fusing the Prediction Error Method (PEM) with a Moving Horizon Estimation (MHE) state estimator as formulated by \textit{Zhou \& Köhler (2024)} and accelerated via parametric tuning paradigms by \textit{Simpson et al. (2024)}.
+
+Let the non-linear parameterized grid device state space model be represented by the discrete-time mapping:
+\begin{align}
+x_{k+1} &= f_d(x_k, u_k, w_k; \theta) \\
+y_k &= C x_k + F \eta_k
+\end{align}
+where $x_k \in \mathbb{R}^{n_x}$ is the latent state, $u_k \in \mathbb{R}^{n_u}$ is the control input vector, $y_k \in \mathbb{R}^{n_y}$ is the measured telemetry output, and $w_k, \eta_k$ represent mutually independent process and measurement noise structures. The unknown parameters $\theta \in \mathbb{R}^{n_\theta}$ are recovered by segmenting input-output data into a dataset $\mathcal{D} = \{u_{0:N-1}^{(i)}, \tilde{y}_{0:N}^{(i)}\}_{i=1}^M$ of $M$ overlapping time-series windows of length $N$. To guarantee absolute physical interpretability alongside flexible residual mapping, the algebraic observation function tracks a physics-neural gray-box model structure:
+\begin{equation}
+h_{\text{gray}}(x, u; \theta_{\text{gray}}) := h_{\text{phys}}(x, u; \theta_{\text{phys}}) + h_{\text{NN}}(x, u; \theta_{\text{NN}})
+\end{equation}
+where $h_{\text{phys}}$ defines the explicit physics-based turbine constants and $h_{\text{NN}}$ acts as a neural network residual tracker mapping anomalous load spikes. 
+
+By eliminating parameter-wide sensitivity matrices, hypergradient evaluation realizes up to a $215\times$ speedup, allowing the real-time parameter estimates to be outputted instantly as discrete features and values. These values form positive and negative structural exemplars ($\mathcal{E}$) to retrain our localized decision forest memory matrices, establishing certifiable models to verify the correctness of any active inter-area network configuration.
+
 \section{Throughput Derivation and Data Center Parameter Estimation}
 Following the network routing principles of \textit{Sherman \& Gable (1983)}, the emergent CSMA/CD protocol evaluates carrier availability using a normalized propagation delay parameter $a = \tau_{\text{prop}} / T_{\text{trans}}$. Given that electricity travels through copper busbars and high-voltage cabling at approximately $v = 0.67c \approx 2 \times 10^8\text{ m/s}$, a massive $1000\text{-meter}$ campus cable run maps to a propagation delay of $\tau_{\text{prop}} = 5\text{ }\mu\text{s}$. Bound against our sub-millisecond EMT control sample window of $T_{\text{trans}} = 500\text{ }\mu\text{s}$, the data center power network parameter is estimated exactly at $a = 0.01$. 
 
-To anchor this optimization theoretically within classical communication packet channel parameters, the absolute non-persistent CSMA channel throughput ($S$) as a function of offered traffic load ($G$) is governed by the structural formula piooner-analyzed by \textit{Kleinrock (1975)}:
+The absolute non-persistent CSMA channel throughput ($S$) as a function of offered traffic load ($G$) is governed by the structural formula pioneer-analyzed by \textit{Kleinrock (1975)}:
 \begin{equation}
 S = \frac{G \cdot e^{-aG}}{G \cdot (1 + 2a) + e^{-aG} - (1 - e^{-aG})}
 \end{equation}
@@ -62,7 +78,7 @@ STEP | FREQ DEVIATION (w) | GRAPHICAL TRAJECTORY (w vs. Time)
    8 | 0.5000             | ###############---> [OPEN-LOOP CHAOS]
    9 | 0.6500             | ######################## [PHASE SLIP]
   10 | 0.5000             | ###############---> [OPEN-LOOP CHAOS]
-  11 | 0.9500             | #################################### [BIFURCATION]
+  11 | 0.9500             | #################################... [BIFURCATION]
   12 | 1.1000             | ########################################## [DROOP]
   13 | 0.6500             | ######################## [PHASE SLIP]
   14 | 0.5000             | ###############---> [OPEN-LOOP CHAOS]
@@ -79,7 +95,7 @@ STEP | FREQ DEVIATION (w) | GRAPHICAL TRAJECTORY (w vs. Time)
   25 | 0.2711             | #========= [STABLE ATTAINABLE SPACE V']
   26 | 0.2394             | ######### [PHASE-LOCKED]
   27 | 0.2105             | ######## [PHASE-LOCKED]
-  28 | 0.1876             | #Ref     [PHASE-LOCKED]
+  28 | 0.1876             | ####### [PHASE-LOCKED]
   29 | 0.1654             | ###### [PHASE-LOCKED]
   30 | 0.1492             | ##### [PHASE-LOCKED]
   31 | 0.1321             | ##### [PHASE-LOCKED]
@@ -121,7 +137,9 @@ FORCING WORKLOAD  | VOLTAGE MAGNITUDE (p.u.) | FREQUENCY SWING (Hz) | STATUS
 \bibitem{kleinrock75} Kleinrock, L. (1975). \textit{Queueing Systems, Volume 2: Computer Applications}. Wiley-Interscience.
 \bibitem{lara23} Lara, J. D., Henriquez-Auba, R., Bossart, M., Callaway, D. S., \& Barrows, C. (2023). PowerSimulationsDynamics.jl---An open source modeling package for modern power systems with inverter-based resources. \textit{arXiv preprint arXiv:2308.02921}.
 \bibitem{sherman83} Sherman, R., \& Gable, M. (1983). Experience with a Local Network. \textit{Data Communications}, July, 1983.
+\bibitem{simpson24} Simpson, L., Asprion, J., Muntwiler, S., Köhler, J., \& Diehl, M. (2024). Parallelizable parametric nonlinear system identification via tuning of a moving horizon state estimator. \textit{Proc. 63rd Conference on Decision and Control (CDC)}, 8786–8792. IEEE.
 \bibitem{vieira96} de Sousa Vieira, M., Khoury, P., Lichtenberg, A. J., Lieberman, M. A., Wonchoba, W., Gullicksen, J., Huang, J. Y., Sherman, R., \& Steinberg, M. (1996). Numerical and Experimental Studies of Self-Synchronization and Synchronized Chaos. \textit{Journal of Nonlinear Science}.
+\bibitem{zhou24} Zhou, Y., \& Köhler, J. (2024). Scalable Identification of Physics-Based and Neural Dynamics from Partial Measurements. \textit{arXiv preprint arXiv:2412.01997}.
 \end{thebibliography}
 
 \end{document}
