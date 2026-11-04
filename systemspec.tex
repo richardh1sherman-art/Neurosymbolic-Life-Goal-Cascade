@@ -32,14 +32,31 @@ To ground the continuous-time physics layer into a verifiable industrial framewo
 \end{equation}
 where $V_i(t)$ represents the instantaneous voltage magnitude, $\delta_i(t)$ defines the phase angle deviation, and $P_{\text{IBR}, i}(t), Q_{\text{IBR}, i}(t)$ monitor the active and reactive power outputs of local inverter-based renewable resources.
 
-\section{Non-Linear Contraction-Constrained MPC Specifications}
-To guarantee asymptotic tracking stability under high-frequency stochastic phase noise obstructions, the secondary control loop implements an active Self-Adaptive Contraction-Constrained Model Predictive Control (MPC) law. The controller ingests real-time parameter estimate vectors $\theta = [\theta_{\text{phys}}, \theta_{\text{NN}}]^T$ recovered from partial measurements via a bi-level Moving Horizon Estimation (MHE) scheme. 
+\section{In-Line Self-Adaptive Contraction-Constrained MPC Specifications}
+To guarantee asymptotic tracking stability under high-frequency stochastic phase noise obstructions, the secondary control loop implements an active, in-line Self-Adaptive Contraction-Constrained Model Predictive Control (MPC) law. The controller inserts a real-time system identification pass directly into the feedforward path, ingesting parameter estimate vectors $\theta = [\theta_{\text{phys}}, \theta_{\text{NN}}]^T$ recovered from partial measurements via a bi-level Moving Horizon Estimation (MHE) scheme following the paradigms of \textit{Zhou \& K\"ohler (2024)}.
 
-Let the parameter-dependent state constraint space $\mathcal{X}(\theta_{\text{NN}})$ be dynamically morphed via a continuous contraction multiplier $\alpha(\theta_{\text{NN}})$ bound against the nominal current saturation limit $\mathcal{X}_{\text{nominal}}$:
+Let the parameter-dependent state constraint space $\mathcal{X}(\theta_{\text{NN}})$ be dynamically morphed via a continuous in-line contraction multiplier $\alpha(\theta_{\text{NN}})$ bound against the nominal current saturation limit $\mathcal{X}_{\text{nominal}}$:
 \begin{equation}
 \mathcal{X}(\theta_{\text{NN}}) = \alpha(\theta_{\text{NN}}) \cdot \mathcal{X}_{\text{nominal}} = \left( \frac{1}{1 + \beta \cdot \theta_{\text{NN}}} \right) \cdot \mathcal{X}_{\text{nominal}}
 \end{equation}
 where $\beta \in \mathbb{R}^+$ defines the invariant tuning gain. This constraint compression ensures that the active optimization trajectories contract exponentially toward a stable phase-locked manifold, avoiding optimization gradient collapse and preventing the physical inverter nodes from triggering control-loop interaction chaos.
+
+\subsection{Linear Matrix Inequality Formulation and Convergence Certification}
+Let $\bm{W}(x) = \bm{W}^T(x) > 0$ define the positive-definite dual contraction metric tensor. The system trajectories are certified stable under an $L_2$-gain noise attenuation index $\gamma$ if the following symmetric matrix relation is strictly satisfied within the column boundaries:
+\begin{equation}
+\begin{bmatrix}
+\bm{\Theta}_{11}(x) & \bm{B}_w(x) \\
+\bm{B}_w^T(x) & -\gamma^2 \bm{I}
+\end{bmatrix} \le 0
+\end{equation}
+where the bounded sub-matrix component $\bm{\Theta}_{11}(x)$ is unrolled using a split block to prevent horizontal margin spills:
+\begin{equation}
+\begin{split}
+\bm{\Theta}_{11}(x) = & -\bm{\dot{W}}(x) + \bm{A}(x)\bm{W}(x) \\
+& + \bm{W}(x)\bm{A}^T(x) - 2\lambda\bm{W}(x)
+\end{split}
+\end{equation}
+In this equation, $\bm{A}(x) = \frac{\partial f}{\partial x}$ acts as the system state Jacobian, $\bm{B}_w(x)$ maps the non-linear multiplicative phase noise vector parameters, and $\lambda \in \mathbb{R}^+$ defines the target exponential contraction convergence rate. This in-line formulation guarantees physical controllability before the state vectors can hit the unmodeled inner protective current rails.
 
 \section{Black-Hunter-Pan Multi-Ontology Dialogue Strategy}
 When independent corporate data centers must resolve grid access boundaries without data leakage or brute-force database merges, the deconfliction process is modeled as a preference-ordered dialogue game following the algebraic principles of \textbf{Black, Hunter \& Pan}. Let $\mathcal{D}_t$ represent the sequential state-history matrix of the active dialogue at turn $t$. The turn-taking strategy function $\mathcal{S}_x(\mathcal{D}_t)$ acts as a deterministic, preference-ordered selection transducer over the Description Logic poset, mapped via the following strict dominance hierarchy:
