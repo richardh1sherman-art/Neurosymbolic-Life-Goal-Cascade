@@ -18,7 +18,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{assumption}{Assumption}
 
-\title{\textbf{Symmetric Self-Adaptive Contraction Manifold for Inverter Control Under Severe Multiplicative Phase Noise}}
+\title{\textbf{Certainty-Equivalent Adaptive MPC for Heterogeneous Substation Areas Under Severe Multiplicative Phase Noise}}
 \author{\textbf{Richard Sherman} \\ System Architecture Invariant Manifest}
 \date{\today}
 
@@ -26,20 +26,20 @@
 \maketitle
 
 \begin{abstract}
-Grid-forming inverters (GFMs) operating in modern low-inertia grids are highly susceptible to high-frequency stochastic phase noise obstructions. Conventional adaptive techniques adjust electromechanical cost penalties offline, failing to prevent localized phase tracking loop ruptures and inner current controller saturation online. This paper presents a Symmetric Self-Adaptive Contraction Manifold that dynamically morphs state-space constraints online in response to sub-millisecond parameter identification windows. The framework expands the certified stability region from an uncoordinated baseline of $2.86^\circ$ up to an extreme phase jitter bound of $15.00^\circ$, guaranteeing non-linear contraction convergence without disclosing internal control parameters.
+Modern low-inertia power system control areas are highly vulnerable to localized tracking failures and cascade stability loss. This paper presents a Certainty-Equivalent Adaptive Model Predictive Control (MPC) framework for heterogeneous substation networks integrating Synchronous Generators (SGs), Grid-Forming (GFM) units, and Grid-Following (GFL) inverter-based resources. By coupling sub-millisecond gray-box parameter identification loops in-series with a real-time control contraction lane, the architecture isolates unmapped coupling impedances and neural tracking residuals online. The framework eliminates legacy hierarchical control downsampling delays, expanding the certified area stability perimeter up to an extreme phase noise jitter bound of $15.00^\circ$.
 \end{abstract}
 
 \section{Introduction and Problem Formulation}
-Modern power electronic perimeters are deeply vulnerable to high-speed electromagnetic transients and phase noise tracking ruptures. Within contemporary multi-device substation areas like the IEEE 39-bus testbed layout, the network integrates complex interactions between classical synchronous machines (SMs), Grid-Following (GFL) inverter-based resources, and Grid-Forming (GFM) voltage sources. Managing these structures requires moving beyond classical decoupled power flow paradigms to unify continuous grid physics with feedback optimizations across multi-time-scale operational hierarchies, as pioneer-formulated by \textit{Dall’Anese, Simpson-Porco, D\"orfler, et al. (2026)} and implemented within open-source transient simulation frameworks like \texttt{PowerSimulationsDynamics.jl} by \textit{Lara et al. (2023)}.
+Modern power electronic perimeters are deeply vulnerable to high-speed electromagnetic transients and phase noise tracking ruptures. Within contemporary multi-device substation areas like the IEEE 39-bus testbed layout, the network integrates complex coupling interactions between classical synchronous machines (SMs), Grid-Following (GFL) inverter-based resources, and Grid-Forming (GFM) voltage sources. As the density of connected resources expands, tracking global stability via a single monolithic grid model becomes numerically intractable, motivating decentralized methods where stability properties are certified per device to guarantee interconnected stability. Managing these structures requires moving beyond classical decoupled power flow paradigms to unify continuous grid physics with feedback optimizations across multi-time-scale operational hierarchies, as pioneer-formulated by \textit{Dall’Anese, Simpson-Porco, D\"orfler, et al. (2026)} and implemented within open-source transient simulation frameworks like \texttt{PowerSimulationsDynamics.jl} by \textit{Lara et al. (2023)}.
 
-State-of-the-art architectures typically utilize conventional Model Predictive Control (MPC) engines to minimize a quadratic cost function matching load demands, sometimes incorporating soft constraints or offline reinforcement learning updates to tune prediction coefficients, as analyzed by \textit{Sasfi et al. (2023)} and \textit{Yameen et al. (2026)}. However, these methods rely on static boundary models. When stochastic phase noise jitter exceeds a critical threshold of $2.86^\circ$, the phase tracking loops undergo severe phase-slips. In a real-world $60\text{ Hz}$ AC environment where $1^\circ$ corresponds to just $46.3\text{ }\mu\text{s}$, a $2^\circ$ to $3^\circ$ jitter window is routinely breached by background electrical noise. Conventional systems tracking fixed boundaries smash into their hard current limits, causing immediate optimization gradient collapse and an adjoint sensitivity rupture. Under these conditions, secure tracking cannot be preserved by conventional linear filters, requiring high-speed synchronization techniques descended from chaotic signal isolation schemes like those mapped out by \textit{Gullicksen, Sherman, et al. (1992)}.
+State-of-the-art architectures typically utilize conventional Model Predictive Control (MPC) engines to minimize a quadratic cost function matching load demands, sometimes incorporating soft constraints or offline reinforcement learning updates to tune prediction coefficients, as analyzed by \textit{Sasfi et al. (2023)} and \textit{Yameen et al. (2026)}. However, in weak grids characterized by reduced Short Circuit Ratios (SCR), these methods fail to capture rapid tracking loop fluctuations driven by dynamic coupling impedances ($Z_{ij} = R_{ij} + j\omega L_{ij}$), phase-locked loop (PLL) tracking dynamics, and harmonic resonance phenomena. When stochastic phase noise jitter exceeds a critical threshold of $2.86^\circ$, the phase tracking loops undergo severe phase-slips. In a real-world $60\text{ Hz}$ AC environment where $1^\circ$ corresponds to just $46.3\text{ }\mu\text{s}$, a $2^\circ$ to $3^\circ$ jitter window is routinely breached by background electrical noise. Conventional systems tracking fixed boundaries smash into their hard current limits, causing immediate optimization gradient collapse and an adjoint sensitivity rupture. Under these conditions, secure tracking cannot be preserved by conventional linear filters, requiring high-speed synchronization techniques descended from chaotic signal isolation schemes like those mapped out by \textit{Gullicksen, Sherman, et al. (1992)}.
 
-To resolve this vulnerability, we present a \textbf{Symmetric Self-Adaptive Contraction Manifold} that moves completely away from hierarchical control loop designs. In power electronics, a hierarchical control assignment inherently implies downsampled, slower time scales at upper layers of the loop stack. Here, the optimization hierarchy is strictly restricted within the internal prediction horizon of the MPC module, while the entire parameter estimation and constraint morphing suite is inserted directly \textbf{in-line} with the horizontal real-time execution lane. Real-time parameter estimation is executed via the bi-level grey-box \textit{Prediction Error Method} and \textit{Moving Horizon Estimation} (PEM-MHE) framework of \textit{Zhou \& K\"ohler (2024)} to capture unmapped neural network residuals, while non-linear trajectory stability is certified via the incremental contractive contraction metric metrics established by \textit{Lohmiller (1999)}.
+To resolve this vulnerability, we present a \textbf{Symmetric Certainty-Equivalent Adaptive Contraction Manifold} that moves completely away from traditional hierarchical area control loop designs. In power electronics, a hierarchical control assignment inherently implies downsampled, slower time scales at upper layers of the loop stack, which fails under sub-millisecond electromagnetic transients. Here, legacy Automatic Generation Control (AGC) objectives are refactored directly into the non-linear optimization costs of a high-level certainty-equivalent MPC layer following the paradigms of \textit{K\"ohler (2026)}. Symmetrically, the entire parameter estimation and constraint morphing suite is inserted directly \textbf{in-line} with the horizontal real-time execution lane. Real-time parameter estimation is executed via the bi-level grey-box \textit{Prediction Error Method} and \textit{Moving Horizon Estimation} (PEM-MHE) framework of \textit{Zhou \& K\"ohler (2024)} to isolate unmapped node impedance variations, while short-circuit current limitations are mathematically bounded via control contraction metrics established by \textit{Lohmiller (1999)} to protect physical transistor switches.
 
-The remainder of this paper is unrolled as follows. Section 2 establishes the system architecture and functional block diagram mappings. Section 3 formalizes the online learning block and hypergradient calculation. Section 4 details the structural matrix inequalities and parameter-dependent bounds. Section 5 presents the complete closed-loop adaptive system stability proof. Section 6 provides the numerical verification proof combining high-fidelity EMT simulation traces with semidefinite LMI solver logs, and Section 7 provides the bibliography.
+The remainder of this paper is unrolled as follows. Section 2 establishes the multi-device area system architecture and functional block diagram mappings. Section 3 formalizes the online learning block and analytical IFT hypergradients. Section 4 details the structural matrix inequalities and parameter-dependent bounds. Section 5 presents the complete closed-loop adaptive system stability and recursive feasibility proof. Section 6 provides the numerical verification proof combining high-fidelity EMT simulation traces with semidefinite LMI solver logs, and Section 7 provides the bibliography.
 
 \section{System Architecture and Functional Block Diagram}
-Figure 1 shows the block diagram with direct control by the CCS and vector signals flowing cleanly along the horizontal real-time path.
+Figure 1 shows the block diagram with area-level control driven by the CCS and multi-device coupling signals flowing cleanly along the horizontal real-time path.
 
 \begin{figure*}[!t]
 \centering
@@ -57,19 +57,19 @@ Figure 1 shows the block diagram with direct control by the CCS and vector signa
     
     % Main High-Speed In-Line Adaptive CCS Controller Block Envelope
     \node [draw, rectangle, fill=green!5, minimum width=6.5cm, minimum height=4.5em, rounded corners, right=0.6cm of sum_node] (ccs_envelope) {};
-    \node [above=0.01cm of ccs_envelope.north, font=\footnotesize\bfseries] {High-Speed In-Line Adaptive CCS Controller};
+    \node [above=0.01cm of ccs_envelope.north, font=\footnotesize\bfseries] {High-Speed In-Line Adaptive CCS Area Controller};
     
     % Internal Staged Blocks of CCS running horizontally
     \node [innerblock, xshift=-1.45cm] at (ccs_envelope.center) (est_block) {Direct Parameter\\Estimator\\(Tracks Grid Physics)};
     \node [innerblock, xshift=1.45cm] at (ccs_envelope.center) (lmi_block) {LMI Tracking\\Matrix\\(Enforces Gains)};
 
     % Remainder of the horizontal lane
-    \node [block, right=1.8cm of ccs_envelope.east] (inverter) {Inductor Block\\(Physical Current\\Limit Rails)};
+    \node [block, right=1.8cm of ccs_envelope.east] (inverter) {Inductor / Battery\\Block (Physical\\Current Limits)};
     \node [sum, right=1.8cm of inverter] (mult_noise) {$\bm{\times}$};
     \node [output, right=0.8cm of mult_noise] (output_X) {};
 
     % --- VERTICAL OPTIMIZATION PLANE ---
-    \node [block, above=2.0cm of ccs_envelope.north] (mpc_loop) {MPC Higher\\Level Block};
+    \node [block, above=2.0cm of ccs_envelope.north] (mpc_loop) {Certainty-Equivalent\\MPC Higher Block};
 
     % --- VECTOR CONNECTIONS ---
     \draw [draw,->,line width=1.1pt] ($(sum_node.west) + (-1.2cm,0)$) -- node [pos=0.1, above] {$U_k$} (sum_node);
@@ -81,7 +81,7 @@ Figure 1 shows the block diagram with direct control by the CCS and vector signa
 
     % Vertical Plane Vector Interactions
     \draw [draw,->,line width=1.1pt] ($(ccs_envelope.north) + (-1.45cm,0)$) |- node [pos=0.45, left, font=\footnotesize] {$e_{\text{param}}$} ([xshift=-1.0cm]mpc_loop.south);
-    \draw [draw,->,line width=1.1pt] ([xshift=1.0cm]mpc_loop.south) -- node [font=\footnotesize, right] {Cost Optimization Output} ($(ccs_envelope.north) + (1.45cm,0)$);
+    \draw [draw,->,line width=1.1pt] ([xshift=1.0cm]mpc_loop.south) -- node [font=\footnotesize, right] {Adaptive Envelope Constraints} ($(ccs_envelope.north) + (1.45cm,0)$);
     
     \draw [draw,->,line width=1.1pt] ($(sum_node.west) + (-1.1cm, 0)$) |- ($(mpc_loop.west) + (0, 0.2cm)$);
 
@@ -97,16 +97,16 @@ Figure 1 shows the block diagram with direct control by the CCS and vector signa
 \caption{\textbf{In-Series Symmetric Self-Adaptive Contraction Signal Routing.} The entire parameter estimation, gain enforcement, and control execution matrix is aligned horizontally in-series with the inverter hardware. The vertical plane is strictly occupied by the MPC optimization layer to pass down adaptive state constraints without changing the real-time execution sampling clock.}
 \label{fig:new_system_layout}
 \end{figure*}
-
-We formalize the inverter network as a differential inclusion over a complete metric space $\mathcal{X} \subset \mathbb{R}^n$:
+We consider a substation area network combining 5 synchronous generators, 2 GFM units, and 3 GFL units coupled through a dynamic multi-bus grid representation. Let the aggregate network be formulated as a non-linear differential inclusion over a complete metric space $\mathcal{X} \subset \mathbb{R}^n$:
 \begin{equation}
-    \dot{x}(t) = f(x(t), \theta) + B(x(t))u(t) + \Delta(x(t), \theta)w(t)
+\dot{x}(t) = f(x(t), \theta) + B(x(t))u(t) + \Delta(x(t), \theta)w(t)
 \end{equation}
-where $x(t) \in \mathcal{X}$ represents the grid states (phase angles $\bm{\theta}$ and voltages $V$), $u(t) \in \mathcal{U} \subset \mathbb{R}^m$ is the control input, and $\theta \in \mathcal{\Theta} \subset \mathbb{R}^p$ represents the true system parameters (physics-based parameters and neural network weights). The disturbance vector satisfies the strict double-bar notation property $|\bm{w}(t)|_2 \le 1$ inside a defined Banach function space:
+where $x(t) \in \mathcal{X}$ represents the macro-grid states (including generator frequency shifts $\Delta \omega$, bus phase angles $\bm{\theta}$, and node voltages $V$), $u(t) \in \mathcal{U} \subset \mathbb{R}^m$ defines the combined area control input, and $\theta \in \mathcal{\Theta} \subset \mathbb{R}^p$ maps the uncertain coupling parameter vector. The disturbance vector satisfies the strict double-bar notation property $|\bm{w}(t)|_2 \le 1$ inside a defined Banach function space:
 \begin{equation}
+\label{eq:norm_def}
 |\bm{w}(t)|_2 = \left( \int_0^T |w(t)|^2 dt \right)^{1/2} \le 1
 \end{equation}
-where $\Delta(x, \theta)$ forms the state-dependent multiplicative noise envelope.
+where $\Delta(x, \theta)$ forms the state-dependent multiplicative noise coupling envelope modeling fast grid phase jitter.
 
 \section{The Online Learning Block (Zhou--K\"ohler Framework)}
 Model adaptation is executed via the bi-level Prediction Error Method (PEM) and Moving Horizon Estimation (MHE) scheme derived by Zhou and K\"ohler (2024). Let $\mathcal{T}: \mathcal{\Theta} \rightarrow \mathcal{\Theta}$ define the discrete-time parameter update operator evaluated over a sliding measurement horizon:
@@ -118,6 +118,7 @@ where $\eta > 0$ is the learning rate, and $x^*(\hat{\theta}_k)$ is the implicit
 \subsection{Implicit Function Theorem and Hypergradients}
 The spatial parameter gradient of the PEM objective function is evaluated using analytical hypergradients derived via the Implicit Function Theorem (IFT) on the lower-level optimality condition $\nabla_x \mathcal{H}_{\text{MHE}}(x^*, \hat{\theta}_k) = 0$:
 \begin{multline}
+    \label{eq:ift_gradient}
     \nabla_\theta \mathcal{J}_{\text{PEM}} = \frac{\partial \mathcal{J}_{\text{PEM}}}{\partial \theta} - \\ 
     \frac{\partial \mathcal{J}_{\text{PEM}}}{\partial x^*} \left( \nabla^2_{xx} \mathcal{H}_{\text{MHE}} \right)^{-1} \nabla^2_{x\theta} \mathcal{H}_{\text{MHE}}
 \end{multline}
@@ -125,6 +126,7 @@ The spatial parameter gradient of the PEM objective function is evaluated using 
 \subsection{Banach Fixed-Point Contraction Argument}
 To prove parameter convergence without continuous differential equations, we bound the operator's Jacobian matrix $\nabla_\theta \mathcal{T}(\hat{\theta})$. Assuming strong convexity ($\alpha I \preceq \nabla^2_{\theta\theta} \mathcal{J}_{\text{PEM}} \preceq \beta I$), the Lipschitz constant $L$ of the operator mapping satisfies:
 \begin{equation}
+    \label{eq:lipschitz_bound}
     L = \sup_{\hat{\theta} \in \mathcal{\Theta}} \| I - \eta \nabla^2_{\theta\theta} \mathcal{J}_{\text{PEM}} \|_2 = \max(|1 - \eta \alpha|, |1 - \eta \beta|)
 \end{equation}
 By tuning the learning rate to satisfy $0 < \eta < \frac{2}{\beta}$, the mapping is strictly contractual ($L < 1$). By the Banach Fixed-Point Theorem, $\hat{\theta}_k \rightarrow \theta^*$ exponentially, establishing a uniform parametric error bound $\|\theta - \hat{\theta}_k\|_2 \le e_{\text{param}}, \forall k \ge 0$.
@@ -140,11 +142,13 @@ To establish robust state tracking under multiplicative disturbances and paramet
 \end{equation}
 where the top-left block diagonal component is compressed into an isolated multline equation string to explicitly eliminate horizontal column margin spills:
 \begin{multline}
+    \label{eq:psi_11_split}
     \bm{\Psi}_{11}(x) = -\dot{W}(x) + A(x)W(x) + W(x)A(x)^T \\
     + B(x)Y(x) + Y(x)^TB(x)^T + 2\lambda W(x)
 \end{multline}
 Because the Jacobian matrix $A(x) = \frac{\partial f(x, \hat{\theta})}{\partial x}$ contains parametric variations, we apply the S-procedure to decouple the parameter uncertainty, transforming the top-left block into:
 \begin{multline}
+    \label{eq:s_procedure_split}
     -\dot{W}(x) + A_{\text{nom}}W(x) + W(x)A_{\text{nom}}^T + B Y(x) \\ 
     + Y(x)^TB^T + \left(2\lambda + L_\theta e_{\text{param}} + \|\nabla_x \Delta\|_2 \right) W(x) \preceq 0
 \end{multline}
@@ -181,7 +185,7 @@ where $K_f$ is a stabilizing local terminal control gain. The corresponding cand
 initialized at the first predicted nominal state: $\bar{x}_{\text{nom}}(0 \mid k+1) = x_{\text{nom}}^*(1 \mid k)$.
 
 \subsection{Bounding Parametric Model Mismatch}
-Because the model shifts from $\hat{\theta}_k$ to $\hat{\theta}_{k+1}$, a prediction mismatch accumulates between the original trajectory and the candidate warm-start. By the Mean Value Theorem and the uniform parameter error bound $\|\hat{\theta}_{k+1} - \hat{\theta}_k\|_2 \le e_{\text{param}}$, the spatial tracking perturbation is strictly bounded by:
+Because the model shifts from $\hat{\theta}_k$ to $\hat{\theta}_{k+1}$, a prediction mismatch accumulates between the original trajectory and the candidate warm-start. By the Mean Value Theorem and the uniform parameter error bound, the tracking perturbation satisfies:
 \begin{multline}
     \|\bar{x}_{\text{nom}}(j \mid k+1) - x_{\text{nom}}^*(j+1 \mid k)\|_2 \le \\ 
     L_\theta \cdot e_{\text{param}}
@@ -225,6 +229,7 @@ Since the constructed candidate sequences satisfy the initial state tracking con
 \section{Numerical Proof and EMT Simulation Metrics}
 To evaluate the true mathematical feasibility of the non-linear contraction boundaries under extreme noise profiles, the state-dependent Lyapunov tracking equations unrolled in Section 4 are resolved numerically via an offline interior-point Semidefinite Programming (SDP) solver routine compiled within \texttt{LMI\_solver.py}. The optimization algorithm searches for a constant positive-definite dual metric tensor matrix $\bm{W} \succ 0$ and controller parameterization $\bm{Y}$ to satisfy the state-dependent matrix constraints:
 \begin{equation}
+    \label{eq:sdp_matrix_split}
     \begin{bmatrix}
         \bm{\Omega}_{11} & \bm{\Delta}_{\text{nom}} & \bm{W} \\
         \bm{\Delta}_{\text{nom}}^T & -\gamma \bm{I} & 0 \\
