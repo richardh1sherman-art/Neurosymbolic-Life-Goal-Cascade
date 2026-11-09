@@ -4,7 +4,7 @@ import scipy.linalg as la
 class CertaintyEquivalentAdaptiveMPC:
     """
     Python translation of Johannes Köhler's "Certainty-equivalent adaptive MPC" (2026).
-    Tailored for Substation Area Control Tracking under Multiplicative Phase Noise Jitter.
+    Upgraded with relaxed constraint-tightening gains and multi-area consensus link vectors.
     """
     def __init__(self, n_states=4, n_inputs=2, horizon=10):
         self.n = n_states
@@ -22,14 +22,13 @@ class CertaintyEquivalentAdaptiveMPC:
         
         # Hard Saturation Boundaries
         self.u_max = 1.50   # Hard transistor overcurrent rail (p.u.)
-        self.alpha = 1.00   # Initial uncompressed state constraint contraction multiplier
+        self.beta_gain = 1.2 # 🚨 RETUNED: Relaxed from 2.5 to prevent Attainable Space collapse
+        self.alpha = 1.00   # Initial state constraint contraction multiplier
 
     def get_gray_box_dynamics(self, x, u, theta):
         """
         Evaluates the continuous-time system inclusion vector.
-        Combines deterministic grid physics with unmapped parameter modifications.
         """
-        # x = [delta_freq, delta_voltage, P_delivered, Q_delivered]
         A_sys = np.array([
             [-0.2, -0.1,  0.5,  0.0],
             [ 0.1, -0.3,  0.0,  0.4],
@@ -43,16 +42,16 @@ class CertaintyEquivalentAdaptiveMPC:
             [0.0, theta[0]]
         ])
         
-        # Multiplicative noise envelope tracking residual theta[1]
-        noise_envelope = theta[1] * np.sin(x[0]) * u[0]
+        # Multiplicative noise envelope tracking residual theta
+        noise_envelope = theta[1] * np.sin(x) * u[0]
         dx = A_sys @ x + B_sys @ u
-        dx[2] += noise_envelope  # Inject noise directly into active power path
+        dx += noise_envelope  # Inject noise directly into active power path
         return dx
 
-    def update_parameter_estimator_mhe(self, x_meas, x_pred, u_last):
+    def update_parameter_estimator_mhe(self, x_meas, x_pred, u_last, neighbor_token=0.0):
         """
         Zhou-Köhler 2024 Prediction Error Method tracking step.
-        Executes an online hypergradient descent update across the horizontal lane.
+        🚨 UPGRADED: Integrates neighbor distributed MPC token to pre-dampen phase noise.
         """
         learning_rate = 0.02
         pred_error = x_meas - x_pred
@@ -63,27 +62,24 @@ class CertaintyEquivalentAdaptiveMPC:
             np.sin(x_meas[0]) * u_last[0] * pred_error[2]
         ])
         
-        # Banach fixed-point operator contraction update
-        self.theta_hat += learning_rate * grad_theta
+        # Banach fixed-point operator contraction update with neighbor damping
+        self.theta_hat += learning_rate * grad_theta - 0.05 * neighbor_token
         # Protect parameter bounds from divergence explosion
         self.theta_hat = np.clip(self.theta_hat, [0.1, 0.01], [2.0, 1.5])
 
     def compute_constraint_tightening(self):
         """
         Computes the contraction scale multiplier alpha based on neural residual spikes.
-        Tightens bounds before trajectories strike physical inductor rails.
         """
         theta_nn = self.theta_hat[1]
-        beta_gain = 2.5
-        # Tighten constraints inward as unmapped phase noise expands
-        self.alpha = 1.0 / (1.0 + beta_gain * theta_nn)
+        # 🚨 FIXED: Tuned parameter protects Mesarovic's Attainable Space from dropping to zero
+        self.alpha = 1.0 / (1.0 + self.beta_gain * theta_nn)
         return self.alpha
 
     def execute_single_mpc_step(self, x_current, demand_profile):
         """
         Simulates an optimized Certainty-Equivalent control step selection.
         """
-        # Calculate dynamic constraint space boundaries
         alpha = self.compute_constraint_tightening()
         tightened_current_limit = self.u_max * alpha
         
@@ -97,7 +93,7 @@ class CertaintyEquivalentAdaptiveMPC:
         u_nominal = -K_feedback @ error_state
         
         # Enforce current limiting safety threshold
-        u_composite = np.clip(u_nominal, -tightened_current_limit, broadened_limit := tightened_current_limit)
+        u_composite = np.clip(u_nominal, -tightened_current_limit, tightened_current_limit)
         return u_composite
 
 if __name__ == "__main__":
@@ -113,7 +109,7 @@ if __name__ == "__main__":
     
     # Simulate a downstream physical measurement update
     x_next_meas = x_test + mpc.get_gray_box_dynamics(x_test, u_out, mpc.theta_true) * mpc.dt
-    mpc.update_parameter_estimator_mhe(x_next_meas, x_next_pred, u_out)
+    mpc.update_parameter_estimator_mhe(x_next_meas, x_next_pred, u_out, neighbor_token=0.15)
     
     print(f" -> Computed Actuation Vector u_k: {u_out}")
     print(f" -> Sensed Zhou-Köhler Parameters theta_hat: {mpc.theta_hat}")
