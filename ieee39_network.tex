@@ -1,0 +1,104 @@
+\begin{tikzpicture}[scale=0.75, transform shape, >=latex']
+    % 🎨 Core Style Matrix for the Network Elements
+    \tikzstyle{bus} = [line width=1.8pt, draw=black!80]
+    \tikzstyle{branch} = [line width=0.8pt, draw=black!70]
+    \tikzstyle{sg} = [draw, circle, fill=brown!10, minimum size=1.8em, inner sep=0pt, line width=1.1pt]
+    \tikzstyle{gfm} = [draw, rectangle, fill=green!20, minimum size=1.6em, rounded corners=1pt, line width=1.1pt]
+    \tikzstyle{gfl} = [draw, rectangle, fill=yellow!30, minimum size=1.6em, rounded corners=1pt, line width=1.1pt]
+    
+    % --- 📌 TOPOLOGY COORDINATE MESH DEFINITIONS ---
+    % Left Column & Bus 39 Backbone
+    \coordinate (B39) at (1.0, 6.0); \coordinate (B9) at (1.0, 1.5);
+    \coordinate (B1) at (2.0, 7.0);  \coordinate (B2) at (2.0, 8.0);
+    \coordinate (B30) at (2.0, 9.0);
+    
+    % Center-Left Column (Buses 3-8, 11, 31, 18)
+    \coordinate (B25) at (3.5, 8.5); \coordinate (B37) at (3.5, 9.8);
+    \coordinate (B3) at (3.5, 7.0);  \coordinate (B4) at (3.5, 6.2);
+    \coordinate (B5) at (3.5, 5.4);  \coordinate (B6) at (3.5, 4.6);
+    \coordinate (B7) at (2.5, 3.8);  \coordinate (B8) at (2.5, 3.0);
+    \coordinate (B11) at (4.5, 4.0); \coordinate (B31) at (3.5, 3.8);
+    \coordinate (B18) at (4.5, 7.5); % 🚨 FIXED: Explicitly defined Bus 18 coordinate node
+    
+    % Center-Right Column (Buses 10, 12, 13, 14, 26, 27, 32)
+    \coordinate (B26) at (6.0, 8.5); \coordinate (B27) at (6.0, 7.5);
+    \coordinate (B12) at (5.5, 4.8); \coordinate (B13) at (7.0, 4.2);
+    \coordinate (B14) at (7.0, 5.6); \coordinate (B10) at (5.5, 3.0);
+    \coordinate (B32) at (5.5, 1.8);
+    
+    % Right Column Structure (Buses 15-24, 28, 29, 33-36, 38)
+    \coordinate (B15) at (8.0, 5.8);  \coordinate (B16) at (9.0, 6.6);
+    \coordinate (B17) at (7.5, 7.5);  \coordinate (B28) at (8.5, 8.8);
+    \coordinate (B29) at (10.0, 8.8); \coordinate (B38) at (10.0, 7.8);
+    \coordinate (B24) at (9.5, 7.2);  \coordinate (B21) at (9.0, 4.4);
+    \coordinate (B22) at (10.5, 4.4); \coordinate (B35) at (10.5, 5.5);
+    \coordinate (B19) at (8.5, 3.6);  \coordinate (B20) at (8.5, 2.8);
+    \coordinate (B34) at (8.5, 1.8);  \coordinate (B33) at (9.5, 1.0);
+    \coordinate (B23) at (11.0, 3.6); \coordinate (B36) at (11.0, 2.2);
+
+    % --- 🔲 DRAWING BUS BARS (Horizontal/Vertical Grid Rails) ---
+    \draw[bus] ($(B39)+(-0.4,0)$) -- ($(B39)+(0.4,0)$) node[right, font=\tiny] {39};
+    \draw[bus] ($(B9)+(-0.5,0)$) -- ($(B9)+(0.8,0)$) node[right, font=\tiny] {9};
+    \draw[bus] ($(B1)+(-0.4,0)$) -- ($(B1)+(0.4,0)$) node[right, font=\tiny] {1};
+    \draw[bus] ($(B2)+(-0.6,0)$) -- ($(B2)+(0.6,0)$) node[above, font=\tiny] {2};
+    \draw[bus] ($(B25)+(-0.4,0)$) -- ($(B25)+(0.4,0)$) node[above, font=\tiny] {25};
+    \draw[bus] ($(B26)+(-0.5,0)$) -- ($(B26)+(0.5,0)$) node[above, font=\tiny] {26};
+    \draw[bus] ($(B27)+(-0.5,0)$) -- ($(B27)+(0.5,0)$) node[right, font=\tiny] {27};
+    \draw[bus] ($(B28)+(-0.5,0)$) -- ($(B28)+(0.5,0)$) node[above, font=\tiny] {28};
+    \draw[bus] ($(B29)+(-0.4,0)$) -- ($(B29)+(0.4,0)$) node[above, font=\tiny] {29};
+    \draw[bus] ($(B3)+(-0.3,0)$) -- ($(B3)+(0.3,0)$) node[right, font=\tiny] {3};
+    \draw[bus] ($(B4)+(-0.5,0)$) -- ($(B4)+(0.5,0)$) node[above left, font=\tiny] {4};
+    \draw[bus] ($(B5)+(-0.6,0)$) -- ($(B5)+(0.6,0)$) node[above, font=\tiny] {5};
+    \draw[bus] ($(B6)+(-0.8,0)$) -- ($(B6)+(0.8,0)$) node[above, font=\tiny] {6};
+    \draw[bus] ($(B7)+(-0.4,0)$) -- ($(B7)+(0.4,0)$) node[left, font=\tiny] {7};
+    \draw[bus] ($(B8)+(-0.4,0)$) -- ($(B8)+(0.4,0)$) node[below, font=\tiny] {8};
+    \draw[bus] ($(B11)+(-0.3,0)$) -- ($(B11)+(0.3,0)$) node[above, font=\tiny] {11};
+    \draw[bus] ($(B12)+(-0.4,0)$) -- ($(B12)+(0.4,0)$) node[above, font=\tiny] {12};
+    \draw[bus] ($(B10)+(-0.4,0)$) -- ($(B10)+(0.4,0)$) node[left, font=\tiny] {10};
+    \draw[bus] ($(B13)+(-0.4,0)$) -- ($(B13)+(0.4,0)$) node[right, font=\tiny] {13};
+    \draw[bus] ($(B14)+(-0.4,0)$) -- ($(B14)+(0.4,0)$) node[right, font=\tiny] {14};
+    \draw[bus] ($(B15)+(-0.5,0)$) -- ($(B15)+(0.5,0)$) node[above, font=\tiny] {15};
+    \draw[bus] ($(B16)+(-0.4,0)$) -- ($(B16)+(0.4,0)$) node[left, font=\tiny] {16};
+    \draw[bus] ($(B17)+(-0.5,0)$) -- ($(B17)+(0.5,0)$) node[left, font=\tiny] {17};
+    \draw[bus] ($(B18)+(-0.4,0)$) -- ($(B18)+(0.4,0)$) node[above, font=\tiny] {18};
+    \draw[bus] ($(B24)+(-0.4,0)$) -- ($(B24)+(0.4,0)$) node[above, font=\tiny] {24};
+    \draw[bus] ($(B21)+(-0.4,0)$) -- ($(B21)+(0.4,0)$) node[above, font=\tiny] {21};
+    \draw[bus] ($(B22)+(-0.4,0)$) -- ($(B22)+(0.4,0)$) node[below, font=\tiny] {22};
+    \draw[bus] ($(B19)+(-0.5,0)$) -- ($(B19)+(0.5,0)$) node[above, font=\tiny] {19};
+    \draw[bus] ($(B20)+(-0.4,0)$) -- ($(B20)+(0.4,0)$) node[left, font=\tiny] {20};
+    \draw[bus] ($(B23)+(-0.4,0)$) -- ($(B23)+(0.4,0)$) node[left, font=\tiny] {23};
+
+    % --- 🔌 DRAWING TRANSMISSION BRANCHES (Interconnections) ---
+    \draw[branch] (B39) -- (B9); \draw[branch] (B39) -- (B1);
+    \draw[branch] (B1) -- (B2);   \draw[branch] (B2) -- (B25);
+    \draw[branch] (B25) -- (B26); \draw[branch] (B26) -- (B27);
+    \draw[branch] (B26) -- (B28); \draw[branch] (B28) -- (B29);
+    \draw[branch] (B27) -- (B17); \draw[branch] (B17) -- (B16);
+    \draw[branch] (B3) -- (B18);  \draw[branch] (B18) -- (B17); \draw[branch] (B3) -- (B4);
+    \draw[branch] (B4) -- (B5);   \draw[branch] (B4) -- (B14);
+    \draw[branch] (B5) -- (B6);   \draw[branch] (B5) -- (B8);
+    \draw[branch] (B6) -- (B7);   \draw[branch] (B6) -- (B11);
+    \draw[branch] (B11) -- (B10); \draw[branch] (B11) -- (B12);
+    \draw[branch] (B12) -- (B13); \draw[branch] (B13) -- (B14);
+    \draw[branch] (B13) -- (B10); \draw[branch] (B14) -- (B15);
+    \draw[branch] (B15) -- (B16); \draw[branch] (B16) -- (B21);
+    \draw[branch] (B24) -- (B21); \draw[branch] (B24) -- (B23);
+    \draw[branch] (B21) -- (B22); \draw[branch] (B22) -- (B23);
+    \draw[branch] (B16) -- (B19); \draw[branch] (B19) -- (B20);
+    \draw[branch] (B20) -- (B34); \draw[branch] (B19) -- (B33);
+
+    % --- 🚀 ATTACHING THE HETEROGENEOUS INFEED UNITS ---
+    \node[sg] (G39) at ($(B39)+(-0.8,0)$) {I}; \draw[branch] (G39) -- (B39); \node[below=0.1cm of G39, font=\tiny\bfseries] {39};
+    \node[sg] (G37) at (3.5, 9.3) {I};       \draw[branch] (G37) -- (B25); \draw[branch] (G37) -- (B37); \node[left=0.1cm of G37, font=\tiny\bfseries] {37};
+    \node[sg] (G38) at ($(B38)+(0,-0.6)$) {I}; \draw[branch] (G38) -- (B29); \node[right=0.1cm of G38, font=\tiny\bfseries] {38};
+    \node[sg] (G36) at ($(B36)+(0,0.6)$) {I};  \draw[branch] (G36) -- (B23); \node[left=0.1cm of G36, font=\tiny\bfseries] {36};
+    \node[sg] (G33) at ($(B33)+(0,0.6)$) {I};  \draw[branch] (G33) -- (B33); \node[right=0.1cm of G33, font=\tiny\bfseries] {33};
+
+    \node[gfm] (GFM31) at ($(B11)+(-0.8,-0.6)$) {$\sim$}; \draw[branch] (GFM31) |- (B6);   \node[below=0.01cm of GFM31, font=\tiny\bfseries] {31 (GFM)};
+    \node[gfm] (GFM35) at ($(B35)+(0,-0.6)$) {$\sim$};    \draw[branch] (GFM35) -- (B22);  \node[right=0.01cm of GFM35, font=\tiny\bfseries] {35 (GFM)};
+
+    \node[gfl] (GFL30) at ($(B30)+(0,-0.5)$) {$\sim$};    \draw[branch] (GFL30) -- (B2);   \node[above=0.01cm of GFL30, font=\tiny\bfseries] {30 (GFL)};
+    \node[gfl] (GFL32) at ($(B32)+(0,0.6)$) {$\sim$};     \draw[branch] (GFL32) -- (B10);  \node[right=0.01cm of GFL32, font=\tiny\bfseries] {32 (GFL)};
+    \node[gfl] (GFL34) at ($(B34)+(0,0.6)$) {$\sim$};     \draw[branch] (GFL34) -- (B20);  \node[left=0.01cm of GFL34, font=\tiny\bfseries] {34 (GFL)};
+
+\end{tikzpicture}
