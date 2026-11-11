@@ -25,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-Grid-forming (GFM) and grid-following (GFL) inverter-based resources (IBRs) operating in low-inertia substation areas are highly vulnerable to high-frequency stochastic phase noise and multi-path network coupling. Conventional adaptive techniques adjust electromechanical cost penalties offline, failing to prevent localized phase-locked loop (PLL) ruptures and inner current controller saturation during sub-millisecond transients. This paper extends our single-device Symmetric Self-Adaptive Contraction Manifold to wide-area multi-device control across a heterogeneous 10-unit IEEE 39-bus network. By inserting a gray-box parameter estimator and contraction metric enforcer directly in-series with the real-time execution lane, the architecture tracks unmapped coupling impedances online while refactoring Automatic Generation Control (AGC) setpoints into a certainty-equivalent Model Predictive Control (MPC) plane. Numerical validation demonstrates an $82.4\%$ expansion in the wide-area stability margin across phase noise injections from $3.0^\circ$ to $15.0^\circ$, guaranteeing non-linear contraction convergence without disclosing internal control parameters.
+Grid-forming (GFM) and grid-following (GFL) inverter-based resources (IBRs) operating in low-inertia substation areas are highly vulnerable to high-frequency stochastic phase noise and multi-path network coupling. Conventional adaptive techniques adjust electromechanical cost penalties offline, failing to prevent localized phase-locked loop (PLL) ruptures and inner current controller saturation during sub-millisecond transients. This paper extends our single-device Symmetric Self-Adaptive Contraction Manifold to wide-area multi-device control across a heterogeneous 10-unit IEEE 39-bus network. By inserting a gray-box parameter estimator and contraction metric enforcer directly in-series with the real-time execution lane, the architecture tracks unmapped coupling impedances online while accepting standard Automatic Generation Control (AGC) setpoints as external inputs without altering the outer AGC control loop. Numerical validation demonstrates an $82.4\%$ expansion in the wide-area stability margin across phase noise injections from $3.0^\circ$ to $15.0^\circ$, guaranteeing non-linear contraction convergence without disclosing internal control parameters.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -37,7 +37,7 @@ Modern power electronic perimeters are deeply vulnerable to high-speed electroma
 
 Existing adaptive schemes typically employ conventional Model Predictive Control (MPC) engines to minimize quadratic tracking penalties, occasionally incorporating offline reinforcement learning updates to tune prediction weights \cite{sasfi23, yameen26}. In weak grids characterized by reduced Short-Circuit Ratios (SCR), static boundary models fail when dynamic coupling impedances ($Z_{ij} = R_{ij} + j\omega L_{ij}$) and multi-path line reflections induce rapid phase-slips. In a $60\text{ Hz}$ AC grid where $1^\circ$ corresponds to $46.3\text{ }\mu\text{s}$, stochastic phase jitter exceeding $2.86^\circ$ drives uncoordinated controllers into hard transistor current rails, triggering optimization gradient collapse and adjoint sensitivity rupture. Preserving synchronization under severe phase distortion requires high-speed nonlinear tracking mechanisms rooted in chaotic signal synchronization \cite{gullicksen92}.
 
-To resolve this vulnerability at the area level, we present a \textbf{Symmetric Self-Adaptive Contraction Manifold} that eliminates downsampling delays between supervisory optimization and hardware execution. Legacy Automatic Generation Control (AGC) frequency and interchange objectives are refactored into the cost function of a certainty-equivalent adaptive MPC block following K\"ohler \cite{kohler26}, while real-time parameter identification and constraint morphing operate directly \textbf{in-series} with the horizontal control lane. Online identification is executed via the bi-level Prediction Error Method and Moving Horizon Estimation (PEM-MHE) framework of Zhou and K\"ohler \cite{zhou24}, and nonlinear trajectory contraction is certified via incremental Riemannian metrics \cite{lohmiller99}.
+To resolve this vulnerability at the area level, we present a \textbf{Symmetric Self-Adaptive Contraction Manifold} that eliminates downsampling delays between supervisory optimization and hardware execution. Standard Automatic Generation Control (AGC) reference setpoints are accepted directly as supervisory inputs without modifying the legacy AGC control laws, allowing the certainty-equivalent adaptive MPC block \cite{kohler26} and the in-series parameter identification and constraint-morphing lane to focus strictly on fast inter-IBR interactions. Online identification is executed via the bi-level Prediction Error Method and Moving Horizon Estimation (PEM-MHE) framework of Zhou and K\"ohler \cite{zhou24}, and nonlinear trajectory contraction is certified via incremental Riemannian metrics \cite{lohmiller99}.
 
 \subsection{Notation Disambiguation}
 To prevent ambiguity between electrical grid angles and uncertain model parameters throughout this manuscript, we enforce strict symbol separation:
@@ -49,7 +49,7 @@ To prevent ambiguity between electrical grid angles and uncertain model paramete
 The remainder of this paper is organized as follows. Section II presents the wide-area functional block diagram and multi-device DAE formulation. Section III formalizes the online learning block and hypergradient bounds. Section IV derives the control contraction metric inequalities. Section V establishes recursive feasibility and proves the mathematical relationship between IBR/area parameters and the wide-area stability margin. Section VI presents the stability margin bar analysis, offline LMI solver logs, and EMT simulation traces, and Section VII concludes the paper.
 
 \section{System Architecture and Wide-Area Functional Block Diagram}
-Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diagram with direct execution by the in-line Control Contraction System (CCS) and refactored AGC setpoints delivered from the certainty-equivalent MPC block.
+Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diagram with direct execution by the in-line Control Contraction System (CCS) and external AGC reference inputs $U_k$ passed into the certainty-equivalent MPC block.
 
 \begin{figure*}[!t]
 \centering
@@ -78,7 +78,7 @@ Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diag
     \node [output, right=0.8cm of mult_noise] (output_X) {};
 
     % --- VERTICAL OPTIMIZATION PLANE ---
-    \node [block, above=2.1cm of ccs_envelope.north] (mpc_loop) {Certainty-Equivalent\\MPC (Area AGC)};
+    \node [block, above=2.1cm of ccs_envelope.north] (mpc_loop) {Certainty-Equivalent\\MPC (IBR Area Layer)};
 
     % --- VECTOR CONNECTIONS ---
     \draw [draw,->,line width=1.1pt] ($(sum_node.west) + (-1.6cm,0)$) -- node [pos=0.05, above] {$U_k$} (sum_node);
@@ -104,11 +104,18 @@ Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diag
     \node [below=1.1cm of ccs_envelope, font=\footnotesize\bfseries, text=red] {Area State Vector Trajectory (PLL Coupling)};
 
 \end{tikzpicture}
-\caption{In-series Symmetric Self-Adaptive Contraction signal routing for wide-area control. The parameter estimator, gain enforcement, and control execution matrix align horizontally in-series with the IBR hardware, while the certainty-equivalent MPC block passes down tightened envelopes and refactored AGC setpoints without slowing the sub-millisecond execution clock.}
+\caption{In-series Symmetric Self-Adaptive Contraction signal routing for wide-area control. The parameter estimator, gain enforcement, and control execution matrix align horizontally in-series with the IBR hardware, while the certainty-equivalent MPC block accepts external AGC reference inputs $U_k$ without modifying the outer AGC loop and passes down tightened envelopes without slowing the sub-millisecond execution clock.}
 \label{fig:area_block_diagram}
 \end{figure*}
 
 We model a 10-device substation balancing area comprising 5 synchronous generators, 2 GFM inverters, and 3 GFL inverters interconnected via a dynamic transmission admittance network $\bm{Y}_{\text{grid}}(s)$.
+
+\begin{figure*}[!t]
+\centering
+\input{ieee39_network.tex}
+\caption{Modified IEEE 39-bus substation area topology showing the 5 synchronous generators (circles at buses 33, 36--39), 2 grid-forming inverters (green squares at buses 31 and 35), and 3 grid-following inverters (yellow squares at buses 30, 32, and 34).}
+\label{fig:ieee39_topology}
+\end{figure*}
 
 \subsection{Heterogeneous Interaction Mechanics: GFL vs. GFM Units}
 A critical physical asymmetry governs how these device classes interact across the balancing area:
@@ -204,16 +211,6 @@ where the top-left sub-matrix block $\bm{\Omega}_{11}$ is defined as:
     + \bm{B}\bm{Y} + \bm{Y}^T\bm{B}^T + 2\lambda\bm{W}.
 \end{multline}
 Setting $\lambda = 0.35$ and inserting the identified parameters ($\theta_{\text{phys}} = 0.7412$, $\theta_{\text{NN}} = 0.4856$) extracted during a $15.0^\circ$ phase jitter strike, the SDP solver converges with $\lambda_{\max}(\bm{\Theta}) = -0.0142 \le 0$ and optimal $L_2$-gain attenuation $\gamma^* = 0.0384\text{ p.u.}$.
-
-\subsection{Modified IEEE 39-Bus Testbed Topology}
-To evaluate wide-area control performance under heterogeneous inverter penetration, we adopt the modified IEEE 39-bus New England test system shown in Fig.~\ref{fig:ieee39_topology}. The balancing area integrates 5 synchronous generators (buses 33, 36, 37, 38, and 39), 2 grid-forming (GFM) inverters (buses 31 and 35), and 3 grid-following (GFL) inverters (buses 30, 32, and 34) coupled via dynamic transmission lines.
-
-\begin{figure*}[!t]
-\centering
-\input{ieee39_network.tex}
-\caption{Modified IEEE 39-bus substation area topology showing the 5 synchronous generators (circles at buses 33, 36--39), 2 grid-forming inverters (green squares at buses 31 and 35), and 3 grid-following inverters (yellow squares at buses 30, 32, and 34).}
-\label{fig:ieee39_topology}
-\end{figure*}
 
 \subsection{Wide-Area Stability Margin Evaluation (10-Device IEEE 39-Bus)}
 Figure~\ref{fig:stability_margin_bars} compares the Optimized Stability Margin Parameter $\Theta(\sigma_{\delta})$ between the uncoordinated open-loop 10-device area and the closed-loop regularized CCS architecture across phase noise injections from $\sigma_{\delta} = 3.0^\circ$ to $15.0^\circ$.
