@@ -108,7 +108,14 @@ Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diag
 \label{fig:area_block_diagram}
 \end{figure*}
 
-We model a 10-device substation balancing area comprising 5 synchronous generators, 2 GFM inverters, and 3 GFL inverters interconnected via a dynamic transmission admittance network $\bm{Y}_{\text{grid}}(s)$. By Kirchhoff's current and voltage laws, multi-path propagation delays $\tau_{ij}$ and boundary impedance reflections project onto each local terminal bus as an aggregate multiplicative phase-noise envelope. The closed-loop area dynamics evolve as a differential inclusion over a complete metric space $\mathcal{X} \subset \mathbb{R}^n$:
+We model a 10-device substation balancing area comprising 5 synchronous generators, 2 GFM inverters, and 3 GFL inverters interconnected via a dynamic transmission admittance network $\bm{Y}_{\text{grid}}(s)$.
+
+\subsection{Heterogeneous Interaction Mechanics: GFL vs. GFM Units}
+A critical physical asymmetry governs how these device classes interact across the balancing area:
+\begin{itemize}
+    \item \textbf{Grid-Following (GFL) Units (Strong Synchronization Coupling, Weak State Cohesion):} GFL inverters operate as current sources that rely on a Phase-Locked Loop (PLL) to measure the local terminal voltage angle $\delta_i$. Consequently, PLL phase-slips occur \emph{exclusively} in GFL units. Even when two GFL inverters are electrically distant and share weak direct power-flow state cohesion, rapid voltage angle distortions propagate through the admittance network and strongly couple their PLL synchronization loops.
+    \item \textbf{Grid-Forming (GFM) Units (Strong State Cohesion, Weak PLL Coupling):} GFM inverters operate as controlled voltage sources that synthesize their own internal phase angle via virtual inertia and droop ($H_v / m_p$) rather than tracking the grid with a PLL, rendering them immune to PLL phase-slips. Instead, GFMs interact with synchronous generators through strong state-space cohesion: their internal frequency and voltage states are directly coupled into the shared global DAE state manifold ($\Delta \bm{\omega}, \bm{\delta}, \bm{V}$) through active and reactive power balance.
+\end{itemize} By Kirchhoff's current and voltage laws, multi-path propagation delays $\tau_{ij}$ and boundary impedance reflections project onto each local terminal bus as an aggregate multiplicative phase-noise envelope. The closed-loop area dynamics evolve as a differential inclusion over a complete metric space $\mathcal{X} \subset \mathbb{R}^n$:
 \begin{equation}
     \dot{x}(t) = f(x(t), \bm{\theta}) + B(x(t))u(t) + \Delta(x(t), \bm{\theta})w(t)
 \end{equation}
@@ -177,7 +184,7 @@ where $\kappa_{\text{area}}$ is the structural area stiffness constant governed 
 \end{equation}
 Here, the numerator aggregates the stabilizing virtual inertia-to-droop ratios ($H_{v,i}/m_{p,i}$) of the GFM inverters and synchronous machine inertia-to-damping ratios ($H_{g,j}/D_{g,j}$), scaled by the area Short-Circuit Ratio ($\text{SCR}_{\text{area}}$) and equivalent network susceptance ($B_{\text{eq}}$). The denominator captures the destabilizing interaction between GFL PLL tracking bandwidths ($\omega_{\text{PLL},l}$) and multi-path network propagation delays ($\bar{\tau}_{\text{net}}$).
 
-In an \textbf{open-loop 10-device area} ($\lambda_{\text{open}}$ fixed without online constraint morphing), uncompensated PLL phase-slips inflate the $L_2$ disturbance gain linearly, causing the stability margin to decay hyperbolically as $\Theta_{\text{open}}(\sigma_{\delta}) = C_{\text{open}} / \sigma_{\delta}$. When the \textbf{closed-loop regularized CCS} is engaged, online contraction gain adaptation and Minkowski constraint tightening ($\beta_{\text{gain}} = 1.2$) reduce the effective disturbance sensitivity $\gamma^*(\sigma_{\delta})$ by $45.2\%$, expanding the certified stability margin across all phase noise levels by a constant amplification factor:
+Crucially, the wide-area stability margin reflects a \textbf{two-tier (double) contraction hierarchy}. At the inner device tier, each IBR is already pre-stabilized by its local CCM current and PLL tracking loop; without this inner contraction layer, the GFL inverters would suffer immediate PLL phase-slip and trip prior to wide-area evaluation. In an \textbf{open-loop 10-device area} (where locally stabilized IBRs operate without wide-area constraint coordination), uncompensated inter-device PLL interactions inflate the $L_2$ disturbance gain linearly, causing the area stability margin to decay hyperbolically as $\Theta_{\text{open}}(\sigma_{\delta}) = C_{\text{open}} / \sigma_{\delta}$. When the \textbf{outer closed-loop regularized CCS} is engaged on top of the inner device loops, online contraction adaptation and Minkowski constraint tightening ($\beta_{\text{gain}} = 1.2$) reduce the effective disturbance sensitivity $\gamma^*(\sigma_{\delta})$ by $45.2\%$, expanding the certified stability margin across all phase noise levels by a constant amplification factor:
 \begin{equation}
     \Theta_{\text{closed}}(\sigma_{\delta}) = \left(1 + \frac{\lambda_{\text{CCM}}}{\gamma^* \kappa_{\text{reg}}}\right) \Theta_{\text{open}}(\sigma_{\delta}) \approx 1.8235 \, \Theta_{\text{open}}(\sigma_{\delta}).
 \end{equation}
@@ -255,7 +262,7 @@ Figure~\ref{fig:stability_margin_bars} compares the Optimized Stability Margin P
 \label{fig:stability_margin_bars}
 \end{figure}
 
-As shown in Fig.~\ref{fig:stability_margin_bars}, the closed-loop regularized architecture increases the stability margin by $82.35\%$ at every operating point—expanding $\Theta$ from $823.54$ to $1501.75$ at $\sigma_{\delta} = 3.0^\circ$, and preserving a robust margin of $300.35$ (compared to $164.71$ open-loop) at the extreme $15.0^\circ$ jitter threshold.
+As shown in Fig.~\ref{fig:stability_margin_bars}, both curves assume IBRs equipped with inner device-level contraction (without which the GFL units fail below $3.0^\circ$). Adding the outer wide-area regularized contraction layer increases the stability margin by an additional $82.35\%$ at every operating point—expanding $\Theta$ from $823.54$ to $1501.75$ at $\sigma_{\delta} = 3.0^\circ$, and preserving a robust margin of $300.35$ (compared to $164.71$ open-loop) at the extreme $15.0^\circ$ jitter threshold.
 
 \subsection{Continuous-Time EMT Simulation Validation}
 Sub-millisecond electromagnetic transient (EMT) simulations executed across the 39-bus topology in \texttt{PowerSimulationsDynamics.jl} \cite{lara23} cross-validate these analytical margins.
