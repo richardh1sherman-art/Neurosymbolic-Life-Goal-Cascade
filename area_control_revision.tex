@@ -48,6 +48,8 @@ To prevent ambiguity between electrical grid angles and uncertain model paramete
 
 The remainder of this paper is organized as follows. Section II presents the wide-area functional block diagram and multi-device DAE formulation. Section III formalizes the online learning block and hypergradient bounds. Section IV derives the control contraction metric inequalities. Section V establishes recursive feasibility and proves the mathematical relationship between IBR/area parameters and the wide-area stability margin. Section VI presents the stability margin bar analysis, offline LMI solver logs, and EMT simulation traces, and Section VII concludes the paper.
 
+Portions of the exposition, LaTeX typesetting, and structural drafting across Sections~I--VII were prepared with the assistance of Google Gemini~\cite{gemini26}, with all mathematical derivations, simulation setups, and technical conclusions verified by the author.
+
 \section{System Architecture and Wide-Area Functional Block Diagram}
 Figure~\ref{fig:area_block_diagram} illustrates the wide-area control block diagram with direct execution by the in-line Control Contraction System (CCS) and external AGC reference inputs $U_k$ passed into the certainty-equivalent MPC block.
 
@@ -281,6 +283,9 @@ This paper extended the Symmetric Self-Adaptive Contraction Manifold to wide-are
     \item \textbf{Tier 2 --- Double Contraction (Wide-Area Regularized Control):} Engaging the outer wide-area contraction and Minkowski regularization layer on top of the locally stabilized IBRs expands the stability margin by an additional $82.35\%$ across every noise level---raising $\Theta$ from $823.54$ to $1501.75$ at $3.0^\circ$ and from $164.71$ to $300.35$ at $15.0^\circ$.
 \end{enumerate}
 
+\section*{Acknowledgment}
+The author acknowledges the use of Google Gemini~\cite{gemini26} for assistance with drafting, language editing, and LaTeX formatting across Sections~I--VII of this manuscript. All mathematical formulations, control algorithms, simulation data, and technical claims were independently verified and validated by the author.
+
 \begin{thebibliography}{99}
 \bibitem{dallanese26} E. Dall'Anese, J. W. Simpson-Porco, F. D\"orfler, S. Bolognani, and S. Dhople, ``Multi-time-scale control of power systems: From classical automatic generation control to feedback optimization,'' \textit{arXiv:2610.36357}, 2026.
 \bibitem{kohler26} J. K\"ohler, ``Certainty-equivalent adaptive MPC for uncertain nonlinear systems,'' \textit{arXiv preprint arXiv:2603.17843v2 [math.OC]}, Jul. 25, 2026.
@@ -290,6 +295,8 @@ This paper extended the Symmetric Self-Adaptive Contraction Manifold to wide-are
 \bibitem{zhou24} Y. Zhou and J. K\"ohler, ``Scalable identification of physics-based and neural dynamics from partial measurements,'' \textit{arXiv preprint arXiv:2412.01997}, 2024.
 \bibitem{lohmiller99} W. Lohmiller, ``Contraction analysis of nonlinear systems,'' Ph.D. dissertation, Massachusetts Institute of Technology, Cambridge, MA, USA, 1999.
 \bibitem{gullicksen92} J. Gullicksen, M. de Sousa Vieira, M. A. Lieberman, R. Sherman, A. J. Lichtenberg, J. Y. Huang, W. Wonchoba, M. Steinberg, and P. Khoury, ``Secure communications by synchronization to a chaotic signal,'' in \textit{Proc. 1st Experimental Chaos Conf.}, M. F. Shlesinger, W. L. Ditto, L. Pecora, and S. Vohra, Eds., 1992.
+\bibitem{gemini26} Google, ``Gemini (Large Language Model), Mountain View, CA, USA, 2026. [Online]. Available: https://gemini.google.com
 \end{thebibliography}
 
 \end{document}
+
