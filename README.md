@@ -19,43 +19,43 @@ This repository houses the complete mathematical specifications, LaTeX manuscrip
 
 ## 2. Three-Tier Control Architecture Overview
 
-To stabilize $100\%$ inverter-based resource (IBR) transmission networks with **zero synchronous generators ($0\text{ SGs}$)**, this codebase unifies online parameter estimation with nested Riemannian contraction manifolds across three timescales:
+To stabilize **100% inverter-based resource (IBR)** transmission networks with **zero synchronous generators (0 SGs)**, this codebase unifies online parameter estimation with nested Riemannian contraction manifolds across three timescales:
 
-1. **Device Layer ($<1\text{ ms}$ — Sub-Millisecond Inverter Protection):**
-   * Enforces transistor overcurrent limits ($I_{\max} \le 1.20\text{ p.u.}$) and Phase-Locked Loop (PLL) synchronization margins via local contraction multipliers ($\alpha_i$).
+1. **Device Layer (< 1 ms — Sub-Millisecond Inverter Protection):**
+   * Enforces transistor overcurrent limits (`I_max <= 1.20 p.u.`) and Phase-Locked Loop (PLL) synchronization margins via local contraction multipliers (`alpha_i`).
    * Driven by live bi-level Prediction Error Method and Moving Horizon Estimation (**PEM-MHE**) parameter tracking without requiring a prior plant model.
-2. **Area Layer ($\text{ms}$ — Intra-Area Cohesion & Mode-Shift Healing):**
-   * Separates voltage-forming **state-space cohesion ($\mathbf{C}$)** from **PLL synchronization coupling ($\mathbf{P}$)** across heterogeneous Grid-Forming (GFM) and Grid-Following (GFL) devices.
-   * Uses **hierarchical shallow decision trees** parameterized by live PEM-MHE estimates to detect GFM-to-GFL current-limit fallback within **$52.0\text{ ms}$** and engage chatter-free Schmitt-trigger hysteresis damping.
-3. **Grid Layer ($1\text{ s}$ — Distributed Nonlinear SCCM & Supervisory Interface):**
-   * Replaces convex online ADMM consensus with a **Distributed Nonlinear Separable Control Contraction Metric (SCCM)** executing closed-form straight-line geodesic feedback ($u_i^* + K_i(\hat{\theta}_i)(x_i - x_i^*)$) over single-hop neighbor state broadcasts.
-   * Computes **Pontryagin attainable (reachable) ellipsoids** ($\mathcal{R}_{\text{Grid}} \subseteq \mathcal{R}_{\text{Area}} \subseteq \mathcal{R}_{\text{Dev}}$) certified via Schur-complement inclusion LMIs, and projects $\mathcal{R}_{\text{Grid}}^\infty$ through network Power Transfer Distribution Factors (PTDFs) to export safe thermal reserves to slow supervisory optimizers.
+2. **Area Layer (ms — Intra-Area Cohesion & Mode-Shift Healing):**
+   * Separates voltage-forming **state-space cohesion (`C`)** from **PLL synchronization coupling (`P`)** across heterogeneous Grid-Forming (GFM) and Grid-Following (GFL) devices.
+   * Uses **hierarchical shallow decision trees** parameterized by live PEM-MHE estimates to detect GFM-to-GFL current-limit fallback within **52.0 ms** and engage chatter-free Schmitt-trigger hysteresis damping.
+3. **Grid Layer (1 s — Distributed Nonlinear SCCM & Supervisory Interface):**
+   * Replaces convex online ADMM consensus with a **Distributed Nonlinear Separable Control Contraction Metric (SCCM)** executing closed-form straight-line geodesic feedback (`u_i* + K_i(theta_hat_i)(x_i - x_i*)`) over single-hop neighbor state broadcasts.
+   * Computes **Pontryagin attainable (reachable) ellipsoids** (`R_Grid <= R_Area <= R_Dev`) certified via Schur-complement inclusion LMIs, and projects `R_Grid` through network Power Transfer Distribution Factors (PTDFs) to export safe thermal reserves to slow supervisory optimizers.
 
 ---
 
 ## 3. Repository Code & Experiment Map
 
 ### A. Core Area Contraction & Coupling Analysis (Paper 2 & Paper 3)
-* **`compute_coupling_matrices.py`**: Extracts the $10 \times 10$ Kron-reduced susceptance network to construct the **State-Space Cohesion ($\mathbf{C}$)** and **PLL Synchronization Coupling ($\mathbf{P}$)** matrices across GFM, GFL, and SG units.
-* **`coupled_LMI_solver.py`**: Solves the 20-state sparse off-diagonal Control Contraction Metric LMI ($\mathbf{\Psi}_{11} \preceq 0$), tightening worst-case tie-line $L_2$ disturbance gain from $\gamma_{\text{diag}}^* = 0.4162\text{ p.u.}$ to $\gamma_{\text{coupled}}^* = 0.4015\text{ p.u.}$ ($+3.65\%$ margin gain).
-* **`area_mpc_optimizer.py` & `plot_mpc_contraction.py`**: Implements the Certainty-Equivalent Adaptive MPC outer manifold (`+82.35%` contraction margin expansion under $3.0^\circ \to 15.0^\circ$ multiplicative phase noise).
+* **`compute_coupling_matrices.py`**: Extracts the `10 x 10` Kron-reduced susceptance network to construct the **State-Space Cohesion (`C`)** and **PLL Synchronization Coupling (`P`)** matrices across GFM, GFL, and SG units.
+* **`coupled_LMI_solver.py`**: Solves the 20-state sparse off-diagonal Control Contraction Metric LMI (`Psi_11 <= 0`), tightening worst-case tie-line L2 disturbance gain from `gamma_diag* = 0.4162 p.u.` to `gamma_coupled* = 0.4015 p.u.` (**+3.65%** margin gain).
+* **`area_mpc_optimizer.py` & `plot_mpc_contraction.py`**: Implements the Certainty-Equivalent Adaptive MPC outer manifold (**+82.35%** contraction margin expansion under `3.0 deg -> 15.0 deg` multiplicative phase noise).
 * **`run_ieee39_transients.jl` & `audit_grid_waveforms.py`**: Julia `PowerSimulationsDynamics.jl` EMT simulation and Python waveform audit pipeline for the modified IEEE 39-bus testbed.
 
 ### B. Online Mode-Shift Detection, Hysteresis & 100%-IBR Stress Tests
-* **`detect_gfm_to_gfl_shift.py`**: Online Zhou–Köhler PEM-MHE estimator detecting GFM current-rail saturation and fallback into GFL mode within **$52.0\text{ ms}$**.
-* **`heal_gfm_to_gfl_shift.py` & `heal_multi_device_hysteresis.py`**: Schmitt-trigger hysteresis controller (`60 ms` dwell) stabilizing simultaneous `GFM-31` mode drift and `GFL-30` $15.0^\circ$ tie-line jitter with **zero chattering** ($\lambda_{\max} \le -1.0594$).
-* **`test_100pct_ibr_area.py`**: Verifies full $100\%$ IBR operation (**$0\text{ SGs}$, $7\text{ GFMs}$, $3\text{ GFLs}$**), achieving $\gamma_{\text{100ibr}}^* = 0.4018\text{ p.u.}$ (within $0.06\%$ of the legacy SG baseline) and maintaining $\lambda_{\max} \le -2.4312$ under simultaneous faults.
-* **`test_gfm_reduction_threshold.py`**: Sweeps GFM anchor share from $7\text{ GFMs}$ down to $1\text{ GFM}$, proving that reducing $N_{\text{GFM}}$ from $6 \to 3$ avoids blackout ($I_{\max} = 1.0429\text{ p.u.} \le 1.20\text{ p.u.}$) and survives down to $1\text{ GFM} / 9\text{ GFL}$ ($1.1480\text{ p.u.}$).
+* **`detect_gfm_to_gfl_shift.py`**: Online Zhou–Köhler PEM-MHE estimator detecting GFM current-rail saturation and fallback into GFL mode within **52.0 ms**.
+* **`heal_gfm_to_gfl_shift.py` & `heal_multi_device_hysteresis.py`**: Schmitt-trigger hysteresis controller (`60 ms` dwell) stabilizing simultaneous `GFM-31` mode drift and `GFL-30` `15.0 deg` tie-line jitter with **zero chattering** (`lambda_max <= -1.0594`).
+* **`test_100pct_ibr_area.py`**: Verifies full 100% IBR operation (**0 SGs, 7 GFMs, 3 GFLs**), achieving `gamma_100ibr* = 0.4018 p.u.` (within **0.06%** of the legacy SG baseline) and maintaining `lambda_max <= -2.4312` under simultaneous faults.
+* **`test_gfm_reduction_threshold.py`**: Sweeps GFM anchor share from 7 GFMs down to 1 GFM, proving that reducing `N_GFM` from `6 -> 3` avoids blackout (`I_max = 1.0429 p.u. <= 1.20 p.u.`) and survives down to `1 GFM / 9 GFL` (`1.1480 p.u.`).
 
 ### C. IEEE 118-Bus 3-Area Reachable Sets, MARL & Lossy Links (Paper 3)
 * **`three_area_sccm_reachability.py`**:
-  * Synthesizes closed-form geodesic SCCM gains across Device ($\lambda=4.50$), Area ($\lambda=2.40$), and Grid ($\lambda=1.25$) layers.
-  * Computes Pontryagin reachable ellipsoids in $(V_{\text{pu}}, I_{\text{pu}})$ space ($I_{\max} = 1.0431\text{ p.u.}$).
-  * Verifies Schur-complement tube containment ($\lambda_{\min} = +1041.08$ for $\mathcal{R}_{\text{Grid}} \subseteq \mathcal{R}_{\text{Area}}$, $+225.26$ for $\mathcal{R}_{\text{Area}} \subseteq \mathcal{R}_{\text{Dev}}$).
-  * Exports certified PTDF thermal reserve (**$13.46\text{ MW}$** reserve / **$586.54\text{ MW}$** safe dispatch ceiling on bottleneck Line 59) directly into the 3-area IEEE 118-bus supervisory coordinator (`comm-limited-congestion-mgmt-main/`).
-* **`three_area_multitimescale_bridge.py` & `compare_mit_baseline.py`**: Benchmarks the 3-tier stack against the non-communicating supervisory baseline during a $+140\text{ MW}$ Area 1 surge + parallel Line 66 trip, cutting cumulative tie-line overload from **$230.8\text{ MW}\cdot\text{s}$** ($101.3\%$ peak) to **$39.7\text{ MW}\cdot\text{s}$** ($-82.8\%$).
-* **`marl_three_area_emergency.py` & `inspect_prop_delay.py`**: Evaluates isolated decentralized area agents under realistic 1-hop ($1\text{ s}$) and 2-hop ($2\text{ s}$) shadow-price propagation delays ($142.8\text{ MW}\cdot\text{s}$ overload, $-38.1\%$).
-* **`test_packet_loss_resilience.py`**: Tests Zero-Order Hold (ZOH) + decay buffering under **$25\%$ random packet loss** and a **$3\text{ s}$ total link blackout**, holding cumulative overload to **$192.5\text{ MW}\cdot\text{s}$** while keeping $\lambda_{\max} \le -2.7300$.
+  * Synthesizes closed-form geodesic SCCM gains across Device (`lambda = 4.50`), Area (`lambda = 2.40`), and Grid (`lambda = 1.25`) layers.
+  * Computes Pontryagin reachable ellipsoids in `(V_pu, I_pu)` space (`I_max = 1.0431 p.u.`).
+  * Verifies Schur-complement tube containment (`lambda_min = +1041.08` for `R_Grid <= R_Area`, `+225.26` for `R_Area <= R_Dev`).
+  * Exports certified PTDF thermal reserve (**13.46 MW** reserve / **586.54 MW** safe dispatch ceiling on bottleneck Line 59) directly into the 3-area IEEE 118-bus supervisory coordinator (`comm-limited-congestion-mgmt-main/`).
+* **`three_area_multitimescale_bridge.py` & `compare_mit_baseline.py`**: Benchmarks the 3-tier stack against the non-communicating supervisory baseline during a `+140 MW` Area 1 surge + parallel Line 66 trip, cutting cumulative tie-line overload from **230.8 MW·s** (101.3% peak) to **39.7 MW·s** (**-82.8%**).
+* **`marl_three_area_emergency.py` & `inspect_prop_delay.py`**: Evaluates isolated decentralized area agents under realistic 1-hop (`1 s`) and 2-hop (`2 s`) shadow-price propagation delays (**142.8 MW·s** overload, **-38.1%**).
+* **`test_packet_loss_resilience.py`**: Tests Zero-Order Hold (ZOH) + decay buffering under **25% random packet loss** and a **3 s total link blackout**, holding cumulative overload to **192.5 MW·s** while keeping `lambda_max <= -2.7300`.
 
 ---
 
