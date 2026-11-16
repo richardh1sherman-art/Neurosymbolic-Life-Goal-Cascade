@@ -340,6 +340,32 @@ We validate the proposed three-layer architecture across two benchmark systems: 
 
 As summarized in Table~\ref{tab:benchmark_summary}, replacing slow convex consensus with real-time contraction control reduces cumulative thermal overload on bottleneck Line~59 (Bus~33 to Bus~42, $600\text{ MW}$ rating) from $230.8\text{ MW}\cdot\text{s}$ to $39.7\text{ MW}\cdot\text{s}$ ($-82.8\%$) under fast peer-to-peer coordination, and maintains strict contraction ($\lambda_{\max} \le -2.73$) even during a $3\text{ s}$ communication blackout. Moreover, Schur-complement ellipsoid inclusion yields strictly positive minimum eigenvalues ($+1041.08$ for $\mathcal{R}_{\text{Grid}} \subseteq \mathcal{R}_{\text{Area}}$ and $+225.26$ for $\mathcal{R}_{\text{Area}} \subseteq \mathcal{R}_{\text{Dev}}$), bounding peak inverter current at $1.0431\text{ p.u.} \le 1.20\text{ p.u.}$ and exporting a certified $13.46\text{ MW}$ PTDF thermal reserve ($586.54\text{ MW}$ safe dispatch ceiling) to the $15\text{ s}$ supervisory coordinator.
 
+\subsection{Minimum Grid-Forming Anchor Threshold ($N_{\text{GFM}} = 6 \to 3$)}
+A critical planning question in $100\%$ IBR grids is whether retiring half of the voltage-forming units in a balancing area—reducing $N_{\text{GFM}}$ from $6$ to $3$ while increasing GFL units from $4$ to $7$—triggers a cascading blackout during a $15.0^\circ$ tie-line perturbation. Physically, halving the GFM count eliminates three rows of state-space voltage cohesion ($\mathbf{C}$) and activates three additional PLL coupling rows ($\mathbf{P}$), raising peak tie-line phase sensitivity from $0.484$ to $0.553\text{ rad/rad}$ and concentrating fault current across fewer voltage-forming anchors.
+
+Table~\ref{tab:gfm_sweep} quantifies the sweep from $7\text{ GFMs}$ down to $1\text{ GFM}$ on the 10-device testbed. Reducing $N_{\text{GFM}}$ from $6$ to $3$ does \emph{not} cause a blackout: the area-level $\mathbf{C}/\mathbf{P}$ estimator detects the reduced voltage stiffness and scales the GFL injection multiplier $\alpha_{\text{GFL}}$ down to $0.680$, holding peak current at $1.0429\text{ p.u.}$ (safely below the $1.20\text{ p.u.}$ transistor overcurrent rail) with strict contraction ($\lambda_{\max} = -2.5205$). Even at the extreme $1\text{ GFM} / 9\text{ GFL}$ boundary ($10\%$ GFM share), where an uncompensated area trips on overcurrent ($1.3448\text{ p.u.} > 1.20\text{ p.u.}$), SCCM hysteresis backoff ($\alpha_{\text{GFL}} = 0.520$) caps peak current at $1.1480\text{ p.u.}$ and preserves stability ($\lambda_{\max} = -1.9641$).
+
+\begin{table}[!t]
+\centering
+\caption{GFM-to-GFL Anchor Reduction Sweep Under $15.0^\circ$ Tie-Line Perturbation ($1.20\text{ p.u.}$ Overcurrent Rail)}
+\label{tab:gfm_sweep}
+\scriptsize
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Split} & \textbf{Peak $p_{\text{tie}}$} & \textbf{Unhealed $I_{\max}$} & \textbf{SCCM $I_{\max}$} & $\alpha_{\text{GFL}}$ & $\lambda_{\max}$ \\
+\midrule
+7 GFM / 3 GFL & 0.430 & 1.0229 p.u. & 1.0143 p.u. & 1.000 & $-3.5403$ \\
+6 GFM / 4 GFL & 0.484 & 1.0342 p.u. & 1.0245 p.u. & 1.000 & $-3.5722$ \\
+5 GFM / 5 GFL & 0.509 & 1.0475 p.u. & 1.0373 p.u. & 1.000 & $-3.5731$ \\
+4 GFM / 6 GFL & 0.530 & 1.0665 p.u. & 1.0390 p.u. & 0.840 & $-3.0677$ \\
+\textbf{3 GFM / 7 GFL} & \textbf{0.553} & \textbf{1.0976 p.u.} & \textbf{1.0429 p.u.} & \textbf{0.680} & $\mathbf{-2.5205}$ \\
+2 GFM / 8 GFL & 0.666 & 1.1633 p.u. & 1.0540 p.u. & 0.520 & $-1.9707$ \\
+1 GFM / 9 GFL & 0.695 & 1.3448 p.u. (Trip) & 1.1480 p.u. & 0.520 & $-1.9641$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Conclusion}
 This paper established a unified three-layer Distributed Parameter-Dependent SCCM framework for tie-line scheduling and emergency congestion control in inverter-dominated grids. By replacing convex online ADMM consensus with closed-form geodesic feedback driven by live PEM-MHE parameter estimates, the architecture requires convexity strictly offline while guaranteeing exponential trajectory contraction across Device, Area, and Grid timescales. Projecting the certified Grid reachable ellipsoid through network PTDFs supplies rigorous safety envelopes to slow supervisory optimizers, bridging fast converter stability with wide-area economic dispatch.
 
