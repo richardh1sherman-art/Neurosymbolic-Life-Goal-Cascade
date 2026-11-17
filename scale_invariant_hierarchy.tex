@@ -1,0 +1,86 @@
+\documentclass[journal]{IEEEtran}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,bm}
+\usepackage{booktabs,tabularx}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\title{Scale-Invariant Contraction Hierarchies: Group-Theoretic Cohesion, Singular Perturbation, and Compactness Propagation in Multi-Area Grids}
+\author{Richard~Sherman,~\IEEEmembership{Member,~IEEE}%
+\thanks{R. Sherman is with the System Architecture Invariant Manifest Group, Keller, TX 76248 USA.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Multi-area inverter-dominated power grids exhibit striking structural self-similarity: an area exchanging tie-line power with neighboring balancing areas mirrors an individual inverter exchanging active and reactive power with neighboring devices inside an area. This technical note formalizes the control-theoretic foundations underlying this scale invariance. First, we model intra-layer state-space cohesion ($\mathbf{C}$) via finite symmetry group equivariance ($\mathcal{G}_\ell \le S_{N_\ell}$), proving that quotient projection onto the $\mathcal{G}_\ell$-invariant manifold preserves the separable Control Contraction Metric (SCCM) Linear Matrix Inequality (LMI) structure across scales. Second, we apply two-tier singular perturbation theory ($\epsilon_\ell = \tau_\ell / \tau_{\ell+1} \ll 1$) to construct a composite Riemannian metric certifying cross-timescale stability. Third, we prove that compactness of the Pontryagin attainable (reachable) ellipsoid at the lowest device layer propagates inductively to all higher layers under Schur-complement containment.
+\end{abstract}
+
+\section{Group-Theoretic Cohesion and Scale Self-Similarity}
+Consider an $L$-layer hierarchical network where layer $\ell \in \{1, \dots, L\}$ consists of $N_\ell$ interconnected nonlinear subsystems with state $x_\ell = (x_{\ell,1}, \dots, x_{\ell,N_\ell}) \in \mathcal{X}_\ell \subset \mathbb{R}^{N_\ell n_\ell}$ and dynamics:
+\begin{equation}
+\dot{x}_{\ell,i} = f_{\ell,i}(x_{\ell,i}, x_{\ell,\mathcal{N}_i}, \hat{\theta}_{\ell,i}) + B_{\ell,i} u_{\ell,i} + \Delta_{\ell,i} w_{\ell,i}.
+\end{equation}
+
+\begin{definition}[Cohesion Symmetry Group]
+Let $\mathcal{G}_\ell \le S_{N_\ell}$ be a subgroup of node permutations preserving electrical susceptance weights in the layer-$\ell$ cohesion matrix $\mathbf{C}_\ell$, i.e., $P_g \mathbf{C}_\ell P_g^\top = \mathbf{C}_\ell$ for all $g \in \mathcal{G}_\ell$, where $P_g$ is the permutation representation of $g$. The layer-$\ell$ dynamics are $\mathcal{G}_\ell$-cohesive if:
+\begin{equation}
+f_\ell(P_g x_\ell, P_g u_\ell, P_g \hat{\theta}_\ell) = P_g f_\ell(x_\ell, u_\ell, \hat{\theta}_\ell), \quad \forall g \in \mathcal{G}_\ell.
+\end{equation}
+\end{definition}
+
+The fixed-point subspace $\mathcal{X}_\ell^{\mathcal{G}_\ell} = \{x_\ell \in \mathcal{X}_\ell \mid P_g x_\ell = x_\ell \;\forall g \in \mathcal{G}_\ell\}$ defines the synchronized macro-state of the cluster. Let $\Pi_{\mathcal{G}_\ell} : \mathcal{X}_\ell \to \mathbb{R}^{n_{\ell+1}}$ denote the orthogonal Reynolds averaging projector $\Pi_{\mathcal{G}_\ell} x_\ell = \frac{1}{|\mathcal{G}_\ell|} \sum_{g \in \mathcal{G}_\ell} P_g x_\ell$.
+
+\begin{theorem}[Quotient Contraction Isomorphism]
+Suppose layer $\ell$ admits a $\mathcal{G}_\ell$-invariant separable Riemannian metric $M_\ell(x_\ell, \hat{\theta}_\ell) = \operatorname{diag}(M_{\ell,1}, \dots, M_{\ell,N_\ell})$ satisfying $P_g M_\ell P_g^\top = M_\ell$ and exponential contraction rate $\lambda_\ell > 0$. Then:
+\begin{enumerate}
+    \item The synchronized cohesion manifold $\mathcal{X}_\ell^{\mathcal{G}_\ell}$ is forward invariant and exponentially attracting at rate $\lambda_\ell$.
+    \item The induced quotient metric $\bar{M}_{\ell+1} = \Pi_{\mathcal{G}_\ell} M_\ell \Pi_{\mathcal{G}_\ell}^\top$ renders the aggregated macro-node dynamics at layer $\ell+1$ exponentially contracting with the identical separable LMI form as layer $\ell$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By $\mathcal{G}_\ell$-equivariance, for any $x_\ell \in \mathcal{X}_\ell^{\mathcal{G}_\ell}$ and $g \in \mathcal{G}_\ell$, $P_g \dot{x}_\ell = \dot{x}_\ell$, establishing forward invariance of $\mathcal{X}_\ell^{\mathcal{G}_\ell}$. For any trajectory $x_\ell(t)$, the geodesic distance to $P_g x_\ell(t)$ satisfies $d_{M_\ell}(x_\ell(t), P_g x_\ell(t)) \le e^{-\lambda_\ell t} d_{M_\ell}(x_\ell(0), P_g x_\ell(0))$, proving exponential attraction to $\mathcal{X}_\ell^{\mathcal{G}_\ell}$. Projecting the variational inequality $\dot{V}_\ell \le -2\lambda_\ell V_\ell$ onto $\operatorname{range}(\Pi_{\mathcal{G}_\ell})$ via $\delta x_\ell = \Pi_{\mathcal{G}_\ell}^\top \delta x_{\ell+1}$ yields $\delta x_{\ell+1}^\top \bar{M}_{\ell+1} \delta x_{\ell+1}$ contracting at rate $\lambda_\ell$.
+\end{proof}
+
+\section{Two-Tier Singular Perturbation Separation}
+Between adjacent layers $(\ell, \ell+1)$ separated by timescale ratio $\epsilon_\ell = \tau_\ell / \tau_{\ell+1} \ll 1$, the coupled two-tier dynamics take the standard singularly perturbed form:
+\begin{align}
+\dot{x}_{\ell+1} &= f_{\ell+1}(x_{\ell+1}, x_\ell, \hat{\theta}_{\ell+1}) + B_{\ell+1} u_{\ell+1} \\
+\epsilon_\ell \dot{x}_\ell &= g_\ell(x_{\ell+1}, x_\ell, \hat{\theta}_\ell) + B_\ell u_\ell.
+\end{align}
+
+\begin{theorem}[Composite Two-Tier Singular Perturbation Contraction]
+Assume the reduced slow layer ($\epsilon_\ell = 0$) contracts in metric $M_{\ell+1}$ at rate $\lambda_{\ell+1} > 0$, the fast boundary-layer dynamics contract uniformly in metric $M_\ell$ at rate $\lambda_\ell > 0$, and inter-layer coupling Jacobians satisfy bounded Lipschitz gains $\beta_{12}, \beta_{21} < \infty$. Define the composite block-diagonal Riemannian metric:
+\begin{equation}
+M_{\text{comp}}(x, \hat{\theta}) = \operatorname{diag}\big(M_{\ell+1}(x_{\ell+1}, \hat{\theta}_{\ell+1}),\; \epsilon_\ell M_\ell(x_\ell, \hat{\theta}_\ell)\big).
+\end{equation}
+Then for every timescale separation ratio satisfying:
+\begin{equation}
+0 < \epsilon_\ell < \epsilon_\ell^* \triangleq \frac{4 \lambda_{\ell+1} \lambda_\ell}{(\beta_{12} + \beta_{21})^2},
+\end{equation}
+the coupled two-tier system is exponentially contracting with rate $\lambda_{\text{comp}}(\epsilon_\ell) > 0$.
+\end{theorem}
+
+\section{Inductive Compactness of Attainable Sets}
+At each layer $\ell$, the Pontryagin forward attainable (reachable) set from initial uncertainty $\mathcal{R}_\ell(0)$ under disturbance bound $\bar{w}_\ell$ is the closed Riemannian ellipsoid:
+\begin{equation}
+\mathcal{R}_\ell(t) = \Big\{ x_\ell \in \mathbb{R}^{N_\ell n_\ell} \;\Big|\; (x_\ell - x_\ell^*)^\top M_\ell(\hat{\theta}_\ell) (x_\ell - x_\ell^*) \le \rho_\ell^2(t) \Big\}
+\end{equation}
+with steady-state radius $\rho_\ell^\infty = \gamma_\ell \bar{w}_\ell / \lambda_\ell < \infty$.
+
+\begin{theorem}[Inductive Compactness Propagation Across All Layers]
+Suppose the lowest layer $\ell = 1$ (Device layer) has a compact attainable set $\mathcal{R}_1(t)$ ($0 < \alpha_1 I \preceq M_1$ and $\rho_1(t) < \infty$), and every upward aggregation map $\Pi_{\ell \to \ell+1}$ is continuous. If each adjacent pair $(\ell, \ell+1)$ satisfies the Schur-complement containment LMI:
+\begin{equation}
+\frac{1}{\rho_{\ell+1}^2} M_{\ell+1}(\hat{\theta}_{\ell+1}) \succeq \frac{1}{\rho_\ell^2} \Pi_{\ell+1 \to \ell}^\top M_\ell(\hat{\theta}_\ell) \Pi_{\ell+1 \to \ell},
+\end{equation}
+then the Pontryagin attainable set $\mathcal{R}_\ell(t)$ is compact and forward invariant at \textbf{every} higher layer $\ell = 2, 3, \dots, L$.
+\end{theorem}
+
+\begin{proof}
+Since $M_1(\hat{\theta}_1) \succeq \alpha_1 I \succ 0$ and $\rho_1(t) < \infty$, $\mathcal{R}_1(t)$ is closed and bounded in Euclidean space, hence compact by the Heine--Borel theorem. By induction, if $\mathcal{R}_\ell(t)$ is compact, its continuous image $\Pi_{\ell \to \ell+1}(\mathcal{R}_\ell(t))$ is compact. By the S-procedure, the Schur-complement inequality guarantees $\Pi_{\ell+1 \to \ell}(\mathcal{R}_{\ell+1}(t)) \subseteq \mathcal{R}_\ell(t)$ with $M_{\ell+1} \succ 0$ and $\rho_{\ell+1}(t) < \infty$, ensuring $\mathcal{R}_{\ell+1}(t)$ is closed, bounded, and compact for all $\ell \le L$.
+\end{proof}
+
+\end{document}
