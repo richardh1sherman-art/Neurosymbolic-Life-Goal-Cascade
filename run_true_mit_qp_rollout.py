@@ -74,8 +74,8 @@ def build_mit_system(apply_sccm_limits=False):
         area_min_changes = torch.zeros((len(ctrls), max_len), dtype=torch.double)
         for idx_c, c in enumerate(ctrls):
             n_l = int(c.num_lines)
-            area_max_changes[idx_c, :n_l] = -delta_p_tube_mw[c.lines_in_area]
-            area_min_changes[idx_c, :n_l] = delta_p_tube_mw[c.lines_in_area]
+            area_max_changes[idx_c, :n_l] = -(delta_p_tube_mw[c.lines_in_area] / 3.0)
+            area_min_changes[idx_c, :n_l] = (delta_p_tube_mw[c.lines_in_area] / 3.0)
 
         controller_utils.assign_line_limit_changes(ctrls, area_max_changes, area_min_changes)
 
