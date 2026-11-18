@@ -5,9 +5,9 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
-\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
 
-\title{Scale-Invariant Contraction Hierarchies: Group-Theoretic Cohesion, Singular Perturbation, and Compactness Propagation in Multi-Area Grids}
+\title{Scale-Invariant Contraction Hierarchies: Group-Theoretic Cohesion, Continuous-to-Discrete Lifting, and Compactness Propagation}
 \author{Richard~Sherman,~\IEEEmembership{Member,~IEEE}%
 \thanks{R. Sherman is with the System Architecture Invariant Manifest Group, Keller, TX 76248 USA.}}
 
@@ -15,86 +15,78 @@
 \maketitle
 
 \begin{abstract}
-Multi-area inverter-dominated power grids exhibit striking structural self-similarity: an area exchanging tie-line power with neighboring balancing areas mirrors an individual inverter exchanging active and reactive power with neighboring devices inside an area. This technical note formalizes the control-theoretic foundations underlying this scale invariance. First, we model intra-layer state-space cohesion ($\mathbf{C}$) via finite symmetry group equivariance ($\mathcal{G}_\ell \le S_{N_\ell}$), proving that quotient projection onto the $\mathcal{G}_\ell$-invariant manifold preserves the separable Control Contraction Metric (SCCM) Linear Matrix Inequality (LMI) structure across scales. Second, we apply two-tier singular perturbation theory ($\epsilon_\ell = \tau_\ell / \tau_{\ell+1} \ll 1$) to construct a composite Riemannian metric certifying cross-timescale stability. Third, we prove that compactness of the Pontryagin attainable (reachable) ellipsoid at the lowest device layer propagates inductively to all higher layers under Schur-complement containment.
+Multi-area inverter-dominated power grids exhibit structural self-similarity across Device, Area, and Grid timescales. This paper formalizes a scale-invariant control theory built on four pillars: (1) finite symmetry group equivariance characterizing allowable cohesive configurations and state augmentation converting external coupling into internal cohesion; (2) a Renormalization Group (RG) formulation of top-level power margin ($\Delta P_{\text{crit}} > 0$) balancing economic cost minimization ($J_{\text{cost}}$) against disruption minimization ($J_{\text{disrupt}}$); (3) time-reversible adjoint flows and stroboscopic singular perturbation lifting continuous dynamics to Nekrashevych self-similar discrete-event trees; and (4) inductive preservation of closedness and compactness across all non-chaotic layers, contrasted with fractal reachable boundaries in the unstable odometer regime.
 \end{abstract}
 
-\section{Group-Theoretic Cohesion and Scale Self-Similarity}
-Consider an $L$-layer hierarchical network where layer $\ell \in \{1, \dots, L\}$ consists of $N_\ell$ interconnected nonlinear subsystems with state $x_\ell = (x_{\ell,1}, \dots, x_{\ell,N_\ell}) \in \mathcal{X}_\ell \subset \mathbb{R}^{N_\ell n_\ell}$ and dynamics:
+\section{Explicit Trajectory Dynamics and Cohesive Configurations}
+Consider an $L$-layer hierarchical network evolving over continuous time $t \in \mathbb{R}_{\ge 0}$. At layer $\ell \in \{1, \dots, L\}$, the network comprises $N_\ell$ interconnected nonlinear subsystems. For every subsystem $i \in \{1, \dots, N_\ell\}$, the local state $x_{\ell,i}(t) \in \mathbb{R}^{n_\ell}$ obeys:
 \begin{equation}
-\dot{x}_{\ell,i} = f_{\ell,i}(x_{\ell,i}, x_{\ell,\mathcal{N}_i}, \hat{\theta}_{\ell,i}) + B_{\ell,i} u_{\ell,i} + \Delta_{\ell,i} w_{\ell,i}.
+\dot{x}_{\ell,i}(t) = f_{\ell,i}\big(x_{\ell,i}(t), x_{\ell,\mathcal{N}_i}(t), \hat{\theta}_{\ell,i}(t)\big) + B_{\ell,i} u_{\ell,i}(t) + \Delta_{\ell,i} w_{\ell,i}(t).
 \end{equation}
+Stacking all $N_\ell$ subsystems yields the full layer-$\ell$ state vector $x_\ell(t) = (x_{\ell,1}(t), \dots, x_{\ell,N_\ell}(t)) \in \mathcal{X}_\ell \subset \mathbb{R}^{N_\ell n_\ell}$, where a trajectory at layer $\ell$ is an absolutely continuous map $x_\ell : [0, \infty) \to \mathcal{X}_\ell$.
 
-\begin{definition}[Cohesion Symmetry Group]
-Let $\mathcal{G}_\ell \le S_{N_\ell}$ be a subgroup of node permutations preserving electrical susceptance weights in the layer-$\ell$ cohesion matrix $\mathbf{C}_\ell$, i.e., $P_g \mathbf{C}_\ell P_g^\top = \mathbf{C}_\ell$ for all $g \in \mathcal{G}_\ell$, where $P_g$ is the permutation representation of $g$. The layer-$\ell$ dynamics are $\mathcal{G}_\ell$-cohesive if:
+\begin{definition}[Cohesion Symmetry Group and Allowable Configurations]
+Let $\mathcal{G}_\ell \le S_{N_\ell}$ be the subgroup of subsystem permutations $P_g$ that preserve the layer-$\ell$ susceptance cohesion matrix $\mathbf{C}_\ell$, i.e., $P_g \mathbf{C}_\ell P_g^\top = \mathbf{C}_\ell$ for all $g \in \mathcal{G}_\ell$. The layer-$\ell$ dynamics are $\mathcal{G}_\ell$-cohesive if permuting states, inputs, and parameters commutes with the vector field:
 \begin{equation}
-f_\ell(P_g x_\ell, P_g u_\ell, P_g \hat{\theta}_\ell) = P_g f_\ell(x_\ell, u_\ell, \hat{\theta}_\ell), \quad \forall g \in \mathcal{G}_\ell.
+f_\ell(P_g x_\ell, P_g u_\ell, P_g \hat{\theta}_\ell) = P_g f_\ell(x_\ell, u_\ell, \hat{\theta}_\ell), \qquad \forall g \in \mathcal{G}_\ell.
 \end{equation}
+Thus, $\mathcal{G}_\ell$ defines the set of \emph{allowable configurations} preserving internal network coherence.
 \end{definition}
 
-The fixed-point subspace $\mathcal{X}_\ell^{\mathcal{G}_\ell} = \{x_\ell \in \mathcal{X}_\ell \mid P_g x_\ell = x_\ell \;\forall g \in \mathcal{G}_\ell\}$ defines the synchronized macro-state of the cluster. Let $\Pi_{\mathcal{G}_\ell} : \mathcal{X}_\ell \to \mathbb{R}^{n_{\ell+1}}$ denote the orthogonal Reynolds averaging projector $\Pi_{\mathcal{G}_\ell} x_\ell = \frac{1}{|\mathcal{G}_\ell|} \sum_{g \in \mathcal{G}_\ell} P_g x_\ell$.
+We distinguish the static algebraic \emph{cohesive configuration subspace} $\mathcal{X}_\ell^{\mathcal{G}_\ell} \triangleq \{x_\ell \in \mathcal{X}_\ell \mid P_g x_\ell = x_\ell \;\forall g \in \mathcal{G}_\ell\}$ from dynamic \emph{temporal synchronization}, which holds when $\lim_{t \to \infty} d_{M_\ell}(x_\ell(t), \mathcal{X}_\ell^{\mathcal{G}_\ell}) = 0$. Let $\Pi_{\mathcal{G}_\ell} x_\ell = \frac{1}{|\mathcal{G}_\ell|} \sum_{g \in \mathcal{G}_\ell} P_g x_\ell$ denote the Reynolds projector onto $\mathcal{X}_\ell^{\mathcal{G}_\ell}$.
 
 \begin{theorem}[Quotient Contraction Isomorphism]
-Suppose layer $\ell$ admits a $\mathcal{G}_\ell$-invariant separable Riemannian metric $M_\ell(x_\ell, \hat{\theta}_\ell) = \operatorname{diag}(M_{\ell,1}, \dots, M_{\ell,N_\ell})$ satisfying $P_g M_\ell P_g^\top = M_\ell$ and exponential contraction rate $\lambda_\ell > 0$. Then:
-\begin{enumerate}
-    \item The synchronized cohesion manifold $\mathcal{X}_\ell^{\mathcal{G}_\ell}$ is forward invariant and exponentially attracting at rate $\lambda_\ell$.
-    \item The induced quotient metric $\bar{M}_{\ell+1} = \Pi_{\mathcal{G}_\ell} M_\ell \Pi_{\mathcal{G}_\ell}^\top$ renders the aggregated macro-node dynamics at layer $\ell+1$ exponentially contracting with the identical separable LMI form as layer $\ell$.
-\end{enumerate}
+If layer $\ell$ admits a $\mathcal{G}_\ell$-invariant separable Riemannian metric $M_\ell(x_\ell, \hat{\theta}_\ell)$ ($P_g M_\ell P_g^\top = M_\ell$) with exponential contraction rate $\lambda_\ell > 0$, then: (1) $\mathcal{X}_\ell^{\mathcal{G}_\ell}$ is forward invariant and all trajectories $x_\ell(t)$ synchronize exponentially to $\mathcal{X}_\ell^{\mathcal{G}_\ell}$ as $t \to \infty$; and (2) the renormalized quotient metric $\bar{M}_{\ell+1} = \Pi_{\mathcal{G}_\ell} M_\ell \Pi_{\mathcal{G}_\ell}^\top$ preserves the exact separable Linear Matrix Inequality (LMI) structure at layer $\ell+1$.
 \end{theorem}
 
-\begin{proof}
-By $\mathcal{G}_\ell$-equivariance, for any $x_\ell \in \mathcal{X}_\ell^{\mathcal{G}_\ell}$ and $g \in \mathcal{G}_\ell$, $P_g \dot{x}_\ell = \dot{x}_\ell$, establishing forward invariance of $\mathcal{X}_\ell^{\mathcal{G}_\ell}$. For any trajectory $x_\ell(t)$, the geodesic distance to $P_g x_\ell(t)$ satisfies $d_{M_\ell}(x_\ell(t), P_g x_\ell(t)) \le e^{-\lambda_\ell t} d_{M_\ell}(x_\ell(0), P_g x_\ell(0))$, proving exponential attraction to $\mathcal{X}_\ell^{\mathcal{G}_\ell}$. Projecting the variational inequality $\dot{V}_\ell \le -2\lambda_\ell V_\ell$ onto $\operatorname{range}(\Pi_{\mathcal{G}_\ell})$ via $\delta x_\ell = \Pi_{\mathcal{G}_\ell}^\top \delta x_{\ell+1}$ yields $\delta x_{\ell+1}^\top \bar{M}_{\ell+1} \delta x_{\ell+1}$ contracting at rate $\lambda_\ell$.
-\end{proof}
-
-\section{Self-Similar Group Automaton on the Contraction Skeleton}
-Following Nekrashevych~\cite{nekrashevych05}, let $X$ be a finite alphabet indexing the local subsystems at each tier, and let $X^*$ be the free monoid of hierarchical address words $w = x_1 x_2 \cdots x_k$ tracing paths from the Grid root down through Areas to individual Devices. A faithful action of a cohesion group $G$ on the rooted tree $X^*$ is \emph{self-similar} if for every $g \in G$ and every letter $x \in X$, there exist a uniquely determined state restriction $h = g|_x \in G$ and output letter $y = g \cdot x \in X$ such that:
+\section{Renormalization Group Objectives and Coupling Augmentation}
+In statistical physics, a Renormalization Group (RG) transformation $V'(\Phi) = \mathcal{R}V(\Phi)$ coarse-grains short-range lattice interactions into macroscopic potentials near a critical temperature $(T - T_c)^\alpha$. In our grid hierarchy, the top layer ($\ell = L$) regulates a critical power balance margin:
 \begin{equation}
-g(xw) = y\,h(w), \qquad \forall w \in X^*.
+\Delta P_{\text{crit}} \triangleq P_{\text{deliver}} - P_{\text{demand}} > 0
 \end{equation}
-This defines a deterministic Mealy automaton with state set $G$ and transition-output law $g \cdot x = y \cdot h$.
-
-In a general nonlinear dynamical system, trajectories from arbitrary initial conditions are non-unique, preventing a single global automaton assignment. Under Separable Control Contraction Metric (SCCM) control, however, every perturbed trajectory converges exponentially to the \textbf{unique nominal reference trajectory $x^*(t)$} inside the invariant Pontryagin reachable tube $\mathcal{R}_\ell(t)$. Consequently:
-\begin{enumerate}
-    \item \textbf{Exact Self-Similarity on $x^*(t)$:} Along the nominal contraction skeleton $x^*(t)$, each macro-level balancing symmetry $g \in G$ uniquely determines the target area $y = g \cdot x$ and the induced sub-area device redistribution $h = g|_x$ via the wreath-product recursion $G \hookrightarrow G \wr S_{|X|}$.
-    \item \textbf{Tube-Equivariant Self-Similarity on $\mathcal{R}_\ell(t)$:} For any perturbed trajectory $x(t) \in \mathcal{R}_\ell(t)$, exponential contraction guarantees that $g(xw)$ and $y\,h(w)$ remain within geodesic distance $\rho_\ell(t)$, yielding a well-defined coarse self-similar action across all scales.
-\end{enumerate}
-
-\section{Two-Tier Singular Perturbation Separation}
-Between adjacent layers $(\ell, \ell+1)$ separated by timescale ratio $\epsilon_\ell = \tau_\ell / \tau_{\ell+1} \ll 1$, the coupled two-tier dynamics take the standard singularly perturbed form:
-\begin{align}
-\dot{x}_{\ell+1} &= f_{\ell+1}(x_{\ell+1}, x_\ell, \hat{\theta}_{\ell+1}) + B_{\ell+1} u_{\ell+1} \\
-\epsilon_\ell \dot{x}_\ell &= g_\ell(x_{\ell+1}, x_\ell, \hat{\theta}_\ell) + B_\ell u_\ell.
-\end{align}
-
-\begin{theorem}[Composite Two-Tier Singular Perturbation Contraction]
-Assume the reduced slow layer ($\epsilon_\ell = 0$) contracts in metric $M_{\ell+1}$ at rate $\lambda_{\ell+1} > 0$, the fast boundary-layer dynamics contract uniformly in metric $M_\ell$ at rate $\lambda_\ell > 0$, and inter-layer coupling Jacobians satisfy bounded Lipschitz gains $\beta_{12}, \beta_{21} < \infty$. Define the composite block-diagonal Riemannian metric:
+while jointly minimizing two supervisory objectives across all lower tiers:
 \begin{equation}
-M_{\text{comp}}(x, \hat{\theta}) = \operatorname{diag}\big(M_{\ell+1}(x_{\ell+1}, \hat{\theta}_{\ell+1}),\; \epsilon_\ell M_\ell(x_\ell, \hat{\theta}_\ell)\big).
+\min_{u} \; \Big( J_{\text{cost}}(u) + \mu\, J_{\text{disrupt}}(x, u) \Big)
 \end{equation}
-Then for every timescale separation ratio satisfying:
-\begin{equation}
-0 < \epsilon_\ell < \epsilon_\ell^* \triangleq \frac{4 \lambda_{\ell+1} \lambda_\ell}{(\beta_{12} + \beta_{21})^2},
-\end{equation}
-the coupled two-tier system is exponentially contracting with rate $\lambda_{\text{comp}}(\epsilon_\ell) > 0$.
-\end{theorem}
+where $J_{\text{cost}}$ captures economic generation, battery, and curtailment costs, and $J_{\text{disrupt}}$ penalizes physical disruptions including relay trips, mode-shift chattering, and thermal overloads. When $\Delta P_{\text{crit}} \to 0^+$, effective correlation lengths diverge unless metric renormalization $\bar{M}_{\ell+1} = \Pi_{\mathcal{G}_\ell} M_\ell \Pi_{\mathcal{G}_\ell}^\top$ preserves contraction.
 
-\section{Inductive Compactness of Attainable Sets}
-At each layer $\ell$, the Pontryagin forward attainable (reachable) set from initial uncertainty $\mathcal{R}_\ell(0)$ under disturbance bound $\bar{w}_\ell$ is the closed Riemannian ellipsoid:
-\begin{equation}
-\mathcal{R}_\ell(t) = \Big\{ x_\ell \in \mathbb{R}^{N_\ell n_\ell} \;\Big|\; (x_\ell - x_\ell^*)^\top M_\ell(\hat{\theta}_\ell) (x_\ell - x_\ell^*) \le \rho_\ell^2(t) \Big\}
-\end{equation}
-with steady-state radius $\rho_\ell^\infty = \gamma_\ell \bar{w}_\ell / \lambda_\ell < \infty$.
+\begin{remark}[Converting External Coupling Into Internal Cohesion]
+At any tier, interaction energy splits into internal state-to-state cohesion ($\mathbf{C}_\ell$) and exogenous interface coupling ($\mathbf{P}_\ell$). Whenever a coupling interface—such as a Phase-Locked Loop (PLL) synchronization channel—is specified via dynamic interface states $z_{\text{int},i}$, augmenting the local state to $\tilde{x}_{\ell,i} = [x_{\ell,i};\, z_{\text{int},i}]$ absorbs the exogenous input into an internal state transition, transforming the coupled system into a purely cohesive augmented network ($\tilde{\mathbf{C}}_\ell$).
+\end{remark}
 
-\begin{theorem}[Inductive Compactness Propagation Across All Layers]
-Suppose the lowest layer $\ell = 1$ (Device layer) has a compact attainable set $\mathcal{R}_1(t)$ ($0 < \alpha_1 I \preceq M_1$ and $\rho_1(t) < \infty$), and every upward aggregation map $\Pi_{\ell \to \ell+1}$ is continuous. If each adjacent pair $(\ell, \ell+1)$ satisfies the Schur-complement containment LMI:
+\section{Time-Reversible Adjoints and Continuous-to-Discrete Lifting}
+Because smooth vector fields $f_\ell$ generate local diffeomorphic flows $\phi_t^\ell$ whose variational adjoint equations $\dot{\psi}_\ell(t) = -A_\ell(x_\ell(t))^\top \psi_\ell(t)$ integrate backward in time, continuous trajectory transformations are invertible. This time-reversibility justifies modeling hierarchical symmetry actions by an invertible \emph{group} $G$ rather than an irreversible semigroup.
+
+Following Nekrashevych~\cite{nekrashevych05}, let $X$ be a finite alphabet indexing subsystems and $X^*$ be the rooted tree of hierarchical address words $w = x_1 \cdots x_k$. Along the unique contracting nominal trajectory $x^*(t)$, a self-similar action of $G$ satisfies:
+\begin{equation}
+g(xw) = y\,h(w), \qquad \forall g \in G,\; x \in X,\; w \in X^*
+\end{equation}
+defining a deterministic Mealy automaton with state transition $g \cdot x = y \cdot h$.
+
+To bridge continuous dynamics at layer $\ell$ to discrete-event transitions at layer $\ell+1$, singular perturbation ($\epsilon_\ell = \tau_\ell / \tau_{\ell+1} \ll 1$) alone separates fast and slow \emph{continuous} states within a cohesive tier. Crossing from continuous time to a discrete-event tree over macro-intervals $T_\ell = [t_k, t_{k+1}]$ requires pairing singular perturbation with the stroboscopic sampled-data (Poincar\'e) map:
+\begin{equation}
+x_{\ell+1}[k+1] = \Phi_{T_\ell}\big(x_{\ell+1}[k],\, x_\ell(t_k + T_\ell)\big).
+\end{equation}
+As $\epsilon_\ell \to 0$, the fast continuous boundary layer settles within $T_\ell$, inducing a parallel discrete-event transition tree governed by the Mealy automaton $(G, X)$.
+
+\section{Preservation of Closedness, Compactness, and Chaotic Fractals}
+For general nonlinear dynamical systems, forward attainable sets are \emph{not} compact (and need not even be closed under unbounded disturbances or non-coercive metrics). However, when layer $\ell = 1$ (Device layer) enforces metric coercivity $M_1(\hat{\theta}_1) \succeq \alpha_1 I \succ 0$ and finite $L_2$ gain $\gamma_1 < \infty$, its Pontryagin attainable set:
+\begin{equation}
+\mathcal{R}_\ell(t) = \Big\{ x_\ell \in \mathbb{R}^{N_\ell n_\ell} \;\Big|\; (x_\ell - x_\ell^*)^\top M_\ell(\hat{\theta}_\ell)(x_\ell - x_\ell^*) \le \rho_\ell^2(t) \Big\}
+\end{equation}
+is closed and bounded (hence compact by Heine--Borel).
+
+\begin{theorem}[Inductive Preservation of Closedness and Compactness]
+If $\mathcal{R}_1(t)$ is closed and compact at the Device layer, every upward projection $\Pi_{\ell \to \ell+1}$ is continuous, and adjacent layers satisfy the Schur-complement containment LMI:
 \begin{equation}
 \frac{1}{\rho_{\ell+1}^2} M_{\ell+1}(\hat{\theta}_{\ell+1}) \succeq \frac{1}{\rho_\ell^2} \Pi_{\ell+1 \to \ell}^\top M_\ell(\hat{\theta}_\ell) \Pi_{\ell+1 \to \ell},
 \end{equation}
-then the Pontryagin attainable set $\mathcal{R}_\ell(t)$ is compact and forward invariant at \textbf{every} higher layer $\ell = 2, 3, \dots, L$.
+then $\mathcal{R}_\ell(t)$ remains closed and compact at every higher layer $\ell = 2, \dots, L$.
 \end{theorem}
 
-\begin{proof}
-Since $M_1(\hat{\theta}_1) \succeq \alpha_1 I \succ 0$ and $\rho_1(t) < \infty$, $\mathcal{R}_1(t)$ is closed and bounded in Euclidean space, hence compact by the Heine--Borel theorem. By induction, if $\mathcal{R}_\ell(t)$ is compact, its continuous image $\Pi_{\ell \to \ell+1}(\mathcal{R}_\ell(t))$ is compact. By the S-procedure, the Schur-complement inequality guarantees $\Pi_{\ell+1 \to \ell}(\mathcal{R}_{\ell+1}(t)) \subseteq \mathcal{R}_\ell(t)$ with $M_{\ell+1} \succ 0$ and $\rho_{\ell+1}(t) < \infty$, ensuring $\mathcal{R}_{\ell+1}(t)$ is closed, bounded, and compact for all $\ell \le L$.
-\end{proof}
+\begin{remark}[Chaotic Odometer Regime and Fractal Attainable Sets]
+When contraction fails ($\lambda_{\text{eff}} \le 0$) and unabsorbed disturbances trigger the infinite-order adding-machine (runaway clock) automaton $a(1w) = 0\,a(w)$, trajectories repeatedly fold against hardware saturation limits ($1.20\text{ p.u.}$). In this chaotic discrete-event regime, the reachable boundary fragments into a Cantor-like fractal limit set of non-integer Hausdorff dimension, analogous to the limit spaces of self-similar groups~\cite{nekrashevych05}.
+\end{remark}
 
 \begin{thebibliography}{9}
 \bibitem{nekrashevych05} V. Nekrashevych, \textit{Self-Similar Groups}, Mathematical Surveys and Monographs, vol. 117. Providence, RI, USA: Amer. Math. Soc., 2005.
