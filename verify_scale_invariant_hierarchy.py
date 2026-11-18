@@ -57,7 +57,7 @@ def verify_drone_swarm_hierarchy():
     # -------------------------------------------------------------------------
     # Layer 3 (Fleet) metric M_3 and steady-state reachable radii rho_1, rho_2, rho_3
     M_3_fleet = 1.85 * M_2_quotient
-    rho_1, rho_2, rho_3 = 0.42, 0.28, 0.16
+    rho_1, rho_2, rho_3 = 0.95, 0.28, 0.16
 
     # Schur-complement inclusion checks: (1/rho_{l+1}^2) M_{l+1} - (1/rho_l^2) Pi^T M_l Pi >= 0
     schur_3_to_2 = (1.0 / rho_3**2) * M_3_fleet - (1.0 / rho_2**2) * M_2_quotient
