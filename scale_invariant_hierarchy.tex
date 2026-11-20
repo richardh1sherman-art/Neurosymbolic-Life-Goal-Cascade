@@ -151,6 +151,13 @@ where:
 \end{definition}
 
 \subsection{Nested Sub-Representations: DES, DEVS, and Hybrid Systems}
+\paragraph{Contraction Across Discrete Events.}
+Discrete switching events are contracted in two distinct mathematical ways depending on whether one analyzes the symbolic event sequence itself or the continuous physical states riding through those events:
+\begin{enumerate}
+    \item \textbf{Symbolic Contraction (in the Rooted Tree Metric $X^*$):} Even without numerical state values, a discrete automaton contracts symbolically by shrinking the set of distinguishable future trajectories. In the reversible self-similar group setting ($G \le \operatorname{Aut}(X^*)$), this occurs via the \emph{ultrametric tree depth}, where symbolic differences deeper down the word $x_1 x_2 \dots x_n$ carry exponentially smaller weight $2^{-n}$. When passing to an irreversible physical self-similar semigroup ($S \le \operatorname{End}(X^*)$, such as a Renormalization Group coarse-graining step), contraction also occurs via \emph{synchronizing/resetting transitions}---for example, a generator $c$ mapping both \texttt{0} and \texttt{1} into \texttt{0}, collapsing two distinct symbolic paths into a single macroscopic branch.
+    \item \textbf{Metric / Cotangent Contraction (Hybrid Dwell-Time):} In a physical power grid, a discrete breaker trip does not occur in isolation; it switches the continuous nonlinear dynamics from $f_{\mathrm{normal}}(x)$ to $f_{\mathrm{fault}}(x)$. At the instant of the switch, the distance between two trajectories jumps by the saltation matrix norm $\mu$ (a numerical stretching factor). Contraction is preserved across the discrete event because the continuous flow between switches contracts at rate $\lambda$ fast enough to dissipate that jump before the next event arrives ($\tau_{\mathrm{dwell}} > \ln(\mu)/\lambda$).
+\end{enumerate}
+
 Under Definition~3, the three classical formalisms arise as nested structural restrictions of $(\mathcal{G}, \Psi)$:
 \begin{itemize}
     \item \textbf{Discrete-Event Systems (DES):} Obtained by setting $d = 0$ ($\Omega_g(x) \equiv I_0$) and restricting $\pi_g \in \operatorname{End}(X)$ to automaton transitions, yielding a pure self-similar automaton semigroup acting on $X^*$.
