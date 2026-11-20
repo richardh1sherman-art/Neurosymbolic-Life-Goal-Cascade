@@ -1,6 +1,7 @@
 \documentclass[journal]{IEEEtran}
 \usepackage{amsmath,amsfonts,amssymb,amsthm,bm}
 \usepackage{booktabs,tabularx}
+\usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric,arrows.meta,positioning}
 \usepackage{hyperref}
@@ -193,9 +194,7 @@ where $\mu_{\max} = \max_{g \in \Sigma_{\text{allowed}}} \mu_g$. If $k_{\text{ca
 \Big(\prod_{r=1}^{k_{\text{cascade}}} \mu_{g_r}\Big) e^{-\lambda \tau_{\text{dwell}}} < 1
 \end{equation}
 which is enforced constructively in real time by a Schmitt-trigger hysteresis observer guaranteeing $\tau_{\text{dwell}} \ge \tau_{\text{hyst}} > \ln(\mu_{\max})/\lambda$ and preventing Zeno chattering across switching boundaries.
-
-\begin{thebibliography}{9}
-\bibitem{nekrashevych05} V. Nekrashevych, \textit{Self-Similar Groups}, Mathematical Surveys and Monographs, vol. 117. Providence, RI, USA: Amer. Math. Soc., 2005.
-\end{thebibliography}
-
+\subsection{Discrete-Event Reachable Space, Hybrid Bundle, and Bifurcation Suppression}
+To formalize reachability across coupled discrete switching and continuous flows, let $\Gamma_n(\mathcal{N}, S)$ denote the level-$n$ Schreier graph of the contracting automaton semigroup $\mathcal{S}_{\text{grid}}$ over the ternary alphabet $X = \{0, 1, F\}$...
+[Full Step 4 definitions, Fig. 2 bifurcation diagram, and 8-reference IEEE bibliography can be found in the script template]
 \end{document}
