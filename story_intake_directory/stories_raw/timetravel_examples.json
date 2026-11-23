@@ -1,0 +1,41 @@
+[
+  {
+    "story_id": "4fd7d150-b080-4fb1-a592-8c27fa6e1fc8",
+    "premise": "Andrea wanted a picture of her jumping.",
+    "initial": "She set the camera up.",
+    "counterfactual": "She asked her friend to draw one.",
+    "original_ending": "Then, she jumped in the air. The picture kept coming out wrong. It took twenty tries to get it right.",
+    "edited_ending": "Then, she jumped in the air to demonstrate how she wanted it to look. The picture kept coming out wrong. It took drawing it several times to get it right."
+  },
+  {
+    "story_id": "da0e85f1-c586-4236-a8a3-ee6421c8e71d",
+    "premise": "Charles mother taught her son to carry a pre-paid cell phone.",
+    "initial": "As a job seeker, Charles put his cell phone number on applications.",
+    "counterfactual": "As a job seeker, Charles used his cell phone to keep his information out of employers hands.",
+    "original_ending": "He needed a real cell phone, but kept up with his pre-paid cell phone. One afternoon he was in a phone interview with Apple Computers. He ran out of minutes and never reached Apple hiring manager again."
+  },
+  {
+    "story_id": "048f5a77-7c17-4071-8b0b-b8e43087132d",
+    "premise": "Neil was visiting Limerick in Ireland.",
+    "initial": "There, he saw a beautiful sight.",
+    "counterfactual": "It was the ugliest city he had ever seen.",
+    "original_ending": "He saw the large and lovely River Shannon! The River Shannon was beautiful.",
+    "edited_ending": "He saw the small and lonely River Shannon! The River Shannon was lonely."
+  },
+  {
+    "story_id": "b1285c34-a111-4321-b88b-ee22883499ff",
+    "premise": "Tom booked a high-speed flight to Chicago.",
+    "initial": "He packed his suitcase for the airport.",
+    "counterfactual": "The airline cancelled all outgoing flights due to a storm.",
+    "original_ending": "He boarded the plane and arrived early for his meeting.",
+    "edited_ending": "He unpacked his bags and stayed home, missing the conference."
+  },
+  {
+    "story_id": "c5596d11-e404-4fa2-a77b-dd88331190aa",
+    "premise": "The data center routed fiber traffic through Route A.",
+    "initial": "Network streams remained completely stable.",
+    "counterfactual": "An underground excavator severed the primary fiber link on Route A.",
+    "original_ending": "Data packets arrived at the destination vertex with low latency.",
+    "edited_ending": "The system automatically engaged a secondary mesh radio failover path."
+  }
+]

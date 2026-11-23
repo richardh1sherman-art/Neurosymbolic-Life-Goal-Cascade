@@ -1,0 +1,14 @@
+[
+  {
+    "fallacy_id": "composition_fault_01",
+    "definition": "Assuming that what is true of a part must be true of the whole.",
+    "logical_form": "A is part of B; A has property X; Therefore, B has property X.",
+    "applied_story_context": "b1285c34-a111-4321-b88b-ee22883499ff"
+  },
+  {
+    "fallacy_id": "antecedent_leak_02",
+    "definition": "Denying the antecedent or missing a structural premise prerequisite.",
+    "logical_form": "If P then Q; Not P; Therefore, Not Q.",
+    "applied_story_context": "c5596d11-e404-4fa2-a77b-dd88331190aa"
+  }
+]

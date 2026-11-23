@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/home/rsherman/projects/SMT-ILP/ZeroVRAM/MG-Diff_v1/train.py", line 15, in <module>
+    dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/rsherman/projects/SMT-ILP/ZeroVRAM/MG-Diff_v1/data/__init__.py", line 52, in create_dataset
+    data_loader = CustomDatasetDataLoader(opt)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsherman/projects/SMT-ILP/ZeroVRAM/MG-Diff_v1/data/__init__.py", line 67, in __init__
+    self.dataset = dataset_class(opt)
+                   ^^^^^^^^^^^^^^^^^^
+  File "/home/rsherman/projects/SMT-ILP/ZeroVRAM/MG-Diff_v1/data/PEMSBAY_dataset.py", line 41, in __init__
+    self.raw_data = self.load_feature(data_path, self.time_division[opt.phase])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsherman/projects/SMT-ILP/ZeroVRAM/MG-Diff_v1/data/PEMSBAY_dataset.py", line 56, in load_feature
+    df = pd.read_hdf(data_path)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/rsherman/projects/SMT-ILP/smt-ilp-env/lib/python3.12/site-packages/pandas/io/pytables.py", line 435, in read_hdf
+    raise FileNotFoundError(f"File {path_or_buf} does not exist")
+FileNotFoundError: File dataset/pemsbay/pems-bay.h5 does not exist

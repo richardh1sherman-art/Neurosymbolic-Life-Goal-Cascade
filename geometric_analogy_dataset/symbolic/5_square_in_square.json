@@ -1,0 +1,10 @@
+{
+  "sample_name": "5_square_in_square",
+  "predicates": [
+    "shape(s_outer)",
+    "type(s_outer, square)",
+    "shape(s_inner)",
+    "type(s_inner, square)",
+    "inside(s_inner, s_outer)"
+  ]
+}

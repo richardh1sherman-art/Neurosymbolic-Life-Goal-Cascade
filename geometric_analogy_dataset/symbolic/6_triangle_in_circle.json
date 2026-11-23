@@ -1,0 +1,10 @@
+{
+  "sample_name": "6_triangle_in_circle",
+  "predicates": [
+    "shape(c_outer)",
+    "type(c_outer, circle)",
+    "shape(t_inner)",
+    "type(t_inner, triangle)",
+    "inside(t_inner, c_outer)"
+  ]
+}

@@ -1,0 +1,10 @@
+pos(unit_component(register_core, quantum_circuit)).
+pos(contained_in(register_core, register_core)).
+pos(unit_component(qubit, quantum_circuit)).
+pos(contained_in(qubit, register_core)).
+pos(unit_component(dispatch_queue, tactical_allocator)).
+pos(contained_in(dispatch_queue, active_dispatcher)).
+pos(unit_component(trucks, tactical_allocator)).
+pos(contained_in(trucks, active_dispatcher)).
+pos(unit_component(mesh_radio, topological_failover_minor)).
+pos(contained_in(mesh_radio, network_minor)).

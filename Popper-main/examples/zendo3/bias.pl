@@ -1,0 +1,44 @@
+%% From the paper: Céline Hocquette, Andrew Cropper: Relational Program Synthesis with Numerical Reasoning. AAAI 2023: 6425-6433
+
+%% a zendo structure must follow the rules:
+%% zendo(V0):- piece(V0,V1),rhs(V1),contact(V1,V2),size(V2,V3),large(V3).
+%% zendo(V0):- piece(V0,V1),contact(V1,V2),size(V2,V3),large(V3),blue(V2).
+%% zendo(V0):- piece(V0,V1),red(V1),coord1(V1,V2),piece(V0,V3),blue(V3),coord1(V3,V2).
+
+head_pred(zendo,1).
+body_pred(piece,2).
+body_pred(contact,2).
+body_pred(coord1,2).
+body_pred(coord2,2).
+body_pred(size,2).
+body_pred(blue,1).
+body_pred(green,1).
+body_pred(red,1).
+body_pred(small,1).
+body_pred(medium,1).
+body_pred(large,1).
+body_pred(upright,1).
+body_pred(lhs,1).
+body_pred(rhs,1).
+body_pred(strange,1).
+
+type(zendo,(state,)).
+type(piece,(state,piece)).
+type(contact,(piece,piece)).
+type(coord1,(piece,real)).
+type(coord2,(piece,real)).
+type(size,(piece,real)).
+type(blue,(piece,)).
+type(green,(piece,)).
+type(red,(piece,)).
+type(small,(real,)).
+type(medium,(real,)).
+type(large,(real,)).
+type(upright,(piece,)).
+type(lhs,(piece,)).
+type(rhs,(piece,)).
+type(strange,(piece,)).
+
+:-
+    clause(C),
+    #count{V : var_type(C,V,state)} != 1.

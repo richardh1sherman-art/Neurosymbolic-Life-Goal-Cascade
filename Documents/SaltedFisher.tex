@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\section*{Method 1: Extended Salted Kalman Filter + Recursive PEM}
+
+\subsection*{1. Hybrid Nonlinear Grid \& Measurement Model}
+Define the continuous state vector $x \in \mathbb{R}^n$, control inputs $u \in \mathbb{R}^m$, and unknown parameter vector $\theta \in \mathbb{R}^p$.
+
+\begin{itemize}
+    \item \textbf{Continuous Dynamics (Mode $q \in \{1, 2\}$):}
+    \begin{equation}
+        \dot{x}(t) = f_q(x(t), u(t), \theta) + w(t), \quad w(t) \sim \mathcal{N}(0, Q_c)
+    \end{equation}
+    where $f_1$ is the pre-switch (device online) vector field and $f_2$ is the post-switch (device offline/reclosed) vector field.
+    
+    \item \textbf{Discrete Measurement Model (at sample $k$, step $\Delta t$):}
+    \begin{equation}
+        y_k = h_q(x_k, u_k, \theta) + v_k, \quad v_k \sim \mathcal{N}(0, R)
+    \end{equation}
+    
+    \item \textbf{Guard Surface \& Reset Map:}
+    \begin{equation}
+        g(x, u) = 0, \qquad x^+ = \mathcal{R}(x^-)
+    \end{equation}
+    \textit{(Note: For electrical switching where inductor currents and capacitor voltages cannot jump instantaneously, $\mathcal{R}(x^-) = x^-$ and $D_x \mathcal{R} = I$.)}
+\end{itemize}
+
+\subsection*{2. Continuous-Time Propagation (Between Switching Events)}
+Integrate the nonlinear state and covariance from $t_{k-1}$ to $t_k$ holding $\hat{\theta}_{k-1}$ constant:
+
+\begin{itemize}
+    \item \textbf{State Prediction:}
+    \begin{equation}
+        \hat{x}_{k|k-1} = \hat{x}_{k-1|k-1} + \int_{t_{k-1}}^{t_k} f_q(\hat{x}(\tau), u(\tau), \hat{\theta}_{k-1})\, d\tau
+    \end{equation}
+    
+    \item \textbf{Continuous-to-Discrete Jacobian:}
+    \begin{equation}
+        A_k = \left. \frac{\partial f_q}{\partial x} \right|_{\hat{x}_{k-1|k-1}, u_{k-1}, \hat{\theta}_{k-1}}, \qquad F_k \approx I + A_k \Delta t
+    \end{equation}
+    
+    \item \textbf{Covariance Prediction:}
+    \begin{equation}
+        P_{k|k-1} = F_k P_{k-1|k-1} F_k^\top + Q_d, \qquad Q_d \approx Q_c \Delta t
+    \end{equation}
+\end{itemize}
+
+\subsection*{3. Jump Detection \& Saltation Matrix Update (At Switching Instant $t_s$)}
+When the jump detector triggers (e.g., $\|\Delta V_k / \Delta t\| > \gamma_V$, $\|\Delta I_k / \Delta t\| > \gamma_I$, or normalized innovation test $e_k^\top S_k^{-1} e_k > \chi^2_{\text{thresh}}$):
+
+\begin{enumerate}
+    \item \textbf{Compute the Saltation Matrix $\Xi$:}
+    Evaluate $f^- = f_1(\hat{x}^-, u_s, \hat{\theta})$, $f^+ = f_2(\hat{x}^+, u_s, \hat{\theta})$, and $\nabla g = \left(\frac{\partial g}{\partial x}\right)^\top$ at the switching state:
+    \begin{equation}
+        \Xi = D_x \mathcal{R}(\hat{x}^-) + \frac{\left(f^+ - D_x \mathcal{R}(\hat{x}^-) f^-\right) \nabla g^\top}{\nabla g^\top f^-}
+    \end{equation}
+    \textit{(When $\mathcal{R}(x^-) = x^-$, this simplifies to $\Xi = I + \frac{(f^+ - f^-) \nabla g^\top}{\nabla g^\top f^-}$.)}
+    
+    \item \textbf{Map State \& Covariance Across the Discrete Jump:}
+    \begin{equation}
+        \hat{x}^+ = \mathcal{R}(\hat{x}^-), \qquad P^+ = \Xi P^- \Xi^\top + Q_{\text{jump}}
+    \end{equation}
+    \textit{(where $Q_{\text{jump}}$ is an optional jitter-inflation term for detection lag $\delta t$.)}
+    
+    \item \textbf{Switch Active Model:} Update mode $q \leftarrow 2$ and proceed to the measurement update using $h_2$.
+\end{enumerate}
+
+\subsection*{4. EKF Measurement Update (Every Sample $k$)}
+Using the active mode $q$:
+
+\begin{itemize}
+    \item \textbf{Innovation \& Innovation Covariance:}
+    \begin{align}
+        e_k &= y_k - h_q(\hat{x}_{k|k-1}, u_k, \hat{\theta}_{k-1}) \\
+        H_k &= \left. \frac{\partial h_q}{\partial x} \right|_{\hat{x}_{k|k-1}, u_k, \hat{\theta}_{k-1}}, \qquad S_k = H_k P_{k|k-1} H_k^\top + R
+    \end{align}
+    
+    \item \textbf{Kalman Gain \& Posterior State/Covariance (Joseph Form):}
+    \begin{align}
+        K_k &= P_{k|k-1} H_k^\top S_k^{-1} \\
+        \hat{x}_{k|k} &= \hat{x}_{k|k-1} + K_k e_k \\
+        P_{k|k} &= (I - K_k H_k) P_{k|k-1} (I - K_k H_k)^\top + K_k R K_k^\top
+    \end{align}
+\end{itemize}
+
+\subsection*{5. Recursive Prediction Error Method (RPEM) for Parameter $\theta$}
+Run during continuous intervals (freeze $\hat{\theta}$ during a brief blanking window right at $t_s$):
+
+\begin{enumerate}
+    \item \textbf{Compute Parameter Sensitivity Matrix $\Psi_k = \frac{\partial \hat{y}_{k|k-1}}{\partial \theta} \in \mathbb{R}^{n_y \times p}$:}
+    Propagate the state-to-parameter sensitivity $W_k = \frac{\partial \hat{x}_{k|k-1}}{\partial \theta} \in \mathbb{R}^{n \times p}$:
+    \begin{align}
+        W_{k+1} &= F_k (I - K_k H_k) W_k + \left( \frac{\partial f_q}{\partial \theta} \Delta t - F_k K_k \frac{\partial h_q}{\partial \theta} \right) \\
+        \Psi_k &= H_k W_k + \left. \frac{\partial h_q}{\partial \theta} \right|_{\hat{x}_{k|k-1}, u_k, \hat{\theta}_{k-1}}
+    \end{align}
+    
+    \item \textbf{RPEM Gain \& Parameter Covariance Update (with forgetting factor $\lambda \in (0.95, 0.999]$):}
+    \begin{align}
+        L_k &= P^\theta_{k-1} \Psi_k^\top \left( \lambda S_k + \Psi_k P^\theta_{k-1} \Psi_k^\top \right)^{-1} \\
+        \hat{\theta}_k &= \hat{\theta}_{k-1} + L_k e_k \\
+        P^\theta_k &= \frac{1}{\lambda} \left( I - L_k \Psi_k \right) P^\theta_{k-1}
+    \end{align}
+\end{enumerate}
+
+\end{document}
+

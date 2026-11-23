@@ -1,0 +1,2 @@
+Context: An autonomous computing core must pass an urgent diagnostic data packet, but the primary fiber channel interface experiences a physical hardware fault.
+Alternative Solution Modality: Synthesize a plan to execute a failover reroute pass using parallel wireless microwave links.

@@ -1,0 +1,7 @@
+{
+  "sample_name": "2_rectangle",
+  "predicates": [
+    "shape(r1)",
+    "type(r1, rectangle)"
+  ]
+}

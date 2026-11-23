@@ -7,13 +7,14 @@
 
 ## 1. Research Portfolio & Publication Index
 
-This repository houses the complete mathematical specifications, LaTeX manuscripts, electromagnetic transient (EMT) testbeds, and multi-agent control scripts spanning three interconnected research papers:
+This repository houses the complete mathematical specifications, LaTeX manuscripts, electromagnetic transient (EMT) testbeds, and multi-agent control scripts spanning four interconnected research papers:
 
 | Paper | Title | Submission Venues | Core Source / Manuscript |
 | :--- | :--- | :--- | :--- |
 | **Paper 1** | *Decentralized Cyber-Physical Stabilization of Coupled Kuramoto Oscillators via Emergent MARL CSMA/CD Protocols* | arXiv (`submit/8296238`) | `infer_story_logic.py`, `social_gnn_mesh.py` |
-| **Paper 2** | *Symmetric Self-Adaptive Contraction Manifold for Wide-Area Inverter Control Under Severe Multiplicative Phase Noise* | *IEEE Trans. Smart Grid* & arXiv (`submit/8362651`) | `area_control_revision.tex` (`area_control_revision.pdf`) |
-| **Paper 3** | *Tie-Line Scheduling Using Real-Time Contraction Metrics: Hierarchical Reachable Sets for Multi-Area Inverter-Dominated Grids* | *IEEE Trans. Power Systems* & arXiv (`submit/8383032`) | `tie_line_sccm_paper.tex` (`tie_line_sccm_paper.pdf`) |
+| **Paper 2** | *Symmetric Self-Adaptive Contraction Manifold for Wide-Area Inverter Control Under Severe Multiplicative Phase Noise* | *IEEE Trans. Smart Grid* & arXiv (`submit/8362651`) | `Documents/area_control_revision.tex` (`Documents/area_control_revision.pdf`) |
+| **Paper 3** | *Tie-Line Scheduling Using Real-Time Contraction Metrics: Hierarchical Reachable Sets for Multi-Area Inverter-Dominated Grids* | *IEEE Trans. Power Systems* & [arXiv:2611.21858](https://arxiv.org) ([DOI](https://doi.org)) | `Documents/tie_line_sccm_paper.tex` (`Documents/tie_line_sccm_paper.pdf`) |
+| **Paper 4** | *Scale-Invariant Contraction Hierarchies: Group-Theoretic Cohesion, Coupling Augmentation, and Compactness Propagation* | Working Draft (`Documents/scale_invariant_hierarchy.pdf`) | `Documents/scale_invariant_hierarchy.tex`, `verify_scale_invariant_hierarchy.py` |
 
 ---
 
@@ -58,6 +59,12 @@ To stabilize **100% inverter-based resource (IBR)** transmission networks with *
 * **`test_packet_loss_resilience.py`**: Tests Zero-Order Hold (ZOH) + decay buffering under **25% random packet loss** and a **3 s total link blackout**, holding cumulative overload to **192.5 MW·s** while keeping `lambda_max <= -2.7300`.
 
 ---
+
+
+### D. Caltech 28-Bus Digital Twin, MIT OSQP-Julia EMT Co-Simulation & Hybrid Automaton (Paper 3 & Paper 4)
+* **`test_caltech_device_pem_mhe.py` & `caltech_mit_unified_demo.py`**: Anti-aliased 40 ms integral PEM-MHE tracker under Caltech 0.625 deg^2 sync noise linked to the IEEE 118-bus coordinator (`Documents/caltech_mit_emt_comparison.pdf`, `Documents/TopologyCaltech.pdf`).
+* **`mit_sccm_closed_loop_eval.py`, `run_true_mit_qp_rollout.py` & `run_true_mit_emt_closed_loop.py` + `emt_mit_step_worker.jl`**: Closed-loop Python sparse OSQP + Julia `PowerSimulationsDynamics.jl` (`Rodas5P`) co-simulation.
+* **`BridgeObserver.py`, `CoTangent_Lifting.py`, `events_hybrid_reachability.py` & `run_steps123_hybrid_bifurcation.py`**: Cotangent-lifted self-similar wreath recursion, 14-bit Caltech switching words, and Hopf bifurcation verification.
 
 ## 4. Quickstart Execution (DGX Spark ARM64 Environment)
 

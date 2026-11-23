@@ -1,0 +1,7 @@
+{
+  "sample_name": "4_circle",
+  "predicates": [
+    "shape(c1)",
+    "type(c1, circle)"
+  ]
+}

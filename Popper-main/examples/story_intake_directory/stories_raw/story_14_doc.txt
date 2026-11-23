@@ -1,0 +1,5 @@
+A routing algorithm maps out a grid of connected graph nodes. 
+The system initializes a queue to manage the sequence of paths to explore. 
+To ensure safety and prevent infinite loops, it tracks explored coordinates in a visited set. 
+The pathfinding executor pops the first item from the queue, checks its neighbors, and appends new targets to the back of the line. 
+When the queue size drops to zero, the search terminates with a successful shortest path.

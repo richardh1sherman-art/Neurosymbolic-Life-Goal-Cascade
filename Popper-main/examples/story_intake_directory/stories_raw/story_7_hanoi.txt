@@ -1,0 +1,8 @@
+import torch
+import numpy as np
+
+# Tower of Hanoi 3-Disk Wreath Group Engine
+# Generator 1, 2, 3 mapped via Kronecker products onto self-similar state spaces.
+macro_role(tower_of_hanoi, contractive_lattice_planning).
+input_type(wreath_mix, discrete_pulses).
+output_rule(unitary_superposition, validate_tactical_step).

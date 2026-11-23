@@ -1,0 +1,2298 @@
+Data File: ATUS2010(Description Only Codebook)
+
+1) TUCASEID
+ATUS case ID [14-digit (household) identifier]
+
+
+2) TULINENO
+ATUS person line number
+
+
+3) TUYEAR
+Year of diary day (year of day about which respondent was interviewed)
+
+
+4) TUMONTH
+Month of diary day (month of day about which ATUS respondent was interviewed)
+
+
+5) TEABSRSN
+IF TELFS = 2: What was the main reason you were absent from your job last week?
+
+
+6) TEERN
+IF TEERNUOT = 1 AND TEERNPER = 1: Total weekly overtime earnings (two implied decimals)
+
+
+7) TEERNH1O
+IF TEERNPER = 1: Excluding overtime pay, tips and commissions, what is your hourly rate of pay on your main job? (two implied decimals)
+
+
+8) TEERNH2
+IF TEERNRT = 1: Excluding overtime pay, tips and commissions, what is your hourly rate of pay on your main job? (two implied decimals)
+
+
+9) TEERNHRO
+IF TEERNH1O IS GREATER THAN OR EQUAL TO 0: How many hours do you usually work per week at this rate?
+
+
+10) TEERNHRY
+Hourly/non-hourly status
+
+
+11) TEERNPER
+IF TELFS = 1-2 AND TEIO1COW = 1-5: For your main job, what is the easiest way for you to report your total earnings before taxes or other deductions: hourly, weekly, annually or some other way?
+
+
+12) TEERNRT
+IF TEERNPER = 2-7: Even though you told me it is easier to report your earnings another way, are you paid at an hourly rate on this job?
+
+
+13) TEERNUOT
+IF TELFS = 1-2 AND TEIO1COW = 1-5: Do you usually receive overtime pay, tips or commissions at your main job?
+
+
+14) TEERNWKP
+IF TEERNPER = 6: How many weeks a year do you get paid?
+
+
+15) TEHRFTPT
+IF TEHRUSL1 OR TEHRUSL2 = -4: Do you usually work more than 35 hours per week at your job(s)/family business?
+
+
+16) TEHRUSL1
+IF TELFS = 1-2: How many hours per week do you usually work at your main job?
+
+
+17) TEHRUSL2
+IF TELFS = 1-2 AND TEMJOT = 1: How many hours per week do you usually work at your other job(s)?
+
+
+18) TEHRUSLT
+IF TELFS = 1-2: Total hours usually worked per week (sum of TEHRUSL1 and TEHRUSL2)
+
+
+19) TEIO1COW
+IF TELFS = 1-2: Individual class of worker code (main job)
+
+
+20) TEIO1ICD
+IF TELFS = 1-2: Industry code (main job)
+
+
+21) TEIO1OCD
+IF TELFS = 1-2: Occupation code (main job)
+
+
+22) TELAYAVL
+IF TELFS = 3: Could you have returned to work in the last seven days if you had been recalled?
+
+
+23) TELAYLK
+IF TELAYAVL = 1-2: Even though you expect to be called back to work, have you been looking for work during the last four weeks?
+
+
+24) TELFS
+Labor force status
+
+
+25) TELKAVL
+IF TELKM1 = 1-13: Could you have started a job in the last seven days if one had been offered?
+
+
+26) TELKM1
+IF TELFS = 4: What are all of the things you have done to find work during the last four weeks? (first method)
+
+
+27) TEMJOT
+IF TELFS = 1-2: In the last seven days, did you have more than one job?
+
+
+28) TERET1
+IF TELFS = 5 and (TURETOT = 1 OR TUFABS = 3 OR TUFWK = 3 OR TULAY = 3) AND TEAGE IS GREATER THAN OR EQUAL TO 50: Do you currently want a job, either full or part time?
+
+
+29) TESCHENR
+IF TEAGE = 15-49: Are you enrolled in high school, college or university?
+
+
+30) TESCHFT
+IF TESCHENR = 1: Are you enrolled as a full-time or part-time student?
+
+
+31) TESCHLVL
+IF TESCHENR = 1: Would that be high school, college or university?
+
+
+32) TESPEMNT
+IF TRESPPRES = 1-2: Employment status of spouse or unmarried partner (TESPEMPNOT)
+
+
+33) TESPUHRS
+IF TESPEMNT = 1: Usual hours of work of spouse or unmarried partner
+
+
+34) TRCHLDNM
+Number of household children [less than 18 years old] (TRCHILDNUM)
+
+
+35) TRDPFTPT
+IF TELFS = 1-2: Full-time or part-time employment status of respondent
+
+
+36) TRDTIND1
+IF TELFS = 1-2: Detailed industry recode (main job)
+
+
+37) TRDTOCC1
+IF TELFS = 1-2: Detailed occupation recode (main job)
+
+
+38) TRERNHLY
+IF TEERNHRY = 1: Hourly earnings (two implied decimals)
+
+
+39) TRERNUPD
+IF TELFS = 1-2 AND TEIO1COW = 1-5: Earnings update flag
+
+
+40) TRERNWA
+IF TELFS = 1-2 AND TEIO1COW = 1-5: Weekly earnings (two implied decimals)
+
+
+41) TRHERNAL
+IF TEERNHRY = 1: TRERNHLY allocation flag
+
+
+42) TRHHCHLD
+Presence of household children [less than 18 years old] (TRHHCHILD)
+
+
+43) TRHOLDAY
+Flag to indicate if diary day was a holiday [Note: New Year's Day, Easter, Memorial Day, the Fourth of July, Labor Day, Thanksgiving Day and Christmas Day are identified as holidays.] (TRHOLIDAY)
+
+
+44) TRIMIND1
+IF TELFS = 1-2: Intermediate industry recode (main job)
+
+
+45) TRMJIND1
+IF TELFS = 1-2: Major industry recode (main job)
+
+
+46) TRMJOCC1
+IF TELFS = 1-2: Major occupation recode (main job)
+
+
+47) TRMJOCGR
+IF TELFS = 1-2: Major occupation category (main job)
+
+
+48) TRNHHCHD
+Presence of own non-household child [less than 18 years old] (TRNHHCHILD)
+
+
+49) TRNUMHOU
+Number of people living in respondent's household (TRNUMHOU)
+
+
+50) TROHHCH
+Presence of own household children [less than 18 years old] (TROHHCHILD)
+
+
+51) TRSPFTPT
+IF TESPEMNT = 1: Full-time or part-time employment status of spouse or unmarried partner
+
+
+52) TRSPPRES
+Presence of the respondent's spouse or unmarried partner in the household
+
+
+53) TRTALONE
+Total time respondent spent alone (in minutes)
+
+
+54) TRTALOWK
+Total work- and non-work-related time respondent spent alone (in minutes)
+
+
+55) TRTCC
+Total time spent during diary day providing secondary childcare for household and own non-household children [less than 13 years old] (in minutes)
+
+
+56) TRTCCC
+Total time respondent spent with customers, clients and coworkers (in minutes)
+
+
+57) TRTCCCWK
+Total work- and non-work-related time respondent spent with customers, clients and coworkers (in minutes)
+
+
+58) TRTCCTOT
+Total time spent during diary providing secondary childcare for all children [less than 13 years old] (in minutes)
+
+
+59) TRTCHILD
+Total time respondent spent with household or non-household children [less than 18 years old] (in minutes)
+
+
+60) TRTCOC
+Total time spent during diary day providing secondary childcare for non-own, non-household children [less than 13 years old] (in minutes)
+
+
+61) TRTFAMIL
+Total time respondent spent with family members (TRTFAMILY)
+
+
+62) TRTFREND
+Total time respondent spent with friends [in minutes] (TRTFRIEND)
+
+
+63) TRTHH
+Total time spent during diary day providing secondary childcare for household children [less than 13 years old] (in minutes)
+
+
+64) TRTHHFAM
+Total time respondent spent with household family members [in minutes] (TRTHHFAMILY)
+
+
+65) TRTNOCH
+Total time respondent spent with non-own children [less than 18 years old] (TRTNOCHILD)
+
+
+66) TRTNOHH
+Total time spent during diary day providing secondary childcare for non-own household children [less than 13 years old] (in minutes)
+
+
+67) TRTO
+Total time spent during diary day providing secondary childcare for own children [less than 13 years old] (in minutes)
+
+
+68) TRTOHH
+Total time spent during diary day providing secondary childcare for own household children [less than 13 years old] (in minutes)
+
+
+69) TRTOHHCH
+Total time respondent spent with own household children [less than 18 years old, in minutes] (TRTOHHCHILD)
+
+
+70) TRTONHH
+Total time spent during diary day providing secondary childcare for own non-household children [less than 13 years old] (in minutes)
+
+
+71) TRTONHHC
+Total time respondent spent with own non-household children [less than 18 years old, in minutes] (TRTONHHCHILD)
+
+
+72) TRTSPNLY
+Total time respondent spent with spouse only [in minutes] (TRTSPONLY)
+
+
+73) TRTSPOUS
+Total time respondent spent with spouse (others may be present) [in minutes] (TRTSPOUSE)
+
+
+74) TRTUNMPR
+Total time respondent spent with unmarried partner (others may be present) [in minutes] (TRTUNMPART)
+
+
+75) TRWBMODR
+Well-Being Module respondent
+
+
+76) TRWERNAL
+IF TELFS = 1-2 AND TEIO1COW = 1-5: TRERNWA allocation flag
+
+
+77) TRYHHCHD
+IF TRHHCHLD = 1: Age of youngest household child [less than 18 years old] (TRYHHCHILD)
+
+
+78) TTHR
+Hourly pay topcode flag
+
+
+79) TTOT
+Overtime amount topcode flag
+
+
+80) TTWK
+Weekly earnings topcode flag
+
+
+81) TUABSOT
+In the last seven days, did you have a job either full or part-time?
+
+
+82) TUBUS
+Does anyone in the household own a business or farm?
+
+
+83) TUBUS1
+In the last seven days, did you do any unpaid work in the family business or farm?
+
+
+84) TUBUS2OT
+Do you receive payments or profits from the business?
+
+
+85) TUBUSL1
+TULINENO [ATUS person line number] of farm or business owner (first owner)
+
+
+86) TUBUSL2
+TULINENO [ATUS person line number] of farm or business owner (second owner)
+
+
+87) TUBUSL3
+TULINENO [ATUS person line number] of farm or business owner (third owner)
+
+
+88) TUBUSL4
+TULINENO [ATUS person line number] of farm or business owner (fourth owner)
+
+
+89) TUCC2
+Time first household child [less than 13 years old] woke up (Note: A value of -3 indicates 'Refused' and a value of -2 indicates 'Don't know.' Values of this variable were converted by the ARDA to decimal form based on the 24-hour clock. For example, a value of 0 is equivalent to 12 a.m., a value of 7 is equivalent to 7 a.m., and a value of 15.50 is equivalent to 3:30 p.m. To calculate minutes on the hour, multiply decimal values by 60 [e.g., 0.50 x 60 = 30 minutes].)
+
+
+90) TUCC4
+Time last household child [less than 13 years old] went to bed (Note: A value of -3 indicates 'Refused' and a value of -2 indicates 'Don't know.' Values of this variable were converted by the ARDA to decimal form based on the 24-hour clock. For example, a value of 0 is equivalent to 12 a.m., a value of 7 is equivalent to 7 a.m., and a value of 15.50 is equivalent to 3:30 p.m. To calculate minutes on the hour, multiply decimal values by 60 [e.g., 0.50 x 60 = 30 minutes].)
+
+
+91) TUCC5BCK
+Reason respondent did not report secondary childcare activities for non-own household children (TUCC5B_CK)
+
+
+92) TUCC5_CK
+Reason respondent did not report secondary childcare activities for own household children
+
+
+93) TUCC9
+Are the non-own, non-household children you cared for in TUCC8 related to you? [ARDA note: This dataset does not contain the variable TUCC8.]
+
+
+94) TUDIDATE
+Date of diary day [date about which the respondent was interviewed; this variable is in YYYYMMDD format] (TUDIARYDATE)
+
+
+95) TUDIDAY
+Day of the week of diary day [day of the week about which the respondent was interviewed] (TUDIARYDAY)
+
+
+96) TUDIS
+Last time we spoke to someone in this household you were reported to have a disability. Does your disability prevent you from doing any kind of work for the next six months?
+
+
+97) TUDIS1
+Does your disability prevent you from accepting any kind of work during the next six months?
+
+
+98) TUDIS2
+Do you have a disability that prevents you from accepting any kind of work during the next six months?
+
+
+99) TUERN2
+Weekly overtime earnings (two implied decimals)
+
+
+100) TUERNH1C
+What is your hourly rate of pay on this job, excluding overtime pay, tips or commissions? (two implied decimals) [Note: Only asked if the respondent indicates that the recorded hourly rate read back by the interviewer is not correct.]
+
+
+101) TUFINWGT
+ATUS final weight [Note: The weight EUFINWGT should be used instead of this weight for any estimates using variables from the Eating and Health Module.] (TUFINLWGT)
+
+
+102) TUFWK
+In the last seven days, did you do any work for pay or profit?
+
+
+103) TUIO1MFG
+Is this business or organization mainly manufacturing, retail trade, wholesale trade or something else? (main job)
+
+
+104) TUIODP1
+Last time we spoke to someone in this household, you were reported to work for [employer's name]. Do you still work for [employer's name]?
+
+
+105) TUIODP2
+Have the usual activities and duties of your job changed since [month of CPS interview]?
+
+
+106) TUIODP3
+Last time we spoke to someone in this household, you were reported as [occupation] and your usual duties were [activities]. Is this an accurate description of your current job? (main job)
+
+
+107) TULAY
+During the last seven days, were you on layoff from your job?
+
+
+108) TULAY6M
+Have you been given any indication that you will be recalled to work within the next six months?
+
+
+109) TULAYAVR
+Why could you not have started a job in the last week?
+
+
+110) TULAYDT
+Has your employer given you a date to return to work? (to layoff job)
+
+
+111) TULK
+Have you been doing anything to find work during the last four weeks?
+
+
+112) TULKAVR
+Why could you not have started a job last week?
+
+
+113) TULKDK1
+You said you have been trying to find work. How did you go about looking? (first method)
+
+
+114) TULKDK2
+You said you have been trying to find work. How did you go about looking? (second method)
+
+
+115) TULKDK3
+You said you have been trying to find work. How did you go about looking? (third method)
+
+
+116) TULKM2
+What are all of the things you have done to find work during the last four weeks? (second method)
+
+
+117) TULKM3
+What are all of the things you have done to find work during the last four weeks? (third method)
+
+
+118) TULKM4
+What are all of the things you have done to find work during the last four weeks? (fourth method)
+
+
+119) TULKM5
+What are all of the things you have done to find work during the last four weeks? (fifth method)
+
+
+120) TULKM6
+What are all of the things you have done to find work during the last four weeks? (sixth method)
+
+
+121) TULKPS1
+Can you tell me more about what you did to search for work? (first method)
+
+
+122) TULKPS2
+Can you tell me more about what you did to search for work? (second method)
+
+
+123) TULKPS3
+Can you tell me more about what you did to search for work? (third method)
+
+
+124) TURETOT
+The last time we spoke to someone in this household, you were reported to be retired. Are you still retired?
+
+
+125) TUSPABS
+In the last seven days, did your spouse or unmarried partner have a job either full or part time?
+
+
+126) TUSPUSFT
+Does your spouse or unmarried partner usually work 35 hours or more per week?
+
+
+127) TUSPWK
+In the last seven days, did your spouse or unmarried partner do any work for pay or profit?
+
+
+128) TXABSRSN
+TEABSRSN allocation flag
+
+
+129) TXERN
+TEERN allocation flag
+
+
+130) TXERNH1O
+TEERNH1O allocation flag
+
+
+131) TXERNH2
+TEERNH2 allocation flag
+
+
+132) TXERNHRO
+TEERNHRO allocation flag
+
+
+133) TXERNHRY
+TEERNHRY allocation flag
+
+
+134) TXERNPER
+TEERNPER allocation flag
+
+
+135) TXERNRT
+TEERNRT allocation flag
+
+
+136) TXERNUOT
+TEERNOUT allocation flag
+
+
+137) TXERNWKP
+TEERNWKP allocation flag
+
+
+138) TXHRFTPT
+TEHRFTPT allocation flag
+
+
+139) TXHRUSL1
+TEHRUSL1 allocation flag
+
+
+140) TXHRUSL2
+TEHRUSL2 allocation flag
+
+
+141) TXHRUSLT
+TEHRUSLT allocation flag
+
+
+142) TXIO1COW
+TEIO1COW allocation flag
+
+
+143) TXIO1ICD
+TEIO1ICD allocation flag
+
+
+144) TXIO1OCD
+TEIO1OCD allocation flag
+
+
+145) TXLAYAVL
+TELAYAVL allocation flag
+
+
+146) TXLAYLK
+TELAYLK allocation flag
+
+
+147) TXLFS
+TELAYLK allocation flag
+
+
+148) TXLKAVL
+TELKAVL allocation flag
+
+
+149) TXLKM1
+TELKM1 allocation flag
+
+
+150) TXMJOT
+TEMJOT allocation flag
+
+
+151) TXRET1
+TERET1 allocation flag
+
+
+152) TXSCHENR
+TESCHENR allocation flag
+
+
+153) TXSCHFT
+TESCHFT allocation flag
+
+
+154) TXSCHLVL
+TESCHLVL allocation flag
+
+
+155) TXSPEMNT
+TESPEMPNOT [TESPEMNT] allocation flag (TXSPEMPNOT)
+
+
+156) TXSPUHRS
+TESPUHRS allocation flag
+
+
+157) TXTCC
+TRTCC_LN and TRTCC allocation flag (A value of 1 indicates that at least one of the following variables is allocated: TRTOHH_LN, TRTNOHH_LN or TRTONHH_LN.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+158) TXTCCTOT
+TRTCCTOT_LN and TRTCCTOT allocation flag (A value of 1 indicates that at least one of the following variables is allocated: TRTCOC_LN, TRTOHH_LN or TRTNOHH_LN.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+159) TXTCOC
+TRTCOC_LN and TRTCOC allocation flag (Allocated values are based on time spent with non-own non-household children less than 18 years old when no other non-household adult was present. Calculations do not include activities with the activity codes of 0101xx, 0301xx, 0302xx, 0303xx, 0401xx, 0402xx, 0403xx, 180301, 180302, 180303, 180401, 180402 or 180403.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+160) TXTHH
+TRTHH_LN and TRTHH allocation flag (A value of 1 indicates that at least one of the following variables is allocated: TRTOHH_LN or TRTNOHH_LN.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+161) TXTNOHH
+TRTNOHH_LN and TRTNOHH allocation flag (Allocated values are based on time spent with non-own household children less than 13 years old. Calculations do not include activities with activity codes of 0101xx, 0301x, 0302xx, 0303xx, 180301, 180302 or 180303. They also do not include any activities or parts of any activities in which no household child was awake, determined by TUCC2 and TUCC4.)  [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+162) TXTO
+TRTO_LN and TRTO allocation flag (A value of 1 indicates that at least one of the following variables is allocated: TRTOHH_LN or TRTONHH_LN.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+163) TXTOHH
+TRTOHH_LN and TRTOHH allocation flag (Allocated values are based on time spent with own household children less than 13 years old. Calculations do not include activities with activity codes of 0101xx, 0301xx, 0302xx, 0303xx, 180301, 180302 or 180303. They also do not include any activities or parts of any activities in which no household child was awake, determined by TUCC2 and TUCC4.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+164) TXTONHH
+TRTONHH_LN and TRTONHH allocation flag (Allocated values are based on time spent with own non-household children less than 13 years old. Calculations do not include activities with activity codes of 0101xx, 0301xx, 0302xx, 0303xx, 0401xx, 0402xx, 0403xx, 180301, 180302, 180303, 180401, 180402 or 180403.) [ARDA note: Variables ending in _LN are not available in this dataset.]
+
+
+165) TEAGE
+Age (TEAGE is topcoded to 85. All those age 80 through 84 have TEAGE = 80. Those age 85 or above have TEAGE = 85.)
+
+
+166) TESEX
+Sex
+
+
+167) PEEDUCA
+What is the highest level of school you have completed or the highest degree you have received?
+
+
+168) PTDTRACE
+Race (topcoded)
+
+
+169) PEHSPNON
+Are you Spanish, Hispanic or Latino?
+
+
+170) GTMETSTA
+Metropolitan status (2000 definitions) [Note: GTMETSTA is based on MSA definitions from the 2000 Decennial Census and is not comparable to GEMETSTA (available on 2003 and 2004 ATUS-CPS files).]
+
+
+171) T010101
+Personal care: Sleeping
+
+
+172) T010102
+Personal care: Sleeplessness
+
+
+173) T010201
+Personal care: Washing, dressing and grooming oneself
+
+
+174) T010299
+Personal care: Grooming, not elsewhere classified
+
+
+175) T010301
+Personal care: Health-related self care
+
+
+176) T010399
+Personal care: Self care, not elsewhere classified
+
+
+177) T010401
+Personal care: Personal/private activities
+
+
+178) T010499
+Personal care: Personal activities, not elsewhere classified
+
+
+179) T010599
+Personal care: Personal care emergencies, not elsewhere classified
+
+
+180) T019999
+Personal care: Personal care, not elsewhere classified
+
+
+181) T020101
+Household activities: Interior cleaning
+
+
+182) T020102
+Household activities: Laundry
+
+
+183) T020103
+Household activities: Sewing, repairing and maintaining textiles
+
+
+184) T020104
+Household activities: Storing interior household items, including food
+
+
+185) T020199
+Household activities: Housework, not elsewhere classified
+
+
+186) T020201
+Household activities: Food and drink preparation
+
+
+187) T020202
+Household activities: Food presentation
+
+
+188) T020203
+Household activities: Kitchen and food cleanup
+
+
+189) T020301
+Household activities: Interior arrangement, decoration and repairs
+
+
+190) T020302
+Household activities: Building and repairing furniture
+
+
+191) T020303
+Household activities: Heating and cooling
+
+
+192) T020399
+Household activities: Interior maintenance, repair and decoration, not elsewhere classified
+
+
+193) T020401
+Household activities: Exterior cleaning
+
+
+194) T020402
+Household activities: Exterior repair, improvements and decoration
+
+
+195) T020499
+Household activities: Exterior maintenance, repair and decoration, not elsewhere classified
+
+
+196) T020501
+Household activities: Lawn, garden and houseplant care
+
+
+197) T020502
+Household activities: Ponds, pools and hot tubs
+
+
+198) T020599
+Household activities: Lawn and garden, not elsewhere classified
+
+
+199) T020601
+Household activities: Care for animals and pets (not veterinary care)
+
+
+200) T020602
+Household activities: Walking/exercising/playing with animals
+
+
+201) T020699
+Household activities: Pet and animal care, not elsewhere classified
+
+
+202) T020701
+Household activities: Vehicle repair and maintenance (by self)
+
+
+203) T020799
+Household activities: Vehicles, not elsewhere classified
+
+
+204) T020801
+Household activities: Appliance, tool and toy setup, repair and maintenance (by self)
+
+
+205) T020899
+Household activities: Appliances and tools, not elsewhere classified
+
+
+206) T020901
+Household activities: Financial management
+
+
+207) T020902
+Household activities: Household and personal organization and planning
+
+
+208) T020903
+Household activities: Household and personal mail and messages (except email)
+
+
+209) T020904
+Household activities: Household and personal email and messages
+
+
+210) T020905
+Household activities: Home security
+
+
+211) T020999
+Household activities: Household management, not elsewhere classified
+
+
+212) T029999
+Household activities: Household activities, not elsewhere classified
+
+
+213) T030101
+Caring for and helping household members: Physical care for household children
+
+
+214) T030102
+Caring for and helping household members: Reading to/with household children
+
+
+215) T030103
+Caring for and helping household members: Playing with household children, not sports
+
+
+216) T030104
+Caring for and helping household members: Arts and crafts with household children
+
+
+217) T030105
+Caring for and helping household members: Playing sports with household children
+
+
+218) T030106
+Caring for and helping household members: Talking with/listening to household children
+
+
+219) T030108
+Caring for and helping household members: Organization and planning for household children
+
+
+220) T030109
+Caring for and helping household members: Looking after household children (as a primary activity)
+
+
+221) T030110
+Caring for and helping household members: Attending household children's events
+
+
+222) T030111
+Caring for and helping household members: Waiting for/with household children
+
+
+223) T030112
+Caring for and helping household members: Picking up/dropping off household children
+
+
+224) T030199
+Caring for and helping household members: Caring for and helping household children, not elsewhere classified
+
+
+225) T030201
+Caring for and helping household members: Homework (household children)
+
+
+226) T030202
+Caring for and helping household members: Meetings and school conferences (household children)
+
+
+227) T030203
+Caring for and helping household members: Home schooling of household children
+
+
+228) T030204
+Caring for and helping household members: Waiting associated with household children's education
+
+
+229) T030299
+Caring for and helping household members: Activities related to household child's education, not elsewhere classified
+
+
+230) T030301
+Caring for and helping household members: Providing medical care to household children
+
+
+231) T030302
+Caring for and helping household members: Obtaining medical care for household children
+
+
+232) T030303
+Caring for and helping household members: Waiting associated with household children's health
+
+
+233) T030399
+Caring for and helping household members: Activities related to household child's health, not elsewhere classified
+
+
+234) T030401
+Caring for and helping household members: Physical care for household adults
+
+
+235) T030402
+Caring for and helping household members: Looking after household adult (as a primary activity)
+
+
+236) T030403
+Caring for and helping household members: Providing medical care to household adult
+
+
+237) T030404
+Caring for and helping household members: Obtaining medical and care services for household adult
+
+
+238) T030405
+Caring for and helping household members: Waiting associated with caring for household adults
+
+
+239) T030499
+Caring for and helping household members: Caring for household adults, not elsewhere classified
+
+
+240) T030501
+Caring for and helping household members: Helping household adults
+
+
+241) T030502
+Caring for and helping household members: Organization and planning for household adults
+
+
+242) T030503
+Caring for and helping household members: Picking up/dropping off household adult
+
+
+243) T030504
+Caring for and helping household members: Waiting associated with helping household adults
+
+
+244) T030599
+Caring for and helping household members: Helping household adults, not elsewhere classified
+
+
+245) T039999
+Caring for and helping household members: Caring for and helping household members, not elsewhere classified
+
+
+246) T040101
+Caring for and helping non-household members: Physical care for non-household children
+
+
+247) T040102
+Caring for and helping non-household members: Reading to/with non-household children
+
+
+248) T040103
+Caring for and helping non-household members: Playing with non-household children, not sports
+
+
+249) T040104
+Caring for and helping non-household members: Arts and crafts with non-household children
+
+
+250) T040105
+Caring for and helping non-household members: Playing sports with non-household children
+
+
+251) T040106
+Caring for and helping non-household members: Talking with/listening to non-household children
+
+
+252) T040108
+Caring for and helping non-household members: Organization and planning for non-household children
+
+
+253) T040109
+Caring for and helping non-household members: Looking after non-household children (as a primary activity)
+
+
+254) T040110
+Caring for and helping non-household members: Attending non-household children's events
+
+
+255) T040111
+Caring for and helping non-household members: Waiting for/with non-household children
+
+
+256) T040112
+Caring for and helping non-household members: Dropping off/picking up non-household children
+
+
+257) T040199
+Caring for and helping non-household members: Caring for and helping non-household children, not elsewhere classified
+
+
+258) T040201
+Caring for and helping non-household members: Homework (non-household children)
+
+
+259) T040202
+Caring for and helping non-household members: Meetings and school conferences (non-household children)
+
+
+260) T040204
+Caring for and helping non-household members: Waiting associated with non-household children's education
+
+
+261) T040301
+Caring for and helping non-household members: Providing medical care to non-household children
+
+
+262) T040302
+Caring for and helping non-household members: Obtaining medical care for non-household children
+
+
+263) T040303
+Caring for and helping non-household members: Waiting associated with non-household children's health
+
+
+264) T040401
+Caring for and helping non-household members: Physical care for non-household adults
+
+
+265) T040402
+Caring for and helping non-household members: Looking after non-household adults (as primary activity)
+
+
+266) T040403
+Caring for and helping non-household members: Providing medical care to non-household adult
+
+
+267) T040404
+Caring for and helping non-household members: Obtaining medical and care services for non-household adults
+
+
+268) T040405
+Caring for and helping non-household members: Waiting associated with caring for non-household adults
+
+
+269) T040499
+Caring for and helping non-household members: Caring for non-household adults, not elsewhere classified
+
+
+270) T040501
+Caring for and helping non-household members: Housework, cooking and shopping assistance for non-household adults
+
+
+271) T040502
+Caring for and helping non-household members: House and lawn maintenance and repair assistance for non-household adults
+
+
+272) T040503
+Caring for and helping non-household members: Animal and pet care assistance for non-household adults
+
+
+273) T040504
+Caring for and helping non-household members: Vehicle and appliance maintenance/repair assistance for non-household adults
+
+
+274) T040505
+Caring for and helping non-household members: Financial management assistance for non-household adults
+
+
+275) T040506
+Caring for and helping non-household members: Household management and paperwork assistance for non-household adults
+
+
+276) T040507
+Caring for and helping non-household members: Picking up/dropping off non-household adults
+
+
+277) T040508
+Caring for and helping non-household members: Waiting associated with helping non-household adults
+
+
+278) T040599
+Caring for and helping non-household members: Helping non-household adults, not elsewhere classified
+
+
+279) T050101
+Work and work-related activities: Work, main job
+
+
+280) T050102
+Work and work-related activities: Work, other job(s)
+
+
+281) T050103
+Work and work-related activities: Security procedures related to work
+
+
+282) T050104
+Work and work-related activities: Waiting associated with working
+
+
+283) T050199
+Work and work-related activities: Working, not classified elsewhere
+
+
+284) T050201
+Work and work-related activities: Socializing, relaxing and leisure as part of job
+
+
+285) T050202
+Work and work-related activities: Eating and drinking as part of job
+
+
+286) T050204
+Work and work-related activities: Security procedures as part of job
+
+
+287) T050205
+Work and work-related activities: Waiting associated with work-related activities
+
+
+288) T050299
+Work and work-related activities: Work-related activities, not elsewhere classified
+
+
+289) T050301
+Work and work-related activities: Income-generating hobbies, crafts and food
+
+
+290) T050303
+Work and work-related activities: Income-generating services
+
+
+291) T050304
+Work and work-related activities: Income-generating rental property activities
+
+
+292) T050305
+Work and work-related activities: Waiting associated with other income-generating activities
+
+
+293) T050399
+Work and work-related activities: Other income-generating activities, not elsewhere classified
+
+
+294) T050401
+Work and work-related activities: Job search activities
+
+
+295) T050403
+Work and work-related activities: Job interviewing
+
+
+296) T050404
+Work and work-related activities: Waiting associated with job search or interview
+
+
+297) T050499
+Work and work-related activities: Job search and interviewing, not elsewhere classified
+
+
+298) T060101
+Education: Taking class for degree, certification or licensure
+
+
+299) T060102
+Education: Taking class for personal interest
+
+
+300) T060103
+Education: Waiting associated with taking classes
+
+
+301) T060199
+Education: Taking class, not elsewhere classified
+
+
+302) T060201
+Education: Extracurricular club activities
+
+
+303) T060202
+Education: Extracurricular music and performance activities
+
+
+304) T060299
+Education: Education-related extracurricular activities, not elsewhere classified
+
+
+305) T060301
+Education: Research/homework for class degree, certification or licensure
+
+
+306) T060302
+Education: Research/homework for class for personal interest
+
+
+307) T060303
+Education: Waiting associated with research/homework
+
+
+308) T060399
+Education: Research/homework, not elsewhere classified
+
+
+309) T060401
+Education: Administrative activities: class for degree, certification or licensure
+
+
+310) T060403
+Education: Waiting associated with administrative activities (education)
+
+
+311) T060499
+Education: Administrative for education, not elsewhere classified
+
+
+312) T069999
+Education: Education, not elsewhere classified
+
+
+313) T070101
+Consumer purchases: Grocery shopping
+
+
+314) T070102
+Consumer purchases: Purchasing gas
+
+
+315) T070103
+Consumer purchases: Purchasing food (not groceries)
+
+
+316) T070104
+Consumer purchases: Shopping, except groceries, food and gas
+
+
+317) T070105
+Consumer purchases: Waiting associated with shopping
+
+
+318) T070201
+Consumer purchases: Comparison shopping
+
+
+319) T080101
+Professional and personal care services: Using paid childcare services
+
+
+320) T080199
+Professional and personal care services: Using paid childcare services, not elsewhere classified
+
+
+321) T080201
+Professional and personal care services: Banking
+
+
+322) T080202
+Professional and personal care services: Using other financial services
+
+
+323) T080203
+Professional and personal care services: Waiting associated with banking/financial services
+
+
+324) T080299
+Professional and personal care services: Using financial services and banking, not elsewhere classified
+
+
+325) T080301
+Professional and personal care services: Using legal services
+
+
+326) T080302
+Professional and personal care services: Waiting associated with legal services
+
+
+327) T080401
+Professional and personal care services: Using health care and services outside the home
+
+
+328) T080402
+Professional and personal care services: Using in-home health and care services
+
+
+329) T080403
+Professional and personal care services: Waiting associated with medical services
+
+
+330) T080501
+Professional and personal care services: Using personal care services
+
+
+331) T080502
+Professional and personal care services: Waiting associated with personal care services
+
+
+332) T080601
+Professional and personal care services: Activities related to purchasing/selling real estate
+
+
+333) T080701
+Professional and personal care services: Using veterinary services
+
+
+334) T080702
+Professional and personal care services: Waiting associated with veterinary services
+
+
+335) T089999
+Professional and personal care services: Professional and personal services, not elsewhere classified
+
+
+336) T090102
+Household services: Using meal preparation services
+
+
+337) T090103
+Household services: Using clothing repair and cleaning services
+
+
+338) T090199
+Household services: Using household services, not elsewhere classified
+
+
+339) T090201
+Household services: Using home maintenance/repair/decor/construction services
+
+
+340) T090202
+Household services: Waiting associated with home maintenance/repair/decor/construction services
+
+
+341) T090301
+Household services: Using pet services
+
+
+342) T090302
+Household services: Waiting associated with pet services
+
+
+343) T090401
+Household services: Using lawn and garden services
+
+
+344) T090501
+Household services: Using vehicle maintenance or repair services
+
+
+345) T090502
+Household services: Waiting associated with vehicle maintenance or repair services
+
+
+346) T090599
+Household services: Using vehicle maintenance and repair services, not elsewhere classified
+
+
+347) T099999
+Household services: Using household services, not elsewhere classified
+
+
+348) T100101
+Government services and civic obligations: Using police and fire services
+
+
+349) T100102
+Government services and civic obligations: Using social services
+
+
+350) T100103
+Government services and civic obligations: Obtaining licenses and paying fines, fees, taxes
+
+
+351) T100201
+Government services and civic obligations: Civic obligations and participation
+
+
+352) T100299
+Government services and civic obligations: Civic obligations and participation, not elsewhere classified
+
+
+353) T100304
+Government services and civic obligations: Waiting associated with using government services
+
+
+354) T100305
+Government services and civic obligations: Waiting associated with civic obligations and participation
+
+
+355) T100401
+Security procedures related to government services/civic obligations
+
+
+356) T109999
+[Unknown; variable is not listed in 2010 Activity Lexicon]
+
+
+357) T110101
+Eating and drinking: Eating and drinking
+
+
+358) T110201
+Eating and drinking: Waiting associated with eating and drinking
+
+
+359) T120101
+Socializing, relaxing and leisure: Socializing and communicating with others
+
+
+360) T120201
+Socializing, relaxing and leisure: Attending or hosting parties/receptions/ceremonies
+
+
+361) T120202
+Socializing, relaxing and leisure: Attending meetings for personal interest (not volunteering)
+
+
+362) T120299
+Socializing, relaxing and leisure: Attending/hosting social events, not elsewhere classified
+
+
+363) T120301
+Socializing, relaxing and leisure: Relaxing, thinking
+
+
+364) T120302
+Socializing, relaxing and leisure: Tobacco and drug use
+
+
+365) T120303
+Socializing, relaxing and leisure: Television and movies (not religious)
+
+
+366) T120304
+Socializing, relaxing and leisure: Television (religious)
+
+
+367) T120305
+Socializing, relaxing and leisure: Listening to the radio
+
+
+368) T120306
+Socializing, relaxing and leisure: Listening to/playing music (not radio)
+
+
+369) T120307
+Socializing, relaxing and leisure: Playing games
+
+
+370) T120308
+Socializing, relaxing and leisure: Computer use for leisure (except games)
+
+
+371) T120309
+Socializing, relaxing and leisure: Arts and crafts as a hobby
+
+
+372) T120310
+Socializing, relaxing and leisure: Collecting as a hobby
+
+
+373) T120311
+Socializing, relaxing and leisure: Hobbies, except arts and crafts and collecting
+
+
+374) T120312
+Socializing, relaxing and leisure: Reading for personal interest
+
+
+375) T120313
+Socializing, relaxing and leisure: Writing for personal interest
+
+
+376) T120399
+Socializing, relaxing and leisure: Relaxing and leisure, not elsewhere classified
+
+
+377) T120401
+Socializing, relaxing and leisure: Attending performing arts
+
+
+378) T120402
+Socializing, relaxing and leisure: Attending museums
+
+
+379) T120403
+Socializing, relaxing and leisure: Attending movies/film
+
+
+380) T120404
+Socializing, relaxing and leisure: Attending gambling establishments
+
+
+381) T120405
+Socializing, relaxing and leisure: Security procedures related to arts and entertainment
+
+
+382) T120499
+Socializing, relaxing and leisure: Arts and entertainment, not elsewhere classified
+
+
+383) T120501
+Socializing, relaxing and leisure: Waiting associated with socializing and communicating
+
+
+384) T120502
+Socializing, relaxing and leisure: Waiting associated with attending/hosting social events
+
+
+385) T120503
+Socializing, relaxing and leisure: Waiting associated with relaxing/leisure
+
+
+386) T120504
+Socializing, relaxing and leisure: Waiting associated with arts and entertainment
+
+
+387) T129999
+Socializing, relaxing and leisure: Socializing, relaxing and leisure, not elsewhere classified
+
+
+388) T130101
+Sports, exercise and recreation: Doing aerobics
+
+
+389) T130102
+Sports, exercise and recreation: Playing baseball
+
+
+390) T130103
+Sports, exercise and recreation: Playing basketball
+
+
+391) T130104
+Sports, exercise and recreation: Biking
+
+
+392) T130105
+Sports, exercise and recreation: Playing billiards
+
+
+393) T130106
+Sports, exercise and recreation: Boating
+
+
+394) T130107
+Sports, exercise and recreation: Bowling
+
+
+395) T130109
+Sports, exercise and recreation: Dancing
+
+
+396) T130110
+Sports, exercise and recreation: Participating in equestrian sports
+
+
+397) T130112
+Sports, exercise and recreation: Fishing
+
+
+398) T130113
+Sports, exercise and recreation: Playing football
+
+
+399) T130114
+Sports, exercise and recreation: Golfing
+
+
+400) T130116
+Sports, exercise and recreation: Hiking
+
+
+401) T130117
+Sports, exercise and recreation: Playing hockey
+
+
+402) T130118
+Sports, exercise and recreation: Hunting
+
+
+403) T130119
+Sports, exercise and recreation: Participating in martial arts
+
+
+404) T130120
+Sports, exercise and recreation: Playing racquet sports
+
+
+405) T130122
+Sports, exercise and recreation: Rollerblading
+
+
+406) T130123
+Sports, exercise and recreation: Playing rugby
+
+
+407) T130124
+Sports, exercise and recreation: Running
+
+
+408) T130125
+Sports, exercise and recreation: Skiing, ice skating, snowboarding
+
+
+409) T130126
+Sports, exercise and recreation: Playing soccer
+
+
+410) T130127
+Sports, exercise and recreation: Softball
+
+
+411) T130128
+Sports, exercise and recreation: Using cardiovascular equipment
+
+
+412) T130129
+Sports, exercise and recreation: Vehicle touring/racing
+
+
+413) T130130
+Sports, exercise and recreation: Playing volleyball
+
+
+414) T130131
+Sports, exercise and recreation: Walking
+
+
+415) T130132
+Sports, exercise and recreation: Participation in water sports
+
+
+416) T130133
+Sports, exercise and recreation: Weight lifting/strength training
+
+
+417) T130134
+Sports, exercise and recreation: Working out, unspecified
+
+
+418) T130136
+Sports, exercise and recreation: Doing yoga
+
+
+419) T130199
+Sports, exercise and recreation: Playing sports, not elsewhere classified
+
+
+420) T130201
+Sports, exercise and recreation: Watching aerobics
+
+
+421) T130202
+Sports, exercise and recreation: Watching baseball
+
+
+422) T130203
+Sports, exercise and recreation: Watching basketball
+
+
+423) T130204
+Sports, exercise and recreation: Watching biking
+
+
+424) T130205
+Sports, exercise and recreation: Watching billiards
+
+
+425) T130206
+Sports, exercise and recreation: Watching boating
+
+
+426) T130209
+Sports, exercise and recreation: Watching dancing
+
+
+427) T130210
+Sports, exercise and recreation: Watching equestrian sports
+
+
+428) T130213
+Sports, exercise and recreation: Watching football
+
+
+429) T130214
+Sports, exercise and recreation: Watching golfing
+
+
+430) T130215
+Sports, exercise and recreation: Watching gymnastics
+
+
+431) T130216
+Sports, exercise and recreation: Watching hockey
+
+
+432) T130218
+Sports, exercise and recreation: Watching racquet sports
+
+
+433) T130219
+Sports, exercise and recreation: Watching rodeo competitions
+
+
+434) T130222
+Sports, exercise and recreation: Watching running
+
+
+435) T130224
+Sports, exercise and recreation: Watching soccer
+
+
+436) T130225
+Sports, exercise and recreation: Watching softball
+
+
+437) T130226
+Sports, exercise and recreation: Watching vehicle touring/racing
+
+
+438) T130227
+Sports, exercise and recreation: Watching volleyball
+
+
+439) T130229
+Sports, exercise and recreation: Watching water sports
+
+
+440) T130232
+Sports, exercise and recreation: Watching wrestling
+
+
+441) T130299
+Sports, exercise and recreation: Attending sporting events, not elsewhere classified
+
+
+442) T130301
+Sports, exercise and recreation: Waiting related to playing sports or exercising
+
+
+443) T130302
+Sports, exercise and recreation: Waiting related to attending sporting events
+
+
+444) T139999
+Sports, exercise and recreation: Sports, exercise and recreation, not elsewhere classified
+
+
+445) T140101
+Religious and spiritual activities: Attending religious services
+
+
+446) T140102
+Religious and spiritual activities: Participation in religious practices
+
+
+447) T140103
+Religious and spiritual activities: Waiting associated with religious and spiritual activities
+
+
+448) T140105
+Religious and spiritual activities: Religious education activities
+
+
+449) T149999
+Religious and spiritual activities, not elsewhere classified
+
+
+450) T150101
+Volunteer activities: Computer use
+
+
+451) T150102
+Volunteer activities: Organizing and preparing
+
+
+452) T150103
+Volunteer activities: Reading
+
+
+453) T150104
+Volunteer activities: Telephone calls (except hotline counseling)
+
+
+454) T150105
+Volunteer activities: Writing
+
+
+455) T150106
+Volunteer activities: Fundraising
+
+
+456) T150199
+Volunteer activities: Administrative and support activities, not elsewhere classified
+
+
+457) T150201
+Volunteer activities: Food preparation, presentation, cleanup
+
+
+458) T150202
+Volunteer activities: Collecting and delivering clothing and other goods
+
+
+459) T150203
+Volunteer activities: Providing care
+
+
+460) T150204
+Volunteer activities: Teaching, leading, counseling, mentoring
+
+
+461) T150299
+Volunteer activities: Social service and care activities, not elsewhere classified
+
+
+462) T150301
+Volunteer activities: Building houses, wildlife sites and other structures
+
+
+463) T150302
+Volunteer activities: Indoor and outdoor maintenance, repair and cleanup
+
+
+464) T150399
+Volunteer activities: Indoor and outdoor maintenance, building and cleanup activities, not elsewhere classified
+
+
+465) T150401
+Volunteer activities: Performing
+
+
+466) T150402
+Volunteer activities: Serving at volunteer events and cultural activities
+
+
+467) T150499
+Volunteer activities: Participating in performance and cultural activities
+
+
+468) T150501
+Volunteer activities: Attending meetings, conferences and training
+
+
+469) T150599
+Volunteer activities: Attending meetings, conferences and training, not elsewhere classified
+
+
+470) T150601
+Volunteer activities: Public health services
+
+
+471) T150602
+Volunteer activities: Public safety activities
+
+
+472) T150701
+Volunteer activities: Waiting associated with volunteer activities
+
+
+473) T150899
+Volunteer activities: Security procedures related to volunteer activities, not elsewhere classified
+
+
+474) T159999
+Volunteer activities, not elsewhere classified
+
+
+475) T160101
+Telephone calls: Telephone calls to/from family members
+
+
+476) T160102
+Telephone calls: Telephone calls to/from friends, neighbors or acquaintances
+
+
+477) T160103
+Telephone calls: Telephone calls to/from education services providers
+
+
+478) T160104
+Telephone calls: Telephone calls to/from salespeople
+
+
+479) T160105
+Telephone calls: Telephone calls to/from professional or personal care services providers
+
+
+480) T160106
+Telephone calls: Telephone calls to/from household services providers
+
+
+481) T160107
+Telephone calls: Telephone calls to/from paid child or adult care providers
+
+
+482) T160108
+Telephone calls: Telephone calls to/from government officials
+
+
+483) T160199
+Telephone calls: Telephone calls (to or from), not elsewhere specified
+
+
+484) T160201
+Telephone calls: Waiting associated with telephone calls
+
+
+485) T169999
+Telephone calls: Telephone calls, not elsewhere classified
+
+
+486) T180101
+Traveling: Travel related to personal care
+
+
+487) T180199
+Traveling: Travel related to personal care, not elsewhere classified
+
+
+488) T180201
+Traveling: Travel related to housework
+
+
+489) T180202
+Traveling: Travel related to food and drink preparation, cleanup and presentation
+
+
+490) T180203
+Traveling: Travel related to interior maintenance, repair and decoration
+
+
+491) T180204
+Traveling: Travel related to exterior maintenance, repair and decoration
+
+
+492) T180205
+Traveling: Travel related to lawn, garden and houseplant care
+
+
+493) T180206
+Traveling: Travel related to care for animals and pets (not vet care)
+
+
+494) T180207
+Traveling: Travel related to vehicle care and maintenance (by self)
+
+
+495) T180208
+Traveling: Travel related to appliance, tool and toy setup, repair and maintenance (by self)
+
+
+496) T180209
+Traveling: Travel related to household management
+
+
+497) T180301
+Traveling: Travel related to caring for and helping household children
+
+
+498) T180302
+Traveling: Travel related to household children's education
+
+
+499) T180303
+Traveling: Travel related to household children's health
+
+
+500) T180304
+Traveling: Travel related to caring for household adults
+
+
+501) T180305
+Traveling: Travel related to helping household adults
+
+
+502) T180401
+Traveling: Travel related to caring for and helping non-household children
+
+
+503) T180402
+Traveling: Travel related to non-household children's education
+
+
+504) T180403
+Traveling: Travel related to non-household children's health
+
+
+505) T180404
+Traveling: Travel related to caring for non-household adults
+
+
+506) T180405
+Traveling: Travel related to helping non-household adults
+
+
+507) T180501
+Traveling: Travel related to working
+
+
+508) T180502
+Traveling: Travel related to work-related activities
+
+
+509) T180503
+Traveilng: Travel related to income-generating activities
+
+
+510) T180504
+Traveling: Travel related to job search and interviewing
+
+
+511) T180599
+Traveling: Travel related to work, not elsewhere classified
+
+
+512) T180601
+Traveling: Travel related to taking class
+
+
+513) T180602
+Traveling: Travel related to extracurricular activities (except sports)
+
+
+514) T180603
+Traveling: Travel related to research/homework
+
+
+515) T180604
+Traveling: Travel related to registration/administrative activities
+
+
+516) T180699
+Traveling: Travel related to education, not elsewhere classified
+
+
+517) T180701
+Traveling: Travel related to grocery shopping
+
+
+518) T180702
+Traveling: Travel related to purchasing gas
+
+
+519) T180703
+Traveling: Travel related to purchasing food (not groceries)
+
+
+520) T180704
+Traveling: Travel related to shopping, except groceries, food and gas
+
+
+521) T180799
+Traveling: Travel related to consumer purchases, not elsewhere classified
+
+
+522) T180801
+Traveling: Travel related to using childcare services
+
+
+523) T180802
+Traveling: Travel related to using financial services and banking
+
+
+524) T180803
+Traveling: Travel related to using legal services
+
+
+525) T180804
+Traveling: Travel related to using medical services
+
+
+526) T180805
+Traveling: Travel related to using personal care services
+
+
+527) T180806
+Traveling: Travel related to using real estate services
+
+
+528) T180807
+Traveling: Travel related to using veterinary services
+
+
+529) T180899
+Traveling: Travel related to using professional and personal care services, not elsewhere classified
+
+
+530) T180901
+Traveling: Travel related to using household services
+
+
+531) T180902
+Traveling: Travel related to using home maintenance/repair/decor/construction services
+
+
+532) T180903
+Traveling: Travel related to using pet services (not veterinary)
+
+
+533) T180905
+Traveling: Travel related to using vehicle maintenance and repair services
+
+
+534) T180999
+Traveling: Travel related to using household services, not elsewhere classified
+
+
+535) T181001
+Traveling: Travel related to using government services
+
+
+536) T181002
+Traveling: Travel related to civic obligations and participation
+
+
+537) T181099
+Traveling: Travel related to government services and civic obligations, not elsewhere classified
+
+
+538) T181101
+Traveling: Travel related to eating and drinking
+
+
+539) T181201
+Traveling: Travel related to socializing and communicating
+
+
+540) T181202
+Traveling: Travel related to attending or hosting social events
+
+
+541) T181203
+Traveling: Travel related to relaxing and leisure
+
+
+542) T181204
+Traveling: Travel related to arts and entertainment
+
+
+543) T181205
+Traveling: Travel as a form of entertainment
+
+
+544) T181299
+Traveling: Travel related to socializing, relaxing and leisure, not elsewhere classified
+
+
+545) T181301
+Traveling: Travel related to participating in sports/exercise/recreation
+
+
+546) T181302
+Traveling: Travel related to attending sporting/recreational events
+
+
+547) T181401
+Traveling: Travel related to religious/spiritual practices
+
+
+548) T181499
+Traveling: Travel related to religious/spiritual practices, not elsewhere classified
+
+
+549) T181501
+Traveling: Travel related to volunteering
+
+
+550) T181599
+Traveling: Travel related to volunteer activities, not elsewhere classified
+
+
+551) T181601
+Traveling: Travel related to phone calls
+
+
+552) T181801
+Traveling: Security procedures related to traveling
+
+
+553) T181899
+Traveling: Security procedures related to traveling, not elsewhere classified
+
+
+554) T189999
+Traveling: Traveling, not elsewhere classified
+
+
+555) T500101
+Unable to code: Insufficient detail in verbatim
+
+
+556) T500103
+Unable to code: Missing travel or destination
+
+
+557) T500104
+Unable to code: Recorded simultaneous activities incorrectly
+
+
+558) T500105
+Unable to code: Respondent refused to provide information/'none of your business'
+
+
+559) T500106
+Unable to code: Gap/can't remember
+
+
+560) T500107
+Unable to code: Unable to code activity at first tier
+
+
+561) WRTELIG
+Total time spent in all activities eligible to be selected for Well-Being Module
+
+
+562) WEPAINMD
+Did you take any pain medication yesterday, such as aspirin, ibuprofen or prescription pain medication?
+
+
+563) WEGENHTH
+Would you say your health in general is excellent, very good, good, fair or poor?
+
+
+564) WEHBP
+In the last five years, were you ever told by a doctor or other health professional that you have hypertension, also called high blood pressure, or borderline hypertension?
+
+
+565) WEREST
+When you woke up yesterday, how well-rested did you feel? Did you feel very rested, somewhat rested, a little rested or not at all rested?
+
+
+566) WXPAINMD
+WEPAINMD allocation flag
+
+
+567) WXHBP
+WEHBP allocation flag
+
+
+568) WXREST
+WEREST allocation flag
+
+
+569) WXGENHTH
+WEGENHTH allocation flag
+
+
+570) WUFINLWT
+Well-Being Module respondent weight
+
+
+571) I-AGE
+Age (TEAGE is topcoded to 85. All those age 80 through 84 have TEAGE = 80. Those age 85 or above have TEAGE = 85.) (Recoded for use with online analysis)
+
+
+572) I-EDUC
+What is the highest level of school you have completed or the highest degree you have received? (Recoded for use with online analysis)
+
+
+573) I-RACE
+Race (topcoded) (Recoded for use with online analysis)
+
+
+574) I-SEX
+Sex (for use with online analysis)
+
+

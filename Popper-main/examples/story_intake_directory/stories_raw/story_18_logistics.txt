@@ -1,0 +1,2 @@
+Context: A manufacturing plant must route vital sub-components to an assembly line, but the primary freight shipping corridor is blocked by a port strike.
+Alternative Solution Modality: Synthesize a plan to transition the logistics checklist to regional air-freight transport or intermodal rail networks.

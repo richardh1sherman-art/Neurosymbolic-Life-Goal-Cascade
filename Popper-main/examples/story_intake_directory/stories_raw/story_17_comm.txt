@@ -1,0 +1,2 @@
+Context: A disaster relief coordinator must broadcast an emergency alert, but the primary cellular network tower is physically down.
+Alternative Solution Modality: Synthesize a plan to deploy localized mesh-network radio relays or satellite uplinks to clear the broadcast bottleneck.

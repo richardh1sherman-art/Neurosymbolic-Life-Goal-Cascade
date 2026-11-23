@@ -1,0 +1,15 @@
+{
+  "sample_name": "7_analogy_matrix",
+  "predicates": [
+    "quadrant(top_left, panel1)",
+    "contains(panel1, square_in_square)",
+    "quadrant(top_right, panel2)",
+    "contains(panel2, rectangle)",
+    "quadrant(bottom_left, panel3)",
+    "contains(panel3, triangle_in_circle)",
+    "quadrant(bottom_right, panel4)",
+    "contains(panel4, target_variable_x)",
+    "analogy_relation(panel1, panel2, transformation_rule_A)",
+    "analogy_relation(panel3, panel4, transformation_rule_A)"
+  ]
+}

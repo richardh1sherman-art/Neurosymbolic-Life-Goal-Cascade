@@ -1,0 +1,44 @@
+{
+  "id": "geo_sample_2",
+  "topology": "square_inscribed_in_triangle",
+  "predicates": [
+    "triangle(a, b, c)",
+    "square(d, e, f, g)",
+    "on_line(d, b, c)",
+    "on_line(e, b, c)",
+    "on_line(f, a, c)",
+    "on_line(g, a, b)",
+    "perpendicular(g, d, d, e)",
+    "parallel(g, f, d, e)"
+  ],
+  "ground_truth_coordinates": {
+    "A": [
+      48.88,
+      78.88
+    ],
+    "B": [
+      12.74,
+      17.41
+    ],
+    "C": [
+      88.84,
+      17.41
+    ],
+    "D": [
+      32.73,
+      17.41
+    ],
+    "E": [
+      66.73,
+      17.41
+    ],
+    "F": [
+      66.73,
+      51.41
+    ],
+    "G": [
+      32.73,
+      51.41
+    ]
+  }
+}

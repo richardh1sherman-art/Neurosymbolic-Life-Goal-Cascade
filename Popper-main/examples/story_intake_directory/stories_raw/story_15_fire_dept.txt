@@ -1,0 +1,3 @@
+The fire Department received the call for a rescue from Miranda. The fire department maps a physical grid of city streets, emergency coordinates, and a route to the mountain.
+The fire dispatcher manages a literal dispatch line of incoming emergency calls, or a sequential wave of responding fire trucks (Engine 1, Engine 2, Truck 4) and Helicopters being deployed one after the other.
+The fire chief tracks sector clear markers, checked rooms, or a log of streets already clear of fire hazards so teams don't waste critical resources re-searching the same dangerous areas. The fire chief approved the dispatching of the Helicopter for the rescue. The helicopter was ready, and flew to a planned search route with a pilot and fireman.
