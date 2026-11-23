@@ -224,6 +224,11 @@ During maintenance downtime (such as Step 07 coordinated isolation), reduced net
 % =========================================================================
 % SECTION 5: NON-SMOOTH STRATIFIED MANIFOLDS, DWELL TIME & OBSERVER BRIDGE
 % =========================================================================
+
+\begin{remark}[Hybrid Myhill--Nerode Realization and Mesarovi\'c Consistency]
+Rather than propagating reachable sets forward from an idealized white-box plant model, partitioning the manifold into geodesic contraction cells $X$ induces a \emph{hybrid Myhill--Nerode equivalence relation} \cite{Nerode1958}: two physical disturbance histories are indistinguishable whenever their trajectories enter the same contraction ball and remain invariant under the finite nucleus $\mathcal{N}$. Quotienting continuous flows by contractive cells resolves the infinite-state obstruction of classical hybrid automata and guarantees inter-level coordination consistency in the sense of Mesarovi\'c \textit{et al.} \cite{Mesarovic1970}. Notably, emerging hyperscale data-center microgrid schedulers implicitly approximate this quotienting when aggregating heterogeneous UPS, battery, and GPU rack transients into discrete macro-states; formalizing this connection via cotangent-lifted contracting nuclei offers a direct avenue for future study.
+\end{remark}
+
 \section{Hybrid Dwell-Time Contraction on Non-Smooth Manifolds and Observer Bridge}
 
 \paragraph{1. Stratified Non-Smooth Dynamics and Saltation Jump Gain:}
