@@ -21,6 +21,10 @@
 
 \maketitle
 
+\begin{abstract}
+The power grid is being expanded with new energy conversion interfaces requiring a new look at the system-level hierarchies and formal descriptions. This article examines the use of self-similar groups to allow different descriptions of the same object and renormalizations of the hierarchy, observation strategies for continuous and discrete events, and a definition of cohesion and coupling applied to contemporary power systems.
+\end{abstract}
+
 % =========================================================================
 % SECTION 1: MULTI-LAYER GRID HIERARCHY & THREE-LAYER OPERATIONAL FOCUS
 % =========================================================================
@@ -377,34 +381,7 @@ Method \#2: $40\text{ ms}$ Integral PEM-MHE & $\mathbf{8.4\,\mu\text{s}}$ & $0.6
 \end{table}
 
 \subsection{Hybrid Automaton State Transitions and 14-Bit Switching Words}
-Fig.~\ref{fig:hybrid_state_transitions} illustrates the supervised ternary automaton semigroup $\mathcal{S}_{\text{grid}}$ over $X = \{0, 1, F\}$, where the microsecond bridge observer enforces the minimum dwell-time guard $\tau_{\text{dwell}} = 0.1334\text{ s} > \ln(\mu_{\max})/\lambda$ to block premature resets (`01' $\to$ `00') and isolate the absorbing fault ideal $\mathcal{I}_F = X^* F X^*$. Evaluating five representative $14$-bit breaker switching words $w \in \{0, 1\}^{14}$ from the Caltech circuit (Table~\ref{tab:caltech_14bit_summary}) confirms that conformal tube calibration ($\epsilon_{\text{conf}} \in [0.0253, 0.0639]\text{ p.u.}$) preserves a strictly positive Pontryagin inner-eroded safe core of $(0.0030, 0.0030)\text{ p.u.}$ across every configuration (Fig.~\ref{fig:hybrid_core_png}).
-
-\begin{figure}[!t]
-\centering
-\begin{tikzpicture}[
-    node distance=1.35cm and 1.75cm,
-    state/.style={circle, draw=black!85, thick, minimum size=1.05cm, align=center, font=\scriptsize\bfseries},
-    safe0/.style={state, fill=green!14},
-    safe1/.style={state, fill=yellow!18},
-    fault/.style={state, fill=red!16, double},
-    edge/.style={-{Stealth[length=2.1mm]}, thick, font=\scriptsize}
-]
-\node[safe0] (s00) {Cell \texttt{00}\\Nominal};
-\node[safe1, right=of s00] (s01) {Cell \texttt{01}\\Ride-Thru};
-\node[safe1, below=of s01] (s11) {Cell \texttt{11}\\Cascade};
-\node[fault, left=of s11] (sF) {Ideal $\mathcal{I}_F$\\Fault Sink};
-
-\draw[edge] (s00) to[bend left=18] node[above] {$g_a$: $I > 1.05\text{ p.u.}$} (s01);
-\draw[edge] (s01) to[bend left=18] node[below] {$g_a^{-1}$ ($\Delta t \ge \tau_{\text{dwell}}$)} (s00);
-\draw[edge] (s01) to[bend left=18] node[right] {$g_b$: Area Surge} (s11);
-\draw[edge] (s11) to[bend left=18] node[left] {$g_b^{-1}$ (Held if $\Delta t < \tau_{\text{dwell}}$)} (s01);
-\draw[edge, dashed, red!75!black] (s11) -- node[above] {Pruned by $\Sigma_{\text{allowed}}$} (sF);
-\draw[edge, dashed, red!75!black] (s00) -- node[left] {CCT / PLL Loss} (sF);
-\draw[edge, red!75!black] (sF) edge[loop left] node[left] {$\pi_g(F)=F$} (sF);
-\end{tikzpicture}
-\caption{Supervised hybrid automaton state-transition diagram over the contracting nucleus $\mathcal{N} = \{\mathrm{id}, a, b, c\}$. Transitions into the absorbing fault ideal $\mathcal{I}_F$ are pruned by $\Sigma_{\text{allowed}}(w)$, while premature resets are held until $\Delta t \ge \tau_{\text{dwell}} = 0.1334\text{ s}$.}
-\label{fig:hybrid_state_transitions}
-\end{figure}
+As shown in the hybrid automaton structure above, the supervised ternary automaton semigroup $\mathcal{S}_{\text{grid}}$ over $X = \{0, 1, F\}$, where the microsecond bridge observer enforces the minimum dwell-time guard $\tau_{\text{dwell}} = 0.1334\text{ s} > \ln(\mu_{\max})/\lambda$ to block premature resets (`01' $\to$ `00') and isolate the absorbing fault ideal $\mathcal{I}_F = X^* F X^*$. Evaluating five representative $14$-bit breaker switching words $w \in \{0, 1\}^{14}$ from the Caltech circuit (Table~\ref{tab:caltech_14bit_summary}) confirms that conformal tube calibration ($\epsilon_{\text{conf}} \in [0.0253, 0.0639]\text{ p.u.}$) preserves a strictly positive Pontryagin inner-eroded safe core of $(0.0030, 0.0030)\text{ p.u.}$ across every configuration (Fig.~\ref{fig:hybrid_core_png}).
 
 \begin{table}[!t]
 \centering
@@ -428,7 +405,7 @@ Coordinated Isolation & \texttt{11001010100011} & $8.0\text{ s}$ & $0.0639$ & $(
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=\columnwidth]{hybrid_reachable_set.png}
+\includegraphics[width=0.96\columnwidth]{hybrid_reachable_set.png}
 \caption{Cotangent-lifted hybrid reachable set and Pontryagin inner-eroded safe core projected onto tie-line flow coordinates across Caltech switching configurations.}
 \label{fig:hybrid_core_png}
 \end{figure}
@@ -438,6 +415,10 @@ Removing discrete-event mode switching degrades synchronizing stiffness under he
 
 \section{Conclusion}
 We presented a unified scale-invariant control theory that embeds continuous Riemannian contraction manifolds inside the cotangent fibers of a self-similar automaton semigroup. By combining Alleaume \textit{et al.}'s two-matrix saltation covariance update with $40\text{ ms}$ integral PEM-MHE parameter tracking and Schreier-graph dwell-time supervision, the architecture eliminates set-wrapping explosion and stabilizes sub-millisecond inverter transients well inside the update horizon of slow supervisory grid optimizers.
+
+
+\section*{Acknowledgment}
+The author acknowledges Google AI (Gemini) \cite{google_gemini_2026} for assistance with mathematical formalization, hybrid observer synthesis, software verification, and \LaTeX{} manuscript preparation.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
