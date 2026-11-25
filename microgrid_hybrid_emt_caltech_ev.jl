@@ -171,7 +171,7 @@ function guard_condition(u, t, integrator)
 
     # Guard 4: Hysteresis recovery back to nominal (PV=GFM, BESS=GFL)
     g4_recovery = dwell_ok && (p.mode_pv == PV_GFL_CLAMP) &&
-                  (V_pcc >= p.V_recover) && (P_ev <= P_pv_avail + P_sg + 0.05)
+                  (V_pcc >= p.V_recover) && (I_pv_est <= 0.85 * p.I_pv_max)
 
     return g1_pv_overcurrent || g2_bess_takeover || g3_queue_wall || g4_recovery
 end
@@ -199,7 +199,7 @@ function guard_affect!(integrator)
     elseif (q_queue >= p.q_max) && (p.ev_throttle > 0.5)
         p.ev_throttle = 0.5
         @printf("[t = %6.2fs] G_fast: Energy queue hit q_max (%.2f pu*s) -> EV charging throttled to 50%%\n", t, q_queue)
-    elseif dwell_ok && (p.mode_pv == PV_GFL_CLAMP) && (V_pcc >= p.V_recover) && (P_ev <= P_pv_avail + P_sg + 0.05)
+    elseif dwell_ok && (p.mode_pv == PV_GFL_CLAMP) && (V_pcc >= p.V_recover) && (I_pv_est <= 0.85 * p.I_pv_max)
         p.mode_pv = PV_GFM
         p.mode_bess = BESS_GFL
         p.ev_throttle = 1.0
