@@ -1,0 +1,37 @@
+Adaptive queuing layer and finite energy buffers
+
+The queue for our example scenario is two servers, SG and PV, and one consumer the EV. 
+Figure 1: queuing diagram: 2 circles vertically on the right, one queue represented as a rectangle, open on the left, to the left of the servers. One arrow into the queue, and 1 arrows out of each server.
+Scenario #1:  a GFM has a power source, PV, and it's sending power to a battery/GFL. Then somebody, say a GFL with a lot of EV chargers, needs some battery power. Also, the AGC decides when to charge the batteries from the SG or PV.
+	The normal queuing theory applies, but the queue, representing the stored charge SOC, is not only finite, but it varies.
+Not to worry, we will perform congestion control (AGC) on the queue to keep it approximately fixed in size, say 80% full capacity.
+Remark 1: The ability to control SG by AGC is one reason why it’s better to use batteries in the Power Company rather than batteries by a Data Center.
+	We will use a Machine Learning (ML) scheme to provide the performance of service throughput vs demand arrival rate.
+The ML allows us to adapt to changes in the power grid (the network).
+We will use the extensive work in computer network performance to construct the controller.
+	Training will use DES and AGC integrated with the EMT simulator.
+	Adjusting the ML will use the real world data (Caltech dataset) digital twin.
+The strategy is to build  Graph with all the necessary features of the traffic in and out of the queue.
+A GNN will be used for per-flow mean delay prediction (power flow delay can be positive or negative battery usage).
+	The simulator has been updated to include access to the Caltech digital twin:
+((smt-ilp-env) ) rsherman@spark-5794:~/projects/SMT-ILP/ZeroVRAM$ ls -tl *.jl
+-rw-rw-r-- 1 rsherman rsherman 11015 Nov 25 00:17 microgrid_hybrid_emt_caltech_ev.jl
+-rw-rw-r-- 1 rsherman rsherman 10379 Nov 24 16:16 microgrid_hybrid_emt-v3.jl
+
+The first simulated data set will use random arrival’s of EV demands for power. Each
+dataset consists of samples labeled with average per-flow performance measurements. 
+The objective is to predict the mean per-flow delay (How long the batteries are needed to support the load.
+Some of the future features can include timing jitter, frequency drift, noise from wind mills, etc.
+
+Step 1: develop a graphical description of the Caltech digital twin
+Step 2: develop a simulation of the traffic using the graphical approach and build dense NN
+Traffic can be of various patterns and characteristics,
+often modeled as random variables (RVs). In our scenario, we
+utilize an on/off pattern that keeps switching between ‘on’
+(when data are generated) and ‘off’ (when the generation is
+paused) phases. For each flow, the ‘on’ and ‘off’ durations
+are sampled from random distributions upon switches, i.e.,
+ton,i,j∼T(τon,i) and toff,i,j∼T(τoff,i) for the ith flow’s jth
+on and off switches, respectively.
+Step 3: develop an AGC to control the battery SOC
+Step 4: run the simulation (AGC, arrival traffic, GNN and EMT simulator) and plot the throughput versus arrival statistics
