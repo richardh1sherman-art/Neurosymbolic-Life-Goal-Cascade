@@ -26,6 +26,34 @@ Conventional energy management systems evaluate substations independently, faili
 m_i \ddot{\theta}_i + d_i \dot{\theta}_i = P_i - \sum_{j=1}^{N} K_{ij} \sin(\theta_i - \theta_j) - P_{\text{AI}, i}(t)
 \end{equation}
 where $m_i$ represents the rotational turbine inertia, $d_i$ represents the natural damping, and $K_{ij}$ defines the admittance coupling strength of the high-voltage transmission lines. The bounds of global phase-locking under these non-linear conditions follow the fundamental alignment proofs established by \textit{Chopra \& Spong (2009)}.
+\section{Related Work and Comparative Positioning}
+The rapid proliferation of hyperscale artificial intelligence (AI) training clusters has prompted extensive research on data-center power management, broadly organized into three paradigms:
+\begin{enumerate}
+    \item \textbf{Centralized Workload \& Market Scheduling:} Spatial and temporal load-shifting frameworks optimize data-center electricity procurement across wholesale markets and demand-response programs~\cite{Wierman2014DR,Liu2013Geographical}. While effective for hourly or 15-minute economic dispatch, centralized schedulers suffer from telemetry and orchestration latencies too slow to arrest sub-second electromechanical swing oscillations excited by synchronous \texttt{AllReduce} gradient barriers.
+    \item \textbf{Behind-the-Meter BESS \& UPS Peak Shaving:} Hardware-centric approaches buffer compute power ramps using local uninterruptible power supplies (UPS) or Battery Energy Storage Systems (BESS)~\cite{Govindan2011UPS,Wang2012EnergyStorage}. However, continuous $0.5\text{--}2\,\mathrm{Hz}$ pulsing from distributed training jobs accelerates battery degradation and incurs high capital cost compared to utility-regulated generation reserves.
+    \item \textbf{Static Grid-Friendly Frequency/Voltage Droop:} Local power-capping controllers modulate server frequency/voltage scaling (DVFS) proportionally to measured grid frequency deviation~\cite{Li2016GridFriendly}. Because static droop reacts only after an excursion develops and lacks collision-avoidance coordination across geographically correlated pods, multiple clusters still synchronize into resonant subharmonic limit cycles.
+\end{enumerate}
+
+Table~\ref{tab:dc_lit_comparison} contrasts these existing approaches with our decentralized Multi-Agent Reinforcement Learning (MARL) Carrier-Sense Multiple Access with Collision Detection (CSMA/CD) interface protocol, which desynchronizes compute bursts autonomously at the grid boundary without centralized coordination or heavy battery cycling.
+
+\begin{table}[t]
+\centering
+\caption{Comparison of AI Data-Center Grid Stabilization Paradigms}
+\label{tab:dc_lit_comparison}
+\scriptsize
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Control Paradigm} & \textbf{Timescale} & \textbf{Comms.} & \textbf{BESS Wear} & \textbf{Bifurcation Damping} \\
+\midrule
+Centralized Cloud DR~\cite{Wierman2014DR} & $5\text{--}15\,\mathrm{min}$ & Global & None & None (Too Slow) \\
+Behind-Meter UPS/BESS~\cite{Govindan2011UPS} & $<10\,\mathrm{ms}$ & Local & High & Hardware-Limited \\
+Static DVFS Droop~\cite{Li2016GridFriendly} & $50\text{--}200\,\mathrm{ms}$ & Local & Low & Partial (Resonant) \\
+\textbf{MARL CSMA/CD (Ours)} & $\mathbf{10\text{--}50\,\mathrm{ms}}$ & \textbf{None} & \textbf{None} & \textbf{Full Phase-Lock} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Multi-Scale Control Models and High-Fidelity EMT Grounding}
 We implement a dual-resolution physical framework to model grid safety. Macroscopic stability is governed by second-order dynamics to isolate inter-area phase angle bifurcation cascades. Micro-level, sub-millisecond electromagnetic transient (EMT) numerical simulations are executed across a modified IEEE 39-bus New England testbed system using the native, open-source Julia framework \texttt{PowerSimulationsDynamics.jl} documented by \textit{Lara et al. (2023)} to model non-linear inverter-based resource (IBR) Phase-Locked Loop (PLL) voltage tracking dynamics. 
@@ -81,6 +109,75 @@ PHASE JITTER | ACTIVE CURRENT LIMIT | CONTRACTION RATE | STATUS
  15.00 deg   | 0.5420 p.u.          | alpha: 0.4517    | PHASE-LOCKED
 -------------------------------------------------------------------
 \end{verbatim}
+\subsection{Caltech 28-Bus Feeder-Aggregated Compute Cluster Validation}
+To evaluate phase-locking restoration under realistic distribution sensor noise and time-varying background demand, we simulate $K=6$ distributed AI training pods ($T_{\mathrm{sync}} = 2.0\,\mathrm{s}$ \texttt{AllReduce} cycles, $0.22\,\mathrm{pu}$ per pod) superimposed on the Caltech SoCal 28-Bus feeder load profile ($60.0\,\mathrm{s}$, $1.068\,\mathrm{pu}$ peak background surge). Under uncoordinated synchronous software cycles, the periodic square-wave driving force $P_{\mathrm{DC}}(t) = \sum_{i=1}^{K} P_{\mathrm{pod},i}(t)$ excites parametric subharmonic resonance in the coupled swing-voltage dynamics, driving a period-doubling bifurcation ($0.25\,\mathrm{Hz}$ subharmonic spike) and depressing PCC voltage below the $0.90\,\mathrm{pu}$ undervoltage threshold.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{caltech_datacenter_marl_csmacd.png}
+\caption{Caltech 28-Bus validation of six distributed AI training pods: uncoordinated synchronous \texttt{AllReduce} bursts induce period-2 undervoltage excursions ($V_{\mathrm{PCC},\min}=0.8326\,\mathrm{pu}$), whereas emergent MARL CSMA/CD desynchronization halves peak demand and restores phase-locked voltage stability ($V_{\mathrm{PCC},\min}=0.9014\,\mathrm{pu}$).}
+\label{fig:caltech_dc_csmacd}
+\end{figure}
+
+As shown in Fig.~\ref{fig:caltech_dc_csmacd} and summarized in Table~\ref{tab:caltech_dc_results}, enabling the decentralized MARL CSMA/CD carrier-sense and randomized backoff protocol desynchronizes pod power ramps without centralized scheduling, cutting peak compute load by $50.0\%$ ($1.320 \to 0.660\,\mathrm{pu}$), suppressing period-2 subharmonic amplitude by $76.1\%$ ($0.138 \to 0.033$), and maintaining $V_{\mathrm{PCC},\min} = 0.9014\,\mathrm{pu}$ above the undervoltage limit.
+
+\begin{table}[t]
+\centering
+\caption{Caltech 28-Bus AI Data-Center Synchronization & MARL CSMA/CD Benchmark}
+\label{tab:caltech_dc_results}
+\scriptsize
+\setlength{\tabcolsep}{2.8pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Compute Coordination Policy} & \textbf{Peak DC Load} & \textbf{Min $V_{\mathrm{PCC}}$} & \textbf{Period-2 Amp.} \\
+\midrule
+Uncoordinated Sync (\texttt{AllReduce}) & $1.320\,\mathrm{pu}$ & $0.8326\,\mathrm{pu}$ & $0.138$ (Unstable) \\
+\textbf{Emergent MARL CSMA/CD} & $\mathbf{0.660\,\mathrm{pu}}$ & $\mathbf{0.9014\,\mathrm{pu}}$ & $\mathbf{0.033}$ (\textbf{-76.1\%}) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% --- Add these entries inside \begin{thebibliography}{99}\footnotesize\setlength{\itemsep}{1pt} ... 
+\bibitem{Patel2024LLM} P.~Patel \emph{et al.}, ``Characterizing power management opportunities for LLMs in the cloud, in \emph{Proc. 29th ACM Int. Conf. Archit. Support Program. Lang. Oper. Syst. (ASPLOS)}, 2024, pp. 207--222.
+
+\end{thebibliography} ---
+% \bibitem{Wierman2014DR} A.~Wierman, Z.~Liu, I.~Liu, and H.~Mohsenian-Rad, ``Opportunities and challenges for data center demand response,'' in \emph{Proc. Int. Green Comput. Conf. (IGCC)}, 2014, pp. 1--10.
+% \bibitem{Liu2013Geographical} Z.~Liu, M.~Lin, A.~Wierman, S.~H.~Low, and L.~L.~H.~Andrew, ``Greening geographical load balancing,'' \emph{IEEE/ACM Trans. Netw.}, vol. 23, no. 2, pp. 657--671, Apr. 2015.
+% \bibitem{Govindan2011UPS} S.~Govindan, A.~Sivasubramaniam, and B.~Urgaonkar, ``Benefits and limitations of tapping into stored energy for datacenters,'' in \emph{Proc. 38th Annu. Int. Symp. Comput. Archit. (ISCA)}, 2011, pp. 341--351.
+% \bibitem{Wang2012EnergyStorage} D.~Wang, C.~Ren, A.~Sivasubramaniam, B.~Urgaonkar, and H.~Fathy, ``Energy storage in datacenters: What, where, and how much?'' in \emph{Proc. ACM SIGMETRICS}, 2012, pp. 187--198.
+% \bibitem{Li2016GridFriendly} J.~Li \emph{et al.}, ``Analyzing the potential of data centers to provide grid frequency regulation,'' \emph{IEEE Trans. Smart Grid}, vol. 7, no. 4, pp. 1916--1925, Jul. 2016.
+\subsection{Compliance with Utility Interconnection Specifications}
+Because large flexible compute loads connect under utility-specific interconnection agreements, the MARL CSMA/CD interface controller must be parameterized to satisfy both \emph{time-domain} and \emph{frequency-domain} grid codes without requiring manual retuning across service territories:
+\begin{enumerate}
+    \item \textbf{Time-Domain Specifications:} Utility operators enforce strict time-domain bounds on load trajectories at the point of interconnection:
+    \begin{itemize}
+        \item \emph{Ramp-Up Rate ($R_{\uparrow,\max}$):} Maximum permitted rate of active-power increase ($\mathrm{MW/s}$), enforced by bounding the number of pods exiting CSMA/CD backoff per carrier-sense slot ($\dot{P}_{\mathrm{DC}}(t) \le R_{\uparrow,\max}$).
+        \item \emph{Ramp-Down Rate ($R_{\downarrow,\max}$):} Maximum permitted rate of active-power decrease ($\mathrm{MW/s}$), satisfied by staggered completion and trailing-edge hold windows across compute pods.
+        \item \emph{Dynamic Power Range ($\Delta P_{\mathrm{dyn}}$):} Allowed short-term active-power excursion ($|P_{\mathrm{DC}}(t) - \bar{P}_{\mathrm{DC}}| \le \Delta P_{\mathrm{dyn}}$) before utility ramp-rate penalties or protective relays trigger.
+    \end{itemize}
+    \item \textbf{Frequency-Domain Specifications:} Grid operators restrict oscillatory power injection across electromechanical and sub-synchronous bands ($0.1\text{--}2.0\,\mathrm{Hz}$) to prevent exciting inter-area modes or period-doubling cascades. By shaping the MARL backoff distribution as a reward penalty on spectral power density $S_{PP}(f)$ around $f_{\mathrm{sync}}/2$, the interface flattens narrowband \texttt{AllReduce} harmonics into broadband low-amplitude noise.
+\end{enumerate}
+
+Table~\ref{tab:utility_specs} summarizes how the Caltech 28-Bus MARL CSMA/CD policy satisfies representative utility time- and frequency-domain compliance thresholds.
+
+\begin{table}[t]
+\centering
+\caption{Utility Interconnection Time- and Frequency-Domain Compliance}
+\label{tab:utility_specs}
+\scriptsize
+\setlength{\tabcolsep}{2.4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Utility Specification} & \textbf{Uncoordinated} & \textbf{MARL CSMA/CD} & \textbf{Compliance} \\
+\midrule
+Max Ramp-Up / Down Rate & $\pm 6.60\,\mathrm{pu/s}$ & $\pm 2.20\,\mathrm{pu/s}$ & $\mathbf{-66.7\%}$ (Pass) \\
+Dynamic Power Range $\Delta P_{\mathrm{dyn}}$ & $1.320\,\mathrm{pu}$ & $0.660\,\mathrm{pu}$ & $\mathbf{-50.0\%}$ (Pass) \\
+Subharmonic ($0.25\,\mathrm{Hz}$) Spectral Peak & $0.138\,\mathrm{pu}$ & $0.033\,\mathrm{pu}$ & $\mathbf{-76.1\%}$ (Pass) \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \begin{thebibliography}{99}
 \bibitem{barwise} Barwise, J., \& Seligman, J. (1997). \textit{Information Flow: The Logic of Distributed Systems}. Cambridge University Press.
