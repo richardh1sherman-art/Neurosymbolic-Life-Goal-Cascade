@@ -1,0 +1,69 @@
+Review of Hierarchical Hybrid Control and Finite Energy
+Queuing for Smart Microgrids with Grid-Forming
+and Grid-Following DERs 11/26/26
+
+This e-mqil  below shows the importance of using the language of IEEE smart grids  in the new document Documents/microgrid_smart_gridd_tsg-v2.tex.
+
+E-mail:
+21-Nov-2026
+TSG-03286-2026 - Symmetric Self-Adaptive Contraction Manifold for Wide-Area Inverter Control Under Severe Multiplicative Phase Noise
+Dear Dr. Sherman,
+We regret to advise you that the Reviewing Committee is unable to accept the subject paper for publication as an IEEE Transactions on Smart Grid paper.
+This is an administrative reject due to the subject matter and it is not a reflection of the technical content or its presentation.
+The subject matter of your paper does not fall under the scope of the IEEE Transactions on Smart Grid.  Please check the scope of the IEEE Transactions on Smart Grid at: https://www.ieee-pes.org/publications/transactions/transactions-on-smart-grid.
+I hope you will be able to find an appropriate journal for your work.
+Thank you for your interest in the IEEE Transactions on Smart Grid.
+Best regards,
+Dr. Mahmud Fotuhi-Firuzabad
+Editor-in-Chief
+
+Here is my review of the paper: Documents/microgrid_smart_grid_tsg-v2.pdf
+
+ 1. The abstract needs to be rewritten to include the performance modeling based on queuing theory (“Scenario #1:  a GFM has a power source, PV, and it's sending power to a battery/GFL. Then somebody, say a GFL with a lot of EV chargers, needs some battery power. Also, the AGC decides when to charge the batteries from the SG or PV.
+	The normal queuing theory applies, but the queue, representing the stored charge SOC, is not only finite, but it varies.
+Not to worry, we will perform congestion control (AGC) on the queue to keep it approximately fixed in size, say 80% full capacity.
+Remark 1: The ability to control SG by AGC is one reason why it’s better to use batteries by the Power Company rather than batteries by a Data Center.
+	We will use a Machine Learning (ML) , GNN dense NN,,scheme to provide the performance of service throughput vs demand arrival rate.
+The ML allows us to adapt to changes in the power grid (the network).
+We will use the extensive work in computer network performance to construct the controller.
+	Training will use DES and AGC integrated with the EMT simulator.
+	Adjusting the ML will use the real world data (Caltech dataset) digital twin.”
+You  can  remove “group-theoretic port duality” from the abstract.
+
+Abstract - current version needs to be rewritten
+Active distribution networks and smart microgrids
+integrating photovoltaic (PV) generation, Battery Energy Storage
+Systems (BESS), electric vehicle (EV) charging hubs, and syn-
+chronous generators (SGs) require rigorous coordination across
+continuous electromagnetic transients and discrete supervisory
+dispatch. While port duality establishes an algebraic symme-
+try between voltage-forming grid-forming (GFM) and current-
+forming grid-following (GFL) inverters, physical causality, ther-
+mal current limits, and finite energy storage capacities break
+unrestricted group invertibility. This paper presents a four-
+layer hierarchical control architecture grounded in Mesarovi´ c’s
+multilevel systems theory, group-theoretic port duality, Nerode–
+Kohn topological guard abstractions, and finite-buffer Network
+Calculus. Distributed BESS units are formalized as signed, finite-
+capacity energy queues that absorb instantaneous stochastic load
+arrivals while decoupling slower ramp-constrained SGs and 15-
+second Energy Management System (EMS) updates. A 60-second
+electromagnetic transient (EMT) simulation in Julia validates
+bumpless causal role reversals (S ↔ S−1) and finite-queue
+saturation guards during a severe EV charging surge.
+
+1. Delete section III on Group-theory, we didn’t develop the group topics. Keep the explanation of figure 4 as dual’s that interact to provide positive and negative power. Also, we need more space to make figures 2, 8, 9 and 10 larger.In the explanation of figure 4, the squares represent a guard function that only allows connections according  to the duality in figure 3, 4. 
+2. In section IV A , you can referenceI  a queuing system, Bibiliography, for  the   self-similar idea and the  stochastic on/off mathematics. Ref: Ward Whitt, “Stochastic-Process Limits”, Springer Series in Operations Research, 2002.  I didn’t mention that the EV traffic is probably self-similar (like Mandelbrot’s financial fractals showing big  stock investors versus little investors).
+3. We are not using “Network Calculus”, we have a “stochastic on/off EV arrivals”?
+4. Overflows occur for equation (5), Table II last column overflows,Table III middle of last column overflows.
+5. Figure 4, title of left side is S, title of right side is S^-1.
+6. Figure 5, in reality there is a feedback arrow from the mu PV(t) back to the queue input, and mu SG(t) back to the input queue. But these feedbacks describe how loads no longer powered by the server go back into service by the batteries.  Do not change  the  diagram, fig 5, It may be better to just mention that flow in the text rather than changing the diagram.
+7. Section V. 4) change “Supervisory” to EMS.
+8. Section VI A. There needs to be an introductionary paragraph. This section is describing our hybrid control implementation on top of the EMT Devices and complete area. The observer of discrete events uses method 3 a combination of … and architectures … The controller’s are contracting in continuous and discrete elements. Add reference to my paper, R. Sherman, “Tie-line scheduling using real-time contraction metrics: Hierarchical reachable sets for multi-area inverter-dominated grids,” Nov. 2026, arXiv:2611.21858v1 [eess.SY].
+9. Section VI A. Last paragraph, remove “RTT”. Remove “packet loss” (maybe low voltage? Spell out OCPP. Congestion means more power than needed? Spell out PEM-MHE.
+10. There are too many acronym that need to be defined the first time used: DES, AGC,  BESS, DSP, SoC, SG, KCL, AC, Eref, EBESS, PEV, PPV, RSVC, TEMS, GFAST, Toni,j, t off,i,j tau on, equation 5 variables. The feeder graph vertices V and edges E in section IVB, PEM-MHE.
+11. Can we make fig 2 larger, maybe across the top of the page. And can we make the graphs larger Fig 8, 9 and 10?
+ 
+
+
+
